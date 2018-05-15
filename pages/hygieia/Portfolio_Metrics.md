@@ -41,15 +41,15 @@ Each of the widgets on the dashboard is explained in the **Widgets** section.
 
 The following are examples to explain the trend indicator:
 
-![1](https://hygieia.github.io/ExecDashboard/media/images/1.png) **Red Arrow (Upwards)** - A negative increase in the number of open source violations or production incidents over the last 90 days
+![1](https://hygieia.github.io/ExecDashboard/media/images/Arrows/1.png) **Red Arrow (Upwards)** - A negative increase in the number of open source violations or production incidents over the last 90 days
 
-![2](https://hygieia.github.io/ExecDashboard/media/images/2.png) **Green Arrow (Upwards)** - A positive increase in the percentage of automated tests that passed the latest code execution
+![2](https://hygieia.github.io/ExecDashboard/media/images/Arrows/2.png) **Green Arrow (Upwards)** - A positive increase in the percentage of automated tests that passed the latest code execution
 
-![3](https://hygieia.github.io/ExecDashboard/media/images/3.png) **Red Arrow (Downwards)** - Negative decrease in the number of production releases for associated product components
+![3](https://hygieia.github.io/ExecDashboard/media/images/Arrows/3.png) **Red Arrow (Downwards)** - Negative decrease in the number of production releases for associated product components
 
-![4](https://hygieia.github.io/ExecDashboard/media/images/4.png) **Green Arrow (Downwards)** - The positive decrease in code-related issues across all products in your portfolio
+![4](https://hygieia.github.io/ExecDashboard/media/images/Arrows/4.png) **Green Arrow (Downwards)** - The positive decrease in code-related issues across all products in your portfolio
 
-![5](https://hygieia.github.io/ExecDashboard/media/images/5.png) **No Status** - No data available to arrive at a trend indicator value
+![5](https://hygieia.github.io/ExecDashboard/media/images/Arrows/5.png) **No Status** - No data available to arrive at a trend indicator value
 
 ### The Metric Breakdown
 
@@ -69,7 +69,7 @@ This section provides specifics about the different metrics on the dashboard. Th
 
 ### Code Commits
 
-![Image](https://hygieia.github.io/ExecDashboard/media/images/CodeCommits.png)
+![Image](https://hygieia.github.io/ExecDashboard/media/images/Widgets/CodeCommits.png)
 
 The Code Commits widget displays the number of commits occurring over the last 90 days for all the products and the associated components in a portfolio.
 This widget also displays the percentage of Components Reporting from which the data is being collected for calculating this metric. In this example, 63% components are reporting data.
@@ -78,7 +78,7 @@ For more information on the values and calculations on the metrics, see the [Met
 
 ### Open Source Violations
 
-![Image](https://hygieia.github.io/ExecDashboard/media/images/OpenSourceViolations.png)
+![Image](https://hygieia.github.io/ExecDashboard/media/images/Widgets/OpenSourceViolations.png)
 
 The sum of known, unresolved open source violations for all associated components, including violations with blocker, critical, and major severity. An infraction occurs when usage violates legal and security compliance of an open source software license.
 
@@ -89,7 +89,7 @@ This widget breaks down the open source violations in to the following component
 
 ### Security Violations
 
-![Image](https://hygieia.github.io/ExecDashboard/media/images/SecurityViolations.png)
+![Image](https://hygieia.github.io/ExecDashboard/media/images/Widgets/SecurityViolations.png)
 
 Much like Open Source Violations, Security Violations are the sum of known, unresolved issues for all associated components. This includes infractions with blocker, critical, and major severity. Security violations are collected by Hygieia from various software security scanning tools.
 
@@ -100,7 +100,7 @@ This widget breaks down the security violations in to the following components:
 
 ### Automated Tests Passing
 
-![Image](https://hygieia.github.io/ExecDashboard/media/images/AutomatedTestsPassing.png)
+![Image](https://hygieia.github.io/ExecDashboard/media/images/Widgets/AutomatedTestsPassing.png)
 
 The percentage of automated acceptance tests that passed during the most recent test execution for each associated component collecting test automation results in Hygieia. The formula is as follows: 
 
@@ -112,7 +112,7 @@ In addition, this widget displays the percentage of Components Reporting from wh
 
 ### Code Analysis Issues
 
-![Image](https://hygieia.github.io/ExecDashboard/media/images/CodeAnalysisIssues.png)
+![Image](https://hygieia.github.io/ExecDashboard/media/images/Widgets/CodeAnalysisIssues.png)
 
 The sum of known, unresolved code issues for all associated components. This includes violations with blocker, critical, and major severity. Hygieia collects this information from various software quality scanning tools. Estimated days of technical debt effort is also included. Issues are collected by Hygieia from various software quality scanning tools.
 
@@ -124,7 +124,7 @@ This widget breaks down the code analysis issues in to the following components:
 
 ### Production Incidents
 
-![Image](https://hygieia.github.io/ExecDashboard/media/images/ProductionIncidents.png)
+![Image](https://hygieia.github.io/ExecDashboard/media/images/Widgets/ProductionIncidents.png)
 
 The sum of severity 1, 2, 3, 3C, and 3D production incidents occurring over the last 90 days. An incident is any event that is not part of the standard operation of a service and that causes or may cause an interruption to, or a reduction in, the quality of that service. Severity is a measure of the impact on the number of employees or groups in an organization. A product incident with severity 1 has the maximum impact on users.
 
@@ -136,7 +136,7 @@ This widget breaks down the production incidents in to the following components:
 
 ### Unit Test Coverage
 
-![Image](https://hygieia.github.io/ExecDashboard/media/images/UnitTestCoverage.png)
+![Image](https://hygieia.github.io/ExecDashboard/media/images/Widgets/UnitTestCoverage.png)
 
 The percentage of code covered by unit tests for all associated components. Unit tests are automated low-level tests that focus on a small unit of software. They are developer implemented and aim to reduce regression issues as enhancements and refactoring occur.
 
@@ -144,7 +144,7 @@ In addition, this widget displays the percentage of Components Reporting from wh
 
 ### Production Releases
 
-![Image](https://hygieia.github.io/ExecDashboard/media/images/ProductionReleases.png)
+![Image](https://hygieia.github.io/ExecDashboard/media/images/Widgets/ProductionReleases.png)
 
 The number of production releases occurring over the last 90 days for all associated components. Production release information is collected by Hygieia from release management software to deployment tools.
 
@@ -152,7 +152,7 @@ This widget also displays the percentage of Components Reporting from which the 
 
 ### Average Pipeline Lead Time 
 
-![Image](https://hygieia.github.io/ExecDashboard/media/images/AveragePipelineLeadTime.png)
+![Image](https://hygieia.github.io/ExecDashboard/media/images/Widgets/AveragePipelineLeadTime.png)
 
 Average amount of time from code commit to production deployment for all associated components. Cycle time is a key indicator of overall DevOps efficiency and is collected by Hygieia from continuous integration to delivery tools.
 
