@@ -1,0 +1,69 @@
+# This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
+
+entries:
+- title: sidebar
+  #product: 
+  #version: 
+  folders:
+  - title:
+    output: pdf
+    type: frontmatter
+    folderitems:
+    - title:
+      url: /titlepage
+      output: pdf
+      type: frontmatter
+    - title:
+      url: /tocpage
+      output: pdf
+      type: frontmatter
+
+  - title: Getting Started
+    output: web, pdf
+    folderitems:
+    - title: Introduction
+      url: /Introduction.html
+      output: web, pdf
+      type: homepage
+      
+  - title: Dashboard Elements
+    output: web, pdf
+    folderitems:
+    - title: Selecting a Portfolio
+      url: /Select_Portfolio.html
+      output: web, pdf
+    - title: Portfolio Metrics
+      url: /Portfolio_Metrics.html
+      output: web, pdf     
+    - title: Product Details
+      url: /Metric_Details.html
+      output: web, pdf 
+    - title: Component Details
+      url: /Component_Details.html
+      output: web, pdf 
+     
+  - title: Developer's Guide
+    output: web, pdf
+    folderitems:
+    - title: Database Configuration
+      url: /EXECDatabase_Setup.html
+      output: web, pdf
+    - title: Collectors
+      url: /EXECCollectors_Setup.html
+      output: web, pdf
+    - title: API Configuration
+      url: /EXECAPI_Setup.html
+      output: web, pdf
+    - title: UI Configuration
+      url: /EXECUI_Setup.html
+      output: web, pdf
+    
+  - title: Contribution Guidelines
+    output: web, pdf
+    folderitems:
+    - title: Contribute Widgets
+      url: /Create_Widget.html
+      output: web, pdf
+    - title: Contribution Agreement
+      url: /Contribute.html
+      output: web, pdf
