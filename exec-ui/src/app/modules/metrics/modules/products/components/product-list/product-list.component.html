@@ -1,0 +1,16 @@
+<div class="product-list">
+  <div class="view-opts-bar">
+    <app-heading [model]="headingModel"></app-heading>
+
+    <span class="fa fa-search"></span>&nbsp;
+    <input class="input" placeholder=" Search Application" type="text" [(ngModel)]="searchString" (ngModelChange)="search()">
+
+    <button type="button" class="btn btn-outlined ucase view-all-metrics" (click)="goToPortfolioDashboard()">
+      View Portfolio Metrics
+    </button>
+  </div>
+  <hr class="divider"/>
+  <div class="products">
+    <app-building-blocks [buildingBlocks]="products"></app-building-blocks>
+  </div>
+</div>

@@ -1,0 +1,125 @@
+/* You can add global styles to this file, and also import other style files */
+@import './reset';
+@import './colors';
+@import './fonts';
+
+html, body {
+  background-color: $blue-main;
+  font-family: $OpenSans_Light;
+  font-size: 16px;
+  color: $white;
+  height: 100%;
+  position: relative;
+}
+
+h1 {
+  font-family: $OpenSans_Light;
+  font-size: 1.5em;
+  opacity: 0.9;
+  padding-top: 40px;
+  padding-bottom: 21px;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.divider {
+  border-color: transparent;
+  border-bottom: 1px solid $card-border;
+}
+
+.btn {
+  background-color: #3E505A;
+  border: solid 1px transparent;
+  border-radius: 60px;
+  color: $white;
+  cursor: pointer;
+  font-family: $OpenSans_Regular;
+  font-size: 14px;
+  font-weight: 300;
+  height: 30px; /*This will need to be adjusted with a media query when in mobile views so that the button container can wrap the text (using min-height)*/
+  line-height: 28px;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 0ms ease-out;
+  z-index: 0;
+
+  &.ucase {
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  &.flex-in-heading {
+    bottom: 3px;
+  }
+
+  &.btn-small {
+      font-size: 12px;
+      letter-spacing: 0.02em;
+      padding: 5px 30px;
+
+      &:hover {
+
+          &:after {
+              transform: scaleX(1.07);
+          }
+      }
+  }
+
+  &.btn-outlined {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    font-size: 10px;
+    height: 28px;
+    letter-spacing: 0.1em;
+    line-height: 26px;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    &:active {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  &.btn-right {
+      float: right;
+  }
+
+  &:hover {
+
+      &:after {
+          transform: scaleX(1.1);
+      }
+  }
+
+  &:active, &:focus {
+      outline: none;
+  }
+
+  &.disabled, &:disabled {
+      cursor: default;
+
+      &:after {
+
+      }
+
+      &:hover {
+
+          &:after {
+              transform: scaleX(1);
+          }
+      }
+  }
+}
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}

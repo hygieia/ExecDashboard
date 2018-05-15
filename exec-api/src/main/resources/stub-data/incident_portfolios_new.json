@@ -1,0 +1,383 @@
+[
+    {
+        "id": "lknope",
+        "lob": "Parks & Recreation",
+        "firstName": "Leslie",
+        "lastName": "Knope",
+        "role": "Deputy Director",
+        "products": [
+            {
+                "id": "park",
+                "name": "The Park",
+                "components": [
+                    {
+                        "id": "sebastian",
+                        "name": "Lil Sebastian",
+                        "metrics": [
+                            {
+                                "name": "production-incidents",
+                                "trendSlope": 0.7,
+                                "lastScanned": "2017-10-04T18:12:43.511Z",
+                                "lastUpdated": "2017-10-03T15:25:43.122Z",
+                                "secondaryTime": 86400000,
+                                "series": [
+                                    {
+                                        "daysAgo": 0,
+                                        "counts": [
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "1",
+                                                    "event": "open"
+                                                },
+                                                "count": 0
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "1",
+                                                    "event": "close"
+                                                },
+                                                "count": 0
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "2",
+                                                    "event": "open"
+                                                },
+                                                "count": 0
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "2",
+                                                    "event": "close"
+                                                },
+                                                "count": 1
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "3",
+                                                    "event": "close"
+                                                },
+                                                "count": 0
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "3",
+                                                    "event": "open"
+                                                },
+                                                "count": 1
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "3C",
+                                                    "event": "open"
+                                                },
+                                                "count": 2
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "3D",
+                                                    "event": "open"
+                                                },
+                                                "count": 0
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "4",
+                                                    "event": "open"
+                                                },
+                                                "count": 2
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "5",
+                                                    "event": "open"
+                                                },
+                                                "count": 0
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "3C",
+                                                    "event": "close"
+                                                },
+                                                "count": 3
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "3D",
+                                                    "event": "close"
+                                                },
+                                                "count": 0
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "4",
+                                                    "event": "close"
+                                                },
+                                                "count": 0
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "5",
+                                                    "event": "close"
+                                                },
+                                                "count": 1
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "daysAgo": 1,
+                                        "counts": [
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "1",
+                                                    "event": "open"
+                                                },
+                                                "count": 0
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "2",
+                                                    "event": "open"
+                                                },
+                                                "count": 0
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "3",
+                                                    "event": "open"
+                                                },
+                                                "count": 1
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "3C",
+                                                    "event": "open"
+                                                },
+                                                "count": 0
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "3D",
+                                                    "event": "open"
+                                                },
+                                                "count": 0
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "4",
+                                                    "event": "open"
+                                                },
+                                                "count": 0
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "5",
+                                                    "event": "open"
+                                                },
+                                                "count": 2
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "1",
+                                                    "event": "close"
+                                                },
+                                                "count": 2
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "2",
+                                                    "event": "close"
+                                                },
+                                                "count": 0
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "3",
+                                                    "event": "close"
+                                                },
+                                                "count": 0
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "3C",
+                                                    "event": "close"
+                                                },
+                                                "count": 0
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "3D",
+                                                    "event": "close"
+                                                },
+                                                "count": 4
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "4",
+                                                    "event": "close"
+                                                },
+                                                "count": 1
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "5",
+                                                    "event": "close"
+                                                },
+                                                "count": 2
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "daysAgo": 2,
+                                        "counts": [
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "1",
+                                                    "event": "open"
+                                                },
+                                                "count": 2
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "2",
+                                                    "event": "open"
+                                                },
+                                                "count": 1
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "3",
+                                                    "event": "open"
+                                                },
+                                                "count": 2
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "3C",
+                                                    "event": "open"
+                                                },
+                                                "count": 1
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "3D",
+                                                    "event": "open"
+                                                },
+                                                "count": 1
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "4",
+                                                    "event": "open"
+                                                },
+                                                "count": 1
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "5",
+                                                    "event": "open"
+                                                },
+                                                "count": 2
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "1",
+                                                    "event": "close"
+                                                },
+                                                "count": 0
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "2",
+                                                    "event": "close"
+                                                },
+                                                "count": 1
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "3",
+                                                    "event": "close"
+                                                },
+                                                "count": 0
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "3C",
+                                                    "event": "close"
+                                                },
+                                                "count": 2
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "3D",
+                                                    "event": "close"
+                                                },
+                                                "count": 0
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "4",
+                                                    "event": "close"
+                                                },
+                                                "count": 0
+                                            },
+                                            {
+                                                "label": {
+                                                    "type": "issue",
+                                                    "severity": "5",
+                                                    "event": "close"
+                                                },
+                                                "count": 2
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

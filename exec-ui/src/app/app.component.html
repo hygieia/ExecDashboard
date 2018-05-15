@@ -1,0 +1,7 @@
+<div class="app-container">
+  <div class="image-backdrop"></div>
+  <app-header></app-header>
+  <div class="page-content" [@navigationAnimation]="getRouteAnimation(route)">
+    <router-outlet #route="outlet"></router-outlet>
+  </div>
+</div>

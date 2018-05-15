@@ -1,0 +1,52 @@
+@import '../../../assets/styles/fonts';
+@import '../../../assets/styles/styles';
+
+.app-logo {
+  margin: 0 auto;
+  max-width: 1440px;
+  padding-left: 15px;
+  width: 100%;
+
+  .app-logo-image {
+    display: inline-block;
+    height: 34px;
+    margin: 13px 2px 13px 0;
+    width: 34px;
+  }
+
+  .app-name {
+    bottom: 12px;
+    display: inline-block;
+    position: relative;
+    width: 180px;
+  }
+
+  div {
+    &.app-label {
+      display: inline-block;
+      height: 40px;
+    }
+  }
+
+  p {
+    &.name-primary {
+      display: inline-block;
+      font-family: $OpenSans_SemiBold;
+      font-size: 1em;
+      letter-spacing: .03em;
+      margin-right: 4px;
+    }
+
+    &.platinum {
+      display: inline-block;
+      font-family: $OpenSans_Light;
+      font-size: 0.75em;
+    }
+  }
+}
+
+
+
+
+
+

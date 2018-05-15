@@ -1,0 +1,11 @@
+<div class="metric-graph-container">
+  <div *ngIf="model" class="graph-contents">
+    <app-metric-trend-indicator [trend]="model.trend"></app-metric-trend-indicator>
+    <div class="active-count">
+      <span class="prefix">{{this.model.score.prefix}}</span><span>{{this.model.score.value | number}}<span class="unit" *ngIf="model.score.unit">{{model.score.unit}}</span><span *ngIf="model.isRatio" class="percent">%</span></span>
+      <span class="graph-title">{{model.valueLabel}}</span>
+      <span class="last-scanned">{{this.model.lastScanned}}</span>
+    </div>
+    <div id="metric-graph" class="metric-graph {{model.trend.direction}}" [ngClass]="{'danger': model.trend.danger}"></div>
+  </div>
+</div>

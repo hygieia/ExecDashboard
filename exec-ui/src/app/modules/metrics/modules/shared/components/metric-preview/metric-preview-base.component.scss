@@ -1,0 +1,484 @@
+@import '../../../../../../../assets/styles/colors';
+@import '../../../../../../../assets/styles/fonts';
+@import '../../../../../../../assets/styles/retina';
+
+.metric-preview-card {
+  height: 308px;
+  min-width: 260px;
+  margin-bottom: 11px;
+  perspective: 1000px;
+
+  &.show-description .flipper {
+    transform: rotateY(180deg);
+  }
+
+  .flipper {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: 0.6s;
+  }
+
+  .content-side, .description-side {
+    backface-visibility: hidden;
+    height: 308px;
+    left: 0;
+    max-width: 100%;
+    min-width: 260px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  .description-side {
+    background-color: $card-bg;
+    border: 1px solid $card-border;
+    border-radius: 10px;
+    cursor: default;
+    padding: 30px 26px 15px 26px;
+    text-align: left;
+    transform: rotateY(180deg);
+
+    .title {
+      font-family: $OpenSans_SemiBold;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      line-height: 20px;
+      text-transform: uppercase;
+      width: 141px;
+    }
+
+    p {
+      font-size: 12px;
+      height: 138px;
+      line-height: 17px;
+      margin-top: 20px;
+      overflow: hidden;
+    }
+
+    button {
+      background-color: transparent;
+      border: none;
+      float: right;
+      position: relative;
+      right: -17px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    svg {
+      &.x {
+        bottom: 0.0625em;
+        position: relative;
+        vertical-align: bottom;
+      }
+    }
+
+    .pill-container {
+      display: block;
+      font-size: 0.97em;
+      height: 40px;
+      margin: 0 auto;
+      max-width: 208px;
+      position: relative;
+      top: 13px;
+      width: 100%;
+
+      label {
+        background-color: $blue-main;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 100px;
+        box-shadow: none 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+        display: table-cell;
+        float: none;
+        font-size: 13px;
+        letter-spacing: .05em;
+        line-height: 13px;
+        padding: 0.5em 1em;
+        text-align: center;
+        text-transform: uppercase;
+        transition: all 0.1s ease-in-out;
+        vertical-align: middle;
+        width: 50%;
+
+        &:hover {
+          cursor: pointer;
+          background-color: $selected-action;
+        }
+
+        span {
+          display: block;
+        }
+      }
+
+      .pill {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 100px;
+        display: table;
+        height: 40px;
+        margin-bottom: 0.5em;
+        position: relative;
+        bottom: -8px;
+        width: 100%;
+      }
+    }
+
+    hr {
+      border-color: transparent;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      height: 0;
+      position: relative;
+      top: 13px;
+
+      &.selected {
+        transition: border-color 0s ease-in;
+      }
+
+      &.deselected {
+        transition: border-color 1s ease-out;
+      }
+    }
+  }
+
+  .content-side {
+    background-color: $card-bg;
+    border: 1px solid $card-border;
+    border-radius: 10px;
+    height: 308px;
+    padding: 11px 26px 15px 26px;
+    transform: rotateY(0deg);
+    z-index: 2;
+
+    .description-button {
+      background-color: rgba(255,255,255,0.05);
+      border: none;
+      border-radius: 100px;
+      color: #FFFFFF;
+      cursor: pointer;
+      font-family: $OpenSans_Regular;
+      font-size: 9px;
+      margin-left: auto;
+      padding: .5em;
+      width: 80px;
+
+      &:focus {
+        outline: none;
+      }
+
+      &:hover {
+        background-color: #546979;
+      }
+    }
+
+    &.selectable {
+      transition: background-color 200ms ease-out;
+    }
+
+    &.defocused {
+      cursor: pointer;
+      opacity: .1;
+      transition: opacity 200ms ease-out;
+
+      &:hover,
+      &:active {
+        background-color: $card-bg;
+      }
+
+      .description-button {
+        &:hover {
+          background-color: initial;
+        }
+      }
+
+      .toggle-container {
+        label {
+          &:first-of-type,
+          &:last-of-type {
+            &:hover {
+              cursor: pointer;
+              background-color: initial;
+            }
+          }
+
+          &.disabled {
+            &:first-of-type:hover {
+              background-color: $disabled-action;
+            }
+          }
+        }
+      }
+    }
+
+    &.focused {
+      cursor: default;
+
+      &.deselected {
+        transition: border-color 1s ease-out, opacity 200ms ease-in;
+      }
+      .toggle-container {
+        .toggle {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .main-indicators {
+      height: 66px;
+      position: relative;
+      top: 10px;
+
+      .score {
+        color: $white;
+        font-family: $Montserrat_SemiBold;
+        font-size: 60px;
+        letter-spacing: 0.04em;
+        width: 170px;
+
+        &.small {
+          font-size: 51px;
+
+          .unit {
+            font-size: 32.3px;
+          }
+
+          .percent {
+            font-size: 32.3px;
+          }
+        }
+
+
+        .unit {
+          font-size: 38px;
+          padding-left: 3px;
+        }
+
+        .percent {
+          font-family: $OpenSans_SemiBold;
+          font-size: 38px;
+        }
+      }
+
+      app-metric-trend-indicator {
+        float: right;
+        position: absolute;
+        top: 8px;
+        right: 0;
+      }
+    }
+
+    hr {
+      border-color: transparent;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      height: 0;
+
+      &.selected {
+        transition: border-color 0s ease-in;
+      }
+
+      &.deselected {
+        transition: border-color 1s ease-out;
+      }
+
+      &.toggle-rule {
+        position: relative;
+        top: 49px;
+      }
+    }
+
+    .metric-name {
+      height: 32px;
+
+      p {
+        display: inline-block;
+        font-family: $OpenSans_SemiBold;
+        font-size: 12px;
+        letter-spacing: 1px;
+        line-height: 16px;
+        text-transform: uppercase;
+        width: 140px;
+      }
+
+      div {
+        align-content: center;
+        float: right;
+        height: 100%;
+        width: 70px;
+
+        button {
+          border: solid 1px transparent;
+          color: $white;
+          cursor: pointer;
+          font-family: $OpenSans_Light;
+          font-size: 8px;
+          font-weight: 300;
+          line-height: 16px;
+          padding: 0 6px;
+          position: relative;
+          text-align: center;
+          text-decoration: none;
+          transition: color 0ms ease-out;
+          z-index: 0;
+          height: 18px;
+          width: 58px;
+          border-radius: 9px;
+          background-color: $dark;
+          vertical-align: sub;
+        }
+      }
+    }
+
+    .metric-update-status {
+      bottom: 16px;
+      height: 9px;
+      padding-bottom: 22px;
+      position: relative;
+
+      p {
+        height: 9px;
+        float: right;
+        font-family: $OpenSans_Light;
+        font-size: 10px;
+        letter-spacing: 0.05em;
+        line-height: 9px;
+        text-align: right;
+        width: 100%;
+        padding-top: 10px;
+      }
+    }
+
+    .key-indicators {
+      color: $white;
+      height: 20px;
+      margin-bottom: 18px;
+      width: 100%;
+
+      .secondary-metric {
+        margin-bottom: 9px;
+      }
+      .secondary-metric,
+      .total-reporting {
+        color: white;
+        width: 100%;
+        display: table;
+
+        p {
+          display: inline-block;
+          font-family: $OpenSans_Light;
+          font-size: 10px;
+          letter-spacing: .045em;
+          text-transform: capitalize;
+          width: 75%;
+        }
+
+        div {
+          background-color: $preview-datum;
+          border: solid 1px transparent;
+          border-radius: 20px;
+          float: right;
+          font-family: $OpenSans_SemiBold;
+          font-size: 12px;
+          height: 20px;
+          letter-spacing: .03em;
+          line-height: 18px;
+          position: relative;
+          text-align: center;
+          text-decoration: none;
+          transition: color 0ms ease-out;
+          width: 50px;
+          z-index: 0;
+        }
+      }
+    }
+
+    .no-reports {
+      bottom: 19px;
+      color: #546979;
+      font-family: $OpenSans_Light;
+      font-size: 24px;
+      height: 160px;
+      line-height: 200px;
+      position: relative;
+      text-transform: uppercase;
+      width: 100%;
+
+      p {
+        margin: 0 auto;
+      }
+    }
+
+    .toggle-container {
+      display: block;
+      font-size: 0.97em;
+      height: 40px;
+      margin: 0 auto;
+      max-width: 208px;
+      position: relative;
+      width: 100%;
+
+      &.toggle-rule {
+        top: 49px;
+      }
+
+      label {
+        background-color: $blue-main;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: none 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+        display: table-cell;
+        float: none;
+        font-size: 10px;
+        letter-spacing: .05em;
+        padding: 0.5em 1em;
+        text-align: center;
+        text-transform: uppercase;
+        transition: all 0.1s ease-in-out;
+        vertical-align: middle;
+        width: 50%;
+
+        &.multiline {
+          font-size: 0.9em;
+        }
+
+        &:hover {
+          cursor: pointer;
+          background-color: $selected-action;
+        }
+
+        &:first-of-type {
+          border-radius: 100px 0 0 100px;
+        }
+
+        &:last-of-type {
+          border-radius: 0 100px 100px 0;
+        }
+
+        &.products-selected {
+          background-color: $selected-action;
+        }
+
+        &.disabled {
+          background-color: $disabled-action;
+
+          &:hover {
+            cursor: not-allowed;
+          }
+        }
+
+        span {
+          display: block;
+        }
+      }
+
+      .toggle {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 100px;
+        display: table;
+        height: 40px;
+        margin-bottom: 0.5em;
+        position: relative;
+        bottom: -8px;
+        width: 100%;
+      }
+    }
+  }
+}

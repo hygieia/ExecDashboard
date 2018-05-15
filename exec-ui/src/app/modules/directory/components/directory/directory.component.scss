@@ -1,0 +1,123 @@
+@import '../../../../../assets/styles/colors';
+@import '../../../../../assets/styles/fonts';
+@import '../../../../../assets/styles/retina';
+
+.input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #CCC;
+  color: white;
+  font-family: 'Arvo';
+  font-size: 18px;
+  &:focus {
+    outline: none;
+  }
+}
+
+input::-webkit-input-placeholder {
+  color: grey;
+}
+
+.portfolio-name {
+    left: 25px;
+    width: 230px;
+  }
+
+.executive-name {
+    width: 400px;
+
+    .fa-search {
+      position: absolute;
+     font-size: 20px;
+    }
+  }
+
+.directory-view {
+  padding: 60px 20px 0 20px;
+  position: relative;
+
+  h1 {
+    padding-top: 40px;
+    padding-bottom: 21px;
+  }
+
+  .view-opts-bar {
+    margin-bottom: 10px;
+    min-width: 290px;
+
+    * /deep/ .heading {
+
+      h1 {
+        margin-left: 35px;
+      }
+    }
+  }
+
+  hr.divider {
+    margin-bottom: 23px;
+    margin-left: 0;
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .view-opts-bar {
+    * /deep/ button.change-executive {
+      margin-top: 20px;
+    }
+
+    * /deep/ .heading {
+      margin-right: 0;
+      min-width: 0;
+
+      .primary {
+        min-width: 0;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .view-opts-bar {
+
+    * /deep/ .change-executive {
+      width: 210px;
+    }
+
+    .view-all-products {
+      bottom: 4px;
+      margin-top: 15px;
+      position: relative;
+      right: unset;
+      width: 210px;
+    }
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .view-opts-bar {
+
+    * /deep/ .change-executive {
+      width: 100%;
+    }
+
+    .view-all-products {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .view-opts-bar {
+
+    * /deep/ .change-executive {
+      min-width: 260px;
+    }
+
+    .view-all-products {
+      min-width: 260px;
+    }
+  }
+}
+
+

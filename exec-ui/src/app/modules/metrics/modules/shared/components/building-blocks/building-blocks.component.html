@@ -1,0 +1,8 @@
+<div class="metric-building-blocks">
+  <div class="building-blocks-heading {{icon}}">
+    <img class="icon" src="../../../../../assets/images/{{icon}}.svg"/>
+    <span class="label">{{isComponentList ? 'Components' : 'Products'}}</span>
+    <span class="reporting">{{this.reportingBuildingBlocks | number}} of {{this.totalBuildingBlocks | number}} Reporting</span>
+  </div>
+  <app-building-block-card *ngFor="let buildingBlock of buildingBlocks" [buildingBlock]="buildingBlock" [isComponent]="isComponentList"></app-building-block-card>
+</div>

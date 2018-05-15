@@ -1,0 +1,16 @@
+<div *ngIf="model" class="metric-segmentation">
+  <div class="title">Breakdown</div>
+  <div class="issues">
+    <div *ngIf="this.columnLabels().length" class="column-labels">
+      <p *ngFor="let label of this.columnLabels()">{{label}}</p>
+    </div>
+    <hr *ngIf="this.columnLabels().length">
+    <div class="indicators">
+      <div *ngFor="let row of this.rowValues()" class="indicator">
+        <p>{{row.label}}</p>
+        <div *ngFor="let value of row.values">{{value | number}}</div>
+      </div>
+    </div>
+    <hr [ngClass]="{'no-column-labels': !this.columnLabels().length, 'conceal': this.rowValues().length > 3}">
+  </div>
+</div>

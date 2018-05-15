@@ -1,0 +1,80 @@
+<div class="metric-previews" (click)="reset()" [ngClass]="{'metric-selected': selectedMetric }" fxLayout="row" fxLayoutWrap>
+  <app-scm-commits-preview class="metric" [attr.data-sort]="sortMap.get('scm-commits').currentSort"
+                           [ngClass]="{'disabled': isDisabled('scm-commits')}"
+                           [portfolioName]="portfolioName" [portfolioLob]="portfolioLob" [productId]="this.productId"
+                           (hideBuildingBlocksEvent)="reset()"
+                           (showBuildingBlocksEvent)="showBuildingBlocks($event)"
+                           (metricPreviewInitialized)="addMetric()"
+                           [selectedMetric]="selectedMetric" (isSelectedEvent)="selectMetric($event)"
+                           fxFlex></app-scm-commits-preview>
+  <app-static-code-analysis-preview class="metric" [attr.data-sort]="sortMap.get('static-code-analysis').currentSort"
+                                    [ngClass]="{'disabled': isDisabled('static-code-analysis')}"
+                                    fxFlex [portfolioName]="portfolioName" [portfolioLob]="portfolioLob" [productId]="this.productId"
+                                    (hideBuildingBlocksEvent)="reset()"
+                                    (showBuildingBlocksEvent)="showBuildingBlocks($event)"
+                                    (metricPreviewInitialized)="addMetric()"
+                                    [selectedMetric]="selectedMetric"
+                                    (isSelectedEvent)="selectMetric($event)"></app-static-code-analysis-preview>
+  <app-open-source-violations-card class="metric" [attr.data-sort]="sortMap.get('open-source-violations').currentSort"
+                                   [ngClass]="{'disabled': isDisabled('open-source-violations')}"
+                                   fxFlex [portfolioName]="portfolioName" [portfolioLob]="portfolioLob" [productId]="this.productId"
+                                   (hideBuildingBlocksEvent)="reset()"
+                                   (showBuildingBlocksEvent)="showBuildingBlocks($event)"
+                                   (metricPreviewInitialized)="addMetric()"
+                                   [selectedMetric]="selectedMetric"
+                                   (isSelectedEvent)="selectMetric($event)"></app-open-source-violations-card>
+  <!-- app-security-violations-preview class="metric" [attr.data-sort]="sortMap.get('security-violations').currentSort" fxFlex
+                                   [ngClass]="{'disabled': isDisabled('security-violations')}"
+                                   [portfolioName]="portfolioName" [portfolioLob]="portfolioLob" [productId]="this.productId"
+                                   (hideBuildingBlocksEvent)="reset()"
+                                   (showBuildingBlocksEvent)="showBuildingBlocks($event)"
+                                   (metricPreviewInitialized)="addMetric()"
+                                   [selectedMetric]="selectedMetric"
+                                   (isSelectedEvent)="selectMetric($event)"></app-security-violations-preview -->
+  <!-- app-test-automation-card class="metric" [attr.data-sort]="sortMap.get('test-automation').currentSort" fxFlex
+                            [ngClass]="{'disabled': isDisabled('test-automation')}"
+                            [portfolioName]="portfolioName" [portfolioLob]="portfolioLob" [productId]="this.productId"
+                            (hideBuildingBlocksEvent)="reset()"
+                            (showBuildingBlocksEvent)="showBuildingBlocks($event)"
+                            (metricPreviewInitialized)="addMetric()"
+                            [selectedMetric]="selectedMetric"
+                            (isSelectedEvent)="selectMetric($event)"></app-test-automation-card -->
+  <!-- app-production-incidents-preview class="metric" [attr.data-sort]="sortMap.get('production-incidents').currentSort"
+                                    [ngClass]="{'disabled': isDisabled('production-incidents')}"
+                                    fxFlex [portfolioName]="portfolioName" [portfolioLob]="portfolioLob" [productId]="this.productId"
+                                    (hideBuildingBlocksEvent)="reset()"
+                                    (showBuildingBlocksEvent)="showBuildingBlocks($event)"
+                                    (metricPreviewInitialized)="addMetric()"
+                                    [selectedMetric]="selectedMetric"
+                                    (isSelectedEvent)="selectMetric($event)"></app-production-incidents-preview -->
+  <!-- app-unit-test-coverage-card class="metric" [attr.data-sort]="sortMap.get('unit-test-coverage').currentSort"
+                               [ngClass]="{'disabled': isDisabled('unit-test-coverage')}"
+                               [portfolioName]="portfolioName" [portfolioLob]="portfolioLob" [productId]="this.productId"
+                               (hideBuildingBlocksEvent)="reset()"
+                               (showBuildingBlocksEvent)="showBuildingBlocks($event)"
+                               (metricPreviewInitialized)="addMetric()"
+                               [selectedMetric]="selectedMetric"
+                               (isSelectedEvent)="selectMetric($event)" fxFlex></app-unit-test-coverage-card -->
+  <!-- app-production-releases-preview class="metric" [attr.data-sort]="sortMap.get('production-releases').currentSort"
+                                   [ngClass]="{'disabled': isDisabled('production-releases')}"
+                                   [portfolioName]="portfolioName" [portfolioLob]="portfolioLob" [productId]="this.productId"
+                                   (hideBuildingBlocksEvent)="reset()"
+                                   (showBuildingBlocksEvent)="showBuildingBlocks($event)"
+                                   (metricPreviewInitialized)="addMetric()"
+                                   [selectedMetric]="selectedMetric" (isSelectedEvent)="selectMetric($event)"
+                                   fxFlex></app-production-releases-preview -->
+  <!-- app-pipeline-lead-time-card class="metric" [attr.data-sort]="sortMap.get('pipeline-lead-time').currentSort" fxFlex
+                            [ngClass]="{'disabled': isDisabled('pipeline-lead-time')}"
+                               [portfolioName]="portfolioName" [portfolioLob]="portfolioLob" [productId]="this.productId"
+                            (hideBuildingBlocksEvent)="reset()"
+                            (showBuildingBlocksEvent)="showBuildingBlocks($event)"
+                               (metricPreviewInitialized)="addMetric()"
+                            [selectedMetric]="selectedMetric"
+                            (isSelectedEvent)="selectMetric($event)"></app-pipeline-lead-time-card -->
+
+  <div class="placeholder" fxFlex></div>
+  <div class="placeholder" fxFlex></div>
+  <div class="placeholder" fxFlex></div>
+  <div class="placeholder" fxFlex></div>
+  <div class="placeholder" fxFlex></div>
+</div>
