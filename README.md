@@ -20,8 +20,8 @@
 <tbody>
 <tr>
 <td><a href="https://hygieia.github.io/ExecDashboard/Introduction.html"><img src="https://github.com/Hygieia/ExecDashboard/blob/gh-pages/media/images/ReadmeIcons/About.png" alt="About Icon" height="145" width="280"/></a></td>
-<td><a href="https://hygieia.github.io/ExecDashboard/EXECDatabase_Setup.html"><img src="/="https://github.com/Hygieia/ExecDashboard/blob/gh-pages/media/images/ReadmeIcons/Installation.png" alt="Installation Icon" align="center" height="145" width="280"/></td>
-<td><a href="https://hygieia.github.io/ExecDashboard/Create_Widget.html"><img src="="https://github.com/Hygieia/ExecDashboard/blob/gh-pages/media/images/ReadmeIcons/Contribute.png" alt="Contribute Icon" align="center" height="145" width="280"/></a></td>
+<td><a href="https://hygieia.github.io/ExecDashboard/EXECDatabase_Setup.html"><img src="/="https://github.com/Megha849/ExecDashboard/blob/gh-pages/media/images/ReadmeIcons/Installation.png" alt="Installation Icon" align="center" height="145" width="280"/></td>
+<td><a href="https://hygieia.github.io/ExecDashboard/Create_Widget.html"><img src="="https://github.com/Megha849/ExecDashboard/blob/gh-pages/media/images/ReadmeIcons/Contribute.png" alt="Contribute Icon" align="center" height="145" width="280"/></a></td>
 </tr>
 </tbody>
 </table>
