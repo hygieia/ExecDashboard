@@ -102,8 +102,8 @@ public class PortfolioCollector implements Runnable {
             return;
         }
 
-//        scmCollector.collect(sparkSession, javaSparkContext, portfolioList);
-//        libraryPolicyCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        scmCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        libraryPolicyCollector.collect(sparkSession, javaSparkContext, portfolioList);
         staticCodeAnalysisCollector.collect(sparkSession, javaSparkContext, portfolioList);
         unitTestCoverageCollector.collect(sparkSession, javaSparkContext, portfolioList);
         sparkSession.close();
