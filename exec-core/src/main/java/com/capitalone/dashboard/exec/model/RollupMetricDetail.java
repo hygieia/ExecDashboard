@@ -12,7 +12,7 @@ public class RollupMetricDetail extends MetricDetails{
         if (metricDetails.isProcessed()) {return;}
         MetricSummary itemMetricSummary = metricDetails.getSummary();
         setReportingComponents(getReportingComponents() + 1);
-        if ((summary.getLastScanned() == null)||summary.getLastScanned().before(itemMetricSummary.getLastScanned())) {
+        if ((summary.getLastScanned() == null) || summary.getLastScanned().before(itemMetricSummary.getLastScanned())) {
             summary.setLastScanned(itemMetricSummary.getLastScanned());
         }
         List<MetricCount> itemSummaryCounts = itemMetricSummary.getCounts();
@@ -25,15 +25,22 @@ public class RollupMetricDetail extends MetricDetails{
                 rollupSummaryCounts.add(copyCount);
             } else {
                 rollupSummaryCounts.remove(existing);
-                copyCount.addValue(existing.getValue());
-                rollupSummaryCounts.add(copyCount);
+                MetricCount updatedMetricCount = getUpdatedMetricCount(copyCount, metricDetails.getType().getDataType(), existing.getValue());
+                rollupSummaryCounts.add(updatedMetricCount);
             }
         }
         summary.setCounts(rollupSummaryCounts);
         if (getType() != null) { summary.setName(getType().getName()); }
     }
 
-
+    private MetricCount getUpdatedMetricCount(MetricCount metricCount, MetricType.DataType metricDataType, Double existingValue) {
+        if(metricDataType.equals(MetricType.DataType.SUM)) {
+            metricCount.addValue(existingValue);
+        } else {
+            metricCount.averageValue(existingValue);
+        }
+        return metricCount;
+    }
 
     protected void updateTimeSeries(MetricDetails itemMetricDetails) {
         if (itemMetricDetails.isProcessed()) {return;}
@@ -41,7 +48,12 @@ public class RollupMetricDetail extends MetricDetails{
         for (MetricTimeSeriesElement itemDetailsTimeSeriesElement : itemMetricDetailTimeSeries) {
             List<MetricCount> itemTimeSeriesElementCounts = itemDetailsTimeSeriesElement.getCounts();
             for (MetricCount itemCount : itemTimeSeriesElementCounts) {
-                timeSeries.get(itemDetailsTimeSeriesElement.getDaysAgo()).addCount(itemCount);
+                if(itemMetricDetails.getType().getDataType().equals(MetricType.DataType.SUM)) {
+                    timeSeries.get(itemDetailsTimeSeriesElement.getDaysAgo()).addCount(itemCount);
+                } else {
+                    timeSeries.get(itemDetailsTimeSeriesElement.getDaysAgo()).averageCount(itemCount);
+                }
+
             }
         }
 

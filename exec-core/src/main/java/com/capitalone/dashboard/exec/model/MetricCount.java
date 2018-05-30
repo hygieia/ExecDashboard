@@ -34,6 +34,10 @@ public class MetricCount {
         value += val;
     }
 
+    public void averageValue(double val) {
+        value = (value + val) / 2;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
