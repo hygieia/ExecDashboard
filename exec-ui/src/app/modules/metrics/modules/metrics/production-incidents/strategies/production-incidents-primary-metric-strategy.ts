@@ -13,7 +13,9 @@ export class ProductionIncidentsPrimaryMetricStrategy extends PrimaryMetricStrat
       name: ProductionIncidentsConfiguration.buildingBlockLabel,
       value: counts
         .filter(c => c.label['type'] === 'issue')
-        .filter(c => c.label['event'] === 'open')
+        .filter(c => (!!c.label['event'].length) &&
+                                ((c.label['event'].toLowerCase() === 'open')
+                                  || (c.label['event'].toLowerCase() === 'opened')))
         .filter(c => validSet.has(c.label['severity']))
         .map(c => c.value)
         .reduce((a, b) => a + b, 0)

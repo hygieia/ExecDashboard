@@ -41,15 +41,9 @@ export class ProductionIncidentsPreviewStrategy extends PreviewStrategyBase {
     const open = model.counts
       .filter(count => count.label['type'] === 'issue')
       .filter(count => severities.has(count.label['severity']))
-      .filter(count => count.label['event'] === 'open')
-      .reduce((sum, count) => sum + count.value, 0);
-
-    const closed = model.counts
-      .filter(count => count.label['type'] === 'issue')
-      .filter(count => severities.has(count.label['severity']))
-      .filter(count => (count.label['event'] === 'close')
-                                  || (count.label['event'] === 'closed')
-                                  || (count.label['event'] === 'resolved'))
+      .filter(count => (!!count.label['event'].length)
+                                  && ((count.label['event'].toLowerCase() === 'open')
+                                      || (count.label['event'].toLowerCase() === 'opened')))
       .reduce((sum, count) => sum + count.value, 0);
 
     const mttr = this.auxiliaryFigureStrategy.parse(model);
@@ -59,7 +53,7 @@ export class ProductionIncidentsPreviewStrategy extends PreviewStrategyBase {
       unit: unit(mttr)
     }];
 
-    return [{ name: 'Open Incidents', value: open - closed }, ...mttrDisplay];
+    return [{ name: 'Open Incidents', value: open }, ...mttrDisplay];
 
     function unit(valueModel) {
       switch (valueModel.unit) {

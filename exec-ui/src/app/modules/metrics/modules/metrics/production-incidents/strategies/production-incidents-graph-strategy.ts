@@ -32,7 +32,9 @@ export class ProductionIncidentsGraphStrategy extends GraphStrategyBase {
     const validSet = new Set(['1', '2', '3', '3C', '3D']);
     return seriesElement.counts
       .filter(item => item.label['type'] === 'issue')
-      .filter(item => item.label['event'] === 'open')
+      .filter(item => ((!!item.label['event'].length)
+                                  && ((item.label['event'].toLowerCase() === 'open')
+                                      || (item.label['event'].toLowerCase() === 'opened'))))
       .reduce((sum, item) => validSet.has(item.label['severity']) ? sum + item.value : sum, 0);
   }
 }

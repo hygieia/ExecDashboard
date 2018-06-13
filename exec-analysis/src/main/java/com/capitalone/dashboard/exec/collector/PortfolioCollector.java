@@ -52,38 +52,38 @@ public class PortfolioCollector implements Runnable {
 
     private List<Row> environmentRowsList;
 
-
     private List<Row> componentRowsList;
 
     private List<Row> dashboardRowsList;
-
 
     private final SCMCollector scmCollector;
 
     private final LibraryPolicyCollector libraryPolicyCollector;
 
-
     private StaticCodeAnalysisCollector staticCodeAnalysisCollector;
+
+    private final IncidentCollector incidentCollector;
 
     @Autowired
     public PortfolioCollector(TaskScheduler taskScheduler, PortfolioRepository portfolioRepository,
                                 PortfolioCollectorSetting setting,
                                 SCMCollector scmCollector,
                                 LibraryPolicyCollector libraryPolicyCollector,
-                                StaticCodeAnalysisCollector staticCodeAnalysisCollector) {
+                                StaticCodeAnalysisCollector staticCodeAnalysisCollector,
+                                IncidentCollector incidentCollector) {
         this.taskScheduler = taskScheduler;
         this.portfolioRepository = portfolioRepository;
         this.setting = setting;
         this.scmCollector = scmCollector;
         this.libraryPolicyCollector = libraryPolicyCollector;
         this.staticCodeAnalysisCollector = staticCodeAnalysisCollector;
+        this.incidentCollector = incidentCollector;
     }
 
     /**
      * Main collection loop
      */
     public void collect() {
-
         HygieiaSparkConnection sparkConnection = new HygieiaSparkConnection(setting.getReadUri(), setting.getReadDatabase(),
                 setting.getWriteUri(), setting.getWriteDatabase());
         SparkSession sparkSession = sparkConnection.getInstance();
@@ -91,8 +91,6 @@ public class PortfolioCollector implements Runnable {
 
         //Build portfolio structure: Portfolio -> Product (ASV) -> Environment -> Component (BAP)
         List<Portfolio> portfolioList = collectCMDB(sparkSession, javaSparkContext);
-
-        // Close connections, sessions
 
         if (CollectionUtils.isEmpty(portfolioList)) {
             LOGGER.info("##### Portfolio List is empty, cannot procedd further, returning ... #####");
@@ -102,6 +100,7 @@ public class PortfolioCollector implements Runnable {
         scmCollector.collect(sparkSession, javaSparkContext, portfolioList);
         libraryPolicyCollector.collect(sparkSession, javaSparkContext, portfolioList);
         staticCodeAnalysisCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        incidentCollector.collect(sparkSession, javaSparkContext, portfolioList);
         sparkSession.close();
         javaSparkContext.close();
     }
