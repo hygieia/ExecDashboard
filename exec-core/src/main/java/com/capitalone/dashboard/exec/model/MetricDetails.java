@@ -1,7 +1,6 @@
 package com.capitalone.dashboard.exec.model;
 
 import java.util.List;
-import java.util.Objects;
 
 public class MetricDetails {
     private String name;
