@@ -4,3 +4,11 @@ services:
     build: exec-ui
     ports:
       - "4200:4200"
+
+  api:
+    build: 
+      context: exec-api
+      args:
+        JAR_FILE: "./target/exec-api.jar"
+    ports:
+      - "8080:8080"
