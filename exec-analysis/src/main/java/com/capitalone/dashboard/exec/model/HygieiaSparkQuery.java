@@ -40,13 +40,13 @@ public class HygieiaSparkQuery {
                     "ORDER BY timeWindow ASC";
 
     public static final String CMDB_INCIDENT_QUERY =
-            "SELECT collectorItemId, severity, status, cast(cast(from_unixtime(cast(openTime/1000 as bigint)) as timestamp) as date) as timeWindow, " +
-                    "cast(cast(from_unixtime(cast(closedTime/1000 as bigint)) as timestamp) as date) as closeDate, " +
+            "SELECT collectorItemId, severity, status, cast(from_unixtime(cast(openTime/1000 as bigint)) as timestamp) as timeWindow, " +
+                    "cast(from_unixtime(cast(closedTime/1000 as bigint)) as timestamp) as closeDate, " +
                     "cast(count(*) as double) as count " +
                     "FROM incident " +
                     "WHERE LTRIM(RTRIM(IFNULL(affectedItem, ''))) != '' and severity in ('1','2','3','3C','3D') " +
                     " and LTRIM(RTRIM(IFNULL(status, ''))) != '' " +
-                    "GROUP BY collectorItemId, severity, status, cast(cast(from_unixtime(cast(openTime/1000 as bigint)) as timestamp) as date), " +
-                    "cast(cast(from_unixtime(cast(closedTime/1000 as bigint)) as timestamp) as date) " +
+                    "GROUP BY collectorItemId, severity, status, cast(from_unixtime(cast(openTime/1000 as bigint)) as timestamp), " +
+                    "cast(from_unixtime(cast(closedTime/1000 as bigint)) as timestamp) " +
                     "ORDER BY collectorItemId, timeWindow, closeDate";
 }
