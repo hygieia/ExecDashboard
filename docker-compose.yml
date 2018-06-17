@@ -12,3 +12,5 @@ services:
         JAR_FILE: "./target/exec-api.jar"
     ports:
       - "8080:8080"
+    volumes:
+      - "/Users//dev/config:/var/app/config"
