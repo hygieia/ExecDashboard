@@ -76,6 +76,7 @@ public class IncidentCollector extends DefaultMetricCollector {
 
         collectorItemMetricDetail.setStrategy(MetricCollectionStrategy.AVERAGE);
         collectorItemMetricDetail.updateMeanTimeToResolve(meanTimeToResolveInMilliSeconds);
+        collectorItemMetricDetail.setStrategy(getCollectionStrategy());
 
         collectorItemMetricDetail.setLastScanDate(openDate);
     }

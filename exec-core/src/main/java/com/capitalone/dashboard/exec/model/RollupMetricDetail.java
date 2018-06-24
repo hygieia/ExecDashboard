@@ -3,10 +3,12 @@ package com.capitalone.dashboard.exec.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
-public class RollupMetricDetail extends MetricDetails{
-
+public class RollupMetricDetail extends MetricDetails {
+    protected static final String MTTR = "mttr";
+    protected static final String TYPE = "type";
 
     protected void updateSummary(MetricDetails metricDetails) {
         if (metricDetails.isProcessed()) {return;}
@@ -24,16 +26,24 @@ public class RollupMetricDetail extends MetricDetails{
             if (existing == null) {
                 rollupSummaryCounts.add(copyCount);
             } else {
-                rollupSummaryCounts.remove(existing);
-                copyCount.addValue(existing.getValue());
-                rollupSummaryCounts.add(copyCount);
+                processExistingMetricCount(existing, copyCount, rollupSummaryCounts);
             }
         }
         summary.setCounts(rollupSummaryCounts);
         if (getType() != null) { summary.setName(getType().getName()); }
     }
 
-
+    protected void processExistingMetricCount(MetricCount existing, MetricCount copyCount,
+                                              List<MetricCount> rollupSummaryCounts) {
+        rollupSummaryCounts.remove(existing);
+        Map<String, String> label = existing.getLabel();
+        if (MTTR.equalsIgnoreCase(label.get(TYPE))) { // Mean Time To Resolve
+            copyCount.addAverageValue(existing.getValue());
+        } else {
+            copyCount.addValue(existing.getValue());
+        }
+        rollupSummaryCounts.add(copyCount);
+    }
 
     protected void updateTimeSeries(MetricDetails itemMetricDetails) {
         if (itemMetricDetails.isProcessed()) {return;}
@@ -78,6 +88,7 @@ public class RollupMetricDetail extends MetricDetails{
 
         return trendSlope;
     }
+
     protected Double calculateStandardDeviation(List<Double> values) {
         double sum = 0.0;
         double averageValue = getAverageValue(values);
@@ -86,6 +97,7 @@ public class RollupMetricDetail extends MetricDetails{
 
         return Math.sqrt( sum / ( values.size() - 1 ) );
     }
+
     protected Double getAverageValue(List<Double> values) {
         if (values == null || values.isEmpty()) { return 0.0; }
 

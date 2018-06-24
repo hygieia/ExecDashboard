@@ -131,6 +131,10 @@ public class BuildingBlockMetricSummary {
         BuildingBlockMetricSummary response = new BuildingBlockMetricSummary();
         response.setId(fromItem.getName());
         response.setName(fromItem.getName());
+        if ((fromItem instanceof ComponentMetricDetail)
+                && ((ComponentMetricDetail) fromItem).getItem() != null) {
+            response.setCommonName(((ComponentMetricDetail) fromItem).getItem().getCommonName());
+        }
         response.setLob(fromItem.getLob());
         response.setItemType(fromItem.getLevel());
         response.setMetrics(new ArrayList<>());

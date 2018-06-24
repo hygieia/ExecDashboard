@@ -85,9 +85,6 @@ public class PortfolioServiceImpl implements PortfolioService {
         portfolioMetricDetailList.forEach(portfolioMetricDetail -> productComponentList.forEach(productComponent -> buildComponentBuildingBlockMetricSummary(buildingBlockMetricSummaryList, productComponent,
                 portfolioMetricDetail)));
 
-        portfolioMetricDetailList.forEach(portfolioMetricDetail -> environmentList.forEach(environment -> buildComponentBuildingBlockMetricSummary(buildingBlockMetricSummaryList, environment,
-                portfolioMetricDetail)));
-
         return buildingBlockMetricSummaryList;
     }
 

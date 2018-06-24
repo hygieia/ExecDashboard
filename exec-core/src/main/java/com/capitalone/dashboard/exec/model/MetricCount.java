@@ -35,7 +35,7 @@ public class MetricCount {
     }
 
     public void addAverageValue(double val) {
-        value = (value + val)/2;
+        value = (value + val)/2.0;
     }
 
     @Override
