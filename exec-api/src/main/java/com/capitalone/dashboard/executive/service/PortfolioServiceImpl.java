@@ -3,7 +3,6 @@ package com.capitalone.dashboard.executive.service;
 import com.capitalone.dashboard.exec.model.BaseConfigItem;
 import com.capitalone.dashboard.exec.model.BuildingBlockMetricSummary;
 import com.capitalone.dashboard.exec.model.ComponentMetricDetail;
-import com.capitalone.dashboard.exec.model.Environment;
 import com.capitalone.dashboard.exec.model.MetricType;
 import com.capitalone.dashboard.exec.model.Portfolio;
 import com.capitalone.dashboard.exec.model.PortfolioMetricDetail;
@@ -79,7 +78,6 @@ public class PortfolioServiceImpl implements PortfolioService {
         if (product == null) { return null; }
 
         List<ProductComponent> productComponentList = product.getProductComponentList();
-        List<Environment> environmentList = product.getEnvironments();
 
         List<BuildingBlockMetricSummary> buildingBlockMetricSummaryList = new ArrayList<>();
         portfolioMetricDetailList.forEach(portfolioMetricDetail -> productComponentList.forEach(productComponent -> buildComponentBuildingBlockMetricSummary(buildingBlockMetricSummaryList, productComponent,
