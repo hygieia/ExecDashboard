@@ -8,7 +8,7 @@
       <app-metric-graph [model]="this.metricDetailView.graphModel"></app-metric-graph>
       <div fxLayout="row" fxLayoutWrap>
         <app-metric-segmentation fxFlex *ngIf="this.metricDetailView.segmentationModel" [model]="this.metricDetailView.segmentationModel"></app-metric-segmentation>
-        <app-total-reporting fxFlex [totalReporting]="this.metricDetailView.totalReporting"></app-total-reporting>
+        <app-total-reporting fxFlex [totalReporting]="this.metricDetailView.totalReporting" [isComponentList]="!!this.productId"></app-total-reporting>
         <app-metric-auxiliary-figure fxFlex [model]="this.metricDetailView.secondaryFigureModel"></app-metric-auxiliary-figure>
       </div>
     </div>

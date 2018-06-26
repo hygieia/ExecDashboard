@@ -8,6 +8,7 @@ import * as d3 from 'd3';
 })
 export class TotalReportingComponent implements OnChanges {
   @Input() public totalReporting: number = null;
+  @Input() public isComponentList: boolean;
 
   constructor() { }
 
