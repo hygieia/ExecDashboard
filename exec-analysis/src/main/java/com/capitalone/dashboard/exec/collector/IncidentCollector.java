@@ -60,7 +60,11 @@ public class IncidentCollector extends DefaultMetricCollector {
 
     private void updateCollectorItemMetricDetail(CollectorItemMetricDetail collectorItemMetricDetail, Row itemRow) {
         Date openDate = itemRow.getAs("timeWindow");
-        Date closeDate = itemRow.getAs("closeDate");
+        Date closeDate = null;
+        Long closedTime = itemRow.getAs("closedTime");
+        if (closedTime != 0L) {
+            closeDate = itemRow.getAs("closeDate");
+        }
         String severity = itemRow.getAs("severity");
         String status = itemRow.getAs("status");
         double value = itemRow.getAs("count");
