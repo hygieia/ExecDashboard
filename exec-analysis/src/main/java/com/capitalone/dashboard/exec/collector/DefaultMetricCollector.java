@@ -12,7 +12,6 @@ import com.capitalone.dashboard.exec.model.Product;
 import com.capitalone.dashboard.exec.model.ProductComponent;
 import com.capitalone.dashboard.exec.model.ProductMetricDetail;
 import com.capitalone.dashboard.exec.repository.PortfolioMetricRepository;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
@@ -46,17 +45,14 @@ public abstract class DefaultMetricCollector {
         DefaultDataCollector dataCollector
                 = new DefaultDataCollector(getCollection(), getQuery(), collectorItemList, sparkSession, javaSparkContext);
         Map<String, List<Row>> rowsListMap = dataCollector.collectAll();
-        if (!CollectionUtils.isEmpty(portfolioList)) {
-            portfolioMetricRepository.deleteAllByType(getMetricType());
-        }
+        boolean deleteFlag = true;
 
-        Optional.ofNullable(portfolioList).orElseGet(Collections::emptyList)
-        .forEach(portfolio -> {
+        for (Portfolio portfolio: portfolioList) {
             PortfolioMetricDetail portfolioMetricDetail = new PortfolioMetricDetail();
             List<Product> products = portfolio.getProducts();
             portfolioMetricDetail.setName(portfolio.getName());
             portfolioMetricDetail.setLob(portfolio.getLob());
-            products.forEach(product -> {
+            for (Product product: products) {
                 List<ProductComponent> productComponents = product.getProductComponentList();
                 ProductMetricDetail productMetricDetail = new ProductMetricDetail();
                 productMetricDetail.setName(product.getName());
@@ -67,21 +63,23 @@ public abstract class DefaultMetricCollector {
                     componentMetricDetail.setName(productComponent.getName());
                     componentMetricDetail.setLob(productComponent.getLob());
                     ObjectId dashboardId = productComponent.getProductComponentDashboardId();
-                    if (dashboardId == null) {
-                        return;
-                    }
+                    if (dashboardId == null) { return; }
                     List<String> collectorItems = dashboardCollectorItemsMap.get(dashboardId.toString()) != null ? dashboardCollectorItemsMap.get(dashboardId.toString()) : new ArrayList<>();
                     collectorItems.stream().map(collectorItem -> getCollectorItemMetricDetail(rowsListMap.get(collectorItem), getMetricType())).forEach(componentMetricDetail::addCollectorItemMetricDetail);
                     productMetricDetail.addComponentMetricDetail(componentMetricDetail);
                 });
                 productMetricDetail.setTotalComponents(productComponents.size());
                 portfolioMetricDetail.addProductMetricDetail(productMetricDetail);
-            });
+            }
             if (portfolioMetricDetail.getSummary() != null) {
                 portfolioMetricDetail.setTotalComponents(products.size());
+                if (deleteFlag) { // Clear the metrics results in the database before saving the first newly generated result
+                    portfolioMetricRepository.deleteAllByType(getMetricType());
+                    deleteFlag = false;
+                }
                 portfolioMetricRepository.save(portfolioMetricDetail);
             }
-        });
+        }
     }
 
     protected abstract MetricType getMetricType();
