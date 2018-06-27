@@ -3,24 +3,27 @@
 Create a file in this folder named application.properties and enter the following properties:
 
 ```
-dbname=analyticsdb
-dbusername=analyticsuser
-dbpassword=analyticspass
+server.contextPath=/api
+server.port=8080
+
 dbhost=exec-db
 dbport=27017
 
-portfolio.cron=0 */5 * * * *
+dbname=analyticsdb
+dbusername=analyticsuser
+dbpassword=analyticspass
 
-portfolio.readUriUserName=dashboarduser
-portfolio.readUriPassword=dbpassword
+dbreplicaset=false
 
-portfolio.readUriDatabase=db:27017
-portfolio.readUriPrefix=mongodb
-portfolio.readDatabase=dashboarddb
+logRequest=false
+logSplunkRequest=false
+corsEnabled=false
 
-portfolio.incidentsCollectorFlag=true
-portfolio.scmCollectorFlag=true
-portfolio.codeAnalysisCollectorFlag=true
+version.number=@application.version.number@
 
-server.port=8081
+# [JWT expiration time in milliseconds]
+auth.expirationTime=1200000
+
+auth.secret=hygsecret
+auth.authenticationProviders=STANDARD
 ```
