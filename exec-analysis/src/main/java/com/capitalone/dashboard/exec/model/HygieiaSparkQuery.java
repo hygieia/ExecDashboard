@@ -45,7 +45,7 @@ public class HygieiaSparkQuery {
                     "cast(count(*) as double) as count " +
                     "FROM incident " +
                     "WHERE LTRIM(RTRIM(IFNULL(affectedItem, ''))) != '' and severity in ('1','2','3','3C','3D') " +
-                    " and LTRIM(RTRIM(IFNULL(status, ''))) != '' " +
+                    " and LTRIM(RTRIM(IFNULL(status, ''))) != '' and UCASE(status) in ('OPEN', 'OPENED', 'CLOSE', 'CLOSED')" +
                     "GROUP BY collectorItemId, severity, status, cast(from_unixtime(cast(openTime/1000 as bigint)) as timestamp), " +
                     "cast(from_unixtime(cast(closedTime/1000 as bigint)) as timestamp), closedTime " +
                     "ORDER BY collectorItemId, timeWindow, closeDate";
