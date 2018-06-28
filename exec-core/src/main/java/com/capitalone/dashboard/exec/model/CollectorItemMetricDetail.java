@@ -3,6 +3,8 @@ package com.capitalone.dashboard.exec.model;
 import com.capitalone.dashboard.exec.util.HygieiaExecutiveUtil;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CollectorItemMetricDetail extends MetricDetails {
     private MetricCollectionStrategy strategy;
@@ -52,6 +54,15 @@ public class CollectorItemMetricDetail extends MetricDetails {
         }
     }
 
+    public void updateMeanTimeToResolve(long meanTimeToResolve) {
+        if (summary == null) {return;}
+        MetricCount mc = new MetricCount();
+        Map<String, String> label = new HashMap<>();
+        label.put("type", "mttr");
+        mc.setLabel(label);
+        mc.setValue(meanTimeToResolve);
+        summary.addCollectorItemCount(mc, strategy, null);
+    }
 
     private void updateTimeSeries(MetricCount metricCount, Date scanTime) {
         MetricTimeSeriesElement mts = new MetricTimeSeriesElement();
@@ -60,7 +71,6 @@ public class CollectorItemMetricDetail extends MetricDetails {
         mts.addCount(metricCount);
         addTimeSeriesElement(mts, metricCount, scanTime);
     }
-
 
     public void addTimeSeriesElement(MetricTimeSeriesElement element, MetricCount metricCount, Date scanTime) {
         if (timeSeries == null) {

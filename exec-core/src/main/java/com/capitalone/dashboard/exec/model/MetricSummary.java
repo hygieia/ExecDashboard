@@ -58,7 +58,8 @@ public class MetricSummary {
             counts = new ArrayList<>();
         }
         MetricCount oCount = this.getMetricCountByLabel(count.getLabel());
-        this.setLastScanned(scanTime);
+        if (scanTime != null) { this.setLastScanned(scanTime); }
+
         if (oCount == null) {
             counts.add(cloneCount);
         } else {
@@ -76,6 +77,8 @@ public class MetricSummary {
                     break;
 
                 case AVERAGE:
+                    cloneCount.addAverageValue(oCount.getValue());
+                    counts.add(cloneCount);
                     break;
 
                 default:
