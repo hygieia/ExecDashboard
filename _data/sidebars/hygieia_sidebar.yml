@@ -57,6 +57,13 @@ entries:
     - title: UI Configuration
       url: /EXECUI_Setup.html
       output: web, pdf
+      
+  - title: Architecture
+    output: web, pdf
+    folderitems:
+    - title: A Diagram of Hygieia Executive
+      url: /architecture.html
+      output: web, pdf    
     
   - title: Contribution Guidelines
     output: web, pdf
