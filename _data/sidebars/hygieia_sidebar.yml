@@ -71,6 +71,9 @@ entries:
     - title: Contribute Widgets
       url: /Create_Widget.html
       output: web, pdf
+    - title: Contribute to the Documentation
+      url: /Documentation.html
+      output: web, pdf  
     - title: Contribution Agreement
       url: /Contribute.html
       output: web, pdf

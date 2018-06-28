@@ -5,7 +5,7 @@ keywords:
 toc: true
 summary: 
 sidebar: hygieia_sidebar
-permalink: documentation.html
+permalink: Documentation.html
 ---
 
 To create and edit markdown files for the documentation of **Hygieia Executive Dashboard**, follow the instructions given below:
