@@ -3,6 +3,7 @@ package com.capitalone.dashboard.exec.model;
 public enum CollectorType {
     SCM,
     CMDB,
+    Incident,
     Build,
     Artifact,
     Deployment,

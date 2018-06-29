@@ -9,4 +9,5 @@ export class MetricGraphModel {
   trend: MetricTrendModel;
   valueLabel: string;
   toolTipLabel: (number) => string;
+  additionalValues: { totalCount: number, item: string}[];
 }

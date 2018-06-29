@@ -40,17 +40,23 @@ export class ProductionIncidentsSegmentationStrategy implements Strategy<MetricS
         .filter(i => i.label['severity'] === severity);
 
       const open = severityCounts
-        .filter(i => i.label['event'] === 'open')
+        .filter(i =>
+          (!!i.label['event'].length)
+          && ((i.label['event'].toLowerCase() === 'open')
+              || (i.label['event'].toLowerCase() === 'opened')))
         .map(c => c.value)
         .reduce((a, b) => a + b, 0);
 
       const closed = severityCounts
-        .filter(i => i.label['event'] === 'close')
+        .filter(i =>
+          (!!i.label['event'].length)
+          && ((i.label['event'].toLowerCase() === 'close')
+              || (i.label['event'].toLowerCase() === 'closed')))
         .map(c => c.value)
         .reduce((a, b) => a + b, 0);
 
       return {
-        open: open - closed,
+        open: open,
         closed: closed
       };
     }

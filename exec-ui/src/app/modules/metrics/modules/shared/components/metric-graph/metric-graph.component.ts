@@ -30,12 +30,23 @@ export class MetricGraphComponent implements OnInit, OnChanges {
     }
 
     const model = this.model;
-
     const apiData = this.model.values;
+    const apiAdditionalData = this.model.additionalValues;
 
-    const graphData = [
-      ...apiData.slice(0, 89).map((x, i) => ({daysAgo: i, issues: x}))
-    ];
+    let graphData;
+    if (apiData !== undefined) {
+      graphData = [
+        ...apiData.slice(0, 89).map((x, i) => ({daysAgo: i, issues: x}))
+      ];
+    } else if (apiAdditionalData !== undefined) {
+      graphData = [
+        ...apiAdditionalData.slice(0, 89).map(
+          (x, i) => ({daysAgo: i,
+                                issues: x.totalCount,
+                                toolTipLabel: x.item}))
+      ];
+    }
+
 
     const width = 750,
           height = 225;
@@ -176,6 +187,9 @@ export class MetricGraphComponent implements OnInit, OnChanges {
       });
 
     function toolTip(d) {
+      if (d.toolTipLabel !== undefined) {
+        return `<strong>${d.toolTipLabel}</strong> on ${getToolTipDate(d)}`;
+      }
       return `<strong>${issue(d.issues)}</strong> on ${getToolTipDate(d)}`;
     }
 
