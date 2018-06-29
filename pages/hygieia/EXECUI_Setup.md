@@ -1,5 +1,5 @@
 ---
-title: The Hygieia Executive Dashboard UI
+title: The Hygieia Executive Dashboard UI Layer
 tags:
 keywords:
 summary:
@@ -14,6 +14,8 @@ The Hygieia dashboard requires installation of:
 - nvm
 - Node JS
 - npm
+
+To set up the UI layer, execute the following steps:
 
 *	**Step 1: Install nvm**
 

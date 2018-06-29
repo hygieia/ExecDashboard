@@ -1,5 +1,5 @@
 ---
-title: The Hygieia Executive Dashboard API
+title: The Hygieia Executive Dashboard API Layer
 tags:
 keywords:
 summary:

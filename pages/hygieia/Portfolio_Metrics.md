@@ -49,7 +49,7 @@ The following are examples to explain the trend indicator:
 
 ![4](https://hygieia.github.io/ExecDashboard/media/images/Arrows/4.png) **Green Arrow (Downwards)** - The positive decrease in code-related issues across all products in your portfolio
 
-![5](https://hygieia.github.io/ExecDashboard/media/images/Arrows/5.png) **No Status** - No data available to arrive at a trend indicator value
+![5](https://hygieia.github.io/ExecDashboard/media/images/Arrows/5.png) **No Status** - No data update from the latest collector run.
 
 ### The Metric Breakdown
 
