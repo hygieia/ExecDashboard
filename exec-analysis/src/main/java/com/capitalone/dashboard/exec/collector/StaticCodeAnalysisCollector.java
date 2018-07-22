@@ -5,6 +5,8 @@ import com.capitalone.dashboard.exec.repository.PortfolioMetricRepository;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.catalyst.expressions.GenericRowWithSchema;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import scala.collection.JavaConversions;
@@ -21,6 +23,8 @@ import java.util.HashMap;
 
 @Component
 public class StaticCodeAnalysisCollector extends DefaultMetricCollector {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(StaticCodeAnalysisCollector.class);
 
     @Autowired
     public StaticCodeAnalysisCollector(PortfolioMetricRepository portfolioMetricRepository) {
@@ -71,12 +75,17 @@ public class StaticCodeAnalysisCollector extends DefaultMetricCollector {
                     GenericRowWithSchema genericRowWithSchema = (GenericRowWithSchema) m;
                     String existingLabelName = genericRowWithSchema.getAs("name");
                     if (scaMetricList.contains(existingLabelName)) {
-                        double value = genericRowWithSchema.getAs("value");
-                        MetricCount mc = getMetricCount("", value, existingLabelName);
-                        if (mc != null) {
-                            collectorItemMetricDetail.setStrategy(getCollectionStrategy());
-                            collectorItemMetricDetail.addCollectorItemMetricCount(timeWindowDt, mc);
-                            collectorItemMetricDetail.setLastScanDate(timeWindowDt);
+                        String valueStr = genericRowWithSchema.getAs("value");
+                        try {
+                            double value = Double.parseDouble(valueStr);
+                            MetricCount mc = getMetricCount("", value, existingLabelName);
+                            if (mc != null) {
+                                collectorItemMetricDetail.setStrategy(getCollectionStrategy());
+                                collectorItemMetricDetail.addCollectorItemMetricCount(timeWindowDt, mc);
+                                collectorItemMetricDetail.setLastScanDate(timeWindowDt);
+                            }
+                        } catch (NumberFormatException e) {
+                            LOGGER.info("Exception: Not a number, 'value' = "+valueStr,e);
                         }
                     }
                 });
