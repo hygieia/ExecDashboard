@@ -10,7 +10,7 @@ RUN npm install && \
 
 FROM httpd:2.4
 ENV API_URL http://localhost:8080
-COPY docker-util/configure-httpd.sh /tmp
 COPY --from=build /var/app/dist /usr/local/apache2/htdocs/
-CMD sh -c /tmp/configure-httpd.sh && \
-    httpd-foreground
+COPY docker-util/docker-entrypoint.sh /usr/local/bin/
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["httpd-foreground"]
