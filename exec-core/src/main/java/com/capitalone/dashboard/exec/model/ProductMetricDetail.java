@@ -1,5 +1,7 @@
 package com.capitalone.dashboard.exec.model;
 
+import org.springframework.data.annotation.Transient;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,6 +11,8 @@ import static com.capitalone.dashboard.exec.util.HygieiaExecutiveUtil.getEmptyTi
 public class ProductMetricDetail extends RollupMetricDetail {
     private List<ComponentMetricDetail> componentMetricDetailList;
 
+    @Transient
+    private List<CollectorItemMetricDetail> collectorItemMetricDetailList;
 
     public ProductMetricDetail() {
         setLevel(MetricLevel.PRODUCT);
@@ -36,23 +40,50 @@ public class ProductMetricDetail extends RollupMetricDetail {
             componentMetricDetailList = new ArrayList<>();
         }
         this.componentMetricDetailList.add(componentMetricDetail);
-        updateSummary();
-        updateTimeSeries();
+        updateSummary(true);
+        updateTimeSeries(true);
         componentMetricDetail.setProcessed(true);
     }
 
-    protected void updateSummary() {
+    /*
+    *   This is to be able to add a Collector Item directly to a Product, without adding it to a Component under the Product
+    */
+    public void addCollectorItemMetricDetail(CollectorItemMetricDetail collectorItemMetricDetail) {
+        if (collectorItemMetricDetail.getSummary() == null) {
+            return;
+        }
+        if (getType() == null) {
+            setType(collectorItemMetricDetail.getType());
+        }
+        if (collectorItemMetricDetailList == null) {
+            collectorItemMetricDetailList = new ArrayList<>();
+        }
+        this.collectorItemMetricDetailList.add(collectorItemMetricDetail);
+        updateSummary(false);
+        updateTimeSeries(false);
+        collectorItemMetricDetail.setProcessed(true);
+    }
+
+    protected void updateSummary(boolean processComponentMetricDetail) {
         if(summary == null){
             summary = new MetricSummary();
         }
         summary.setLastUpdated(new Date());
-        componentMetricDetailList.forEach(this::updateSummary);
+        if (processComponentMetricDetail) {
+            componentMetricDetailList.forEach(this::updateSummary);
+        } else {
+            collectorItemMetricDetailList.forEach(this::updateSummary);
+        }
     }
 
-    protected void updateTimeSeries() {
+    protected void updateTimeSeries(boolean processComponentMetricDetail) {
         if (timeSeries == null) {
             timeSeries = getEmptyTimeSeries();
         }
-        componentMetricDetailList.forEach(this::updateTimeSeries);
+        if (processComponentMetricDetail) {
+            componentMetricDetailList.forEach(this::updateTimeSeries);
+        } else {
+            collectorItemMetricDetailList.forEach(this::updateTimeSeries);
+        }
     }
 }

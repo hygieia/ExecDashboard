@@ -8,6 +8,7 @@ import com.capitalone.dashboard.exec.model.MetricCount;
 import com.capitalone.dashboard.exec.model.MetricType;
 import com.capitalone.dashboard.exec.repository.PortfolioMetricRepository;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.spark.sql.Row;
 import org.springframework.stereotype.Component;
 
@@ -48,11 +49,14 @@ public class IncidentCollector extends DefaultMetricCollector {
 
     @Override
     protected CollectorItemMetricDetail getCollectorItemMetricDetail(List<Row> rowList, MetricType metricType) {
-        CollectorItemMetricDetail collectorItemMetricDetail = new CollectorItemMetricDetail();
+         CollectorItemMetricDetail collectorItemMetricDetail = new CollectorItemMetricDetail();
         if (CollectionUtils.isEmpty(rowList)) { return collectorItemMetricDetail; }
 
         collectorItemMetricDetail.setType(metricType);
         for (Row row : rowList) {
+            if (row.getAs("attachedToBusinessServiceOnly")) {
+                collectorItemMetricDetail.setAttachedToBusinessServiceOnly(true);
+            }
             updateCollectorItemMetricDetail(collectorItemMetricDetail, row);
         }
         return collectorItemMetricDetail;
@@ -62,7 +66,7 @@ public class IncidentCollector extends DefaultMetricCollector {
         Date openDate = itemRow.getAs("timeWindow");
         Date closeDate = null;
         Long closedTime = itemRow.getAs("closedTime");
-        if (closedTime != 0L) {
+        if ((closedTime != null) && (closedTime != 0L)) {
             closeDate = itemRow.getAs("closeDate");
         }
         String severity = itemRow.getAs("severity");

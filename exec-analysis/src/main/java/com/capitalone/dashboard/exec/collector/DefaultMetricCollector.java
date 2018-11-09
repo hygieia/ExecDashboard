@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Collections;
+import java.util.stream.Collectors;
 
 @Component
 public abstract class DefaultMetricCollector {
@@ -65,8 +66,32 @@ public abstract class DefaultMetricCollector {
                     ObjectId dashboardId = productComponent.getProductComponentDashboardId();
                     if (dashboardId == null) { return; }
                     List<String> collectorItems = dashboardCollectorItemsMap.get(dashboardId.toString()) != null ? dashboardCollectorItemsMap.get(dashboardId.toString()) : new ArrayList<>();
-                    collectorItems.stream().map(collectorItem -> getCollectorItemMetricDetail(rowsListMap.get(collectorItem), getMetricType())).forEach(componentMetricDetail::addCollectorItemMetricDetail);
+
+                    List<CollectorItemMetricDetail> collectorItemMetricDetailList
+                            = Optional.ofNullable(collectorItems).orElseGet(Collections::emptyList).stream()
+                                .map(collectorItem -> getCollectorItemMetricDetail(rowsListMap.get(collectorItem), getMetricType()))
+                                .collect(Collectors.toList());
+
+                    List<CollectorItemMetricDetail> collectorItemMetricDetailsAttachedToProductOnly =
+                            Optional.ofNullable(collectorItemMetricDetailList).orElseGet(Collections::emptyList).stream()
+                                    .filter(collectorItemMetricDetail -> collectorItemMetricDetail.isAttachedToBusinessServiceOnly())
+                                    .collect(Collectors.toList());
+
+                    List<CollectorItemMetricDetail> collectorItemMetricDetailsAttachedToBothProductAndComponent =
+                            Optional.ofNullable(collectorItemMetricDetailList).orElseGet(Collections::emptyList).stream()
+                                    .filter(collectorItemMetricDetail -> !collectorItemMetricDetail.isAttachedToBusinessServiceOnly())
+                                    .collect(Collectors.toList());
+
+                    Optional.ofNullable(collectorItemMetricDetailsAttachedToBothProductAndComponent)
+                        .orElseGet(Collections::emptyList)
+                        .forEach(componentMetricDetail::addCollectorItemMetricDetail);
                     productMetricDetail.addComponentMetricDetail(componentMetricDetail);
+
+                    Optional.ofNullable(collectorItemMetricDetailsAttachedToProductOnly)
+                        .orElseGet(Collections::emptyList)
+                        .forEach(collectorItem -> {
+                            productMetricDetail.addCollectorItemMetricDetail(collectorItem);
+                        });
                 });
                 productMetricDetail.setTotalComponents(productComponents.size());
                 portfolioMetricDetail.addProductMetricDetail(productMetricDetail);

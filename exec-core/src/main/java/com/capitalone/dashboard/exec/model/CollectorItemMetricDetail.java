@@ -9,7 +9,11 @@ import java.util.Map;
 public class CollectorItemMetricDetail extends MetricDetails {
     private MetricCollectionStrategy strategy;
     private Date lastScanDate;
+    private boolean attachedToBusinessServiceOnly;
 
+    public boolean isAttachedToBusinessServiceOnly() { return attachedToBusinessServiceOnly; }
+
+    public void setAttachedToBusinessServiceOnly(boolean attachedToBusinessServiceOnly) { this.attachedToBusinessServiceOnly = attachedToBusinessServiceOnly; }
 
     public CollectorItemMetricDetail() {
         setLevel(MetricLevel.COLLECTOR_ITEM);

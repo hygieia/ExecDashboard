@@ -107,7 +107,7 @@ public class PortfolioServiceImpl implements PortfolioService {
         ComponentMetricDetail componentMetricDetail =
                 Optional.ofNullable(portfolioMetricDetail.getProductMetricDetailList())
                         .orElseGet(Collections::emptyList).stream()
-                        .flatMap(pmd -> pmd.getComponentMetricDetailList().stream())
+                        .flatMap(pmd -> Optional.ofNullable(pmd.getComponentMetricDetailList()).orElseGet(Collections::emptyList).stream())
                         .filter(pcmd -> (pcmd.getName().equalsIgnoreCase(item.getName())))
                         .findFirst().orElse(null);
         if (buildingBlockMetricSummary != null) {
