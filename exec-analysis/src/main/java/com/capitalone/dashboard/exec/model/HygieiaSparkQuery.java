@@ -2,7 +2,7 @@ package com.capitalone.dashboard.exec.model;
 
 public class HygieiaSparkQuery {
     public static final String CMDB_PRODUCT_QUERY =
-            "SELECT _id as productId, configurationItem as productName, environments, components, businessOwner, ownerDept, appServiceOwner, supportOwner, developmentOwner " +
+            "SELECT _id as productId, configurationItem as productName, commonName as productCommonName, environments, components, businessOwner, ownerDept, appServiceOwner, supportOwner, developmentOwner " +
                     "FROM cmdb where (validConfigItem = 1) and (businessOwner is not null) and (itemType = 'app')";
 
     public static final String CMDB_COMPONENT_QUERY =

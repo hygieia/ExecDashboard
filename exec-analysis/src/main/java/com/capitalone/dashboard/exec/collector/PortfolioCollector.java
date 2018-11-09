@@ -179,10 +179,11 @@ public class PortfolioCollector implements Runnable {
 
     private void addProductToPortfolio(Portfolio portfolio, Row productRow) {
         String productName = productRow.getAs("productName");
+        String productCommonName = productRow.getAs("productCommonName");
         String productDept = productRow.getAs("ownerDept");
         String productId = (String) ((GenericRowWithSchema) productRow.getAs("productId")).values()[0];
 
-        LOGGER.debug("    Product Name = " + productName + " ; Owner Dept = " + productDept);
+        LOGGER.debug("    Product Name = " + productName + " ; Product Common Name = " + productCommonName + " ; Owner Dept = " + productDept);
 
         // For a given portfolio, check if the current product already exists in the product list for the portfolio
         // If not, add it to the product list
@@ -197,6 +198,7 @@ public class PortfolioCollector implements Runnable {
             product.setId(new ObjectId(productId));
             product.setLob(productDept);
             product.setName(productName);
+            product.setCommonName(productCommonName);
             product.setMetricLevel(MetricLevel.PRODUCT);
         }
         if (productRow.getAs("environments") != null) {

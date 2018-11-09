@@ -8,7 +8,6 @@ import com.capitalone.dashboard.exec.model.MetricCount;
 import com.capitalone.dashboard.exec.model.MetricType;
 import com.capitalone.dashboard.exec.repository.PortfolioMetricRepository;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.spark.sql.Row;
 import org.springframework.stereotype.Component;
 
