@@ -6,6 +6,7 @@ import {MetricSummary} from '../../domain-models/metric-summary';
 import {Observable} from 'rxjs/Observable';
 import {Router} from '@angular/router';
 import {ItemType} from '../../component-models/item-type';
+import {ProductionIncidentsConfiguration} from "../../../metrics/production-incidents/production-incidents.configuration";
 /**
  *This is a base component class for displaying component instances in the metric previews container component.
  *Extend this class to build previews for additional metrics.
@@ -43,7 +44,9 @@ export abstract class MetricPreviewBaseComponent {
 
   goToDetails(event: Event): void {
     event.stopPropagation();
-    this.viewDetails();
+    return this.hasReports()
+      ? this.viewDetails()
+      : null;
   }
 
   viewDetails(): void {
@@ -94,7 +97,10 @@ export abstract class MetricPreviewBaseComponent {
   }
 
   hasReports(): boolean {
-    return !!this.metricPreview.hasReporting;
+    if (this.metric === ProductionIncidentsConfiguration.identifier) {
+      return !!this.metricPreview.hasReporting;
+    }
+    return !!this.metricPreview.totalReporting;
   }
 
   loadMetricSummaryData(): void {
