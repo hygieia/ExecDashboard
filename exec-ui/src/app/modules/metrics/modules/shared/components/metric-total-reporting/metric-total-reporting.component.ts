@@ -13,9 +13,7 @@ export class TotalReportingComponent implements OnChanges {
   constructor() { }
 
   ngOnChanges() {
-    if (this.totalReporting) {
-      setTimeout(() => this.drawVisual(), 0);
-    }
+    setTimeout(() => this.drawVisual(), 0);
   }
 
   drawVisual() {

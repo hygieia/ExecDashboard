@@ -21,4 +21,22 @@ export class ProductionIncidentsPrimaryMetricStrategy extends PrimaryMetricStrat
         .reduce((a, b) => a + b, 0)
     };
   }
+
+  hasReporting(counts: Count[]): MetricValueModel {
+      const validSet = new Set(['1', '2', '3', '3C', '3D']);
+
+      return {
+        name: ProductionIncidentsConfiguration.buildingBlockLabel,
+        value: counts
+            .filter(c => c.label['type'] === 'issue')
+            .filter(c => (!!c.label['event'].length) &&
+                ((c.label['event'].toLowerCase() === 'open')
+                    || (c.label['event'].toLowerCase() === 'opened')
+                    || (c.label['event'].toLowerCase() === 'close')
+                    || (c.label['event'].toLowerCase() === 'closed')))
+            .filter(c => validSet.has(c.label['severity']))
+            .map(c => c.value)
+            .reduce((a, b) => a + b, 0)
+      };
+  }
 }

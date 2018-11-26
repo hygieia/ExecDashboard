@@ -43,9 +43,7 @@ export abstract class MetricPreviewBaseComponent {
 
   goToDetails(event: Event): void {
     event.stopPropagation();
-    return this.hasReports()
-      ? this.viewDetails()
-      : null;
+    this.viewDetails();
   }
 
   viewDetails(): void {
@@ -96,7 +94,7 @@ export abstract class MetricPreviewBaseComponent {
   }
 
   hasReports(): boolean {
-    return !!this.metricPreview.totalReporting;
+    return !!this.metricPreview.hasReporting;
   }
 
   loadMetricSummaryData(): void {

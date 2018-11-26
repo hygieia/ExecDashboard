@@ -13,7 +13,8 @@ public class RollupMetricDetail extends MetricDetails {
     protected void updateSummary(MetricDetails metricDetails) {
         if (metricDetails.isProcessed()) {return;}
         MetricSummary itemMetricSummary = metricDetails.getSummary();
-        setReportingComponents(getReportingComponents() + 1);
+        setReportingComponents(metricDetails);
+
         if ((summary.getLastScanned() == null)||summary.getLastScanned().before(itemMetricSummary.getLastScanned())) {
             summary.setLastScanned(itemMetricSummary.getLastScanned());
         }
@@ -31,6 +32,13 @@ public class RollupMetricDetail extends MetricDetails {
         }
         summary.setCounts(rollupSummaryCounts);
         if (getType() != null) { summary.setName(getType().getName()); }
+    }
+
+    protected void setReportingComponents(MetricDetails metricDetails) {
+        if ( (metricDetails instanceof CollectorItemMetricDetail)
+                && ((CollectorItemMetricDetail) metricDetails).isAttachedToBusinessServiceOnly() ) { return; }
+
+        setReportingComponents(getReportingComponents() + 1);
     }
 
     protected void processExistingMetricCount(MetricCount existing, MetricCount copyCount,

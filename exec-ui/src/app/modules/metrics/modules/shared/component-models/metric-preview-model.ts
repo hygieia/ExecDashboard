@@ -8,6 +8,7 @@ export class MetricPreviewModel {
   description: string;
   lastScanned: string;
   totalReporting: number;
+  hasReporting: number;
   trend: MetricTrendModel;
   secondaryMetrics: MetricValueModel[];
 }

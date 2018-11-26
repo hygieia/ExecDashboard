@@ -64,23 +64,23 @@ public class ProductMetricDetail extends RollupMetricDetail {
         collectorItemMetricDetail.setProcessed(true);
     }
 
-    protected void updateSummary(boolean processComponentMetricDetail) {
+    protected void updateSummary(boolean isComponentMetricDetail) {
         if(summary == null){
             summary = new MetricSummary();
         }
         summary.setLastUpdated(new Date());
-        if (processComponentMetricDetail) {
+        if (isComponentMetricDetail) {
             componentMetricDetailList.forEach(this::updateSummary);
         } else {
             collectorItemMetricDetailList.forEach(this::updateSummary);
         }
     }
 
-    protected void updateTimeSeries(boolean processComponentMetricDetail) {
+    protected void updateTimeSeries(boolean isComponentMetricDetail) {
         if (timeSeries == null) {
             timeSeries = getEmptyTimeSeries();
         }
-        if (processComponentMetricDetail) {
+        if (isComponentMetricDetail) {
             componentMetricDetailList.forEach(this::updateTimeSeries);
         } else {
             collectorItemMetricDetailList.forEach(this::updateTimeSeries);

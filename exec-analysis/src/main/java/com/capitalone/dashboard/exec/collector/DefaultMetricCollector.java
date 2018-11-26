@@ -12,6 +12,7 @@ import com.capitalone.dashboard.exec.model.Product;
 import com.capitalone.dashboard.exec.model.ProductComponent;
 import com.capitalone.dashboard.exec.model.ProductMetricDetail;
 import com.capitalone.dashboard.exec.repository.PortfolioMetricRepository;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
@@ -82,10 +83,10 @@ public abstract class DefaultMetricCollector {
                                     .filter(collectorItemMetricDetail -> !collectorItemMetricDetail.isAttachedToBusinessServiceOnly())
                                     .collect(Collectors.toList());
 
-                    Optional.ofNullable(collectorItemMetricDetailsAttachedToBothProductAndComponent)
-                        .orElseGet(Collections::emptyList)
-                        .forEach(componentMetricDetail::addCollectorItemMetricDetail);
-                    productMetricDetail.addComponentMetricDetail(componentMetricDetail);
+                    if (!CollectionUtils.isEmpty(collectorItemMetricDetailsAttachedToBothProductAndComponent)) {
+                        collectorItemMetricDetailsAttachedToBothProductAndComponent.forEach(componentMetricDetail::addCollectorItemMetricDetail);
+                        productMetricDetail.addComponentMetricDetail(componentMetricDetail);
+                    }
 
                     Optional.ofNullable(collectorItemMetricDetailsAttachedToProductOnly)
                         .orElseGet(Collections::emptyList)

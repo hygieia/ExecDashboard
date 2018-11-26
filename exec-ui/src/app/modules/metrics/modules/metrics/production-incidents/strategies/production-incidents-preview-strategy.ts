@@ -22,6 +22,7 @@ export class ProductionIncidentsPreviewStrategy extends PreviewStrategyBase {
     metricPreview.lastScanned = PresentationFunctions.calculateLastScannedPresentation(model.summary.lastScanned);
     metricPreview.id = ProductionIncidentsConfiguration.identifier;
     metricPreview.score = mapPrimary(this.primaryMetricStrategy.parse(model.summary.counts));
+    metricPreview.hasReporting = (this.primaryMetricStrategy.hasReporting(model.summary.counts)).value;
     metricPreview.totalReporting = model.reportingComponents / model.totalComponents;
     metricPreview.trend = this.trendStrategy.parse(model.summary);
     metricPreview.secondaryMetrics = this.calculateSecondaryMetric(model.summary);
