@@ -53,7 +53,8 @@ public class IncidentCollector extends DefaultMetricCollector {
 
         collectorItemMetricDetail.setType(metricType);
         for (Row row : rowList) {
-            if (row.getAs("attachedToBusinessServiceOrEnvironmentOnly")) {
+            boolean attachedToBusinessServiceOrEnvironmentOnly = row.getAs("attachedToBusinessServiceOrEnvironmentOnly");
+            if (attachedToBusinessServiceOrEnvironmentOnly) {
                 collectorItemMetricDetail.setAttachedToBusinessServiceOrEnvironmentOnly(true);
             }
             updateCollectorItemMetricDetail(collectorItemMetricDetail, row);
