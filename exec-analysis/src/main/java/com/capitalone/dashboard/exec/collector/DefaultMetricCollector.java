@@ -75,12 +75,12 @@ public abstract class DefaultMetricCollector {
 
                     List<CollectorItemMetricDetail> collectorItemMetricDetailsAttachedToProductOnly =
                             Optional.ofNullable(collectorItemMetricDetailList).orElseGet(Collections::emptyList).stream()
-                                    .filter(collectorItemMetricDetail -> collectorItemMetricDetail.isAttachedToBusinessServiceOnly())
+                                    .filter(collectorItemMetricDetail -> collectorItemMetricDetail.isAttachedToBusinessServiceOrEnvironmentOnly())
                                     .collect(Collectors.toList());
 
                     List<CollectorItemMetricDetail> collectorItemMetricDetailsAttachedToBothProductAndComponent =
                             Optional.ofNullable(collectorItemMetricDetailList).orElseGet(Collections::emptyList).stream()
-                                    .filter(collectorItemMetricDetail -> !collectorItemMetricDetail.isAttachedToBusinessServiceOnly())
+                                    .filter(collectorItemMetricDetail -> !collectorItemMetricDetail.isAttachedToBusinessServiceOrEnvironmentOnly())
                                     .collect(Collectors.toList());
 
                     if (!CollectionUtils.isEmpty(collectorItemMetricDetailsAttachedToBothProductAndComponent)) {

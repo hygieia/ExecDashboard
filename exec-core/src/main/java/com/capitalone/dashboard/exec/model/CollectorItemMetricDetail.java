@@ -9,11 +9,11 @@ import java.util.Map;
 public class CollectorItemMetricDetail extends MetricDetails {
     private MetricCollectionStrategy strategy;
     private Date lastScanDate;
-    private boolean attachedToBusinessServiceOnly;
+    private boolean attachedToBusinessServiceOrEnvironmentOnly;
 
-    public boolean isAttachedToBusinessServiceOnly() { return attachedToBusinessServiceOnly; }
+    public boolean isAttachedToBusinessServiceOrEnvironmentOnly() { return attachedToBusinessServiceOrEnvironmentOnly; }
 
-    public void setAttachedToBusinessServiceOnly(boolean attachedToBusinessServiceOnly) { this.attachedToBusinessServiceOnly = attachedToBusinessServiceOnly; }
+    public void setAttachedToBusinessServiceOrEnvironmentOnly(boolean attachedToBusinessServiceOrEnvironmentOnly) { this.attachedToBusinessServiceOrEnvironmentOnly = attachedToBusinessServiceOrEnvironmentOnly; }
 
     public CollectorItemMetricDetail() {
         setLevel(MetricLevel.COLLECTOR_ITEM);

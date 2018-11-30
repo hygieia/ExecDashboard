@@ -36,7 +36,7 @@ public class RollupMetricDetail extends MetricDetails {
 
     protected void setReportingComponents(MetricDetails metricDetails) {
         if ( (metricDetails instanceof CollectorItemMetricDetail)
-                && ((CollectorItemMetricDetail) metricDetails).isAttachedToBusinessServiceOnly() ) { return; }
+                && ((CollectorItemMetricDetail) metricDetails).isAttachedToBusinessServiceOrEnvironmentOnly() ) { return; }
 
         setReportingComponents(getReportingComponents() + 1);
     }
