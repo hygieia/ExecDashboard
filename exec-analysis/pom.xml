@@ -51,6 +51,7 @@
                 </excludes>
             </resource>
         </resources>
+        <finalName>exec-api</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
