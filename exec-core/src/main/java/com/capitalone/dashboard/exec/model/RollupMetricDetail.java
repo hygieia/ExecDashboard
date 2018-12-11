@@ -1,14 +1,11 @@
 package com.capitalone.dashboard.exec.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class RollupMetricDetail extends MetricDetails {
     protected static final String MTTR = "mttr";
     protected static final String TYPE = "type";
+    protected static final int TREND_SLOPE_BUCKETS = 6;
 
     protected void updateSummary(MetricDetails metricDetails) {
         if (metricDetails.isProcessed()) {return;}
@@ -67,12 +64,13 @@ public class RollupMetricDetail extends MetricDetails {
     }
 
     protected Double calculateTrendSlope(List<MetricTimeSeriesElement> timeSeriesElements) {
-        List<Double> daysAgoList = new ArrayList<>();
-        List<Double> valuesList = new ArrayList<>();
-        timeSeriesElements.forEach(t ->{
-            double daysAgo = t.getDaysAgo();
+        double values[] = new double[TREND_SLOPE_BUCKETS];
 
+        // Get the total counts in each bucket
+        for (MetricTimeSeriesElement t: timeSeriesElements) {
+            double daysAgo = t.getDaysAgo();
             List<MetricCount> metricCountsList = t.getCounts();
+
             MetricCount metricCount =
                     Optional.ofNullable(metricCountsList)
                             .orElseGet(Collections::emptyList).stream()
@@ -81,39 +79,49 @@ public class RollupMetricDetail extends MetricDetails {
                                     (m.getLabel().containsKey("severity") &&
                                             !m.getLabel().get("severity").equalsIgnoreCase("None") ))
                             .findFirst().orElse(null);
-            if (metricCount != null) {
-                daysAgoList.add(daysAgo);
-                valuesList.add(metricCount.getValue());
+
+            double metricCountValue = (metricCount != null)?metricCount.getValue():0.0;
+
+            if (daysAgo <= 15) {
+                values[values.length-1] += metricCountValue;
+            } else if (daysAgo <= 31) {
+                values[values.length-2] += metricCountValue;
+            } else if (daysAgo <= 46) {
+                values[values.length-3] += metricCountValue;
+            } else if (daysAgo <= 61) {
+                values[values.length-4] += metricCountValue;
+            } else if (daysAgo <= 76) {
+                values[values.length-5] += metricCountValue;
+            } else {
+                values[values.length-6] += metricCountValue;
             }
-        });
-        Double trendSlope;
-        Double linearCoefficient = 0.5;
+        };
 
-        Double standardDeviationForDaysAgo = calculateStandardDeviation(daysAgoList);
-        Double standardDeviationForValues = calculateStandardDeviation(valuesList);
-
-        trendSlope = linearCoefficient * (standardDeviationForValues/standardDeviationForDaysAgo);
-
-        return trendSlope;
+        return deriveTrend(values);
     }
 
-    protected Double calculateStandardDeviation(List<Double> values) {
-        double sum = 0.0;
-        double averageValue = getAverageValue(values);
+    protected Double deriveTrend(double values[]) {
+        double trend1 = values[1] - values[0]; // compare 1st bucket and 2nd bucket
 
-        for(Double value: values) { sum += Math.pow((value - averageValue), 2); }
+        double trend2 = values[2] - values[1]; // compare 2nd bucket and 3rd bucket
 
-        return Math.sqrt( sum / ( values.size() - 1 ) );
-    }
+        double trend12 = trend2 + trend1; // compare the trends between 1st, 2nd, and 2nd, 3rd buckets.
 
-    protected Double getAverageValue(List<Double> values) {
-        if (values == null || values.isEmpty()) { return 0.0; }
+        double trend3 = values[3] - values[2]; // compare 3rd and 4th buckets.
 
-        Double averageValue = Optional.ofNullable(values)
-                .orElseGet(Collections::emptyList).stream()
-                .mapToDouble(Double::doubleValue)
-                .average()
-                .getAsDouble();
-        return averageValue;
+        double trend123 = trend3 + trend12; // compare the net trend between 1,2,3 buckets, with the trend between buckets 3,4.
+
+        double trend4 = values[4] - values[3]; // compare 4th and 5th buckets.
+
+        double trend1234 = trend4 + trend123; // compare the net trend between 1,2,3,4 buckets, with the trend between buckets 4,5
+
+        double trend5 = values[5] - values[4]; // compare 5th and 6th buckets.
+
+        double trend12345 = trend5 + trend1234; // compare the net trend between 1,2,3,4,5 buckets, with the trend between buckets 5,6
+
+        if (trend12345 == 0.0) {
+            return 0.0;
+        }
+        return (trend12345 > 0.0)?1.0:-1.0;
     }
 }
