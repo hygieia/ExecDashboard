@@ -28,11 +28,17 @@ public class RollupMetricDetailTest {
         double result = rollupMetricDetail.calculateTrendSlope(timeSeriesElements);
         Assert.equals(result, 1.0);
 
-        double values2[] = new double[]{0, 1, 2, 1, 1, 1, 3, 7, 1, 7, 1, 2};
+        double values2[] = new double[]{0, 0, 2, 1, 1, 1, 1, 1, 7, 2, 2, 3};
         timeSeriesElements = makeTimeSeriesElements(values2);
 
         result = rollupMetricDetail.calculateTrendSlope(timeSeriesElements);
         Assert.equals(result, -1.0);
+
+        double values3[] = new double[]{21, 21, 0, 0, 18, 18, 0, 0, 0, 0, 0, 0};
+        timeSeriesElements = makeTimeSeriesElements(values3);
+
+        result = rollupMetricDetail.calculateTrendSlope(timeSeriesElements);
+        Assert.equals(result, 1.0);
     }
 
     private List<MetricTimeSeriesElement> makeTimeSeriesElements(double values[]) {

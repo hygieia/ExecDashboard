@@ -86,7 +86,7 @@ public class RollupMetricDetail extends MetricDetails {
 
             for (int i=1; i<=arraySize; i++) {
                 if (daysAgo <= (BUCKET_SIZE*i)) {
-                    values[values.length-i] += metricCountValue;
+                    values[values.length-i] += (metricCountValue*(arraySize-(i-1)));
                     break;
                 }
             }
@@ -96,17 +96,15 @@ public class RollupMetricDetail extends MetricDetails {
     }
 
     protected Double deriveTrend(double values[]) {
-        double previousTrend = 0.0;
         double cumulativeTrend = 0.0;
 
         for (int i=0; i<values.length; i++) {
             double currentTrend = 0.0;
             if (i > 0) {
-                currentTrend = (values[i] > 0)?(values[i] - values[i-1]):values[i];
+                // currentTrend = (values[i] > 0)?(values[i] - values[i-1]):values[i];
+                currentTrend = (values[i] - values[i-1]);
             }
-
-            cumulativeTrend = currentTrend + previousTrend;
-            previousTrend = currentTrend;
+            cumulativeTrend += currentTrend;
         }
 
         if (cumulativeTrend == 0.0) {
