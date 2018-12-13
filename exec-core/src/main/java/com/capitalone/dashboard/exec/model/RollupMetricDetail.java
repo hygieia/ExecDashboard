@@ -84,18 +84,11 @@ public class RollupMetricDetail extends MetricDetails {
 
             double metricCountValue = (metricCount != null)?metricCount.getValue():0.0;
 
-            if (daysAgo <= BUCKET_SIZE) {
-                values[values.length-1] += metricCountValue;
-            } else if (daysAgo <= BUCKET_SIZE*2) {
-                values[values.length-2] += metricCountValue;
-            } else if (daysAgo <= BUCKET_SIZE*3) {
-                values[values.length-3] += metricCountValue;
-            } else if (daysAgo <= BUCKET_SIZE*4) {
-                values[values.length-4] += metricCountValue;
-            } else if (daysAgo <= BUCKET_SIZE*5) {
-                values[values.length-5] += metricCountValue;
-            } else {
-                values[values.length-6] += metricCountValue;
+            for (int i=1; i<=arraySize; i++) {
+                if (daysAgo <= (BUCKET_SIZE*i)) {
+                    values[values.length-i] += metricCountValue;
+                    break;
+                }
             }
         }
 
