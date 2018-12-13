@@ -101,7 +101,6 @@ public class RollupMetricDetail extends MetricDetails {
         for (int i=0; i<values.length; i++) {
             double currentTrend = 0.0;
             if (i > 0) {
-                // currentTrend = (values[i] > 0)?(values[i] - values[i-1]):values[i];
                 currentTrend = (values[i] - values[i-1]);
             }
             cumulativeTrend += currentTrend;
