@@ -44,7 +44,7 @@ public class MetricTimeSeriesElement {
         MetricCount copyCount = count.copy();
         if (oCount != null) {
             counts.remove(oCount);
-            copyCount.averageValue(oCount.getValue());
+            copyCount.addAverageValue(oCount.getValue());
         }
         counts.add(copyCount);
     }

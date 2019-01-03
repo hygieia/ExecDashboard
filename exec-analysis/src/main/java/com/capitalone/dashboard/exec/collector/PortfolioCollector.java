@@ -213,7 +213,7 @@ public class PortfolioCollector implements Runnable {
             addComponentsToProduct(product, componentNames);
         }
         product.addOwner(new PeopleRoleRelation(getPeople(productRow.getAs("appServiceOwner"), "appServiceOwner"), RoleRelationShipType.AppServiceOwner));
-        product.addOwner(new PeopleRoleRelation(getPeople(productRow.getAs("supportOwner"), "supportOwner"), RoleRelationShipType.SupportOwner));
+        //product.addOwner(new PeopleRoleRelation(getPeople(productRow.getAs("supportOwner"), "supportOwner"), RoleRelationShipType.SupportOwner));
         product.addOwner(new PeopleRoleRelation(getPeople(productRow.getAs("developmentOwner"), "developmentOwner"), RoleRelationShipType.DevelopmentOwner));
 
         portfolio.addProduct(product);

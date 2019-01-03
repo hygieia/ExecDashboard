@@ -5,15 +5,26 @@ import com.capitalone.dashboard.exec.repository.PortfolioMetricRepository;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.catalyst.expressions.GenericRowWithSchema;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import scala.collection.JavaConversions;
 import scala.collection.mutable.WrappedArray;
 
-import java.util.*;
+import java.util.List;
+import java.util.Collection;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Date;
+import java.util.HashMap;
 
 @Component
 public class UnitTestCoverageCollector extends DefaultMetricCollector {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UnitTestCoverageCollector.class);
 
     @Autowired
     public UnitTestCoverageCollector(PortfolioMetricRepository portfolioMetricRepository) {
@@ -63,15 +74,20 @@ public class UnitTestCoverageCollector extends DefaultMetricCollector {
                 .forEach(m -> {
                     GenericRowWithSchema genericRowWithSchema = (GenericRowWithSchema) m;
                     String existingLabelName = genericRowWithSchema.getAs("name");
-                    if (scaMetricList.contains(existingLabelName)) {
-                        double value = genericRowWithSchema.getAs("value");
-                        MetricCount mc = getMetricCount("", value, "unit-test-coverage");
-                        if (mc != null) {
-                            collectorItemMetricDetail.setStrategy(getCollectionStrategy());
-                            collectorItemMetricDetail.addCollectorItemMetricCount(timeWindowDt, mc);
-                            collectorItemMetricDetail.setLastScanDate(timeWindowDt);
+                        if (scaMetricList.contains(existingLabelName)) {
+                            String valueStr = genericRowWithSchema.getAs("value");
+                            try{
+                            double value = Double.parseDouble(valueStr);
+                            MetricCount mc = getMetricCount("", value, "unit-test-coverage");
+                            if (mc != null) {
+                                collectorItemMetricDetail.setStrategy(getCollectionStrategy());
+                                collectorItemMetricDetail.addCollectorItemMetricCount(timeWindowDt, mc);
+                                collectorItemMetricDetail.setLastScanDate(timeWindowDt);
+                            }
+                            }catch (Exception e){
+                                LOGGER.info("Exception: Not a number, 'value' = "+valueStr,e);
+                            }
                         }
-                    }
                 });
     }
 

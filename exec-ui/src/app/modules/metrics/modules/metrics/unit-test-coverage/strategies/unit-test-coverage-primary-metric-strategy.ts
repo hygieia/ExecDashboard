@@ -16,7 +16,7 @@ export class UnitTestCoveragePrimaryMetricStrategy extends PrimaryMetricStrategy
     }
     return {
       name: UnitTestCoverageConfiguration.buildingBlockLabel,
-      value: counts[0].value
+      value: Math.round(counts[0].value)
     };
   }
 }
