@@ -16,6 +16,7 @@ import {ProductListComponent} from './components/product-list/product-list.compo
 import {ProductsRoutingModule} from './products.routing.module';
 import {ProductListProductsStrategy} from './strategies/product-list-products-strategy';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {TraceabilityModule} from "../metrics/traceability/traceability.module";
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     UnitTestCoverageModule,
     PipelineLeadTimeModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TraceabilityModule
   ],
   declarations: [
     ProductListComponent
