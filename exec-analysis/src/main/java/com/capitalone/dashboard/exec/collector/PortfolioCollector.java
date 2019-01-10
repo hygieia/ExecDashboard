@@ -65,13 +65,17 @@ public class PortfolioCollector implements Runnable {
 
     private final IncidentCollector incidentCollector;
 
+    private UnitTestCoverageCollector unitTestCoverageCollector;
+
     @Autowired
     public PortfolioCollector(TaskScheduler taskScheduler, PortfolioRepository portfolioRepository,
                                 PortfolioCollectorSetting setting,
                                 SCMCollector scmCollector,
                                 LibraryPolicyCollector libraryPolicyCollector,
                                 StaticCodeAnalysisCollector staticCodeAnalysisCollector,
-                                IncidentCollector incidentCollector) {
+                                IncidentCollector incidentCollector,
+                                UnitTestCoverageCollector unitTestCoverageCollector) {
+
         this.taskScheduler = taskScheduler;
         this.portfolioRepository = portfolioRepository;
         this.setting = setting;
@@ -79,6 +83,7 @@ public class PortfolioCollector implements Runnable {
         this.libraryPolicyCollector = libraryPolicyCollector;
         this.staticCodeAnalysisCollector = staticCodeAnalysisCollector;
         this.incidentCollector = incidentCollector;
+        this.unitTestCoverageCollector = unitTestCoverageCollector;
     }
 
     /**
@@ -102,7 +107,7 @@ public class PortfolioCollector implements Runnable {
         libraryPolicyCollector.collect(sparkSession, javaSparkContext, portfolioList);
         incidentCollector.collect(sparkSession, javaSparkContext, portfolioList);
         staticCodeAnalysisCollector.collect(sparkSession, javaSparkContext, portfolioList);
-
+        unitTestCoverageCollector.collect(sparkSession, javaSparkContext, portfolioList);
         sparkSession.close();
         javaSparkContext.close();
     }
@@ -209,7 +214,7 @@ public class PortfolioCollector implements Runnable {
             addComponentsToProduct(product, componentNames);
         }
         product.addOwner(new PeopleRoleRelation(getPeople(productRow.getAs("appServiceOwner"), "appServiceOwner"), RoleRelationShipType.AppServiceOwner));
-        product.addOwner(new PeopleRoleRelation(getPeople(productRow.getAs("supportOwner"), "supportOwner"), RoleRelationShipType.SupportOwner));
+        //product.addOwner(new PeopleRoleRelation(getPeople(productRow.getAs("supportOwner"), "supportOwner"), RoleRelationShipType.SupportOwner));
         product.addOwner(new PeopleRoleRelation(getPeople(productRow.getAs("developmentOwner"), "developmentOwner"), RoleRelationShipType.DevelopmentOwner));
 
         portfolio.addProduct(product);
