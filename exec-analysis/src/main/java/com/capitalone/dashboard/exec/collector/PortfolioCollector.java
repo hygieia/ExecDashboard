@@ -14,6 +14,7 @@ import com.capitalone.dashboard.exec.repository.PortfolioRepository;
 import com.tupilabs.human_name_parser.HumanNameParserParser;
 import com.tupilabs.human_name_parser.Name;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -286,6 +287,10 @@ public class PortfolioCollector implements Runnable {
     }
 
     private Owner getPeople(String name, String role) {
+        if (StringUtils.isEmpty(name)) {
+            return new Owner(name, "", "", "", role);
+        }
+
         try {
             HumanNameParserParser hnp = new HumanNameParserParser(new Name(name));
             return new Owner(hnp.getFirst(), hnp.getLast(), "", "", role);
