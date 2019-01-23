@@ -3,7 +3,6 @@ package com.capitalone.dashboard.exec.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 public class RollupMetricDetail extends MetricDetails {
@@ -14,7 +13,7 @@ public class RollupMetricDetail extends MetricDetails {
         if (metricDetails.isProcessed()) {return;}
         MetricSummary itemMetricSummary = metricDetails.getSummary();
         setReportingComponents(getReportingComponents() + 1);
-        if ((summary.getLastScanned() == null)||summary.getLastScanned().before(itemMetricSummary.getLastScanned())) {
+        if ((summary.getLastScanned() == null) || summary.getLastScanned().before(itemMetricSummary.getLastScanned())) {
             summary.setLastScanned(itemMetricSummary.getLastScanned());
         }
         List<MetricCount> itemSummaryCounts = itemMetricSummary.getCounts();
@@ -26,23 +25,21 @@ public class RollupMetricDetail extends MetricDetails {
             if (existing == null) {
                 rollupSummaryCounts.add(copyCount);
             } else {
-                processExistingMetricCount(existing, copyCount, rollupSummaryCounts);
+                rollupSummaryCounts.remove(existing);
+                MetricCount updatedMetricCount = getUpdatedMetricCount(copyCount, metricDetails.getType().getDataType(), existing.getValue());
+                rollupSummaryCounts.add(updatedMetricCount);
             }
         }
         summary.setCounts(rollupSummaryCounts);
         if (getType() != null) { summary.setName(getType().getName()); }
     }
-
-    protected void processExistingMetricCount(MetricCount existing, MetricCount copyCount,
-                                              List<MetricCount> rollupSummaryCounts) {
-        rollupSummaryCounts.remove(existing);
-        Map<String, String> label = existing.getLabel();
-        if (MTTR.equalsIgnoreCase(label.get(TYPE))) { // Mean Time To Resolve
-            copyCount.addAverageValue(existing.getValue());
+    private MetricCount getUpdatedMetricCount(MetricCount metricCount, MetricType.DataType metricDataType, Double existingValue) {
+        if(metricDataType.equals(MetricType.DataType.SUM)) {
+            metricCount.addValue(existingValue);
         } else {
-            copyCount.addValue(existing.getValue());
+            metricCount.addAverageValue(existingValue);
         }
-        rollupSummaryCounts.add(copyCount);
+        return metricCount;
     }
 
     protected void updateTimeSeries(MetricDetails itemMetricDetails) {
@@ -51,7 +48,12 @@ public class RollupMetricDetail extends MetricDetails {
         for (MetricTimeSeriesElement itemDetailsTimeSeriesElement : itemMetricDetailTimeSeries) {
             List<MetricCount> itemTimeSeriesElementCounts = itemDetailsTimeSeriesElement.getCounts();
             for (MetricCount itemCount : itemTimeSeriesElementCounts) {
-                timeSeries.get(itemDetailsTimeSeriesElement.getDaysAgo()).addCount(itemCount);
+                if(itemMetricDetails.getType().getDataType().equals(MetricType.DataType.SUM)) {
+                    timeSeries.get(itemDetailsTimeSeriesElement.getDaysAgo()).addCount(itemCount);
+                } else {
+                    timeSeries.get(itemDetailsTimeSeriesElement.getDaysAgo()).averageCount(itemCount);
+                }
+
             }
         }
 
