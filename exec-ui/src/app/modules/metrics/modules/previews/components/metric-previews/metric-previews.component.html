@@ -31,6 +31,7 @@
                                     (metricPreviewInitialized)="addMetric()"
                                     [selectedMetric]="selectedMetric"
                                     (isSelectedEvent)="selectMetric($event)"></app-production-incidents-preview>
+
   <!-- app-security-violations-preview class="metric" [attr.data-sort]="sortMap.get('security-violations').currentSort" fxFlex
                                    [ngClass]="{'disabled': isDisabled('security-violations')}"
                                    [portfolioName]="portfolioName" [portfolioLob]="portfolioLob" [productId]="this.productId"
@@ -47,14 +48,14 @@
                             (metricPreviewInitialized)="addMetric()"
                             [selectedMetric]="selectedMetric"
                             (isSelectedEvent)="selectMetric($event)"></app-test-automation-card -->
-  <!-- app-unit-test-coverage-card class="metric" [attr.data-sort]="sortMap.get('unit-test-coverage').currentSort"
+  <app-unit-test-coverage-card class="metric" [attr.data-sort]="sortMap.get('unit-test-coverage').currentSort"
                                [ngClass]="{'disabled': isDisabled('unit-test-coverage')}"
                                [portfolioName]="portfolioName" [portfolioLob]="portfolioLob" [productId]="this.productId"
                                (hideBuildingBlocksEvent)="reset()"
                                (showBuildingBlocksEvent)="showBuildingBlocks($event)"
                                (metricPreviewInitialized)="addMetric()"
                                [selectedMetric]="selectedMetric"
-                               (isSelectedEvent)="selectMetric($event)" fxFlex></app-unit-test-coverage-card -->
+                               (isSelectedEvent)="selectMetric($event)" fxFlex></app-unit-test-coverage-card>
   <!-- app-production-releases-preview class="metric" [attr.data-sort]="sortMap.get('production-releases').currentSort"
                                    [ngClass]="{'disabled': isDisabled('production-releases')}"
                                    [portfolioName]="portfolioName" [portfolioLob]="portfolioLob" [productId]="this.productId"
