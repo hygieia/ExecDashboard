@@ -4,7 +4,6 @@ import {MetricTimeSeriesElement} from '../../../shared/domain-models/metric-time
 import {UnitTestCoverageTrendStrategy} from './unit-test-coverage-trend-strategy';
 import {PresentationFunctions} from '../../../shared/utils/presentation-functions';
 import {GraphStrategyBase} from '../../../shared/strategies/graph-strategy-base';
-import decimalToPercent = PresentationFunctions.decimalToPercent;
 import {UnitTestCoveragePrimaryMetricStrategy} from './unit-test-coverage-primary-metric-strategy';
 import {Injectable} from '@angular/core';
 import {UnitTestCoverageConfiguration} from '../unit-test-coverage.configuration';
@@ -30,6 +29,7 @@ export class UnitTestCoverageGraphStrategy extends GraphStrategyBase {
   }
 
   protected count(seriesElement: MetricTimeSeriesElement): number {
-    return decimalToPercent(seriesElement.counts[0].value);
+    return seriesElement.counts
+      .reduce((sum, item) => sum + item.value, 0);
   }
 }

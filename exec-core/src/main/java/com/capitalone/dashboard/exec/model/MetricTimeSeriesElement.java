@@ -36,6 +36,19 @@ public class MetricTimeSeriesElement {
         counts.add(copyCount);
     }
 
+    public void averageCount(MetricCount count) {
+        if (counts == null) {
+            counts = new ArrayList<>();
+        }
+        MetricCount oCount = getMetricCountByLabel(count.getLabel());
+        MetricCount copyCount = count.copy();
+        if (oCount != null) {
+            counts.remove(oCount);
+            copyCount.addAverageValue(oCount.getValue());
+        }
+        counts.add(copyCount);
+    }
+
     public MetricCount getMetricCountByLabel (Map<String, String> label) {
         return counts.stream().filter(c -> c.getLabel().equals(label)).findFirst().orElse(null);
     }
