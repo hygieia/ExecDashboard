@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import scala.collection.JavaConversions;
+import scala.collection.Seq;
 import scala.collection.mutable.WrappedArray;
 
 import java.util.*;
@@ -57,32 +58,40 @@ public class AuditResultCollector extends DefaultMetricCollector {
 
     private void updateCollectorItemMetricDetail(CollectorItemMetricDetail collectorItemMetricDetail,Row itemRow){
 
+        System.out.println("+++++++++++++++++++++++++++++"+itemRow);
+
+
         Date timeWindowDt = itemRow.getAs("timeWindow");
         List<String> traceability = Arrays.asList("Automated","Manual");
-        Collection<Object> javaCollection = JavaConversions.asJavaCollection(((WrappedArray) itemRow.getAs("metrics")).toList());
-        Optional.ofNullable(javaCollection)
-                .orElseGet(Collections::emptyList)
-                .forEach(m -> {
-                    GenericRowWithSchema genericRowWithSchema = (GenericRowWithSchema) m;
-                    String existingLabelName = genericRowWithSchema.getAs("name");
-                    if (traceability.contains(existingLabelName)) {
-                        String valueStr = genericRowWithSchema.getAs("value");
-                        try {
-                            double value = Double.parseDouble(valueStr);
-                            MetricCount mc = getMetricCount("", value, existingLabelName);
-                            if (mc != null) {
-                                collectorItemMetricDetail.setStrategy(getCollectionStrategy());
-                                collectorItemMetricDetail.addCollectorItemMetricCount(timeWindowDt, mc);
-                                collectorItemMetricDetail.setLastScanDate(timeWindowDt);
-                            }
-                        } catch (NumberFormatException e) {
-                            LOGGER.info("Exception: Not a number, 'value' = "+valueStr,e);
-                        }
-                    }
-                });
+        GenericRowWithSchema javaCollection = (((GenericRowWithSchema) itemRow.getAs("traceability")));
+        System.out.println("javaCollection");
 
-
-
+        GenericRowWithSchema Manual = (((GenericRowWithSchema) javaCollection.getAs("Manual")));
+        String valueStr = Manual.getAs("percentTraceability");
+        try {
+            double value = Double.parseDouble(valueStr);
+            MetricCount mc = getMetricCount("", value, "manual");
+            if (mc != null) {
+                collectorItemMetricDetail.setStrategy(getCollectionStrategy());
+                collectorItemMetricDetail.addCollectorItemMetricCount(timeWindowDt, mc);
+                collectorItemMetricDetail.setLastScanDate(timeWindowDt);
+            }
+        } catch (NumberFormatException e) {
+            LOGGER.info("Exception: Not a number, 'value' = "+valueStr,e);
+        }
+        GenericRowWithSchema Automated = (((GenericRowWithSchema) javaCollection.getAs("Automated")));
+        String valueS = Automated.getAs("percentTraceability");
+        try {
+            double value = Double.parseDouble(valueS);
+            MetricCount mc = getMetricCount("", value, "automated");
+            if (mc != null) {
+                collectorItemMetricDetail.setStrategy(getCollectionStrategy());
+                collectorItemMetricDetail.addCollectorItemMetricCount(timeWindowDt, mc);
+                collectorItemMetricDetail.setLastScanDate(timeWindowDt);
+            }
+        } catch (NumberFormatException e) {
+            LOGGER.info("Exception: Not a number, 'value' = "+valueStr,e);
+        }
     }
 
 
