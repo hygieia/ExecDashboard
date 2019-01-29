@@ -53,7 +53,6 @@ public class AuditResultCollector extends DefaultMetricCollector {
     protected CollectorItemMetricDetail getCollectorItemMetricDetail(List<Row> rowList, MetricType metricType) {
         CollectorItemMetricDetail collectorItemMetricDetail = new CollectorItemMetricDetail();
         if (CollectionUtils.isEmpty(rowList)) {
-            System.out.println(("Checking row list++++++++"));
             return collectorItemMetricDetail;
         }
         collectorItemMetricDetail.setType(getMetricType());
