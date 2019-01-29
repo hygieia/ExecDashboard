@@ -1,6 +1,11 @@
 package com.capitalone.dashboard.exec.collector;
 
-import com.capitalone.dashboard.exec.model.*;
+import com.capitalone.dashboard.exec.model.MetricType;
+import com.capitalone.dashboard.exec.model.HygieiaSparkQuery;
+import com.capitalone.dashboard.exec.model.MetricCollectionStrategy;
+import com.capitalone.dashboard.exec.model.CollectorItemMetricDetail;
+import com.capitalone.dashboard.exec.model.MetricCount;
+import com.capitalone.dashboard.exec.model.CollectorType;
 import com.capitalone.dashboard.exec.repository.PortfolioMetricRepository;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.spark.sql.Row;
@@ -8,11 +13,13 @@ import org.apache.spark.sql.catalyst.expressions.GenericRowWithSchema;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import scala.collection.JavaConversions;
-import scala.collection.Seq;
-import scala.collection.mutable.WrappedArray;
 
-import java.util.*;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class AuditResultCollector extends DefaultMetricCollector {
@@ -58,46 +65,33 @@ public class AuditResultCollector extends DefaultMetricCollector {
 
     private void updateCollectorItemMetricDetail(CollectorItemMetricDetail collectorItemMetricDetail,Row itemRow){
 
-        System.out.println("+++++++++++++++++++++++++++++"+itemRow);
-
-
         Date timeWindowDt = itemRow.getAs("timeWindow");
         List<String> traceability = Arrays.asList("Automated","Manual");
         GenericRowWithSchema javaCollection = (((GenericRowWithSchema) itemRow.getAs("traceability")));
         System.out.println("javaCollection");
+        for (String traceble : traceability
+             ) {
+            GenericRowWithSchema genericRowWithSchema = (((GenericRowWithSchema) javaCollection.getAs(traceble)));
+            String valueStr = genericRowWithSchema.getAs("percentTraceability");
+            try {
+                double value = Double.parseDouble(valueStr);
+                MetricCount mc = getMetricCount("", value, traceble);
+                if (mc != null) {
+                    collectorItemMetricDetail.setStrategy(getCollectionStrategy());
+                    collectorItemMetricDetail.addCollectorItemMetricCount(timeWindowDt, mc);
+                    collectorItemMetricDetail.setLastScanDate(timeWindowDt);
+                }
+            } catch (NumberFormatException e) {
+                LOGGER.info("Exception: Not a number, 'value' = "+valueStr,e);
+            }
 
-        GenericRowWithSchema Manual = (((GenericRowWithSchema) javaCollection.getAs("Manual")));
-        String valueStr = Manual.getAs("percentTraceability");
-        try {
-            double value = Double.parseDouble(valueStr);
-            MetricCount mc = getMetricCount("", value, "manual");
-            if (mc != null) {
-                collectorItemMetricDetail.setStrategy(getCollectionStrategy());
-                collectorItemMetricDetail.addCollectorItemMetricCount(timeWindowDt, mc);
-                collectorItemMetricDetail.setLastScanDate(timeWindowDt);
-            }
-        } catch (NumberFormatException e) {
-            LOGGER.info("Exception: Not a number, 'value' = "+valueStr,e);
-        }
-        GenericRowWithSchema Automated = (((GenericRowWithSchema) javaCollection.getAs("Automated")));
-        String valueS = Automated.getAs("percentTraceability");
-        try {
-            double value = Double.parseDouble(valueS);
-            MetricCount mc = getMetricCount("", value, "automated");
-            if (mc != null) {
-                collectorItemMetricDetail.setStrategy(getCollectionStrategy());
-                collectorItemMetricDetail.addCollectorItemMetricCount(timeWindowDt, mc);
-                collectorItemMetricDetail.setLastScanDate(timeWindowDt);
-            }
-        } catch (NumberFormatException e) {
-            LOGGER.info("Exception: Not a number, 'value' = "+valueStr,e);
         }
     }
 
 
     @Override
     protected CollectorType getCollectorType() {
-        return CollectorType.CodeQuality;
+        return CollectorType.Test;
     }
 
     @Override

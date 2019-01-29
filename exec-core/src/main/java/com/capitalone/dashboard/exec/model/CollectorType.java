@@ -25,8 +25,7 @@ public enum CollectorType {
     Cloud,
     Product,
     AppPerformance,
-    InfraPerformance,
-    Audit;
+    InfraPerformance;
 
     private CollectorType() {
     }
