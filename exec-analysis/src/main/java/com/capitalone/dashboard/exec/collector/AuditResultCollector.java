@@ -23,8 +23,14 @@ import java.util.Map;
 
 @Component
 public class AuditResultCollector extends DefaultMetricCollector {
-    private static final String AUDIT_RESULTS = "audit_results";
+    private static final String STR_AUDIT_RESULTS = "audit_results";
+    private static final String STR_AUTOMATED = "Automated";
+    private static final String STR_MANUAL = "Manual";
+    private static final String STR_TIME_WINDOW = "timeWindow";
+    private static final String STR_TRACEABILITY = "traceability";
+    private static final String STR_PERCENT_TRACEABILITY = "percentTraceability";
     private static final Logger LOGGER = LoggerFactory.getLogger(AuditResultCollector.class);
+
     public AuditResultCollector(PortfolioMetricRepository portfolioMetricRepository) {
         super(portfolioMetricRepository);
     }
@@ -41,7 +47,7 @@ public class AuditResultCollector extends DefaultMetricCollector {
 
     @Override
     protected String getCollection() {
-        return AUDIT_RESULTS;
+        return STR_AUDIT_RESULTS;
     }
 
     @Override
@@ -64,16 +70,16 @@ public class AuditResultCollector extends DefaultMetricCollector {
 
     private void updateCollectorItemMetricDetail(CollectorItemMetricDetail collectorItemMetricDetail,Row itemRow){
 
-        Date timeWindowDt = itemRow.getAs("timeWindow");
-        List<String> traceability = Arrays.asList("Automated","Manual");
-        GenericRowWithSchema javaCollection = (((GenericRowWithSchema) itemRow.getAs("traceability")));
-        for (String traceble : traceability
+        Date timeWindowDt = itemRow.getAs(STR_TIME_WINDOW);
+        List<String> traceability = Arrays.asList(STR_AUTOMATED,STR_MANUAL);
+        GenericRowWithSchema javaCollection = (((GenericRowWithSchema) itemRow.getAs(STR_TRACEABILITY)));
+        for (String traceable : traceability
              ) {
-            GenericRowWithSchema genericRowWithSchema = (((GenericRowWithSchema) javaCollection.getAs(traceble)));
-            String valueStr = genericRowWithSchema.getAs("percentTraceability");
+            GenericRowWithSchema genericRowWithSchema = (((GenericRowWithSchema) javaCollection.getAs(traceable)));
+            String valueStr = genericRowWithSchema.getAs(STR_PERCENT_TRACEABILITY);
             try {
                 double value = Double.parseDouble(valueStr);
-                MetricCount mc = getMetricCount("", value, traceble);
+                MetricCount mc = getMetricCount("", value, traceable);
                 if (mc != null) {
                     collectorItemMetricDetail.setStrategy(getCollectionStrategy());
                     collectorItemMetricDetail.addCollectorItemMetricCount(timeWindowDt, mc);
