@@ -23,7 +23,7 @@ import java.util.Map;
 
 @Component
 public class AuditResultCollector extends DefaultMetricCollector {
-
+    private static final String AUDIT_RESULTS = "audit_results";
     private static final Logger LOGGER = LoggerFactory.getLogger(AuditResultCollector.class);
     public AuditResultCollector(PortfolioMetricRepository portfolioMetricRepository) {
         super(portfolioMetricRepository);
@@ -41,7 +41,7 @@ public class AuditResultCollector extends DefaultMetricCollector {
 
     @Override
     protected String getCollection() {
-        return "audit_results";
+        return AUDIT_RESULTS;
     }
 
     @Override
@@ -67,7 +67,6 @@ public class AuditResultCollector extends DefaultMetricCollector {
         Date timeWindowDt = itemRow.getAs("timeWindow");
         List<String> traceability = Arrays.asList("Automated","Manual");
         GenericRowWithSchema javaCollection = (((GenericRowWithSchema) itemRow.getAs("traceability")));
-        System.out.println("javaCollection");
         for (String traceble : traceability
              ) {
             GenericRowWithSchema genericRowWithSchema = (((GenericRowWithSchema) javaCollection.getAs(traceble)));
