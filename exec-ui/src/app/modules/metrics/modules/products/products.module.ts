@@ -14,6 +14,7 @@ import {UnitTestCoverageModule} from '../metrics/unit-test-coverage/unit-test-co
 import {PipelineLeadTimeModule} from '../metrics/pipeline-lead-time/pipeline-lead-time.module';
 import {ProductListComponent} from './components/product-list/product-list.component';
 import {ProductsRoutingModule} from './products.routing.module';
+import {TraceabilityModule} from "../metrics/traceability/traceability.module";
 import {ProductListProductsStrategy} from './strategies/product-list-products-strategy';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -31,6 +32,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     StaticCodeAnalysisModule,
     TestAutomationModule,
     UnitTestCoverageModule,
+    TraceabilityModule,
     PipelineLeadTimeModule,
     FormsModule,
     ReactiveFormsModule

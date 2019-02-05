@@ -14,6 +14,7 @@ import {UnitTestCoverageModule} from '../metrics/unit-test-coverage/unit-test-co
 import {MetricPreviewsComponent} from '../previews/components/metric-previews/metric-previews.component';
 import {PipelineLeadTimeModule} from '../metrics/pipeline-lead-time/pipeline-lead-time.module';
 import {PreviewsRoutingModule} from './previews.routing.module';
+import {TraceabilityModule} from "../metrics/traceability/traceability.module";
 import {SCMCommitsModule} from '../metrics/scm-commits/scm-commits.module';
 
 @NgModule({
@@ -30,6 +31,7 @@ import {SCMCommitsModule} from '../metrics/scm-commits/scm-commits.module';
     StaticCodeAnalysisModule,
     TestAutomationModule,
     UnitTestCoverageModule,
+    TraceabilityModule,
     PipelineLeadTimeModule,
     SCMCommitsModule
   ],

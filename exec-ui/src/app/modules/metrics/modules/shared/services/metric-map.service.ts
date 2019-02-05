@@ -27,6 +27,9 @@ import {UnitTestCoverageConfiguration} from '../../metrics/unit-test-coverage/un
 import {SCMCommitsTrendStrategy} from '../../metrics/scm-commits/strategies/scm-commits-trend-strategy';
 import {SCMCommitsPrimaryMetricStrategy} from '../../metrics/scm-commits/strategies/scm-commits-primary-metric-strategy';
 import {SCMCommitsConfiguration} from '../../metrics/scm-commits/scm-commits.configuration';
+import {TraceabilityPrimaryMetricStrategy} from "../../metrics/traceability/strategies/traceability-primary-metric-strategy";
+import {TraceabilityTrendStrategy} from "../../metrics/traceability/strategies/traceability-trend-strategy";
+import {TraceabilityConfiguration} from "../../metrics/traceability/traceability.configuration";
 
 @Injectable()
 export class MetricMapService {
@@ -48,7 +51,9 @@ export class MetricMapService {
               private pipelineLeadTimeTrendStrategy: PipelineLeadTimeTrendStrategy,
               private pipelineLeadTimeBuildingBlockPrimaryMetricStrategy: PipelineLeadTimeBuildingBlockPrimaryMetricStrategy,
               private scmCommitsPrimaryMetricStrategy: SCMCommitsPrimaryMetricStrategy,
-              private scmCommitsTrendStrategy: SCMCommitsTrendStrategy) { }
+              private scmCommitsTrendStrategy: SCMCommitsTrendStrategy,
+              private traceabilityPrimaryMetricsStrategy: TraceabilityPrimaryMetricStrategy,
+              private traceabilityTrendStrategy: TraceabilityTrendStrategy) { }
 
   public metrics(): Map<string, any> {
     return new Map<string, any>([
@@ -106,7 +111,13 @@ export class MetricMapService {
         trendStrategy: this.scmCommitsTrendStrategy,
         isRatio: false,
         label: SCMCommitsConfiguration.buildingBlockLabel
-      }]
+      }],
+      [TraceabilityConfiguration.identifier, {
+          primaryMetricStrategy: this.traceabilityPrimaryMetricsStrategy,
+          trendStrategy: this.traceabilityTrendStrategy,
+          isRatio: false,
+          label: TraceabilityConfiguration.buildingBlockLabel
+      }],
     ]);
   }
 }
