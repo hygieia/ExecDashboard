@@ -32,5 +32,5 @@ export class TraceabilityDetailStrategy extends DetailStrategyBase {
 
 
     }
-    }
+}
 
