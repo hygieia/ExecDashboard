@@ -38,7 +38,7 @@ export class TraceabilityPreviewStrategy extends PreviewStrategyBase {
     }
 
     private calculateSecondaryMetric(model: MetricSummary) {
-        const validSet = new Set(['automated', 'manual']);
+        const validSet = new Set(['Automated', 'Manual']);
         const sums = model.counts
             .filter(count => validSet.has(count.label['type']))
             .reduce((runningSums, count) => {
@@ -47,12 +47,12 @@ export class TraceabilityPreviewStrategy extends PreviewStrategyBase {
 
         let result = [];
 
-        if (sums.get('automated')) {
-            result.push({name: 'automated', value: Math.round(sums.get('automated').toLocaleString())});
+        if (sums.get('Automated')) {
+            result.push({name: 'automated', value: Math.round(sums.get('Automated').toLocaleString())});
         }
 
-        if (sums.get('manual')) {
-            result.push({name: 'manual', value: Math.round(sums.get('manual').toLocaleString())});
+        if (sums.get('Manual')) {
+            result.push({name: 'manual', value: Math.round(sums.get('Manual').toLocaleString())});
         }
         return result;
     }

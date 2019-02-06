@@ -9,7 +9,7 @@ import {TraceabilityConfiguration} from '../traceability.configuration';
 @Injectable()
 export class TraceabilityPrimaryMetricStrategy extends PrimaryMetricStrategyBase {
   parse(counts: Count[]): MetricValueModel {
-      const validSet = new Set(['automated', 'manual']);
+      const validSet = new Set(['Automated', 'Manual']);
 
       return {
           name: TraceabilityConfiguration.buildingBlockLabel,

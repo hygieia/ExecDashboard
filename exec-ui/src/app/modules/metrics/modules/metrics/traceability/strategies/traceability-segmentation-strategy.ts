@@ -8,8 +8,8 @@ export class TraceabilitySegmentationStrategy implements Strategy<MetricSummary,
   parse(model: MetricSummary): MetricSegmentationModel {
 
     const rows = [
-      {name: 'automated', order: 1},
-        {name: 'manual', order: 2}
+      {name: 'Automated', order: 1},
+        {name: 'Manual', order: 2}
 
     ];
 

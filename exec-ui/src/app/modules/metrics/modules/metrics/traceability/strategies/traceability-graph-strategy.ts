@@ -30,7 +30,7 @@ export class TraceabilityGraphStrategy extends GraphStrategyBase {
   }
 
     protected count(seriesElement: MetricTimeSeriesElement): number {
-        const validSet = new Set(['automated', 'manual']);
+        const validSet = new Set(['Automated', 'Manual']);
 
         return Math.round(seriesElement.counts.reduce((sum, item) => validSet.has(item.label['type']) ? sum + item.value : sum, 0)/2);
     }
