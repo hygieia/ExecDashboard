@@ -14,6 +14,8 @@ import {TraceabilityTrendStrategy} from './strategies/traceability-trend-strateg
 import {TraceabilityDetailComponent} from './components/metric-detail/traceability-detail.component';
 import {TraceabilityPreviewComponent} from './components/metric-preview/traceability-preview.component';
 import {TraceabilityRoutingModule} from './traceability.routing.module';
+import {TraceabilityAuxiliaryAutomatedFigureStrategy} from "./strategies/traceability-auxiliary-automated-figure-strategy";
+import {TraceabilityAuxiliaryManualFigureStrategy} from "./strategies/traceability-auxiliary-manual-figure-strategy";
 
 @NgModule({
   imports: [
@@ -39,7 +41,9 @@ import {TraceabilityRoutingModule} from './traceability.routing.module';
     TraceabilityDetailStrategy,
     TraceabilityPreviewStrategy,
     TraceabilityGraphStrategy,
-    TraceabilitySegmentationStrategy
+    TraceabilitySegmentationStrategy,
+    TraceabilityAuxiliaryAutomatedFigureStrategy,
+    TraceabilityAuxiliaryManualFigureStrategy
   ]
 })
 

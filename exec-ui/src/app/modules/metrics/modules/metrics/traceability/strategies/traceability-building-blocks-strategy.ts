@@ -7,12 +7,17 @@ import {BuildingBlocksStrategyBase} from '../../../shared/strategies/building-bl
 import {Injectable} from '@angular/core';
 import {NavigationModel} from '../../../../../shared/component-models/navigation-model';
 import {TraceabilityConfiguration} from '../traceability.configuration';
+import {TraceabilityAuxiliaryAutomatedFigureStrategy} from "./traceability-auxiliary-automated-figure-strategy";
+import {TraceabilityAuxiliaryManualFigureStrategy} from "./traceability-auxiliary-manual-figure-strategy";
+
 
 @Injectable()
 export class TraceabilityBuildingBlocksStrategy extends BuildingBlocksStrategyBase {
 
   constructor (private primaryMetricStrategy: TraceabilityPrimaryMetricStrategy,
-               private trendStrategy: TraceabilityTrendStrategy) { super(); }
+               private trendStrategy: TraceabilityTrendStrategy,
+               private auxiliaryAutomatedFigureStrategy: TraceabilityAuxiliaryAutomatedFigureStrategy,
+               private auxiliaryManualFIgureStrategy: TraceabilityAuxiliaryManualFigureStrategy) { super(); }
 
   parse(model: BuildingBlockMetricSummary[]): BuildingBlockModel[] {
     const buildingBlocks = new Array<BuildingBlockModel>();
@@ -45,7 +50,7 @@ export class TraceabilityBuildingBlocksStrategy extends BuildingBlocksStrategyBa
   }
 
   private mapTraceabilityMetric(buildingBlockMetricSummary: BuildingBlockMetricSummary): BuildingBlockMetricSummaryModel[] {
-    return buildingBlockMetricSummary.metrics
+   /* return buildingBlockMetricSummary.metrics
       .filter((metric) => {
         return metric.name === TraceabilityConfiguration.identifier;
       })
@@ -55,6 +60,56 @@ export class TraceabilityBuildingBlocksStrategy extends BuildingBlocksStrategyBa
           trend: this.trendStrategy.parse(metric),
           isRatio: true
         };
-      });
+      });*/
+      const metric = buildingBlockMetricSummary.metrics.find(m => m.name === TraceabilityConfiguration.identifier);
+
+      if (!metric) {
+          return [];
+      }
+
+      return [
+          {
+              value: this.primaryMetricStrategy.parse(metric.counts),
+              trend: this.trendStrategy.parse(metric),
+              isRatio: true
+          },
+          mapAutomatedMetric(this.auxiliaryAutomatedFigureStrategy.parse(metric)),
+          mapManualMetric(this.auxiliaryManualFIgureStrategy.parse(metric))
+      ];
+
+      function mapAutomatedMetric(value) {
+          return {
+                  value: mapAutomated(value),
+                  trend: null,
+                  isRatio: true
+              };
+      }
+
+
+      function mapAutomated(valueModel) {
+          return {
+
+              name: TraceabilityConfiguration.auxilliaryAutomatedIdentifier,
+              value: valueModel.value
+          };
+      }
+
+      function mapManualMetric(value) {
+          return {
+              value: mapManual(value),
+              trend: null,
+              isRatio: true
+          };
+
+      }
+
+
+      function mapManual(valueModel) {
+          return {
+
+              name: TraceabilityConfiguration.auxilliaryManualIdentifier,
+              value: valueModel.value
+          };
+      }
   }
 }

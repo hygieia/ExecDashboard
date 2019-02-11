@@ -6,7 +6,6 @@ import {TraceabilityTrendStrategy} from './traceability-trend-strategy';
 import {DetailStrategyBase} from '../../../shared/strategies/detail-strategy-base';
 import {Injectable} from '@angular/core';
 import {TraceabilitySegmentationStrategy} from "../../traceability/strategies/traceability-segmentation-strategy";
-import {MetricSummary} from "../../../shared/domain-models/metric-summary";
 
 @Injectable()
 export class TraceabilityDetailStrategy extends DetailStrategyBase {
