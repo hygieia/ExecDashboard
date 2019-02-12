@@ -17,7 +17,7 @@ export class TraceabilityBuildingBlocksStrategy extends BuildingBlocksStrategyBa
   constructor (private primaryMetricStrategy: TraceabilityPrimaryMetricStrategy,
                private trendStrategy: TraceabilityTrendStrategy,
                private auxiliaryAutomatedFigureStrategy: TraceabilityAuxiliaryAutomatedFigureStrategy,
-               private auxiliaryManualFIgureStrategy: TraceabilityAuxiliaryManualFigureStrategy) { super(); }
+               private auxiliaryManualFigureStrategy: TraceabilityAuxiliaryManualFigureStrategy) { super(); }
 
   parse(model: BuildingBlockMetricSummary[]): BuildingBlockModel[] {
     const buildingBlocks = new Array<BuildingBlockModel>();
@@ -50,17 +50,6 @@ export class TraceabilityBuildingBlocksStrategy extends BuildingBlocksStrategyBa
   }
 
   private mapTraceabilityMetric(buildingBlockMetricSummary: BuildingBlockMetricSummary): BuildingBlockMetricSummaryModel[] {
-   /* return buildingBlockMetricSummary.metrics
-      .filter((metric) => {
-        return metric.name === TraceabilityConfiguration.identifier;
-      })
-      .map((metric) => {
-        return {
-          value: this.primaryMetricStrategy.parse(metric.counts),
-          trend: this.trendStrategy.parse(metric),
-          isRatio: true
-        };
-      });*/
       const metric = buildingBlockMetricSummary.metrics.find(m => m.name === TraceabilityConfiguration.identifier);
 
       if (!metric) {
@@ -68,13 +57,8 @@ export class TraceabilityBuildingBlocksStrategy extends BuildingBlocksStrategyBa
       }
 
       return [
-          {
-              value: this.primaryMetricStrategy.parse(metric.counts),
-              trend: this.trendStrategy.parse(metric),
-              isRatio: true
-          },
           mapAutomatedMetric(this.auxiliaryAutomatedFigureStrategy.parse(metric)),
-          mapManualMetric(this.auxiliaryManualFIgureStrategy.parse(metric))
+          mapManualMetric(this.auxiliaryManualFigureStrategy.parse(metric))
       ];
 
       function mapAutomatedMetric(value) {
