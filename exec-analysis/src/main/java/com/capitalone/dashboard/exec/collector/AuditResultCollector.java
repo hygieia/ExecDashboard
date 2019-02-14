@@ -58,16 +58,25 @@ public class AuditResultCollector extends DefaultMetricCollector {
     @Override
     protected CollectorItemMetricDetail getCollectorItemMetricDetail(List<Row> rowList, MetricType metricType) {
         CollectorItemMetricDetail collectorItemMetricDetail = new CollectorItemMetricDetail();
-        if (CollectionUtils.isEmpty(rowList)) {
-            return collectorItemMetricDetail;
+        if (!CollectionUtils.isEmpty(rowList)) {
+            collectorItemMetricDetail.setType(getMetricType());
+            for (Row row : rowList) {
+                updateCollectorItemMetricDetail(collectorItemMetricDetail, row);
+            }
         }
-        collectorItemMetricDetail.setType(getMetricType());
-        for (Row row : rowList) {
-            updateCollectorItemMetricDetail(collectorItemMetricDetail, row);
-        }
+
         return collectorItemMetricDetail;
     }
 
+
+    /**
+     *
+     * @param collectorItemMetricDetail
+     * @param itemRow
+     *
+     * Update collectorItemMetric details with latest timeSeries data and summary.
+     *
+     */
     private void updateCollectorItemMetricDetail(CollectorItemMetricDetail collectorItemMetricDetail,Row itemRow){
 
         Date timeWindowDt = itemRow.getAs(STR_TIME_WINDOW);
