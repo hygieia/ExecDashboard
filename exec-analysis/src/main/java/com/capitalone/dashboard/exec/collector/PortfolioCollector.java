@@ -65,7 +65,7 @@ public class PortfolioCollector implements Runnable {
 
     private final IncidentCollector incidentCollector;
 
-    private final AuditResultCollector auditResultCollector;
+    //private final AuditResultCollector auditResultCollector;
 
 
     private UnitTestCoverageCollector unitTestCoverageCollector;
@@ -77,8 +77,9 @@ public class PortfolioCollector implements Runnable {
                               LibraryPolicyCollector libraryPolicyCollector,
                               StaticCodeAnalysisCollector staticCodeAnalysisCollector,
                               IncidentCollector incidentCollector,
-                              UnitTestCoverageCollector unitTestCoverageCollector,
-                              AuditResultCollector auditResultCollector) {
+                              UnitTestCoverageCollector unitTestCoverageCollector
+                              //AuditResultCollector auditResultCollector
+    ) {
 
         this.taskScheduler = taskScheduler;
         this.portfolioRepository = portfolioRepository;
@@ -87,7 +88,7 @@ public class PortfolioCollector implements Runnable {
         this.libraryPolicyCollector = libraryPolicyCollector;
         this.staticCodeAnalysisCollector = staticCodeAnalysisCollector;
         this.incidentCollector = incidentCollector;
-        this.auditResultCollector = auditResultCollector;
+        //this.auditResultCollector = auditResultCollector;
         this.unitTestCoverageCollector = unitTestCoverageCollector;
     }
 
