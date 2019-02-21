@@ -114,7 +114,7 @@ public class PortfolioCollector implements Runnable {
         incidentCollector.collect(sparkSession, javaSparkContext, portfolioList);
         staticCodeAnalysisCollector.collect(sparkSession, javaSparkContext, portfolioList);
         unitTestCoverageCollector.collect(sparkSession, javaSparkContext, portfolioList);
-        auditResultCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        //auditResultCollector.collect(sparkSession, javaSparkContext, portfolioList);
         sparkSession.close();
         javaSparkContext.close();
     }
@@ -193,6 +193,7 @@ public class PortfolioCollector implements Runnable {
     private void addProductToPortfolio(Portfolio portfolio, Row productRow) {
         String productName = productRow.getAs("productName");
         String productDept = productRow.getAs("ownerDept");
+        String commonName = productRow.getAs("commonName");
         String productId = (String) ((GenericRowWithSchema) productRow.getAs("productId")).values()[0];
 
         LOGGER.debug("    Product Name = " + productName + " ; Owner Dept = " + productDept);
@@ -210,6 +211,7 @@ public class PortfolioCollector implements Runnable {
             product.setId(new ObjectId(productId));
             product.setLob(productDept);
             product.setName(productName);
+            product.setCommonName(commonName);
             product.setMetricLevel(MetricLevel.PRODUCT);
         }
         if (productRow.getAs("environments") != null) {
