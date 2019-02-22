@@ -65,7 +65,7 @@ public class PortfolioCollector implements Runnable {
 
     private final IncidentCollector incidentCollector;
 
-    //private final AuditResultCollector auditResultCollector;
+    private final AuditResultCollector auditResultCollector;
 
 
     private UnitTestCoverageCollector unitTestCoverageCollector;
@@ -77,9 +77,8 @@ public class PortfolioCollector implements Runnable {
                               LibraryPolicyCollector libraryPolicyCollector,
                               StaticCodeAnalysisCollector staticCodeAnalysisCollector,
                               IncidentCollector incidentCollector,
-                              UnitTestCoverageCollector unitTestCoverageCollector
-                              //AuditResultCollector auditResultCollector
-    ) {
+                              UnitTestCoverageCollector unitTestCoverageCollector,
+                              AuditResultCollector auditResultCollector ) {
 
         this.taskScheduler = taskScheduler;
         this.portfolioRepository = portfolioRepository;
@@ -88,7 +87,7 @@ public class PortfolioCollector implements Runnable {
         this.libraryPolicyCollector = libraryPolicyCollector;
         this.staticCodeAnalysisCollector = staticCodeAnalysisCollector;
         this.incidentCollector = incidentCollector;
-        //this.auditResultCollector = auditResultCollector;
+        this.auditResultCollector = auditResultCollector;
         this.unitTestCoverageCollector = unitTestCoverageCollector;
     }
 
@@ -110,12 +109,30 @@ public class PortfolioCollector implements Runnable {
         }
 
 
-        scmCollector.collect(sparkSession, javaSparkContext, portfolioList);
-        libraryPolicyCollector.collect(sparkSession, javaSparkContext, portfolioList);
-        incidentCollector.collect(sparkSession, javaSparkContext, portfolioList);
-        staticCodeAnalysisCollector.collect(sparkSession, javaSparkContext, portfolioList);
-        unitTestCoverageCollector.collect(sparkSession, javaSparkContext, portfolioList);
-        //auditResultCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        if(setting.isScmCollectorFlag()) {
+            LOGGER.info("##### Starting SCM Collector #####");
+            scmCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        }
+        if(setting.isLibraryPolicyCollectorFlag()) {
+            LOGGER.info("##### Starting Library Policy Collector #####");
+            libraryPolicyCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        }
+        if(setting.isIncidentsCollectorFlag()){
+            LOGGER.info("##### Starting Incident Collector #####");
+            incidentCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        }
+        if(setting.isStaticCodeAnalysisCollectorFlag()){
+            LOGGER.info("##### Starting Static Code Collector #####");
+            staticCodeAnalysisCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        }
+        if(setting.isUnitTestCoverageCollectorFlag()){
+            LOGGER.info("##### Starting Unit Test Collector #####");
+            unitTestCoverageCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        }
+        if(setting.isAuditResultCollectorFlag()){
+            LOGGER.info("##### Starting Audit Results Collector #####");
+            auditResultCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        }
         sparkSession.close();
         javaSparkContext.close();
     }
