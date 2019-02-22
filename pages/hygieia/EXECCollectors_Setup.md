@@ -94,6 +94,22 @@ portfolio.readDatabase=<db_name>
 portfolio.writeUri=mongodb://<hostname>:<port>
 portfolio.writeDatabase=<db_name>
 portfolio.filters=scm-commits:item:environment|production-incidents:severity:4.0|
+
+#Enable/Disable SCM Collector
+portfolio.scmCollectorFlag=false
+
+#Enable/Disable Incident Collector
 portfolio.incidentsCollectorFlag=false
-portfolio.scmCollectorFlag=true
+
+#Enable/Disable Library Policy Collector
+portfolio.libraryPolicyCollectorFlag=false
+
+#Enable/Disable Static Code Collector
+portfolio.staticCodeAnalysisCollectorFlag=false
+
+#Enable/Disable Unit Test Collector
+portfolio.unitTestCoverageCollectorFlag=false
+
+#Enable/Disable AuditResult Collector
+portfolio.auditResultCollectorFlag=false
 ```	
