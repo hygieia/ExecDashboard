@@ -183,12 +183,12 @@ public class PortfolioCollector implements Runnable {
         }
 
         for (Row productRow : productRowsList) {
+
             String pName = productRow.getAs("businessOwner");
             if(StringUtils.isEmpty(pName)){
                 LOGGER.info("Empty pName found for product" + productRow.getAs("commonName") + ". Skipping..");
                 continue;
             }
-            
             String lob = productRow.getAs("ownerDept");
 
             Portfolio portfolio =
