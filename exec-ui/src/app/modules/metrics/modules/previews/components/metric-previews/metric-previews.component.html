@@ -32,14 +32,14 @@
                                     <!--[selectedMetric]="selectedMetric"-->
                                     <!--(isSelectedEvent)="selectMetric($event)"></app-production-incidents-preview>-->
 
-  <!-- app-security-violations-preview class="metric" [attr.data-sort]="sortMap.get('security-violations').currentSort" fxFlex
+  <app-security-violations-preview class="metric" [attr.data-sort]="sortMap.get('security-violations').currentSort" fxFlex
                                    [ngClass]="{'disabled': isDisabled('security-violations')}"
                                    [portfolioName]="portfolioName" [portfolioLob]="portfolioLob" [productId]="this.productId"
                                    (hideBuildingBlocksEvent)="reset()"
                                    (showBuildingBlocksEvent)="showBuildingBlocks($event)"
                                    (metricPreviewInitialized)="addMetric()"
                                    [selectedMetric]="selectedMetric"
-                                   (isSelectedEvent)="selectMetric($event)"></app-security-violations-preview -->
+                                   (isSelectedEvent)="selectMetric($event)"></app-security-violations-preview>
   <!-- app-test-automation-card class="metric" [attr.data-sort]="sortMap.get('test-automation').currentSort" fxFlex
                             [ngClass]="{'disabled': isDisabled('test-automation')}"
                             [portfolioName]="portfolioName" [portfolioLob]="portfolioLob" [productId]="this.productId"

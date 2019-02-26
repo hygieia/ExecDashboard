@@ -3,11 +3,11 @@ package com.capitalone.dashboard.exec.model;
 public class HygieiaSparkQuery {
     public static final String CMDB_PRODUCT_QUERY =
             "SELECT _id as productId, configurationItem as productName, commonName, environments, components, businessOwner, ownerDept, appServiceOwner, supportOwner, developmentOwner " +
-                    "FROM cmdb where (validConfigItem = 1) and (businessOwner is not null) and (itemType = 'app')";
+                    "FROM cmdb where (validConfigItem = 1) and (businessOwner is not null) and (businessOwner != '') and (itemType = 'app')";
 
     public static final String CMDB_COMPONENT_QUERY =
             "SELECT _id as componentId, configurationItem, commonName as componentName, businessOwner, ownerDept " +
-                    "FROM cmdb where (itemType = 'component')";
+                    "FROM cmdb where (validConfigItem = 1) and (itemType = 'component')";
 
     public static final String CMDB_ENVIRONMENT_QUERY =
             "SELECT _id as componentId, configurationItem, components, commonName as componentName, businessOwner, ownerDept " +
@@ -37,6 +37,11 @@ public class HygieiaSparkQuery {
             "SELECT collectorItemId, metrics, cast(from_unixtime(cast(timestamp/1000 as bigint)) as timestamp) as timeWindow " +
                     "FROM code_quality " +
                     "WHERE (metrics IS NOT NULL) " +
+                    "ORDER BY timeWindow ASC";
+    public static final String SECURITY_ANALYSIS_QUERY_ALL_COLLECTOR_ITEMS =
+            "SELECT collectorItemId, metrics, type, cast(from_unixtime(cast(timestamp/1000 as bigint)) as timestamp) as timeWindow " +
+                    "FROM code_quality " +
+                    "WHERE (metrics IS NOT NULL) and (type = 'SecurityAnalysis') " +
                     "ORDER BY timeWindow ASC";
 
     public static final String TRACEABILITY_QUERY_ALL_COLLECTOR_ITEMS =

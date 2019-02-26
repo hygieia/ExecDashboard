@@ -26,9 +26,9 @@ export class SecurityViolationsSegmentationStrategy implements Strategy<MetricSu
     };
 
 
-    function segmentCount(severity: string) {
+    function segmentCount(type: string) {
       return model.counts
-        .filter(i =>  i.label['severity'] === severity)
+        .filter(i =>  i.label['type'] === type)
         .map(c => c.value)
         .reduce((a, b) => a + b, 0);
     }

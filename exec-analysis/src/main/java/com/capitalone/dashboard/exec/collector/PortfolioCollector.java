@@ -67,8 +67,9 @@ public class PortfolioCollector implements Runnable {
 
     private final AuditResultCollector auditResultCollector;
 
-
     private UnitTestCoverageCollector unitTestCoverageCollector;
+
+    private SecurityCollector securityCollector;
 
     @Autowired
     public PortfolioCollector(TaskScheduler taskScheduler, PortfolioRepository portfolioRepository,
@@ -78,7 +79,8 @@ public class PortfolioCollector implements Runnable {
                               StaticCodeAnalysisCollector staticCodeAnalysisCollector,
                               IncidentCollector incidentCollector,
                               UnitTestCoverageCollector unitTestCoverageCollector,
-                              AuditResultCollector auditResultCollector ) {
+                              AuditResultCollector auditResultCollector,
+                              SecurityCollector securityCollector) {
 
         this.taskScheduler = taskScheduler;
         this.portfolioRepository = portfolioRepository;
@@ -89,6 +91,7 @@ public class PortfolioCollector implements Runnable {
         this.incidentCollector = incidentCollector;
         this.auditResultCollector = auditResultCollector;
         this.unitTestCoverageCollector = unitTestCoverageCollector;
+        this.securityCollector = securityCollector;
     }
 
     /**
@@ -133,6 +136,7 @@ public class PortfolioCollector implements Runnable {
             LOGGER.info("##### Starting Audit Results Collector #####");
             auditResultCollector.collect(sparkSession, javaSparkContext, portfolioList);
         }
+        securityCollector.collect(sparkSession, javaSparkContext, portfolioList);
         sparkSession.close();
         javaSparkContext.close();
     }
@@ -183,12 +187,7 @@ public class PortfolioCollector implements Runnable {
         }
 
         for (Row productRow : productRowsList) {
-
             String pName = productRow.getAs("businessOwner");
-            if(StringUtils.isEmpty(pName)){
-                LOGGER.info("Empty pName found for product" + productRow.getAs("commonName") + ". Skipping..");
-                continue;
-            }
             String lob = productRow.getAs("ownerDept");
 
             Portfolio portfolio =
