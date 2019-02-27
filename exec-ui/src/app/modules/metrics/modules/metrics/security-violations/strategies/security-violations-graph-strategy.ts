@@ -32,6 +32,6 @@ export class SecurityViolationsGraphStrategy extends GraphStrategyBase {
   protected count(seriesElement: MetricTimeSeriesElement): number {
     const validSet = new Set(['blocker', 'critical', 'major']);
     return seriesElement.counts
-      .reduce((sum, item) => validSet.has(item.label['severity']) ? sum + item.value : sum, 0);
+      .reduce((sum, item) => validSet.has(item.label['type']) ? sum + item.value : sum, 0);
   }
 }

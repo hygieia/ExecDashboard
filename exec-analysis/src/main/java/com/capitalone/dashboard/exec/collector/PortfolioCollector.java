@@ -67,8 +67,9 @@ public class PortfolioCollector implements Runnable {
 
     private final AuditResultCollector auditResultCollector;
 
-
     private UnitTestCoverageCollector unitTestCoverageCollector;
+
+    private SecurityCollector securityCollector;
 
     @Autowired
     public PortfolioCollector(TaskScheduler taskScheduler, PortfolioRepository portfolioRepository,
@@ -78,7 +79,8 @@ public class PortfolioCollector implements Runnable {
                               StaticCodeAnalysisCollector staticCodeAnalysisCollector,
                               IncidentCollector incidentCollector,
                               UnitTestCoverageCollector unitTestCoverageCollector,
-                              AuditResultCollector auditResultCollector ) {
+                              AuditResultCollector auditResultCollector,
+                              SecurityCollector securityCollector) {
 
         this.taskScheduler = taskScheduler;
         this.portfolioRepository = portfolioRepository;
@@ -89,6 +91,7 @@ public class PortfolioCollector implements Runnable {
         this.incidentCollector = incidentCollector;
         this.auditResultCollector = auditResultCollector;
         this.unitTestCoverageCollector = unitTestCoverageCollector;
+        this.securityCollector = securityCollector;
     }
 
     /**
@@ -132,6 +135,9 @@ public class PortfolioCollector implements Runnable {
         if(setting.isAuditResultCollectorFlag()){
             LOGGER.info("##### Starting Audit Results Collector #####");
             auditResultCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        }
+        if(setting.isSecurityCollectorFlag()) {
+            securityCollector.collect(sparkSession, javaSparkContext, portfolioList);
         }
         sparkSession.close();
         javaSparkContext.close();

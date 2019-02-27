@@ -38,6 +38,8 @@ public class PortfolioCollectorSetting {
     private boolean unitTestCoverageCollectorFlag;
     @Value("${feature.auditResultCollectorFlag:true}")
     private boolean auditResultCollectorFlag;
+    @Value("${feature.securityCollectorFlag:true}")
+    private boolean securityCollectorFlag;
 
     private Map<MetricType, List<Filter>> filters;
 
@@ -115,6 +117,14 @@ public class PortfolioCollectorSetting {
 
     public void setAuditResultCollectorFlag(boolean auditResultCollectorFlag) {
         this.auditResultCollectorFlag = auditResultCollectorFlag;
+    }
+
+    public boolean isSecurityCollectorFlag() {
+        return securityCollectorFlag;
+    }
+
+    public void setSecurityCollectorFlag(boolean securityCollectorFlag) {
+        this.securityCollectorFlag = securityCollectorFlag;
     }
 
     @PostConstruct

@@ -71,7 +71,7 @@ public class MetricSummary {
                     break;
 
                 case LATEST:
-                    if (getLastScanned() == null || getLastScanned().before(scanTime)) {
+                    if (getLastScanned() == null || getLastScanned().before(scanTime) || getLastScanned().equals(scanTime)) {
                         counts.add(cloneCount);
                     }
                     break;
