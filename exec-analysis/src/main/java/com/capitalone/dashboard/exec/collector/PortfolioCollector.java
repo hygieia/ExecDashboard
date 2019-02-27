@@ -136,7 +136,9 @@ public class PortfolioCollector implements Runnable {
             LOGGER.info("##### Starting Audit Results Collector #####");
             auditResultCollector.collect(sparkSession, javaSparkContext, portfolioList);
         }
-        securityCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        if(setting.isSecurityCollectorFlag()) {
+            securityCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        }
         sparkSession.close();
         javaSparkContext.close();
     }
