@@ -12,7 +12,7 @@ export class SecurityViolationsPrimaryMetricStrategy extends PrimaryMetricStrate
     return {
       name: SecurityViolationsConfiguration.buildingBlockLabel,
       value: counts
-        .filter(c => validSet.has(c.label['severity']))
+        .filter(c => validSet.has(c.label['type']))
         .map(c => c.value)
         .reduce((a, b) => a + b, 0)
     };

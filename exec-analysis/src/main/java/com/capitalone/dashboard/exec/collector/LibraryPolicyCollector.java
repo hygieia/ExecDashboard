@@ -93,7 +93,7 @@ public class LibraryPolicyCollector extends DefaultMetricCollector{
 
     @Override
     protected MetricCount getMetricCount(String level, double value, String type) {
-        if (StringUtils.isEmpty(level) && "None".equalsIgnoreCase(level)) {
+        if (StringUtils.isEmpty(level) || "None".equalsIgnoreCase(level)) {
             return null;
         }
         MetricCount mc = new MetricCount();

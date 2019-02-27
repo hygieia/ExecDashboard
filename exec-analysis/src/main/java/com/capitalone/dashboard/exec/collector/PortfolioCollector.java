@@ -67,10 +67,12 @@ public class PortfolioCollector implements Runnable {
 
     private final AuditResultCollector auditResultCollector;
 
-
     private UnitTestCoverageCollector unitTestCoverageCollector;
 
+    private SecurityCollector securityCollector;
+
     @Autowired
+    @SuppressWarnings("PMD.ExcessiveParameterList")
     public PortfolioCollector(TaskScheduler taskScheduler, PortfolioRepository portfolioRepository,
                               PortfolioCollectorSetting setting,
                               SCMCollector scmCollector,
@@ -78,7 +80,8 @@ public class PortfolioCollector implements Runnable {
                               StaticCodeAnalysisCollector staticCodeAnalysisCollector,
                               IncidentCollector incidentCollector,
                               UnitTestCoverageCollector unitTestCoverageCollector,
-                              AuditResultCollector auditResultCollector) {
+                              AuditResultCollector auditResultCollector,
+                              SecurityCollector securityCollector) {
 
         this.taskScheduler = taskScheduler;
         this.portfolioRepository = portfolioRepository;
@@ -89,11 +92,13 @@ public class PortfolioCollector implements Runnable {
         this.incidentCollector = incidentCollector;
         this.auditResultCollector = auditResultCollector;
         this.unitTestCoverageCollector = unitTestCoverageCollector;
+        this.securityCollector = securityCollector;
     }
 
     /**
      * Main collection loop
      */
+    @SuppressWarnings("PMD.NPathComplexity")
     public void collect() {
         HygieiaSparkConnection sparkConnection = new HygieiaSparkConnection(setting.getReadUri(), setting.getReadDatabase(),
                 setting.getWriteUri(), setting.getWriteDatabase());
@@ -109,12 +114,34 @@ public class PortfolioCollector implements Runnable {
         }
 
 
-        scmCollector.collect(sparkSession, javaSparkContext, portfolioList);
-        libraryPolicyCollector.collect(sparkSession, javaSparkContext, portfolioList);
-        incidentCollector.collect(sparkSession, javaSparkContext, portfolioList);
-        staticCodeAnalysisCollector.collect(sparkSession, javaSparkContext, portfolioList);
-        unitTestCoverageCollector.collect(sparkSession, javaSparkContext, portfolioList);
-        auditResultCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        if(setting.isScmCollectorFlag()) {
+            LOGGER.info("##### Starting SCM Collector #####");
+            scmCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        }
+        if(setting.isLibraryPolicyCollectorFlag()) {
+            LOGGER.info("##### Starting Library Policy Collector #####");
+            libraryPolicyCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        }
+        if(setting.isIncidentsCollectorFlag()){
+            LOGGER.info("##### Starting Incident Collector #####");
+            incidentCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        }
+        if(setting.isStaticCodeAnalysisCollectorFlag()){
+            LOGGER.info("##### Starting Static Code Collector #####");
+            staticCodeAnalysisCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        }
+        if(setting.isUnitTestCoverageCollectorFlag()){
+            LOGGER.info("##### Starting Unit Test Collector #####");
+            unitTestCoverageCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        }
+        if(setting.isAuditResultCollectorFlag()){
+            LOGGER.info("##### Starting Audit Results Collector #####");
+            auditResultCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        }
+        if(setting.isSecurityCollectorFlag()) {
+            LOGGER.info("##### Starting Security Collector #####");
+            securityCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        }
         sparkSession.close();
         javaSparkContext.close();
     }
@@ -193,6 +220,7 @@ public class PortfolioCollector implements Runnable {
     private void addProductToPortfolio(Portfolio portfolio, Row productRow) {
         String productName = productRow.getAs("productName");
         String productDept = productRow.getAs("ownerDept");
+        String commonName = productRow.getAs("commonName");
         String productId = (String) ((GenericRowWithSchema) productRow.getAs("productId")).values()[0];
 
         LOGGER.debug("    Product Name = " + productName + " ; Owner Dept = " + productDept);
@@ -210,6 +238,7 @@ public class PortfolioCollector implements Runnable {
             product.setId(new ObjectId(productId));
             product.setLob(productDept);
             product.setName(productName);
+            product.setCommonName(commonName);
             product.setMetricLevel(MetricLevel.PRODUCT);
         }
         if (productRow.getAs("environments") != null) {

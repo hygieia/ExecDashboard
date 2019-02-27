@@ -17,6 +17,7 @@ export class ProductListProductsStrategy extends BuildingBlocksStrategyBase {
       products.push({
         id: p.id,
         name: p.name,
+        commonName: p.commonName,
         lob: p.lob,
         poc: p.poc,
         reporting: this.mapReportingComponents(p),

@@ -34,14 +34,12 @@ export class SecurityViolationsPreviewStrategy extends PreviewStrategyBase {
   }
 
   private calculateSecondaryMetric(model: MetricSummary) {
-    const sums = model.counts.reduce((runningSums, count) => {
-      if (!runningSums.has(count.label['severity'])) {
-        runningSums.set(count.label['severity'], 0);
-      }
-      const newCount = runningSums.get(count.label['severity']) + count.value;
-      return runningSums.set(count.label['severity'], newCount);
-    }, new Map());
-
+      const validSet = new Set(['blocker', 'critical', 'major']);
+      const sums = model.counts
+          .filter(count => validSet.has(count.label['type']))
+          .reduce((runningSums, count) => {
+              return runningSums.set(count.label['type'], count.value);
+          }, new Map());
     if (sums.get('blocker')) {
       return [{name: 'blocker', value: sums.get('blocker').toLocaleString()}];
     }
