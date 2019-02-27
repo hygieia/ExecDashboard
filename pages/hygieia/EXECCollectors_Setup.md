@@ -114,5 +114,5 @@ portfolio.unitTestCoverageCollectorFlag=false
 portfolio.auditResultCollectorFlag=false
 
 #Enable/Disable Security Collector
-portfolio.securityCollectorFlag=true
+portfolio.securityCollectorFlag=false
 ```	
