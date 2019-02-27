@@ -112,4 +112,7 @@ portfolio.unitTestCoverageCollectorFlag=false
 
 #Enable/Disable AuditResult Collector
 portfolio.auditResultCollectorFlag=false
+
+#Enable/Disable Security Collector
+portfolio.securityCollectorFlag=true
 ```	
