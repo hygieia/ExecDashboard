@@ -72,6 +72,7 @@ public class PortfolioCollector implements Runnable {
     private SecurityCollector securityCollector;
 
     @Autowired
+    @SuppressWarnings("PMD.ExcessiveParameterList")
     public PortfolioCollector(TaskScheduler taskScheduler, PortfolioRepository portfolioRepository,
                               PortfolioCollectorSetting setting,
                               SCMCollector scmCollector,
@@ -97,6 +98,7 @@ public class PortfolioCollector implements Runnable {
     /**
      * Main collection loop
      */
+    @SuppressWarnings("PMD.NPathComplexity")
     public void collect() {
         HygieiaSparkConnection sparkConnection = new HygieiaSparkConnection(setting.getReadUri(), setting.getReadDatabase(),
                 setting.getWriteUri(), setting.getWriteDatabase());
@@ -137,6 +139,7 @@ public class PortfolioCollector implements Runnable {
             auditResultCollector.collect(sparkSession, javaSparkContext, portfolioList);
         }
         if(setting.isSecurityCollectorFlag()) {
+            LOGGER.info("##### Starting Security Collector #####");
             securityCollector.collect(sparkSession, javaSparkContext, portfolioList);
         }
         sparkSession.close();
