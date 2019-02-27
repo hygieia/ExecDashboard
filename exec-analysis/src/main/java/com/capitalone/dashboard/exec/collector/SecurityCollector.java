@@ -71,7 +71,7 @@ public class SecurityCollector extends DefaultMetricCollector {
 
     private void updateCollectorItemMetricDetail(CollectorItemMetricDetail collectorItemMetricDetail, Row itemRow) {
         Date timeWindowDt = itemRow.getAs("timeWindow");
-        List<String> scaMetricList = Arrays.asList("High", "Medium", "Low");
+        List<String> metricList = Arrays.asList("High", "Medium", "Low");
         Collection<Object> javaCollection = JavaConversions.asJavaCollection(((WrappedArray) itemRow.getAs("metrics")).toList());
 
         Optional.ofNullable(javaCollection)
@@ -79,7 +79,7 @@ public class SecurityCollector extends DefaultMetricCollector {
                 .forEach(m -> {
                     GenericRowWithSchema genericRowWithSchema = (GenericRowWithSchema) m;
                     String existingLabelName = genericRowWithSchema.getAs("name");
-                    if (scaMetricList.contains(existingLabelName)) {
+                    if (metricList.contains(existingLabelName)) {
                         String valueStr = genericRowWithSchema.getAs("value");
                         try {
                             double value = Double.parseDouble(valueStr);
@@ -116,13 +116,15 @@ public class SecurityCollector extends DefaultMetricCollector {
     }
 
     private String getMetricLabel(String inputMetricLabel) {
-        if(inputMetricLabel.equals("High")) {
-            return "blocker";
-        } else if (inputMetricLabel.equals("Medium")) {
-            return "critical";
-        } else if (inputMetricLabel.equals("Low")) {
-            return "major";
+        switch (inputMetricLabel){
+            case "High":
+                return "blocker";
+            case "Medium":
+                return "critical";
+            case "Low":
+                return "major";
+            default:
+                return null;
         }
-        return null;
     }
 }
