@@ -89,6 +89,16 @@
               <arguments>install</arguments>
             </configuration>
           </execution>
+            <execution>
+                <id>npm run-script build</id>
+                <goals>
+                    <goal>npm</goal>
+                </goals>
+                <!-- Optional configuration which provides for running any npm command -->
+                <configuration>
+                    <arguments>run-script build</arguments>
+                </configuration>
+            </execution>
 <!--
           <execution>
             <id>bower install</id>
