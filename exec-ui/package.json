@@ -59,5 +59,9 @@
     "ts-node": "~3.2.2",
     "tslint": "~5.7.0",
     "typescript": "~2.3.4"
+  },
+  "peerDependencies": {
+    "@angular/core": "^2.2.3",
+    "@angular/common": "^2.2.3"
   }
 }
