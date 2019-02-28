@@ -89,31 +89,16 @@
               <arguments>install</arguments>
             </configuration>
           </execution>
-<!--
-          <execution>
-            <id>bower install</id>
-            <goals>
-              <goal>bower</goal>
-            </goals>
-            <configuration>
-              <arguments>install</arguments>
-            </configuration>
-          </execution>
-
-          <execution>
-            <id>gulp build</id>
-            <goals>
-              <goal>gulp</goal>
-            </goals>
-
-            <phase>generate-resources</phase>
-
-            <configuration>
-              <arguments>build</arguments>
-            </configuration>
-          </execution>
--->
-
+            <execution>
+                <id>npm run-script build</id>
+                <goals>
+                    <goal>npm</goal>
+                </goals>
+                <!-- Optional configuration which provides for running any npm command -->
+                <configuration>
+                    <arguments>run-script build</arguments>
+                </configuration>
+            </execution>
         </executions>
 
       </plugin>
