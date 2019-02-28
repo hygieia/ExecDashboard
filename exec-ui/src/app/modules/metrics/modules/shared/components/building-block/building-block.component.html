@@ -19,7 +19,7 @@
         <app-metric-trend-indicator *ngIf="metric.trend" [trend]="metric.trend"></app-metric-trend-indicator>
         <span class="score">
           <span *ngIf="metric.value.prefix" class="prefix">{{metric.value?.prefix}}</span>{{metric.value?.value | number}}<span *ngIf="metric.value.unit" class="unit">{{metric.value?.unit}}</span><span *ngIf="metric.isRatio" class="percent">%</span>
-          <span class="name" fxFlex="110px">{{metric.value?.name | buildingBlockMetricName}}</span>
+          <span class="name">{{metric.value?.name | buildingBlockMetricName}}</span>
         </span>
       </div>
     </div>
