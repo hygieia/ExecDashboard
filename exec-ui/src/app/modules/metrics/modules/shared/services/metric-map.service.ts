@@ -112,12 +112,12 @@ export class MetricMapService {
         isRatio: false,
         label: SCMCommitsConfiguration.buildingBlockLabel
       }],
-      [TraceabilityConfiguration.identifier, {
+      /*[TraceabilityConfiguration.identifier, {
           primaryMetricStrategy: this.traceabilityPrimaryMetricsStrategy,
           trendStrategy: this.traceabilityTrendStrategy,
           isRatio: false,
           label: TraceabilityConfiguration.buildingBlockLabel
-      }],
+      }],*/
     ]);
   }
 }
