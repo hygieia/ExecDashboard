@@ -31,14 +31,14 @@
                                     <!--(metricPreviewInitialized)="addMetric()"-->
                                     <!--[selectedMetric]="selectedMetric"-->
                                     <!--(isSelectedEvent)="selectMetric($event)"></app-production-incidents-preview>-->
-  <app-traceability-card class="metric" [attr.data-sort]="sortMap.get('traceability').currentSort"
+  <!--<app-traceability-card class="metric" [attr.data-sort]="sortMap.get('traceability').currentSort"
                          [ngClass]="{'disabled': isDisabled('traceability')}"
                          [portfolioName]="portfolioName" [portfolioLob]="portfolioLob" [productId]="this.productId"
                          (hideBuildingBlocksEvent)="reset()"
                          (showBuildingBlocksEvent)="showBuildingBlocks($event)"
                          (metricPreviewInitialized)="addMetric()"
                          [selectedMetric]="selectedMetric"
-                         (isSelectedEvent)="selectMetric($event)"></app-traceability-card>
+                         (isSelectedEvent)="selectMetric($event)"></app-traceability-card>-->
   <app-security-violations-preview class="metric" [attr.data-sort]="sortMap.get('security-violations').currentSort" fxFlex
                                    [ngClass]="{'disabled': isDisabled('security-violations')}"
                                    [portfolioName]="portfolioName" [portfolioLob]="portfolioLob" [productId]="this.productId"
