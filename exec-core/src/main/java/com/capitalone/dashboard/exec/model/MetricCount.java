@@ -34,8 +34,9 @@ public class MetricCount {
         value += val;
     }
 
-    public void addAverageValue(double val) {
-        value = (value + val)/2.0;
+    public void addAverageValue(double val,int reportingComponents) {
+
+        value = ((val*(reportingComponents-1)) + value)/reportingComponents;
     }
 
     @Override
@@ -53,5 +54,9 @@ public class MetricCount {
 
     protected MetricCount copy() {
         return new MetricCount(this.getLabel(), this.getValue());
+    }
+
+    public void addMetricSummaryAverageValue(double val) {
+        value = (value + val)/2.0;
     }
 }

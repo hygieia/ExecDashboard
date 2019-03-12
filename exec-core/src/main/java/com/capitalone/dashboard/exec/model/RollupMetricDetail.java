@@ -9,7 +9,7 @@ public class RollupMetricDetail extends MetricDetails {
     protected static final String MTTR = "mttr";
     protected static final String TYPE = "type";
 
-    protected void updateSummary(MetricDetails metricDetails) {
+    protected void updateSummary(MetricDetails metricDetails, int size) {
         if (metricDetails.isProcessed()) {return;}
         MetricSummary itemMetricSummary = metricDetails.getSummary();
         setReportingComponents(getReportingComponents() + 1);
@@ -26,23 +26,23 @@ public class RollupMetricDetail extends MetricDetails {
                 rollupSummaryCounts.add(copyCount);
             } else {
                 rollupSummaryCounts.remove(existing);
-                MetricCount updatedMetricCount = getUpdatedMetricCount(copyCount, metricDetails.getType().getDataType(), existing.getValue());
+                MetricCount updatedMetricCount = getUpdatedMetricCount(copyCount, metricDetails.getType().getDataType(), existing.getValue(),size);
                 rollupSummaryCounts.add(updatedMetricCount);
             }
         }
         summary.setCounts(rollupSummaryCounts);
         if (getType() != null) { summary.setName(getType().getName()); }
     }
-    private MetricCount getUpdatedMetricCount(MetricCount metricCount, MetricType.DataType metricDataType, Double existingValue) {
+    private MetricCount getUpdatedMetricCount(MetricCount metricCount, MetricType.DataType metricDataType, Double existingValue,int reporting) {
         if(metricDataType.equals(MetricType.DataType.SUM)) {
             metricCount.addValue(existingValue);
         } else {
-            metricCount.addAverageValue(existingValue);
+            metricCount.addAverageValue(existingValue,reporting);
         }
         return metricCount;
     }
 
-    protected void updateTimeSeries(MetricDetails itemMetricDetails) {
+    protected void updateTimeSeries(MetricDetails itemMetricDetails, int size) {
         if (itemMetricDetails.isProcessed()) {return;}
         List<MetricTimeSeriesElement> itemMetricDetailTimeSeries = itemMetricDetails.getTimeSeries();
         for (MetricTimeSeriesElement itemDetailsTimeSeriesElement : itemMetricDetailTimeSeries) {
@@ -51,7 +51,7 @@ public class RollupMetricDetail extends MetricDetails {
                 if(itemMetricDetails.getType().getDataType().equals(MetricType.DataType.SUM)) {
                     timeSeries.get(itemDetailsTimeSeriesElement.getDaysAgo()).addCount(itemCount);
                 } else {
-                    timeSeries.get(itemDetailsTimeSeriesElement.getDaysAgo()).averageCount(itemCount);
+                    timeSeries.get(itemDetailsTimeSeriesElement.getDaysAgo()).averageCount(itemCount,size);
                 }
 
             }

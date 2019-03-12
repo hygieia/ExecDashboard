@@ -77,7 +77,7 @@ public class MetricSummary {
                     break;
 
                 case AVERAGE:
-                    cloneCount.addAverageValue(oCount.getValue());
+                    cloneCount.addMetricSummaryAverageValue(oCount.getValue());
                     counts.add(cloneCount);
                     break;
 
