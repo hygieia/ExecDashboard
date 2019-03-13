@@ -18,7 +18,8 @@ public enum MetricType {
     PRODUCTION_RELEASES("production-releases", DataType.SUM, MULTI_DAY, null),
     PIPELINE_LEAD_TIME("pipeline-lead-time", DataType.AVERAGE, DAY, null),
     SCM_COMMITS("scm-commits", DataType.SUM, MULTI_DAY, null),
-    TRACEABILITY("traceability", DataType.RATIO, DAY, null);
+    TRACEABILITY("traceability", DataType.RATIO, DAY, null),
+    PERFORMANCE_TEST("performance-test",DataType.RATIO,DAY,null);
 
     public enum DataType { SUM, RATIO, AVERAGE }
     public enum SummaryRange { DAY, MULTI_DAY }

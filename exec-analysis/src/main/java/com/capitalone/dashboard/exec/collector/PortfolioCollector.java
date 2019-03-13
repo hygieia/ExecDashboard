@@ -71,6 +71,10 @@ public class PortfolioCollector implements Runnable {
 
     private SecurityCollector securityCollector;
 
+    private final PerformanceCollector performanceCollector;
+
+
+
     @Autowired
     @SuppressWarnings("PMD.ExcessiveParameterList")
     public PortfolioCollector(TaskScheduler taskScheduler, PortfolioRepository portfolioRepository,
@@ -81,7 +85,8 @@ public class PortfolioCollector implements Runnable {
                               IncidentCollector incidentCollector,
                               UnitTestCoverageCollector unitTestCoverageCollector,
                               AuditResultCollector auditResultCollector,
-                              SecurityCollector securityCollector) {
+                              SecurityCollector securityCollector,
+                              PerformanceCollector performanceCollector) {
 
         this.taskScheduler = taskScheduler;
         this.portfolioRepository = portfolioRepository;
@@ -93,6 +98,7 @@ public class PortfolioCollector implements Runnable {
         this.auditResultCollector = auditResultCollector;
         this.unitTestCoverageCollector = unitTestCoverageCollector;
         this.securityCollector = securityCollector;
+        this.performanceCollector = performanceCollector;
     }
 
     /**
@@ -116,11 +122,11 @@ public class PortfolioCollector implements Runnable {
 
         if(setting.isScmCollectorFlag()) {
             LOGGER.info("##### Starting SCM Collector #####");
-            scmCollector.collect(sparkSession, javaSparkContext, portfolioList);
+            //scmCollector.collect(sparkSession, javaSparkContext, portfolioList);
         }
         if(setting.isLibraryPolicyCollectorFlag()) {
             LOGGER.info("##### Starting Library Policy Collector #####");
-            libraryPolicyCollector.collect(sparkSession, javaSparkContext, portfolioList);
+            //libraryPolicyCollector.collect(sparkSession, javaSparkContext, portfolioList);
         }
         if(setting.isIncidentsCollectorFlag()){
             LOGGER.info("##### Starting Incident Collector #####");
@@ -128,19 +134,23 @@ public class PortfolioCollector implements Runnable {
         }
         if(setting.isStaticCodeAnalysisCollectorFlag()){
             LOGGER.info("##### Starting Static Code Collector #####");
-            staticCodeAnalysisCollector.collect(sparkSession, javaSparkContext, portfolioList);
+            //staticCodeAnalysisCollector.collect(sparkSession, javaSparkContext, portfolioList);
         }
         if(setting.isUnitTestCoverageCollectorFlag()){
             LOGGER.info("##### Starting Unit Test Collector #####");
-            unitTestCoverageCollector.collect(sparkSession, javaSparkContext, portfolioList);
+            //unitTestCoverageCollector.collect(sparkSession, javaSparkContext, portfolioList);
         }
         if(setting.isAuditResultCollectorFlag()){
             LOGGER.info("##### Starting Audit Results Collector #####");
-            auditResultCollector.collect(sparkSession, javaSparkContext, portfolioList);
+            //uditResultCollector.collect(sparkSession, javaSparkContext, portfolioList);
         }
         if(setting.isSecurityCollectorFlag()) {
             LOGGER.info("##### Starting Security Collector #####");
-            securityCollector.collect(sparkSession, javaSparkContext, portfolioList);
+            //securityCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        }
+        if(setting.isPerformanceCollectorFlag()) {
+            LOGGER.info("##### Starting Performance Collector #####");
+            performanceCollector.collect(sparkSession, javaSparkContext, portfolioList);
         }
         sparkSession.close();
         javaSparkContext.close();
