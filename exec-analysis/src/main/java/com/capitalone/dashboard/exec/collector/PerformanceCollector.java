@@ -18,6 +18,7 @@ public class PerformanceCollector extends DefaultMetricCollector {
     private static final String STR_AVG_RESPONSE_TIME = "averageResponseTime";
     private static final String STR_CALLSPER_MINUTE = "callsperMinute";
     private static final String STR_ERROR_RATE = "actualErrorRate";
+    private static final String STR_TPS = "Transaction Per Second";
 
 
     public PerformanceCollector(PortfolioMetricRepository portfolioMetricRepository) {
@@ -89,7 +90,7 @@ public class PerformanceCollector extends DefaultMetricCollector {
         if(metricName != null) {
             label.put("type", metricName);
             metricCount.setLabel(label);
-            if("Transaction Per Second".equalsIgnoreCase(metricName)){
+            if(STR_TPS.equalsIgnoreCase(metricName)){
             metricCount.setValue(value/60);
             }else {
                 metricCount.setValue(value);
