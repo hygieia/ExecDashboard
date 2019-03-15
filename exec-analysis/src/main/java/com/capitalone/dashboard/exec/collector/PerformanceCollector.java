@@ -5,7 +5,6 @@ import com.capitalone.dashboard.exec.repository.PortfolioMetricRepository;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.catalyst.expressions.GenericRowWithSchema;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 
@@ -90,7 +89,7 @@ public class PerformanceCollector extends DefaultMetricCollector {
         if(metricName != null) {
             label.put("type", metricName);
             metricCount.setLabel(label);
-            if(metricName.equalsIgnoreCase("Transaction Per Second")){
+            if("Transaction Per Second".equalsIgnoreCase(metricName)){
             metricCount.setValue(value/60);
             }else {
                 metricCount.setValue(value);

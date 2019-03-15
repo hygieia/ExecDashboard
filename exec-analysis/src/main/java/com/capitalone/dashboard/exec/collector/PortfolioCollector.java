@@ -73,8 +73,6 @@ public class PortfolioCollector implements Runnable {
 
     private final PerformanceCollector performanceCollector;
 
-
-
     @Autowired
     @SuppressWarnings("PMD.ExcessiveParameterList")
     public PortfolioCollector(TaskScheduler taskScheduler, PortfolioRepository portfolioRepository,
