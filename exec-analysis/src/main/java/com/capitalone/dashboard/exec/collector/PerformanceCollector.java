@@ -1,6 +1,11 @@
 package com.capitalone.dashboard.exec.collector;
 
-import com.capitalone.dashboard.exec.model.*;
+import com.capitalone.dashboard.exec.model.MetricType;
+import com.capitalone.dashboard.exec.model.MetricCount;
+import com.capitalone.dashboard.exec.model.HygieiaSparkQuery;
+import com.capitalone.dashboard.exec.model.CollectorItemMetricDetail;
+import com.capitalone.dashboard.exec.model.MetricCollectionStrategy;
+import com.capitalone.dashboard.exec.model.CollectorType;
 import com.capitalone.dashboard.exec.repository.PortfolioMetricRepository;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.spark.sql.Row;
@@ -21,8 +26,12 @@ public class PerformanceCollector extends DefaultMetricCollector {
     private static final String STR_TIMEWINDOW = "timeWindow";
     private static final String STR_AVG_RESPONSE_TIME = "averageResponseTime";
     private static final String STR_CALLSPER_MINUTE = "callsperMinute";
-    private static final String STR_ERROR_RATE = "actualErrorRate";
-    private static final String STR_TPS = "Transaction Per Second";
+    private static final String STR_ERROR_RATE = "errorsperMinute";
+    //private static final String STR_TPS = "Transaction Per Second";
+    private static final String STR_AVGRESPONSE = "Response Time";
+    private static final String STR_TPS = "TPS";
+    private static final String STR_ERRORRATE = "Error Rate";
+
 
 
     public PerformanceCollector(PortfolioMetricRepository portfolioMetricRepository) {
@@ -65,14 +74,15 @@ public class PerformanceCollector extends DefaultMetricCollector {
 
     private void updateCollectorItemMetricDetail(CollectorItemMetricDetail collectorItemMetricDetail, Row row) {
         Date timeWindowDt = row.getAs(STR_TIMEWINDOW);
-        List<String> performanceMetricList = Arrays.asList("averageResponseTime","callsperMinute","actualErrorRate");
+        List<String> performanceMetricList = Arrays.asList(STR_AVG_RESPONSE_TIME,STR_CALLSPER_MINUTE,STR_ERROR_RATE);
         GenericRowWithSchema pefMetrics = row.getAs("metrics");
 
         for(String perfMetric :performanceMetricList){
             Long valueStr =  pefMetrics.getAs(perfMetric);
             double value = valueStr;
             MetricCount mc = getMetricCount("", value, perfMetric);
-            if (mc != null) {
+            System.out.println(mc.getLabel().isEmpty());
+            if (!mc.getLabel().isEmpty()) {
                 collectorItemMetricDetail.setStrategy(getCollectionStrategy());
                 collectorItemMetricDetail.addCollectorItemMetricCount(timeWindowDt, mc);
                 collectorItemMetricDetail.setLastScanDate(timeWindowDt);
@@ -91,7 +101,7 @@ public class PerformanceCollector extends DefaultMetricCollector {
         Map<String, String> label = new HashMap<>();
         String metricName = getMetricLabel(type);
 
-        if(metricName != null) {
+        if(!metricName.isEmpty()) {
             label.put("type", metricName);
             metricCount.setLabel(label);
             if(STR_TPS.equalsIgnoreCase(metricName)){
@@ -101,18 +111,18 @@ public class PerformanceCollector extends DefaultMetricCollector {
             }
             return metricCount;
         }
-        return null;
+        return metricCount;
     }
 
     private String getMetricLabel(String inputMetricLabel) {
         if(inputMetricLabel.equals(STR_AVG_RESPONSE_TIME)) {
-            return "Avg Response Times";
+            return STR_AVGRESPONSE;
         } else if (inputMetricLabel.equals(STR_CALLSPER_MINUTE)) {
-            return "Transaction Per Second";
+            return STR_TPS;
         } else if (inputMetricLabel.equals(STR_ERROR_RATE)) {
-            return "Error Rate Threshold";
+            return STR_ERRORRATE;
         }
-        return null;
+        return "";
     }
 
 
