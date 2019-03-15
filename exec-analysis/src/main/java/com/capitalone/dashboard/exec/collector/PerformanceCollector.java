@@ -18,8 +18,7 @@ public class PerformanceCollector extends DefaultMetricCollector {
     private static final String STR_TIMEWINDOW = "timeWindow";
     private static final String STR_AVG_RESPONSE_TIME = "averageResponseTime";
     private static final String STR_CALLSPER_MINUTE = "callsperMinute";
-    private static final String STR_ERRORSPER_MINUTE = "errorsperMinute";
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(PerformanceCollector.class);
+    private static final String STR_ERROR_RATE = "actualErrorRate";
 
 
     public PerformanceCollector(PortfolioMetricRepository portfolioMetricRepository) {
@@ -62,7 +61,7 @@ public class PerformanceCollector extends DefaultMetricCollector {
 
     private void updateCollectorItemMetricDetail(CollectorItemMetricDetail collectorItemMetricDetail, Row row) {
         Date timeWindowDt = row.getAs(STR_TIMEWINDOW);
-        List<String> performanceMetricList = Arrays.asList("averageResponseTime","callsperMinute","errorsperMinute");
+        List<String> performanceMetricList = Arrays.asList("averageResponseTime","callsperMinute","actualErrorRate");
         GenericRowWithSchema pefMetrics = row.getAs("metrics");
 
         for(String perfMetric :performanceMetricList){
@@ -106,7 +105,7 @@ public class PerformanceCollector extends DefaultMetricCollector {
             return "Avg Response Times";
         } else if (inputMetricLabel.equals(STR_CALLSPER_MINUTE)) {
             return "Transaction Per Second";
-        } else if (inputMetricLabel.equals(STR_ERRORSPER_MINUTE)) {
+        } else if (inputMetricLabel.equals(STR_ERROR_RATE)) {
             return "Error Rate Threshold";
         }
         return null;
