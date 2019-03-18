@@ -27,7 +27,6 @@ public class PerformanceCollector extends DefaultMetricCollector {
     private static final String STR_AVG_RESPONSE_TIME = "averageResponseTime";
     private static final String STR_CALLSPER_MINUTE = "callsperMinute";
     private static final String STR_ERROR_RATE = "errorsperMinute";
-    //private static final String STR_TPS = "Transaction Per Second";
     private static final String STR_AVGRESPONSE = "Response Time";
     private static final String STR_TPS = "TPS";
     private static final String STR_ERRORRATE = "Error Rate";
@@ -81,7 +80,6 @@ public class PerformanceCollector extends DefaultMetricCollector {
             Long valueStr =  pefMetrics.getAs(perfMetric);
             double value = valueStr;
             MetricCount mc = getMetricCount("", value, perfMetric);
-            System.out.println(mc.getLabel().isEmpty());
             if (!mc.getLabel().isEmpty()) {
                 collectorItemMetricDetail.setStrategy(getCollectionStrategy());
                 collectorItemMetricDetail.addCollectorItemMetricCount(timeWindowDt, mc);
