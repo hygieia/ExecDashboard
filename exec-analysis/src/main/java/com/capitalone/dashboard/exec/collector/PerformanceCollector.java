@@ -22,11 +22,11 @@ import java.util.Date;
 @Component
 public class PerformanceCollector extends DefaultMetricCollector {
 
-    private static final String STR_PERFORMANCE = "performance";
+    private static final String COLLN_PERFORMANCE = "performance";
     private static final String STR_TIMEWINDOW = "timeWindow";
     private static final String STR_AVG_RESPONSE_TIME = "averageResponseTime";
     private static final String STR_CALLSPER_MINUTE = "callsperMinute";
-    private static final String STR_ERROR_RATE = "errorsperMinute";
+    private static final String STR_ERROR_RATE = "actualErrorRate";
     private static final String STR_AVGRESPONSE = "Response Time";
     private static final String STR_TPS = "TPS";
     private static final String STR_ERRORRATE = "Error Rate";
@@ -49,7 +49,7 @@ public class PerformanceCollector extends DefaultMetricCollector {
 
     @Override
     protected String getCollection() {
-        return STR_PERFORMANCE;
+        return COLLN_PERFORMANCE;
     }
 
     @Override
@@ -77,8 +77,14 @@ public class PerformanceCollector extends DefaultMetricCollector {
         GenericRowWithSchema pefMetrics = row.getAs("metrics");
 
         for(String perfMetric :performanceMetricList){
-            Long valueStr =  pefMetrics.getAs(perfMetric);
-            double value = valueStr;
+            double value;
+            try {
+                Long valueStr = pefMetrics.getAs(perfMetric);
+                value = valueStr.doubleValue();
+            }catch (IllegalArgumentException exception){
+                value = 0.0;
+            }
+
             MetricCount mc = getMetricCount("", value, perfMetric);
             if (!mc.getLabel().isEmpty()) {
                 collectorItemMetricDetail.setStrategy(getCollectionStrategy());
