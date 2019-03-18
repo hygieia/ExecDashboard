@@ -63,6 +63,15 @@
                                (metricPreviewInitialized)="addMetric()"
                                [selectedMetric]="selectedMetric"
                                (isSelectedEvent)="selectMetric($event)" fxFlex></app-unit-test-coverage-card>
+
+  <app-performance-test-card class="metric" [attr.data-sort]="sortMap.get('performance-test').currentSort" fxFlex
+                             [ngClass]="{'disabled': isDisabled('performance-test')}"
+                             [portfolioName]="portfolioName" [portfolioLob]="portfolioLob" [productId]="this.productId"
+                             (hideBuildingBlocksEvent)="reset()"
+                             (showBuildingBlocksEvent)="showBuildingBlocks($event)"
+                             (metricPreviewInitialized)="addMetric()"
+                             [selectedMetric]="selectedMetric"
+                             (isSelectedEvent)="selectMetric($event)"></app-performance-test-card>
   <!-- app-production-releases-preview class="metric" [attr.data-sort]="sortMap.get('production-releases').currentSort"
                                    [ngClass]="{'disabled': isDisabled('production-releases')}"
                                    [portfolioName]="portfolioName" [portfolioLob]="portfolioLob" [productId]="this.productId"

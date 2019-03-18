@@ -52,6 +52,9 @@ export abstract class MetricPreviewBaseComponent {
     if (this.productId) {
       this.router.navigate(['portfolio', this.portfolioName, this.portfolioLob, this.metric, 'product', this.productId]);
     } else {
+        if(this.metricPreview.id == "performance-test") {
+            localStorage.setItem("DetailsConditon", "true")
+        }
       this.router.navigate(['portfolio', this.portfolioName, this.portfolioLob, this.metric]);
     }
   }
@@ -119,6 +122,7 @@ export abstract class MetricPreviewBaseComponent {
   }
 
   toggleBuildingBlocks(event: Event): void {
+    localStorage.clear()
     return this.hasFocus()
       ? this.selectAndShowBuildingBlocksList(event)
       : undefined;

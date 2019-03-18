@@ -19,6 +19,7 @@ export class BuildingBlockComponent implements OnInit {
   }
 
   gotToBuildingBlockDetails() {
+    localStorage.clear()
     if (!!this.isComponent) {
       window.open(this.buildingBlock.detail.url, '_blank');
     } else {

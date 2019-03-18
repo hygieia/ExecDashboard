@@ -17,6 +17,7 @@ import {ProductsRoutingModule} from './products.routing.module';
 import {TraceabilityModule} from "../metrics/traceability/traceability.module";
 import {ProductListProductsStrategy} from './strategies/product-list-products-strategy';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {PerformanceTestModule} from "../metrics/performance-test/performance-test.module";
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     UnitTestCoverageModule,
     TraceabilityModule,
     PipelineLeadTimeModule,
+    PerformanceTestModule,
     FormsModule,
     ReactiveFormsModule
   ],

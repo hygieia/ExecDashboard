@@ -110,6 +110,15 @@ export abstract class MetricDetailBaseComponent {
       .subscribe(
         result => {
           this.buildingBlocks = this.buildingBlockStrategy.parse(result);
+            if(localStorage.getItem("DetailsConditon")){
+                this.buildingBlocks.forEach((value,index)=>{
+                    value.metrics.forEach((val,ind)=>{
+                        if(val.value.name !== "Error Rate"){
+                            value.metrics.splice(ind,2)
+                        }
+                    })
+                })
+            }
           this.headingModel = this.getHeader();
         },
         error => {
