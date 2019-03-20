@@ -40,7 +40,7 @@ public class PortfolioCollectorSetting {
     private boolean auditResultCollectorFlag;
     @Value("${feature.securityCollectorFlag:true}")
     private boolean securityCollectorFlag;
-    @Value("${feature.performanceCollectorFlag:false}")
+    @Value("${feature.performanceCollectorFlag:true}")
     private  boolean performanceCollectorFlag;
 
     private Map<MetricType, List<Filter>> filters;
