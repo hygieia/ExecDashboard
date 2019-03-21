@@ -44,7 +44,14 @@ public abstract class DefaultMetricCollector {
 
         DefaultDataCollector dataCollector
                 = new DefaultDataCollector(getCollection(), getQuery(), collectorItemList, sparkSession, javaSparkContext);
-        Map<String, List<Row>> rowsListMap = dataCollector.collectAll();
+        Map<String, List<Row>> rowsListMap;
+        boolean isDashboardConfigNeeded;
+        if ((isDashboardConfigNeeded = isDashboardConfigNeeded()) == true) {
+            rowsListMap = dataCollector.collectAll(isDashboardConfigNeeded);
+        }else {
+            rowsListMap = dataCollector.collectAll();
+        }
+
         boolean deleteFlag = true;
 
         for (Portfolio portfolio: portfolioList) {
@@ -64,8 +71,14 @@ public abstract class DefaultMetricCollector {
                     componentMetricDetail.setLob(productComponent.getLob());
                     ObjectId dashboardId = productComponent.getProductComponentDashboardId();
                     if (dashboardId == null) { return; }
-                    List<String> collectorItems = dashboardCollectorItemsMap.get(dashboardId.toString()) != null ? dashboardCollectorItemsMap.get(dashboardId.toString()) : new ArrayList<>();
-                    collectorItems.stream().map(collectorItem -> getCollectorItemMetricDetail(rowsListMap.get(collectorItem), getMetricType())).forEach(componentMetricDetail::addCollectorItemMetricDetail);
+                    List<String> dashboardIds = new ArrayList<>();
+                    dashboardIds.add(dashboardId.toString());
+                    if (isDashboardConfigNeeded) {
+                        dashboardIds.stream().map(dashboardId1 -> getCollectorItemMetricDetail(rowsListMap.get(dashboardId1), getMetricType())).forEach(componentMetricDetail::addCollectorItemMetricDetail);
+                    }else{
+                        List<String> collectorItems = dashboardCollectorItemsMap.get(dashboardId.toString()) != null ? dashboardCollectorItemsMap.get(dashboardId.toString()) : new ArrayList<>();
+                        collectorItems.stream().map(collectorItem -> getCollectorItemMetricDetail(rowsListMap.get(collectorItem), getMetricType())).forEach(componentMetricDetail::addCollectorItemMetricDetail);
+                    }
                     productMetricDetail.addComponentMetricDetail(componentMetricDetail);
                 });
                 productMetricDetail.setTotalComponents(productComponents.size());
@@ -102,15 +115,19 @@ public abstract class DefaultMetricCollector {
 
         List<String> collectorItemList = new ArrayList<>();
         Optional.ofNullable(portfolioList).orElseGet(Collections::emptyList).stream()
-        .map(Portfolio::getProducts)
+                .map(Portfolio::getProducts)
                 .forEach(products -> products.stream()
                         .map(Product::getProductComponentList)
                         .forEach(productComponents -> productComponents
-                                                        .stream()
-                                                        .map(ProductComponent::getProductComponentDashboardId)
-                                                        .filter(Objects::nonNull)
-                                                        .<List<String>>map(dashboardId -> dashboardCollectorItemsMap.get(dashboardId.toString()) != null ? dashboardCollectorItemsMap.get(dashboardId.toString()) : new ArrayList<>())
-                                                        .forEach(collectorItemList::addAll)));
+                                .stream()
+                                .map(ProductComponent::getProductComponentDashboardId)
+                                .filter(Objects::nonNull)
+                                .<List<String>>map(dashboardId -> dashboardCollectorItemsMap.get(dashboardId.toString()) != null ? dashboardCollectorItemsMap.get(dashboardId.toString()) : new ArrayList<>())
+                                .forEach(collectorItemList::addAll)));
         return collectorItemList;
+    }
+
+    public boolean isDashboardConfigNeeded() {
+        return getMetricType().equals(MetricType.TRACEABILITY);
     }
 }
