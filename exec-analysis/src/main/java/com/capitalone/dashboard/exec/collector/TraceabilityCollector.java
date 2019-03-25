@@ -10,8 +10,6 @@ import com.capitalone.dashboard.exec.repository.PortfolioMetricRepository;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.catalyst.expressions.GenericRowWithSchema;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 
@@ -22,14 +20,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class AuditResultCollector extends DefaultMetricCollector {
+public class TraceabilityCollector extends DefaultMetricCollector {
     private static final String STR_AUDIT_RESULTS = "audit_results";
     private static final String STR_AUTOMATED = "Automated";
     private static final String STR_MANUAL = "Manual";
     private static final String STR_TIME_WINDOW = "timeWindow";
     private static final String STR_TRACEABILITY = "traceability";
 
-    public AuditResultCollector(PortfolioMetricRepository portfolioMetricRepository) {
+    public TraceabilityCollector(PortfolioMetricRepository portfolioMetricRepository) {
         super(portfolioMetricRepository);
     }
 

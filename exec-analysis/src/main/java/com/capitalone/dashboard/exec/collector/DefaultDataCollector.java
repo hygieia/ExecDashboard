@@ -23,7 +23,6 @@ public class DefaultDataCollector {
     private String collectionName;
     private String query;
     private JavaSparkContext javaSparkContext;
-    private boolean isDashboardConfigNeeded;
 
     DefaultDataCollector(String collectionName, String query, List<String> collectorItemIds, SparkSession sparkSession, JavaSparkContext javaSparkContext) {
         this.collectionName = collectionName;

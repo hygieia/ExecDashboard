@@ -23,7 +23,6 @@ export class TraceabilityDetailStrategy extends DetailStrategyBase {
         metricDetailView.totalReporting = model.reportingComponents / model.totalComponents;
         metricDetailView.trend = this.trendStrategy.parse(model.summary);
         metricDetailView.graphModel = this.graphStrategy.parse(model);
-        metricDetailView.segmentationModel = this.segmentationStrategy.parse(model.summary);
         metricDetailView.isRatio = true;
 
 

@@ -65,7 +65,7 @@ public class PortfolioCollector implements Runnable {
 
     private final IncidentCollector incidentCollector;
 
-    private final AuditResultCollector auditResultCollector;
+    private final TraceabilityCollector traceabilityCollector;
 
     private UnitTestCoverageCollector unitTestCoverageCollector;
 
@@ -80,7 +80,7 @@ public class PortfolioCollector implements Runnable {
                               StaticCodeAnalysisCollector staticCodeAnalysisCollector,
                               IncidentCollector incidentCollector,
                               UnitTestCoverageCollector unitTestCoverageCollector,
-                              AuditResultCollector auditResultCollector,
+                              TraceabilityCollector traceabilityCollector,
                               SecurityCollector securityCollector) {
 
         this.taskScheduler = taskScheduler;
@@ -90,7 +90,7 @@ public class PortfolioCollector implements Runnable {
         this.libraryPolicyCollector = libraryPolicyCollector;
         this.staticCodeAnalysisCollector = staticCodeAnalysisCollector;
         this.incidentCollector = incidentCollector;
-        this.auditResultCollector = auditResultCollector;
+        this.traceabilityCollector = traceabilityCollector;
         this.unitTestCoverageCollector = unitTestCoverageCollector;
         this.securityCollector = securityCollector;
     }
@@ -134,9 +134,9 @@ public class PortfolioCollector implements Runnable {
             LOGGER.info("##### Starting Unit Test Collector #####");
             unitTestCoverageCollector.collect(sparkSession, javaSparkContext, portfolioList);
         }
-        if(setting.isAuditResultCollectorFlag()){
-            LOGGER.info("##### Starting Audit Results Collector #####");
-            auditResultCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        if(setting.isTraceabilityCollectorFlag()){
+            LOGGER.info("##### Starting Traceability Collector #####");
+            traceabilityCollector.collect(sparkSession, javaSparkContext, portfolioList);
         }
         if(setting.isSecurityCollectorFlag()) {
             LOGGER.info("##### Starting Security Collector #####");
