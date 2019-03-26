@@ -1,9 +1,10 @@
+import {Injectable} from '@angular/core';
+
 import {MetricPreviewModel} from '../../../shared/component-models/metric-preview-model';
 import {PresentationFunctions} from '../../../shared/utils/presentation-functions';
 import {PerformanceTestTrendStrategy} from './performance-test-trend-strategy';
 import {PerformanceTestPrimaryMetricStrategy} from './performance-test-primary-metric-strategy';
 import {PreviewStrategyBase} from '../../../shared/strategies/preview-strategy-base';
-import {Injectable} from '@angular/core';
 import {PerformanceTestConfiguration} from '../performance-test.configuration';
 import {MetricDetail} from '../../../shared/domain-models/metric-detail';
 import {MetricSummary} from "../../../shared/domain-models/metric-summary";

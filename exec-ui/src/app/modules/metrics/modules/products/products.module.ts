@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {SharedModule} from '../../../shared/shared.module';
 import {DashboardSharedModule} from '../shared/shared.module';
@@ -16,7 +17,6 @@ import {ProductListComponent} from './components/product-list/product-list.compo
 import {ProductsRoutingModule} from './products.routing.module';
 import {TraceabilityModule} from "../metrics/traceability/traceability.module";
 import {ProductListProductsStrategy} from './strategies/product-list-products-strategy';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {PerformanceTestModule} from "../metrics/performance-test/performance-test.module";
 
 @NgModule({

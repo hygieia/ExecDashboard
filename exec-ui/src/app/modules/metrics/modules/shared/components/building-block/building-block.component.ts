@@ -1,6 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {BuildingBlockModel} from '../../component-models/building-block-model';
 import {ActivatedRoute, Router} from '@angular/router';
+import {BuildingBlockModel} from '../../component-models/building-block-model';
 
 @Component({
   selector: 'app-building-block-card',

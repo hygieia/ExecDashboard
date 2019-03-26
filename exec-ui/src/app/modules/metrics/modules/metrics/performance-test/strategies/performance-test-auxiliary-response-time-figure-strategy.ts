@@ -1,6 +1,7 @@
-import {Strategy} from '../../../../../shared/strategies/strategy';
-import {MetricSummary} from '../../../shared/domain-models/metric-summary';
 import {Injectable} from '@angular/core';
+import {Strategy} from '../../../../../shared/strategies/strategy';
+
+import {MetricSummary} from '../../../shared/domain-models/metric-summary';
 import {MetricValueModel} from '../../../shared/component-models/metric-value-model';
 import {PerformanceTestConfiguration} from "../performance-test.configuration";
 

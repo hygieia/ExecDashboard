@@ -21,14 +21,13 @@ import java.util.Date;
 
 @Component
 public class PerformanceCollector extends DefaultMetricCollector {
-
-    private static final String COLLN_PERFORMANCE = "performance";
+    
     private static final String STR_TIMEWINDOW = "timeWindow";
     private static final String STR_AVG_RESPONSE_TIME = "averageResponseTime";
     private static final String STR_CALLSPER_MINUTE = "callsperMinute";
     private static final String STR_ERROR_RATE = "actualErrorRate";
     private static final String STR_AVGRESPONSE = "Response Time";
-    private static final String STR_TPS = "TPS";
+    private static final String STR_TPS = "TPS"; // TPS - Transaction Per Minute
     private static final String STR_ERRORRATE = "Error Rate";
 
 
@@ -49,7 +48,7 @@ public class PerformanceCollector extends DefaultMetricCollector {
 
     @Override
     protected String getCollection() {
-        return COLLN_PERFORMANCE;
+        return "performance";
     }
 
     @Override

@@ -1,11 +1,12 @@
+import {Injectable} from '@angular/core';
+import {NavigationModel} from '../../../../../shared/component-models/navigation-model';
+
 import {BuildingBlockMetricSummaryModel} from '../../../shared/component-models/building-block-metric-summary-model';
 import {BuildingBlockMetricSummary} from '../../../shared/domain-models/building-block-metric-summary';
 import {BuildingBlockModel} from '../../../shared/component-models/building-block-model';
 import {PerformanceTestTrendStrategy} from './performance-test-trend-strategy';
 import {PerformanceTestPrimaryMetricStrategy} from './performance-test-primary-metric-strategy';
 import {BuildingBlocksStrategyBase} from '../../../shared/strategies/building-blocks-strategy-base';
-import {Injectable} from '@angular/core';
-import {NavigationModel} from '../../../../../shared/component-models/navigation-model';
 import {PerformanceTestConfiguration} from '../performance-test.configuration';
 import {PerformanceTestAuxiliaryErrorRateFigureStrategy} from "./performance-test-auxiliary-error-rate-figure-strategy";
 import {PerformanceTestAuxiliaryResponseTimeFigureStrategy} from "./performance-test-auxiliary-response-time-figure-strategy";

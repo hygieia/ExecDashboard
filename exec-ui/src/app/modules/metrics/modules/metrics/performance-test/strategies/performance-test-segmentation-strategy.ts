@@ -1,7 +1,7 @@
+import {Injectable} from '@angular/core';
 import {Strategy} from '../../../../../shared/strategies/strategy';
 import {MetricSummary} from '../../../shared/domain-models/metric-summary';
 import {MetricSegmentationModel} from '../../../shared/component-models/metric-segmentation-model';
-import {Injectable} from '@angular/core';
 
 @Injectable()
 export class PerformanceTestSegmentationStrategy implements Strategy<MetricSummary, MetricSegmentationModel> {

@@ -1,14 +1,15 @@
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router, Params} from '@angular/router';
+import {Location} from '@angular/common';
+
 import {MetricDetailModel} from '../../../../shared/component-models/metric-detail-model';
 import {PerformanceTestDetailStrategy} from '../../strategies/performance-test-detail-strategy';
 import {PerformanceTestService} from '../../services/performance-test.service';
-import {Component, OnInit} from '@angular/core';
 import {MetricDetailBaseComponent} from '../../../../shared/components/metric-detail/metric-detail-base.component';
-import {ActivatedRoute, Router, Params} from '@angular/router';
 import {PortfolioService} from '../../../../../../shared/shared.module';
 import {PerformanceTestBuildingBlocksStrategy} from '../../strategies/performance-test-building-blocks-strategy';
 import {ProductService} from '../../../../shared/services/product.service';
 import {PerformanceTestConfiguration} from '../../performance-test.configuration';
-import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-performance-test-detail',

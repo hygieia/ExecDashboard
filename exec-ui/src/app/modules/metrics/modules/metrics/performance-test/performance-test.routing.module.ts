@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Routes, RouterModule} from '@angular/router';
+
 import {PerformanceTestDetailComponent} from './components/metric-detail/performance-test-detail.component';
 import {PerformanceTestConfiguration} from './performance-test.configuration';
 

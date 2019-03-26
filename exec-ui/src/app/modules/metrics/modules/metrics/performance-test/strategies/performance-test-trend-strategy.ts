@@ -1,7 +1,7 @@
+import {Injectable} from '@angular/core';
 import {MetricSummary} from '../../../shared/domain-models/metric-summary';
 import {MetricTrendModel} from '../../../shared/component-models/metric-trend-model';
 import {TrendStrategyBase} from '../../../shared/strategies/trend-strategy-base';
-import {Injectable} from '@angular/core';
 
 @Injectable()
 export class PerformanceTestTrendStrategy extends TrendStrategyBase {

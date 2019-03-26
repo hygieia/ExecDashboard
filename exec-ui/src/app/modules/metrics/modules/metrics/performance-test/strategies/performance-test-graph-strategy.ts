@@ -1,12 +1,12 @@
+import {Injectable} from '@angular/core';
+
 import {MetricGraphModel} from '../../../shared/component-models/metric-graph-model';
 import {MetricDetail} from '../../../shared/domain-models/metric-detail';
 import {MetricTimeSeriesElement} from '../../../shared/domain-models/metric-time-series-element';
 import {PerformanceTestTrendStrategy} from './performance-test-trend-strategy';
 import {PresentationFunctions} from '../../../shared/utils/presentation-functions';
 import {GraphStrategyBase} from '../../../shared/strategies/graph-strategy-base';
-import decimalToPercent = PresentationFunctions.decimalToPercent;
 import {PerformanceTestPrimaryMetricStrategy} from './performance-test-primary-metric-strategy';
-import {Injectable} from '@angular/core';
 import {PerformanceTestConfiguration} from '../performance-test.configuration';
 
 @Injectable()

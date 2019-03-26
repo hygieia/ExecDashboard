@@ -1,16 +1,15 @@
-import { BuildingBlockModel } from '../../component-models/building-block-model';
 import { Input } from '@angular/core';
+import {Router} from '@angular/router';
+import {Location} from '@angular/common';
 import { Strategy } from '../../../../../shared/strategies/strategy';
+import {HeadingModel} from '../../../../../shared/component-models/heading-model';
+import {NavigationModel} from '../../../../../shared/component-models/navigation-model';
+import { BuildingBlockModel } from '../../component-models/building-block-model';
 import { MetricDetailModel } from '../../component-models/metric-detail-model';
 import {MetricService} from '../../services/metric.service';
-import {Router} from '@angular/router';
 import {PortfolioService} from '../../../../../shared/services/portfolio.service';
 import {Portfolio} from '../../../../../shared/domain-models/portfolio';
 import {ProductService} from '../../services/product.service';
-import {HeadingModel} from '../../../../../shared/component-models/heading-model';
-import {NavigationModel} from '../../../../../shared/component-models/navigation-model';
-import {Location} from '@angular/common';
-import {BuildingBlockMetricSummary} from '../../domain-models/building-block-metric-summary';
 
 /**
  *This is a base component class for displaying component instances in the metric detail container component.

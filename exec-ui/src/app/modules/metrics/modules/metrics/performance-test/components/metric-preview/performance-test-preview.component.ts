@@ -1,7 +1,8 @@
-import {MetricPreviewBaseComponent} from '../../../../shared/components/metric-preview/metric-preview-base.component';
 import {Component, OnInit} from '@angular/core';
-import {PerformanceTestService} from '../../services/performance-test.service';
 import {Router} from '@angular/router';
+
+import {MetricPreviewBaseComponent} from '../../../../shared/components/metric-preview/metric-preview-base.component';
+import {PerformanceTestService} from '../../services/performance-test.service';
 import {PerformanceTestPreviewStrategy} from '../../strategies/performance-test-preview-strategy';
 import {PerformanceTestConfiguration} from '../../performance-test.configuration';
 

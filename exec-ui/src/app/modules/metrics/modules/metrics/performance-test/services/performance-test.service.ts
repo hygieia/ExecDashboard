@@ -1,13 +1,14 @@
-import {MetricDetail} from '../../../shared/domain-models/metric-detail';
 import {Injectable} from '@angular/core';
-import {MetricService } from '../../../shared/services/metric.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-import {MetricSummary} from '../../../shared/domain-models/metric-summary';
-import {BuildingBlockMetricSummary} from '../../../shared/domain-models/building-block-metric-summary';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/observable/throw';
+
+import {MetricService } from '../../../shared/services/metric.service';
+import {MetricDetail} from '../../../shared/domain-models/metric-detail';
+import {MetricSummary} from '../../../shared/domain-models/metric-summary';
+import {BuildingBlockMetricSummary} from '../../../shared/domain-models/building-block-metric-summary';
 import {PerformanceTestConfiguration} from '../performance-test.configuration';
 
 @Injectable()
