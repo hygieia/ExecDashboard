@@ -45,14 +45,6 @@ export class PerformanceTestPreviewStrategy extends PreviewStrategyBase {
 
         let result = [];
 
-       /* if (sums.get('Transaction Per Second')) {
-            result.push({name: 'Transaction Per Second', value: Math.round(sums.get('Transaction Per Second').toLocaleString())});
-        }
-
-        if (sums.get('Avg Response Times')) {
-            result.push({name: 'Avg Response Times', value: sums.get('Avg Response Times').toLocaleString()});
-        }*/
-
         if (sums.get('Error Rate')) {
             result.push({name: 'Error Rate', value: sums.get('Error Rate').toLocaleString(),unit:'%'});
         }
