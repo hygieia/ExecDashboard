@@ -9,6 +9,7 @@ import {TestAutomationConfiguration} from '../../../metrics/test-automation/test
 import {UnitTestCoverageConfiguration} from '../../../metrics/unit-test-coverage/unit-test-coverage.configuration';
 import {TraceabilityConfiguration} from "../../../metrics/traceability/traceability.configuration";
 import {SCMCommitsConfiguration} from '../../../metrics/scm-commits/scm-commits.configuration';
+import {PerformanceTestConfiguration} from "../../../metrics/performance-test/performance-test.configuration";
 
 @Component({
   selector: 'app-metric-previews',
@@ -66,9 +67,13 @@ export class MetricPreviewsComponent implements OnInit, OnDestroy {
       currentSort: 9
     }],
     [TraceabilityConfiguration.identifier, {
-        defaultSort:10,
-        currentSort: 10
+      defaultSort:10,
+      currentSort: 10
     }],
+      [PerformanceTestConfiguration.identifier, {
+        defaultSort:11,
+        currentSort: 11
+      }],
   ]);
 
   constructor() {}

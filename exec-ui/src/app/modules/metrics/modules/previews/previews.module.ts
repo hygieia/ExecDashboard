@@ -16,6 +16,7 @@ import {PipelineLeadTimeModule} from '../metrics/pipeline-lead-time/pipeline-lea
 import {PreviewsRoutingModule} from './previews.routing.module';
 import {TraceabilityModule} from "../metrics/traceability/traceability.module";
 import {SCMCommitsModule} from '../metrics/scm-commits/scm-commits.module';
+import {PerformanceTestModule} from "../metrics/performance-test/performance-test.module";
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import {SCMCommitsModule} from '../metrics/scm-commits/scm-commits.module';
     UnitTestCoverageModule,
     TraceabilityModule,
     PipelineLeadTimeModule,
-    SCMCommitsModule
+    SCMCommitsModule,
+    PerformanceTestModule
   ],
   declarations: [
     MetricPreviewsComponent
