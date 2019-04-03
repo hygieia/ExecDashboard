@@ -50,6 +50,12 @@ public class HygieiaSparkQuery {
                     "WHERE (options.traceability IS NOT NULL)  and (auditType = 'TEST_RESULT') "+
                     "ORDER BY timeWindow ASC";
 
+    public static final String PERFORMANCE_QUERY_ALL_COLLECTOR_ITEMS =
+            "SELECT collectorItemId, metrics, cast(from_unixtime(cast(timestamp/1000 as bigint)) as timestamp) as timeWindow " +
+                    "FROM performance " +
+                    "WHERE (metrics IS NOT NULL) " +
+                    "ORDER BY timeWindow ASC";
+
     public static final String CMDB_INCIDENT_QUERY =
             "SELECT collectorItemId, severity, status, cast(from_unixtime(cast(openTime/1000 as bigint)) as timestamp) as timeWindow, " +
                     "cast(from_unixtime(cast(closedTime/1000 as bigint)) as timestamp) as closeDate, closedTime, " +

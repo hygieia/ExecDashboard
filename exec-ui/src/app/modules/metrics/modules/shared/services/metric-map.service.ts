@@ -30,6 +30,9 @@ import {SCMCommitsConfiguration} from '../../metrics/scm-commits/scm-commits.con
 import {TraceabilityPrimaryMetricStrategy} from "../../metrics/traceability/strategies/traceability-primary-metric-strategy";
 import {TraceabilityTrendStrategy} from "../../metrics/traceability/strategies/traceability-trend-strategy";
 import {TraceabilityConfiguration} from "../../metrics/traceability/traceability.configuration";
+import {PerformanceTestPrimaryMetricStrategy} from "../../metrics/performance-test/strategies/performance-test-primary-metric-strategy";
+import {PerformanceTestTrendStrategy} from "../../metrics/performance-test/strategies/performance-test-trend-strategy";
+import {PerformanceTestConfiguration} from "../../metrics/performance-test/performance-test.configuration";
 
 @Injectable()
 export class MetricMapService {
@@ -53,7 +56,9 @@ export class MetricMapService {
               private scmCommitsPrimaryMetricStrategy: SCMCommitsPrimaryMetricStrategy,
               private scmCommitsTrendStrategy: SCMCommitsTrendStrategy,
               private traceabilityPrimaryMetricsStrategy: TraceabilityPrimaryMetricStrategy,
-              private traceabilityTrendStrategy: TraceabilityTrendStrategy) { }
+              private traceabilityTrendStrategy: TraceabilityTrendStrategy,
+              private performanceTestPrimaryMetricStrategy: PerformanceTestPrimaryMetricStrategy,
+              private performanceTestTrendStrategy: PerformanceTestTrendStrategy) { }
 
   public metrics(): Map<string, any> {
     return new Map<string, any>([
@@ -118,6 +123,12 @@ export class MetricMapService {
           isRatio: true,
           label: TraceabilityConfiguration.buildingBlockLabel
       }],
+        [PerformanceTestConfiguration.identifier, {
+            primaryMetricStrategy: this.performanceTestPrimaryMetricStrategy,
+            trendStrategy: this.performanceTestTrendStrategy,
+            isRatio: true,
+            label: PerformanceTestConfiguration.buildingBlockLabel
+        }]
     ]);
   }
 }

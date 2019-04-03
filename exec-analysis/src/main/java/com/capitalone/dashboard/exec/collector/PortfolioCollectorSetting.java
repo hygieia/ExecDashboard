@@ -40,6 +40,8 @@ public class PortfolioCollectorSetting {
     private boolean traceabilityCollectorFlag;
     @Value("${feature.securityCollectorFlag:true}")
     private boolean securityCollectorFlag;
+    @Value("${feature.performanceCollectorFlag:true}")
+    private  boolean performanceCollectorFlag;
 
     private Map<MetricType, List<Filter>> filters;
 
@@ -125,6 +127,13 @@ public class PortfolioCollectorSetting {
 
     public void setTraceabilityCollectorFlag(boolean traceabilityCollectorFlag) {
         this.traceabilityCollectorFlag = traceabilityCollectorFlag;
+    }
+    public boolean isPerformanceCollectorFlag() {
+        return performanceCollectorFlag;
+    }
+
+    public void setPerformanceCollectorFlag(boolean performanceCollectorFlag) {
+        this.performanceCollectorFlag = performanceCollectorFlag;
     }
 
     @PostConstruct

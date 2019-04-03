@@ -71,6 +71,8 @@ public class PortfolioCollector implements Runnable {
 
     private SecurityCollector securityCollector;
 
+    private final PerformanceCollector performanceCollector;
+
     @Autowired
     @SuppressWarnings("PMD.ExcessiveParameterList")
     public PortfolioCollector(TaskScheduler taskScheduler, PortfolioRepository portfolioRepository,
@@ -81,8 +83,8 @@ public class PortfolioCollector implements Runnable {
                               IncidentCollector incidentCollector,
                               UnitTestCoverageCollector unitTestCoverageCollector,
                               TraceabilityCollector traceabilityCollector,
-                              SecurityCollector securityCollector) {
-
+                              SecurityCollector securityCollector,
+                              PerformanceCollector performanceCollector) {
         this.taskScheduler = taskScheduler;
         this.portfolioRepository = portfolioRepository;
         this.setting = setting;
@@ -93,6 +95,7 @@ public class PortfolioCollector implements Runnable {
         this.traceabilityCollector = traceabilityCollector;
         this.unitTestCoverageCollector = unitTestCoverageCollector;
         this.securityCollector = securityCollector;
+        this.performanceCollector = performanceCollector;
     }
 
     /**
@@ -141,6 +144,10 @@ public class PortfolioCollector implements Runnable {
         if(setting.isSecurityCollectorFlag()) {
             LOGGER.info("##### Starting Security Collector #####");
             securityCollector.collect(sparkSession, javaSparkContext, portfolioList);
+        }
+        if(setting.isPerformanceCollectorFlag()) {
+            LOGGER.info("##### Starting Performance Collector #####");
+            performanceCollector.collect(sparkSession, javaSparkContext, portfolioList);
         }
         sparkSession.close();
         javaSparkContext.close();

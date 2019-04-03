@@ -1,11 +1,12 @@
 import {EventEmitter, Input, Output} from '@angular/core';
-import {MetricPreviewModel} from '../../component-models/metric-preview-model';
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs/Observable';
 import {Strategy} from '../../../../../shared/strategies/strategy';
+import {ItemType} from '../../component-models/item-type';
+import {MetricPreviewModel} from '../../component-models/metric-preview-model';
 import {MetricService} from '../../services/metric.service';
 import {MetricSummary} from '../../domain-models/metric-summary';
-import {Observable} from 'rxjs/Observable';
-import {Router} from '@angular/router';
-import {ItemType} from '../../component-models/item-type';
+
 /**
  *This is a base component class for displaying component instances in the metric previews container component.
  *Extend this class to build previews for additional metrics.
@@ -52,6 +53,9 @@ export abstract class MetricPreviewBaseComponent {
     if (this.productId) {
       this.router.navigate(['portfolio', this.portfolioName, this.portfolioLob, this.metric, 'product', this.productId]);
     } else {
+        if(this.metricPreview.id == "performance-test") {
+            localStorage.setItem("DetailsConditon", "true")
+        }
       this.router.navigate(['portfolio', this.portfolioName, this.portfolioLob, this.metric]);
     }
   }
@@ -119,6 +123,7 @@ export abstract class MetricPreviewBaseComponent {
   }
 
   toggleBuildingBlocks(event: Event): void {
+    localStorage.clear()
     return this.hasFocus()
       ? this.selectAndShowBuildingBlocksList(event)
       : undefined;
