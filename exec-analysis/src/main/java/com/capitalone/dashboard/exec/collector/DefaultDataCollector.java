@@ -60,7 +60,11 @@ public class DefaultDataCollector {
         return rowMap;
     }
 
-    public Map<String, List<Row>> collectAll(boolean isDashboarConfigNeeded) {
+    /**
+     * collect by dashboard id map data
+     * @return
+     */
+    public Map<String, List<Row>> collectAllByDashboard() {
         Map<String, List<Row>> rowMap = new HashMap<>();
         DataFrameLoader.loadDataFrame(collectionName, javaSparkContext);
         Dataset<Row> dataRows = sparkSession.sql(query);

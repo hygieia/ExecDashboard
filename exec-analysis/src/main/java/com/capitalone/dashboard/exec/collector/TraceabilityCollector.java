@@ -110,4 +110,9 @@ public class TraceabilityCollector extends DefaultMetricCollector {
         return null;
     }
 
+    @Override
+    protected boolean isCollectByCollectorItem() {
+        return false;
+    }
+
 }

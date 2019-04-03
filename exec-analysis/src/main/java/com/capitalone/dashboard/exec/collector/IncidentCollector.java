@@ -95,4 +95,9 @@ public class IncidentCollector extends DefaultMetricCollector {
         mc.setValue(value);
         return mc;
     }
+
+    @Override
+    protected boolean isCollectByCollectorItem() {
+        return true;
+    }
 }

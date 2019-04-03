@@ -110,4 +110,9 @@ public class UnitTestCoverageCollector extends DefaultMetricCollector {
         mc.setValue(value);
         return mc;
     }
+
+    @Override
+    protected boolean isCollectByCollectorItem() {
+        return true;
+    }
 }

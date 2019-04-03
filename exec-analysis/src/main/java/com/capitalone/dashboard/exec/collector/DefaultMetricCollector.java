@@ -61,11 +61,11 @@ public abstract class DefaultMetricCollector {
                     if (dashboardId == null) { return; }
                     List<String> dashboardIds = new ArrayList<>();
                     dashboardIds.add(dashboardId.toString());
-                    if (isDashboardConfigNeeded()) {
-                        dashboardIds.stream().map(dashboardId1 -> getCollectorItemMetricDetail(rowsListMap.get(dashboardId1), getMetricType())).forEach(componentMetricDetail::addCollectorItemMetricDetail);
-                    }else{
+                    if (isCollectByCollectorItem()) {
                         List<String> collectorItems = dashboardCollectorItemsMap.get(dashboardId.toString()) != null ? dashboardCollectorItemsMap.get(dashboardId.toString()) : new ArrayList<>();
                         collectorItems.stream().map(collectorItem -> getCollectorItemMetricDetail(rowsListMap.get(collectorItem), getMetricType())).forEach(componentMetricDetail::addCollectorItemMetricDetail);
+                    }else{
+                        dashboardIds.stream().map(dbdId -> getCollectorItemMetricDetail(rowsListMap.get(dbdId), getMetricType())).forEach(componentMetricDetail::addCollectorItemMetricDetail);
                     }
                     productMetricDetail.addComponentMetricDetail(componentMetricDetail);
                 });
@@ -97,6 +97,8 @@ public abstract class DefaultMetricCollector {
 
     protected abstract MetricCount getMetricCount(String level, double value, String type);
 
+    protected abstract boolean isCollectByCollectorItem();
+
     private List<String> getCollectorItemListForPortfolios(List<Portfolio> portfolioList, SparkSession sparkSession, JavaSparkContext javaSparkContext) {
         dashboardCollectorItemsMap
                 = DashBoardCollectorItemMapBuilder.getDashboardNameCollectorItemsMapById(getCollectorType(), sparkSession, javaSparkContext);
@@ -118,18 +120,14 @@ public abstract class DefaultMetricCollector {
     private Map<String,List<Row>> getCollectedDataMap(SparkSession sparkSession, JavaSparkContext javaSparkContext, List<Portfolio> portfolioList) {
         Map<String, List<Row>> rowsListMap;
         DefaultDataCollector dataCollector;
-        if (isDashboardConfigNeeded()) {
-            dataCollector = new DefaultDataCollector(getCollection(), getQuery(), null, sparkSession, javaSparkContext);
-            rowsListMap = dataCollector.collectAll(true);
-        }else {
+        if (isCollectByCollectorItem()) {
             List<String> collectorItemList = getCollectorItemListForPortfolios(portfolioList, sparkSession, javaSparkContext);
             dataCollector = new DefaultDataCollector(getCollection(), getQuery(), collectorItemList, sparkSession, javaSparkContext);
             rowsListMap = dataCollector.collectAll();
+        }else {
+            dataCollector = new DefaultDataCollector(getCollection(), getQuery(), null, sparkSession, javaSparkContext);
+            rowsListMap = dataCollector.collectAllByDashboard();
         }
         return rowsListMap;
-    }
-
-    private boolean isDashboardConfigNeeded() {
-        return getMetricType().equals(MetricType.TRACEABILITY);
     }
 }

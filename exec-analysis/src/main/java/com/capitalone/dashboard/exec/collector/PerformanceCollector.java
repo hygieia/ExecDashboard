@@ -117,6 +117,11 @@ public class PerformanceCollector extends DefaultMetricCollector {
         return metricCount;
     }
 
+    @Override
+    protected boolean isCollectByCollectorItem() {
+        return true;
+    }
+
     private String getMetricLabel(String inputMetricLabel) {
         if(inputMetricLabel.equals(STR_AVG_RESPONSE_TIME)) {
             return STR_AVGRESPONSE;

@@ -115,6 +115,11 @@ public class SecurityCollector extends DefaultMetricCollector {
         return null;
     }
 
+    @Override
+    protected boolean isCollectByCollectorItem() {
+        return true;
+    }
+
     private String getMetricLabel(String inputMetricLabel) {
         switch (inputMetricLabel){
             case "High":
