@@ -11,6 +11,12 @@ public class MetricSummary {
     private Date lastUpdated;
     private double trendSlope;
     private String name;
+    
+    private int totalComponents;
+	private int reportingComponents;
+	private String confMessage;
+	private Boolean dataAvailable;
+	private String appCriticality;
 
     public String getName() { return name; }
 
@@ -71,13 +77,13 @@ public class MetricSummary {
                     break;
 
                 case LATEST:
-                    if (getLastScanned() == null || getLastScanned().before(scanTime) || getLastScanned().equals(scanTime)) {
+                    if (getLastScanned() == null || getLastScanned().before(scanTime)) {
                         counts.add(cloneCount);
                     }
                     break;
 
                 case AVERAGE:
-                    cloneCount.addMetricSummaryAverageValue(oCount.getValue());
+                    cloneCount.addAverageValue(oCount.getValue());
                     counts.add(cloneCount);
                     break;
 
@@ -86,4 +92,46 @@ public class MetricSummary {
             }
         }
     }
+
+	public int getTotalComponents() {
+		return totalComponents;
+	}
+
+	public void setTotalComponents(int totalComponents) {
+		this.totalComponents = totalComponents;
+	}
+
+	public int getReportingComponents() {
+		return reportingComponents;
+	}
+
+	public void setReportingComponents(int reportingComponents) {
+		this.reportingComponents = reportingComponents;
+	}
+
+	public String getConfMessage() {
+		return confMessage;
+	}
+
+	public void setConfMessage(String confMessage) {
+		this.confMessage = confMessage;
+	}
+
+	public Boolean getDataAvailable() {
+		return dataAvailable;
+	}
+
+	public void setDataAvailable(Boolean dataAvailable) {
+		this.dataAvailable = dataAvailable;
+	}
+
+	public String getAppCriticality() {
+		return appCriticality;
+	}
+
+	public void setAppCriticality(String appCriticality) {
+		this.appCriticality = appCriticality;
+	}
+    
+    
 }

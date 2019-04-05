@@ -36,7 +36,7 @@ public class MetricTimeSeriesElement {
         counts.add(copyCount);
     }
 
-    public void averageCount(MetricCount count,int size) {
+    public void averageCount(MetricCount count) {
         if (counts == null) {
             counts = new ArrayList<>();
         }
@@ -44,7 +44,7 @@ public class MetricTimeSeriesElement {
         MetricCount copyCount = count.copy();
         if (oCount != null) {
             counts.remove(oCount);
-            copyCount.addAverageValue(oCount.getValue(),size);
+            copyCount.addAverageValue(oCount.getValue());
         }
         counts.add(copyCount);
     }
