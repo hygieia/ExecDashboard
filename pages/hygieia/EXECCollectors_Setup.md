@@ -115,4 +115,7 @@ portfolio.auditResultCollectorFlag=false
 
 #Enable/Disable Security Collector
 portfolio.securityCollectorFlag=false
+
+#Enable/Disable Performance Collector
+portfolio.performanceCollectorFlag=false
 ```	
