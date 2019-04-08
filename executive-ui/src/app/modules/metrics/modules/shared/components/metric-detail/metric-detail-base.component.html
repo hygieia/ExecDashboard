@@ -1,0 +1,56 @@
+<div class="metric-detail-view">
+		
+	<div class="view-opts-bar">
+		<app-heading [model]="headingModel"></app-heading>
+		<div class="dataInfo">Averages & Trends are Calculated over a 90 Day period</div>
+	</div>
+	<div [className]="spinnerVisibility" >
+			<div class="la-ball-clip-rotate-multiple la-3x">
+			<div></div>
+			<div></div>
+			<div></div>
+		  </div>
+	</div>
+	<!--<input class="input" placeholder="Search Application" type="text" [(ngModel)]="qryString" (ngModelChange) = "search()">-->
+	<hr class="divider" />
+	<div class="metric-detail-content" fxLayout="row" *ngIf="!this.isDevopscup">
+		<div class="metric-details" fxFlex>
+			<app-metric-bargraph  *ngIf="this.isStoriesOrCloud" [model]="this.metricDetailView.graphModel"></app-metric-bargraph>
+            <app-metric-graph *ngIf="!this.isStoriesOrCloud" [model]="this.metricDetailView.graphModel"></app-metric-graph> 
+          	<!--<app-metric-graph  [model]="this.metricDetailView.graphModel"></app-metric-graph>-->
+			<div fxLayout="row" *ngIf="this.showApplicationreporting" fxLayoutWrap>
+				<app-total-reporting fxFlex [totalReporting]="this.metricDetailView.totalReporting"></app-total-reporting>
+
+				<app-metric-segmentation fxFlex *ngIf="this.metricDetailView.segmentationModel && !this.isTest" [model]="this.metricDetailView.segmentationModel"></app-metric-segmentation>
+				<app-metric-auxiliary-figure fxFlex *ngIf="!(this.isSayDoRatio || this.isTest)" [model]="this.metricDetailView.secondaryFigureModel"></app-metric-auxiliary-figure>
+			</div>
+			<div fxLayout="row" *ngIf="this.showApplicationreporting" fxLayoutWrap>
+				<app-metric-segmentation fxFlex *ngIf="this.showApplicationreporting && this.metricDetailView.segmentationModel && this.isTest"
+			[model]="this.metricDetailView.segmentationModel"></app-metric-segmentation>
+			</div>
+			<div fxLayout="row" *ngIf="this.showApplicationreporting" fxLayoutWrap>
+				<app-operational-metrics  *ngIf="this.isEvents" [model]="this.metricDetailView.operationalListModel"
+							[outageModel]="this.metricDetailView.outageListModel" [eventModel]="this.metricDetailView.eventListModel"></app-operational-metrics>
+			</div>
+		</div>
+
+		<div class="metric-product-list" [ngClass]="{'visible': this.buildingBlocks, 'hidden': !this.buildingBlocks}" fxFlex>
+
+          
+		  <app-building-blocks *ngIf="this.showApplicationreporting" [buildingBlocks]="this.buildingBlocks" [isComponentList]="!!this.productId"
+				[portfolioId]="this.portfolioId" (showSpinnerApp)="setSpinnerForApp($event)"></app-building-blocks>
+			<app-metric-segmentation fxFlex *ngIf="!this.showApplicationreporting && !this.isCloud" [model]="this.metricDetailView.segmentationModel"></app-metric-segmentation>
+			<!-- <app-total-reporting fxFlex [totalReporting]="this.metricDetailView.totalReporting" *ngIf="!this.isOutages"></app-total-reporting> -->
+         
+			<app-metric-auxiliary-figure fxFlex [model]="this.metricDetailView.secondaryFigureModel" *ngIf="!this.isOutages" ></app-metric-auxiliary-figure>
+			<app-cloud-metrics  *ngIf="!this.showApplicationreporting && this.isCloud" [model]="this.metricDetailView"></app-cloud-metrics>
+		</div>
+
+		<app-building-blocks *ngIf="!this.showApplicationreporting && !this.isCloud" [buildingBlocks]="this.buildingBlocks" [isComponentList]="!!this.productId"
+			[portfolioId]="this.portfolioId" (showSpinnerApp)="setSpinnerForApp($event)"></app-building-blocks>
+		
+	</div>
+	<div *ngIf="this.isDevopscup">
+		<app-devopscup-metrics  [devopscupScoreList]="this.devopscupScoresList" [vastDetailsList]="this.vastDetailsList" [showDevopscupFilter]="this.showDevopscupFilter" [devopscupRoundDet]="this.devopscupRoundDet" (showSpinnerApp)="setSpinnerForApp($event)"></app-devopscup-metrics>
+	</div>
+</div>

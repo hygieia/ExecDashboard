@@ -1,0 +1,242 @@
+@import '../../../../../assets/styles/colors';
+@import '../../../../../assets/styles/fonts';
+@import '../../../../../assets/styles/retina';
+
+
+
+.xylabel{
+  float: right;
+  
+  font-size: 12px;
+  height: 12px;
+  letter-spacing: 0.05em;
+  line-height: 12px;
+  padding-right: 0;
+  text-align: left;
+  width: auto;
+}
+
+
+.metric-graph-container {
+  background-color: rgba(2, 24, 41, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  cursor: pointer;
+  height: 320px;
+  margin-bottom: 15px;
+  margin-right: 10px;
+  min-width: 160px;
+  padding: 25px 30px 20px 10px;
+
+  app-metric-trend-indicator {
+    padding-left: 6px;
+    padding-top: 2px;
+    position: absolute;
+  }
+
+  .active-count {
+    color: $white;
+    font-family: $OpenSans_SemiBold;
+    font-size: 13.5px;
+    letter-spacing: 0.1em;
+    padding-left: 31px;
+    width: 100%;
+
+    span {
+      font-family: $Montserrat_SemiBold;
+      font-size: 23px;
+      letter-spacing: 0.02em;
+      padding-right: 2px;
+      width: 37px;
+
+      .percent {
+        font-family: $OpenSans_SemiBold;
+        font-size: 14px;
+      }
+
+      .unit {
+        font-size: 14px;
+        padding-left: 2px;
+      }
+
+      &.graph-title {
+        font-family: $OpenSans_SemiBold;
+        font-size: 14px;
+        letter-spacing: 0.06em;
+        margin-right: 6px;
+        padding-right: 0;
+      }
+    }
+
+    .last-scanned {
+      display: inline-block;
+      font-family: $OpenSans_Light;
+      font-size: 10px;
+      height: 9px;
+      letter-spacing: 0.05em;
+      line-height: 9px;
+      min-width: 53px;
+      padding-right: 0;
+      text-align: right;
+      width: auto;
+    }
+  }
+
+  .metric-update-status {
+    padding-top: 25px;
+    height: 9px;
+
+    p {
+      font-family: $OpenSans_Light;
+      font-size: 10px;
+      height: 9px;
+      letter-spacing: 0.05em;
+      line-height: 9px;
+      text-align: right;
+      width: 100%;
+    }
+  }
+}
+
+.graph-contents {
+  overflow: hidden;
+}
+
+.metric-graph {
+  margin-bottom: -16px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  padding-top: 26px;
+  position: relative;
+  -ms-overflow-style: none;
+
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+
+  /deep/ svg {
+
+    &.svg-content-responsive {
+      overflow: unset;
+    }
+
+    .lines path {
+      stroke: $good-trend;
+      stroke-dasharray: 8000;
+      stroke-dashoffset: 0;
+      animation: dash 800ms linear forwards;
+    }
+
+    .points circle {
+      fill: $good-trend;
+      animation: fadein 800ms;
+    }
+
+    @keyframes dash {
+      from {
+        stroke-dashoffset: -1000;
+      }
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    @keyframes fadein {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  }
+
+  &.neutral {
+
+    /deep/ svg {
+
+      .lines path {
+        stroke: $neutral-trend;
+      }
+
+      .points circle {
+        fill: $neutral-trend;
+      }
+    }
+  }
+
+  &.danger {
+
+    /deep/ svg {
+
+      .lines path {
+        stroke: $bad-trend;
+      }
+
+      .points circle {
+        fill: $bad-trend;
+      }
+    }
+  }
+}
+
+* /deep/ svg {
+
+  text {
+    fill: rgb(255, 255, 255);
+    font-family: $OpenSans_Light;
+    letter-spacing: 0.1em;
+    opacity: 0.8;
+    text-anchor: middle;
+  }
+
+  .tick {
+
+    line {
+      stroke: rgba(255, 255, 255, 0.1);
+    }
+
+    text {
+      font-size: 0.5em;
+    }
+  }
+
+  .points {
+
+    circle {
+      stroke: transparent;
+      stroke-width: 12px;
+      transition: fill 150ms ease-in-out;
+
+      &:hover {
+        fill: #556979;
+      }
+    }
+
+    text {
+      font-size: 0.6em;
+      letter-spacing: 0.3em;
+    }
+  }
+}
+
+* /deep/ div.tooltip {
+  background: #556979;
+  border: 1px solid #1c3141;
+  border-radius: 8px;
+  font-family: $OpenSans_Light;
+  font-size: 10px;
+  padding: 8px;
+  pointer-events: none;
+  position: fixed;
+  text-align: center;
+  transition: opacity 150ms ease-in;
+  white-space: nowrap;
+
+  strong {
+    font-family: $OpenSans_SemiBold;
+    font-weight: normal;
+  }
+}

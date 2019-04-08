@@ -1,0 +1,36 @@
+@import '../../../assets/styles/colors';
+
+header {
+  background-color: $blue-main;
+  height: 60px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+nav {
+    background: #2D2E2E;
+    height: 100%;
+
+    ul {
+        list-style-type: square;
+        padding: 0;
+        margin: 0;
+
+        li {
+
+            a {
+                color: #fff;
+                padding: 20px;
+                display: block;
+            }
+
+            .activated {
+                background-color: #00a8ff;
+            }
+        }
+    }
+    
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="13px" viewBox="0 0 8 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+  <title>breadcrumb-arrow</title>
+  <desc>Created with Sketch.</desc>
+  <defs></defs>
+  <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.5">
+    <g id="components/page-title" transform="translate(-87.000000, -8.000000)" fill="#FFFFFF">
+      <g id="breadcrumb-arrow" transform="translate(82.000000, 8.000000)">
+        <path d="M10.6164197,2.38358031 C10.496408,2.26356861 10.3306134,2.18933983 10.1474817,2.18933983 L10.1474817,2.18933983 L2.85251832,2.18933983 L2.85251832,2.18933983 C2.48625495,2.18933983 2.18933983,2.48625495 2.18933983,2.85251832 L2.18933983,2.85251832 L2.18933983,2.85251832 C2.18933983,3.21878168 2.48625495,3.5156968 2.85251832,3.5156968 L2.85251832,3.5156968 L9.4843032,3.5156968 L9.4843032,10.1474817 L9.4843032,10.1474817 C9.4843032,10.513745 9.78121832,10.8106602 10.1474817,10.8106602 C10.513745,10.8106602 10.8106602,10.513745 10.8106602,10.1474817 L10.8106602,2.85251832 C10.8106602,2.66938663 10.7364314,2.50359201 10.6164197,2.38358031 Z" id="Combined-Shape" transform="translate(6.500000, 6.500000) rotate(-315.000000) translate(-6.500000, -6.500000) "></path>
+      </g>
+    </g>
+  </g>
+</svg>

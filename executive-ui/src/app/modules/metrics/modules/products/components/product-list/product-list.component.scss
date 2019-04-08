@@ -1,0 +1,298 @@
+@import '../../../../../../../assets/styles/colors';
+@import '../../../../../../../assets/styles/fonts';
+@import '../../../../../../../assets/styles/retina';
+
+.product-list {
+  padding: 60px 20px 0 20px;
+  position: relative;
+
+  .view-opts-bar {
+    display: inline-block;
+    margin-bottom: 10px;
+    position: relative;
+    width: 100%;
+
+    .view-all-metrics {
+      bottom: 15px;
+      padding: 0 15px;
+      position: absolute;
+      right: 10px;
+      width: 210px;
+    }
+  }
+
+  * /deep/ .metric-building-blocks {
+    min-width: 260px;
+  }
+
+  * /deep/ .metric-detail {
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 10px !important;
+    min-width: 115px !important;
+    padding: 12px 0 20px;
+    text-align: center;
+
+    &.last-metric {
+      border-right-color: transparent;
+    }
+
+    .empty-metric {
+
+      .name {
+        top: 17px !important;
+      }
+    }
+
+    div {
+      display: block !important;
+      width: 100%;
+
+      .metric-trend-indicator {
+        display: inline !important;
+        position: relative;
+        bottom: 6px;
+      }
+
+      .name {
+        margin: 0 auto;
+      }
+    }
+
+  }
+
+  * /deep/ .product {
+
+    .product-heading {
+      margin-bottom: 15px;
+      padding-right: 130px;
+
+      .name {
+        display: inline-block;
+        flex: none !important;
+      }
+
+      .last-scanned {
+        display: inline-block;
+        flex: none !important;
+        margin-left: 5px;
+        position: relative;
+        text-align: left !important;
+        top: 3px;
+      }
+    }
+
+    .product-detail {
+      padding-right: 0;
+    }
+
+    .view-details {
+      min-width: 100px;
+      top: -35px;
+      width: 100px;
+    }
+  }
+
+  * /deep/ .building-blocks-heading {
+    display: none;
+  }
+
+  hr.divider {
+    margin-bottom: 23px;
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-width: 875px) {
+  .view-opts-bar {
+
+    * /deep/ .change-executive {
+      display: block !important;
+      margin-top: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 564px) {
+  .view-opts-bar {
+
+    * /deep/ .change-executive {
+      display: block !important;
+      margin-top: 20px;
+    }
+  }
+
+  .product-list {
+
+    .products {
+      min-width: 260px !important;
+
+      * /deep/ .metric-products {
+        max-width: none !important;
+        min-width: 260px !important;
+
+        * /deep/ .metric-products {
+          min-width: 260px;
+        }
+      }
+
+      * /deep/ .product {
+
+        .product-detail {
+          padding-top: 45px;
+        }
+
+        .view-details {
+          display: block;
+          float: none;
+          position: absolute;
+          right: unset;
+          top: 0;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .product-list {
+
+    .view-opts-bar {
+
+      * /deep/ .heading {
+        margin-right: 0;
+        min-width: 0;
+
+        .primary {
+          min-width: 0;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .product-list {
+
+    .view-opts-bar {
+      padding-right: 10px;
+
+      * /deep/ .change-executive {
+        width: 210px;
+      }
+
+      .view-all-metrics {
+        bottom: 4px;
+        margin-top: 15px;
+        position: relative;
+        right: unset;
+        width: 210px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .product-list {
+
+    * /deep/ .metric-detail {
+      border-right-color: transparent;
+    }
+
+    * /deep/ .product {
+
+      .product-heading {
+        margin-bottom: 0;
+      }
+
+      .product-detail {
+        display: flex !important;
+        margin-top: 5px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .product-list {
+
+    .view-opts-bar {
+      min-width: 260px;
+
+      * /deep/ .change-executive {
+        min-width: 260px;
+        width: 100%;
+      }
+
+      .view-all-metrics {
+        min-width: 260px;
+        width: 100%;
+      }
+    }
+
+    * /deep/ .metric-detail {
+      min-width: 108px !important;
+    }
+  }
+}
+
+.input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #CCC;
+  color: white;
+  font-family: 'Arvo';
+  font-size: 18px;
+  
+  &:focus {
+    outline: none;    
+  }
+}
+
+input::-webkit-input-placeholder {
+  color: grey;
+}
+
+ .product-list .product-card .metrics-name {
+      width: 300px;
+
+      .fa-search { 
+        position: absolute;
+       font-size: 30px;
+      }
+
+     ::ng-deep .selected-list[_ngcontent-c4] .c-list[_ngcontent-c4] .c-token[_ngcontent-c4] {
+       background: transparent !important;
+       color: black;
+     }
+
+    }
+
+  .product-list .product-card .portfolio-name {
+      width: 250px;
+
+      .fa-search { 
+        position: absolute;
+       font-size: 30px;
+      }
+
+     ::ng-deep .selected-list[_ngcontent-c4] .c-list[_ngcontent-c4] .c-token[_ngcontent-c4] {
+       background: transparent !important;
+       color: black;
+     }
+
+    }
+
+  .product-list .product-card .application-name {
+      width: 450px;
+
+      .fa-search { 
+        position: absolute;
+       font-size: 30px;
+      }
+
+     ::ng-deep .selected-list[_ngcontent-c4] .c-list[_ngcontent-c4] .c-token[_ngcontent-c4] {
+       background: transparent !important;
+       color: black;
+     }
+
+    }

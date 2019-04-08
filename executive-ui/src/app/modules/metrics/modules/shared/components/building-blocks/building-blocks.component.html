@@ -1,0 +1,552 @@
+<div class="metric-building-blocks" *ngIf="isComponentList && showModules && !productView">
+    <div class="building-blocks-heading {{icon}}">
+        <img class="icon" src="../../../../../assets/images/{{icon}}.svg" />
+        <span class="label">{{isComponentList ? 'Modules' : 'Applications'}}</span>
+        <span *ngIf="isOutages" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By Crisis ID <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('outages')" id="outages">By Events <img class="sorta" src="../../assets/images/{{outagesIcon}}.svg"></a>
+                    <a *ngIf="showMttr" (click)="sortFor('mttr')" id="mttr">By MTTR <img class="sorta" src="../../assets/images/{{mttrIcon}}.svg"></a>
+                </div>
+            </div>
+
+
+        </span>
+
+        <span *ngIf="isVelocity" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('velocity')" id="velocity">By Velocity <img class="sorta" src="../../assets/images/{{velocityIcon}}.svg"></a>
+                </div>
+            </div>
+
+
+        </span>
+
+        <span *ngIf="isCycleTime" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('cycleTime')" id="cycleTime">By Cycle Time <img class="sorta" src="../../assets/images/{{cycleTimeIcon}}.svg"></a>
+                </div>
+            </div>
+
+
+        </span>
+
+        <span *ngIf="isSecurity" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('security')" id="security">By Total Vulnerabilities <img class="sorta" src="../../assets/images/{{securityIcon}}.svg"></a>
+                    <a (click)="sortFor('critical')" id="critical">By Critical <img class="sorta" src="../../assets/images/{{criticalIcon}}.svg"></a>
+                    <a (click)="sortFor('blocker')" id="blocker">By High <img class="sorta" src="../../assets/images/{{blockerIcon}}.svg"></a>
+                    <a (click)="sortFor('major')" id="major">By Medium <img class="sorta" src="../../assets/images/{{majorIcon}}.svg"></a>
+                </div>
+            </div>
+
+
+        </span>
+        <span *ngIf="isWip" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('wip')" id="wip">By In Progress Count <img class="sorta" src="../../assets/images/{{wipIcon}}.svg"></a>
+                </div>
+            </div>
+
+
+        </span>
+
+        <span *ngIf="isQuality" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('quality')" id="quality">By Defects <img class="sorta" src="../../assets/images/{{qualityIcon}}.svg"></a>
+                </div>
+            </div>
+
+
+        </span>
+
+        <span *ngIf="isTotalValue" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('totalValue')" id="totalValue">By Stories <img class="sorta" src="../../assets/images/{{totalValueIcon}}.svg"></a>
+                </div>
+            </div>
+
+
+        </span>
+
+        <span *ngIf="isStash" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('stash')" id="totalValue">By Commits <img class="sorta" src="../../assets/images/{{stashIcon}}.svg"></a>
+                </div>
+            </div>
+
+
+        </span>
+
+        <span *ngIf="isBuild" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('build')" id="build">By Builds <img class="sorta" src="../../assets/images/{{buildIcon}}.svg"></a>
+                </div>
+            </div>
+
+
+        </span>
+
+        <span *ngIf="isDeploy" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('deploy')" id="build">By Deploys <img class="sorta" src="../../assets/images/{{deployIcon}}.svg"></a>
+                </div>
+            </div>
+        </span>
+
+        <span *ngIf="isSayDo" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('saydoratio')" id="saydoratio">By Story Points<img class="sorta" src="../../assets/images/{{saydoratioIcon}}.svg"></a>
+                    <a *ngIf="showStoriesRatio" (click)="sortFor('saydoratioStoriesRatio')" id="saydoratioStoriesRatio">By
+                        Stories<img class="sorta" src="../../assets/images/{{saydoratiostoriesIcon}}.svg"></a>
+                </div>
+            </div>
+        </span>
+        <span *ngIf="isTest" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('test')" id="saydoratio">By Test Cases<img class="sorta" src="../../assets/images/{{testIcon}}.svg"></a>
+
+                </div>
+            </div>
+        </span>
+        <span *ngIf="isCloud" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('cloud')" id="cloud">By Cost <img class="sorta" src="../../assets/images/{{cloudIcon}}.svg"></a>
+                </div>
+            </div>
+        </span>
+        <span *ngIf="isDevopscup" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('devopscup')" id="devopscup">By Total Improvements <img class="sorta" src="../../assets/images/{{devopscupIcon}}.svg"></a>
+                </div>
+            </div>
+        </span>
+
+        <span *ngIf="component && (isQuality || isVelocity || isWip || isCycleTime || isTotalValue || isStash || isBuild || isDeploy || isCloud || isSayDo)"
+            class="filter">
+            {{filterName}} <div class="dropdown">
+                <div class="dropbtn"> <img class="filterIcon" src="../../assets/images/down-arrow.svg"></div>
+                <div *ngIf="isQuality || isVelocity || isWip ||  isCycleTime || isTotalValue || isStash || isBuild || isDeploy || isCloud || isSayDo"
+                    class="dropdown-content">
+                    <a (click)="filterJiraFun('all')" id="all">All</a>
+                    <a (click)="filterJiraFun('nonzero')" id="nonzero">Non-Zero Values</a>
+                    <a (click)="filterJiraFun('zero')" id="zero">Zero Values</a>
+                </div>
+
+            </div>
+
+
+        </span>
+
+        <div><span class="count">{{this.buildingBlocksCopy.length  | number}} of {{this.buildingBlocksFiltered.length | number}}
+                Reporting</span></div>
+    </div>
+    <app-building-block-card *ngFor="let buildingBlock of buildingBlocksCopyOnScroll" [buildingBlock]="buildingBlock"
+        [isComponent]="isComponentList" (showSpinnerForApp)="setSpinnerStatusForApp($event)"></app-building-block-card>
+    <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="100" (scrolled)="onScroll()">
+    </div>
+</div>
+<div class="metric-building-blocks" *ngIf="!isComponentList  && !productView">
+    <div class="building-blocks-heading {{icon}}">
+        <img class="icon" src="../../../../../assets/images/{{icon}}.svg" />
+        <span class="label">{{isComponentList ? 'Modules' : 'Applications'}}</span>
+        <span *ngIf="isOutages" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('outages')" id="outages">By Events <img class="sorta" src="../../assets/images/{{outagesIcon}}.svg"></a>
+                    <a *ngIf="showMttr" (click)="sortFor('mttr')" id="mttr">By MTTR <img class="sorta" src="../../assets/images/{{mttrIcon}}.svg"></a>
+                </div>
+            </div>
+
+
+        </span>
+
+        <span *ngIf="isVelocity" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('velocity')" id="velocity">By Velocity <img class="sorta" src="../../assets/images/{{velocityIcon}}.svg"></a>
+                </div>
+            </div>
+
+
+        </span>
+
+        <span *ngIf="isCycleTime" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('cycleTime')" id="cycleTime">By Cycle Time <img class="sorta" src="../../assets/images/{{cycleTimeIcon}}.svg"></a>
+                    <a *ngIf="showCadence" (click)="sortFor('cadence')" id="cadence">By Cadence <img class="sorta" src="../../assets/images/{{cadenceIcon}}.svg"></a>
+                </div>
+            </div>
+
+
+        </span>
+
+        <span *ngIf="isSecurity" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('security')" id="security">By Total Vulnerabilities <img class="sorta" src="../../assets/images/{{securityIcon}}.svg"></a>
+                    <a (click)="sortFor('critical')" id="critical">By Critical <img class="sorta" src="../../assets/images/{{criticalIcon}}.svg"></a>
+                    <a (click)="sortFor('blocker')" id="blocker">By High <img class="sorta" src="../../assets/images/{{blockerIcon}}.svg"></a>
+                    <a (click)="sortFor('major')" id="major">By Medium <img class="sorta" src="../../assets/images/{{majorIcon}}.svg"></a>
+                </div>
+            </div>
+
+
+        </span>
+        <span *ngIf="isWip" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('wip')" id="wip">By In Progress Count <img class="sorta" src="../../assets/images/{{wipIcon}}.svg"></a>
+                </div>
+            </div>
+        </span>
+
+        <span *ngIf="isQuality" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('quality')" id="quality">By Defects <img class="sorta" src="../../assets/images/{{qualityIcon}}.svg"></a>
+                </div>
+            </div>
+        </span>
+
+        <span *ngIf="isTotalValue" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('totalValue')" id="totalValue">By Stories <img class="sorta" src="../../assets/images/{{totalValueIcon}}.svg"></a>
+                </div>
+            </div>
+        </span>
+
+        <span *ngIf="isStash" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('stash')" id="totalValue">By Commits <img class="sorta" src="../../assets/images/{{stashIcon}}.svg"></a>
+                </div>
+            </div>
+        </span>
+        <span *ngIf="isBuild" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('build')" id="build">By Builds <img class="sorta" src="../../assets/images/{{buildIcon}}.svg"></a>
+                    <a *ngIf="showAvgTimeBuild" (click)="sortFor('buildavgtime')" id="buildavgtime">By Avg Exec Time
+                        <img class="sorta" src="../../assets/images/{{buildavgtimeIcon}}.svg"></a>
+                </div>
+            </div>
+        </span>
+
+        <span *ngIf="isDeploy" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('deploy')" id="deploy">By Deploys <img class="sorta" src="../../assets/images/{{deployIcon}}.svg"></a>
+                    <a *ngIf="showAvgTimeDeploy" (click)="sortFor('deployavgtime')" id="deployavgtime">By Avg Exec Time
+                        <img class="sorta" src="../../assets/images/{{deployavgtimeIcon}}.svg"></a>
+                </div>
+            </div>
+        </span>
+
+        <span *ngIf="isSayDo" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('saydoratio')" id="saydoratio">By Story Points<img class="sorta" src="../../assets/images/{{saydoratioIcon}}.svg"></a>
+                    <a *ngIf="showStoriesRatio" (click)="sortFor('saydoratioStoriesRatio')" id="saydoratioStoriesRatio">By
+                        Stories<img class="sorta" src="../../assets/images/{{saydoratiostoriesIcon}}.svg"></a>
+                </div>
+            </div>
+        </span>
+
+        <span *ngIf="isCloud" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('cloud')" id="cost">By Cost <img class="sorta" src="../../assets/images/{{cloudIcon}}.svg"></a>
+                </div>
+            </div>
+        </span>
+        <span *ngIf="isDevopscup" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('devopscup')" id="devopscup">By Total Improvements <img class="sorta" src="../../assets/images/{{devopscupIcon}}.svg"></a>
+                </div>
+            </div>
+        </span>
+        <span *ngIf="isTest" class="reporting">
+            Sort <div class="dropdown">
+                <div class="dropbtn"> <img class="sort" src="../../assets/images/down-arrow.svg"></div>
+                <div class="dropdown-content-sort">
+                    <a (click)="sortFor('appName')" id="appName">By App Name <img class="sorta" src="../../assets/images/{{appNameIcon}}.svg"></a>
+                    <a (click)="sortFor('test')" id="saydoratio">By Test Cases<img class="sorta" src="../../assets/images/{{testIcon}}.svg"></a>
+
+                </div>
+            </div>
+        </span>
+        <span *ngIf="!component && !isDevopscup" class="filter">
+            {{filterName}} <div class="dropdown">
+                <div class="dropbtn"> <img class="filterIcon" src="../../assets/images/down-arrow.svg"></div>
+                <div *ngIf="!isSecurity" class="dropdown-content">
+                    <a (click)="filterFunNew('All')" id="All">All</a>
+                    <a (click)="filterFunNew('missionc')" id="missionc">Mission Critical</a>
+                    <a (click)="filterFunNew('businessc')" id="businessc">Business Critical</a>
+                    <a (click)="filterFunNew('systemc')" id="systemc">System Critical</a>
+                    <a (click)="filterFunNew('nonc')" id="nonc">Non-Critical</a>
+                </div>
+
+                <div *ngIf="isSecurity" class="dropdown-content">
+                    <a (click)="secFilterFun('up')" id="up">Negative Trend</a>
+                    <a (click)="secFilterFun('down')" id="down">Positive Trend</a>
+                    <a (click)="secFilterFun('neutral')" id="neutral">Neutral</a>
+                    <a (click)="secFilterFun('all')" id="all">All </a>
+                </div>
+            </div>
+        </span>
+
+        <div><span class="count">{{this.reportingBuildingBlocks | number}} of {{this.totalBuildingBlocks | number}}
+                Reporting</span></div>
+    </div>
+    <app-building-block-card *ngFor="let buildingBlock of buildingBlocksCopyOnScroll" [buildingBlock]="buildingBlock"
+        [isComponent]="isComponentList" (showSpinnerForApp)="setSpinnerStatusForApp($event)"></app-building-block-card>
+    <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="100" (scrolled)="onScroll()">
+    </div>
+</div>
+
+<div *ngIf="productView">
+    <div class="product-heading">
+        <span style="text-align: center" fxFlex="10px">
+        </span>
+        <span style="text-align: center" fxFlex="140px" [hidden]="!setCards('open-source-violations')">
+            <span *ngIf="sortType === 'Velocity as Days per Story Point'" style="color:#FF5733;" (click)="sort('Velocity as Days per Story Point')">
+                <strong>Velocity <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                    <span *ngIf="!sortReverse" class="fa fa-caret-up"></span></strong>
+            </span>
+            <span *ngIf="sortType !== 'Velocity as Days per Story Point'" style="color:white;" (click)="sort('Velocity as Days per Story Point')">
+                Velocity
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+        </span>
+        <span style="text-align: center" fxFlex="140px" [hidden]="!setCards('pipeline-lead-time')">
+            <span *ngIf="sortType === 'Cycle Time'" style="color:#FF5733;" (click)="sort('Cycle Time')"> Cycle Time
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+            <span *ngIf="sortType !== 'Cycle Time'" style="color:white;" (click)="sort('Cycle Time')"> Cycle Time
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+        </span>
+        <span style="text-align: center" fxFlex="140px" [hidden]="!setCards('security-violations')">
+            <span *ngIf="sortType === 'Security Vulnerabilities'" style="color:#FF5733;" (click)="sort('Security Vulnerabilities')">
+                Security
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+            <span *ngIf="sortType !== 'Security Vulnerabilities'" style="color:white;" (click)="sort('Security Vulnerabilities')">
+                Security
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+        </span>
+        <span style="text-align: center" fxFlex="140px" [hidden]="!setCards('production-incidents')">
+            <span *ngIf="sortType === 'Production Events'" style="color:#FF5733;" (click)="sort('Production Events')">
+                Events
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+            <span *ngIf="sortType !== 'Production Events'" style="color:white;" (click)="sort('Production Events')">
+                Events
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+        </span>
+        <span style="text-align: center" fxFlex="140px" [hidden]="!setCards('quality')">
+            <span *ngIf="sortType === 'Defects'" style="color:#FF5733;" (click)="sort('Defects')"> Quality
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+            <span *ngIf="sortType !== 'Defects'" style="color:white;" (click)="sort('Defects')"> Quality
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+        </span>
+        <span style="text-align: center" fxFlex="140px" [hidden]="!setCards('work-in-progress')">
+            <span *ngIf="sortType === 'Work In Progress'" style="color:#FF5733;" (click)="sort('Work In Progress')">
+                WIP
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+            <span *ngIf="sortType !== 'Work In Progress'" style="color:white;" (click)="sort('Work In Progress')"> WIP
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+        </span>
+        <span style="text-align: center" fxFlex="140px" [hidden]="!setCards('total-value')">
+            <span *ngIf="sortType === 'Stories Completed'" style="color:#FF5733;" (click)="sort('Stories Completed')">
+                Stories
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+            <span *ngIf="sortType !== 'Stories Completed'" style="color:white;" (click)="sort('Stories Completed')">
+                Stories
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+        </span>
+        <span style="text-align: center" fxFlex="140px" [hidden]="!setCards('build')">
+            <span *ngIf="sortType === 'Total Builds'" style="color:#FF5733;" (click)="sort('Total Builds')"> Builds
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+            <span *ngIf="sortType !== 'Total Builds'" style="color:white;" (click)="sort('Total Builds')"> Builds
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+        </span>
+        <span style="text-align: center" fxFlex="140px" [hidden]="!setCards('deploy')">
+            <span *ngIf="sortType === 'Total Deploys'" style="color:#FF5733;" (click)="sort('Total Deploys')"> Deploys
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+            <span *ngIf="sortType !== 'Total Deploys'" style="color:white;" (click)="sort('Total Deploys')">Deploys
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+        </span>
+        <span style="text-align: center" fxFlex="140px" [hidden]="!setCards('cloud')">
+            <span *ngIf="sortType === 'cloudCost'" style="color:#FF5733;" (click)="sort('cloudCost')"> Cloud Cost
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+            <span *ngIf="sortType !== 'cloudCost'" style="color:white;" (click)="sort('cloudCost')">Cloud Cost
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+        </span>
+        <span style="text-align: center" fxFlex="140px" [hidden]="!setCards('stash')">
+            <span *ngIf="sortType === 'Code Commits Per Day'" style="color:#FF5733;" (click)="sort('Code Commits Per Day')">Code
+                Repo
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+            <span *ngIf="sortType !== 'Code Commits Per Day'" style="color:white;" (click)="sort('Code Commits Per Day')">Code
+                Repo
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+        </span>
+        <span style="text-align: center" fxFlex="140px" [hidden]="!setCards('saydoratio')">
+            <span *ngIf="sortType === 'Story Points Ratio'" style="color:#FF5733;" (click)="sort('Story Points Ratio')">Say/Do
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+            <span *ngIf="sortType !== 'Story Points Ratio'" style="color:white;" (click)="sort('Story Points Ratio')">Say/Do
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+        </span>
+        <span style="text-align: center" fxFlex="140px" [hidden]="!setCards('test')">
+            <span *ngIf="sortType === 'Test Cases'" style="color:#FF5733;" (click)="sort('Test Cases')">Test Metrics
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+            <span *ngIf="sortType !== 'Test Cases'" style="color:white;" (click)="sort('Test Cases')">Test Metrics
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+        </span>
+        <span style="text-align: center" fxFlex="140px" [hidden]="!setCards('devopscup')">
+            <span *ngIf="sortType === 'DevOps Cup Improvements'" style="color:#FF5733;" (click)="sort('DevOps Cup Improvements')">
+                DevOps Cup
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+            <span *ngIf="sortType !== 'DevOps Cup Improvements'" style="color:white;" (click)="sort('DevOps Cup Improvements')">DevOps
+                Cup
+                <span *ngIf="sortReverse" class="fa fa-caret-down"></span>
+                <span *ngIf="!sortReverse" class="fa fa-caret-up"></span>
+            </span>
+        </span>
+        <span style="text-align: center" fxFlex="150px" (click)="downloadExcel()"><i class="fa fa-download" aria-hidden="true"></i></span>
+    </div>
+    <br>
+    <div>
+    <div [className]="spinnerVisibility" >
+            <div class="la-ball-clip-rotate-multiple la-3x">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+    </div>
+    <app-building-block-card *ngFor="let buildingBlock of buildingBlocks | paginate: { itemsPerPage: 50, currentPage: pageNumber }"
+        [buildingBlock]="buildingBlock" [cardsList]="cardsList" (showSpinnerForApp)="setSpinnerStatusForApp($event)"></app-building-block-card>
+    </div>
+    <div class="pagination-block" style="text-align: center">
+        <pagination-controls (pageChange)="pageNumber = $event"></pagination-controls>
+        <div class="pagination-block"></div>
+    </div>
+</div>

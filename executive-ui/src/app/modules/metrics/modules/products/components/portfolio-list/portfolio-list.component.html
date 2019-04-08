@@ -1,0 +1,46 @@
+<div class="portfolio-list">
+	<app-spinner></app-spinner>
+	<br>
+	<div class="view-opts-bar">
+		<div class="portfolio-card" fxLayout fxLayoutGap="5em">
+			<div class="portfolio-name">
+				Portfolio <br> <br>
+				<angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
+					(onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)"> </angular2-multiselect>
+				<br> <br>
+			</div>
+			<div class="executive-name">
+				Executives <br> <br>
+				<angular2-multiselect [data]="dropdownListExecutive" [(ngModel)]="selectedItemsExecutive" [settings]="dropdownSettingsExecutive"
+					(onSelect)="onItemSelectExecutive($event)" (onDeSelect)="OnItemDeSelectExecutive($event)" (onSelectAll)="onSelectAllExecutive($event)"
+					(onClose)="onCloseExecutive($event)"
+					(onDeSelectAll)="onDeSelectAllExecutive($event)">
+				</angular2-multiselect>
+			</div>
+			<div class="metrics-name">
+				Metrics <br> <br>
+				<angular2-multiselect [data]="dropdownListMetrics" [(ngModel)]="selectedItemsMetrics" [settings]="dropdownSettingsMetrics"
+					(onSelect)="onItemSelectMetrics($event)" (onDeSelect)="OnItemDeSelectMetrics($event)" (onSelectAll)="onSelectAllMetrics($event)"
+					(onClose)="onCloseMetrics($event)"
+					(onDeSelectAll)="onDeSelectAllMetrics($event)">
+				</angular2-multiselect>
+			</div>
+			<div *ngIf="!isFav && showFav" (click)="changeFavStatus()" class="favo" > <p class="tooltip-custom"> <img height="35" width="35" src="../../../../../../../assets/images/silverStarNew.png" /><span class="tooltiptext-custom">Save Filter</span></p></div>
+    <div *ngIf="isFav && showFav" (click)="changeFavStatus()" class="favo" ><p class="tooltip-custom"><img height="36" width="36" src="../../../../../../../assets/images/goldStar.png" /><span class="tooltiptext-custom">Save Filter</span></p></div>
+
+
+			 <button type="button" class="btn btn-outlined ucase view-all-metrics" (click)="goToPortfolioDashboard()">View Executive Metrics</button>
+		</div>
+		<div class="portfolio-card" *ngIf="this.directLoading">
+        		<h3>{{portfolioHeading}}</h3>
+		</div>
+	</div>
+	<hr class="divider" />
+	<div class="portfolios" *ngIf="this.productsAvailable">
+		<app-building-executive-blocks [buildingBlocks]="products" [cardsList]="selectedCardsList"></app-building-executive-blocks>
+	</div>
+
+	<div class="portfolios" *ngIf="!this.productsAvailable">
+		{{this.msg}}
+	</div>
+</div>

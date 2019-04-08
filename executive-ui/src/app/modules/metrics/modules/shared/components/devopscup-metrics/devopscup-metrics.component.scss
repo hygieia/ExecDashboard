@@ -1,0 +1,449 @@
+@import '../../../../../../../assets/styles/colors';
+@import '../../../../../../../assets/styles/fonts';
+@import '../../../../../../../assets/styles/retina';
+
+
+::ng-deep .mat-tab-label-active{
+  background-color: transparent ;
+  color: white;
+  font-family: $OpenSans_Bold;
+}
+
+.pagination-block ::ng-deep .ngx-pagination a {
+    color: white;
+    background-color: transparent;
+  }
+
+  .tooltip-custom {
+      position: relative;
+      display: inline-block;
+      border: 2px B black;
+    }
+
+    .tooltip-custom .tooltiptext-custom {
+      visibility: hidden;
+      width: 150px;
+      background-color: black;
+      color: #fff;
+      text-align: left;
+      font-size: 12px;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -10px;
+      opacity: 0.5;
+      transition: opacity 0.5s;
+    }
+
+    .tooltip-custom .tooltiptext-custom::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #555 transparent transparent transparent;
+    }
+
+    .tooltip-custom:hover .tooltiptext-custom {
+      visibility: visible;
+      opacity: 1;
+    }
+
+
+   .title {
+    font-family: $OpenSans_SemiBold;
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+ .indicator {
+      color: $white;
+      height: 25px;
+      margin-bottom: 15px;
+      width: 100%;
+      font-weight: bold;
+      font-size: medium;
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      p {
+        display: inline-block;
+        font-family: $OpenSans_SemiBold;
+        font-size: small;
+        letter-spacing: 1.5px;
+        word-wrap: break-word;
+        
+      }
+
+      div {
+        background-color: $preview-datum;
+        border: solid 1px transparent;
+        border-radius: 20px;
+        font-family: $OpenSans_Light;
+        font-size: medium;
+        height: 20px;
+        letter-spacing: .03em;
+        line-height: 18px;
+        margin-left: 15px;
+        text-decoration: none;
+        transition: color 0ms ease-out;
+        width: 700px;
+        z-index: 0;
+      }
+    }
+
+    .secondHeading {
+      color: $white;
+      height: 20px;
+      margin-bottom: 15px;
+      width: 100%;
+      font-weight: normal;
+      font-size: x-small;
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      p {
+        display: inline-block;
+        font-family: $OpenSans_Light;
+        font-size: x-small;
+        letter-spacing: 1.5px;
+        word-wrap: break-word;
+        
+      }
+
+      div {
+        background-color: $preview-datum;
+        border: solid 1px transparent;
+        border-radius: 20px;
+        font-family: $OpenSans_Light;
+        font-size: x-small;
+        height: 20px;
+        letter-spacing: .03em;
+        line-height: 18px;
+        margin-left: 15px;
+        text-decoration: none;
+        transition: color 0ms ease-out;
+        width: 700px;
+        z-index: 0;
+      }
+    }
+
+    .contentStyle {
+      color: $white;
+      height: 20px;
+      margin-bottom: 15px;
+      width: 100%;
+      font-weight: normal;
+      font-size: medium;
+      vertical-align:  text-top;
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      p {
+        display: inline-block;
+        font-family: $OpenSans_SemiBold;
+        font-size: 11.5px;
+        letter-spacing: 1.5px;
+        word-wrap: break-word;
+        
+      }
+    }
+
+hr {
+    border: 0.4px solid $card-border;
+    height: 0;
+
+    &:last-of-type {
+      margin-top: 21px;
+
+      &.conceal {
+        display: table;
+      }
+    }
+
+    &.no-column-labels {
+      margin-top: 50px;
+    }
+  }
+  .numberField
+  {
+    text-align: right;
+  }
+.metric-graph-container {
+  background-color: rgba(2, 24, 41, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  min-height: 400px;
+  margin-bottom: 15px;
+  margin-right: 10px;
+  width: 100%;
+  padding: 25px 30px 20px 10px;
+
+  app-metric-trend-indicator {
+    padding-left: 6px;
+    padding-top: 2px;
+    position: absolute;
+  }
+
+  .active-count {
+    color: $white;
+    font-family: $OpenSans_SemiBold;
+    font-size: 13.5px;
+    letter-spacing: 0.1em;
+    padding-left: 31px;
+    width: 100%;
+
+    span {
+      font-family: $Montserrat_SemiBold;
+      font-size: 23px;
+      letter-spacing: 0.02em;
+      padding-right: 2px;
+      width: 37px;
+
+      .percent {
+        font-family: $OpenSans_SemiBold;
+        font-size: 14px;
+      }
+
+      .unit {
+        font-size: 14px;
+        padding-left: 2px;
+      }
+
+      &.graph-title {
+        font-family: $OpenSans_SemiBold;
+        font-size: 14px;
+        letter-spacing: 0.06em;
+        margin-right: 6px;
+        padding-right: 0;
+      }
+    }
+
+    .last-scanned {
+      display: inline-block;
+      font-family: $OpenSans_Light;
+      font-size: 10px;
+      height: 9px;
+      letter-spacing: 0.05em;
+      line-height: 9px;
+      min-width: 53px;
+      padding-right: 0;
+      text-align: right;
+      width: auto;
+    }
+  }
+
+  .metric-update-status {
+    padding-top: 25px;
+    height: 9px;
+
+    p {
+      font-family: $OpenSans_Light;
+      font-size: 10px;
+      height: 9px;
+      letter-spacing: 0.05em;
+      line-height: 9px;
+      text-align: right;
+      width: 100%;
+    }
+  }
+}
+td.metrics{
+  border-right: 1px solid white; text-align: center; padding: 5px !important; 
+}
+td.metricvalue
+{
+  text-align: center;border-right: 1px solid white;padding: 10px !important;
+}
+table.subtable{
+  border: 1px solid whitesmoke; 
+  border-collapse: collapse;    
+  width: 100%;  
+}
+h3.title{
+font: bold; 
+font-size: large;
+}
+p.selectedcolor{
+  color:#fbfb6a  ;
+}
+p.unselectedcolor{
+  color:white;
+}
+h5.heading{
+  text-align: left;
+  font-family: OpenSans_SemiBold, arial, sans-serif;
+  font-size: 22px;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+.product-list {
+  
+  position: relative;
+  font-family: OpenSans_SemiBold, arial, sans-serif;
+  .view-opts-bar {
+    display: inline-block;
+    margin-bottom: 10px;
+    position: relative;
+    width: 100%;
+
+    .view-all-metrics {
+      bottom: 15px;
+      padding: 0 15px;
+      position: absolute;
+      right: 10px;
+      width: 210px;
+    }
+  }
+
+  * /deep/ .metric-building-blocks {
+    min-width: 260px;
+  }
+
+  * /deep/ .metric-detail {
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 10px !important;
+    min-width: 115px !important;
+    padding: 12px 0 20px;
+    text-align: center;
+
+    &.last-metric {
+      border-right-color: transparent;
+    }
+
+    .empty-metric {
+
+      .name {
+        top: 17px !important;
+      }
+    }
+
+    div {
+      display: block !important;
+      width: 100%;
+
+      .metric-trend-indicator {
+        display: inline !important;
+        position: relative;
+        bottom: 6px;
+      }
+
+      .name {
+        margin: 0 auto;
+      }
+    }
+
+  }
+
+  * /deep/ .product {
+
+    .product-heading {
+      margin-bottom: 15px;
+      padding-right: 130px;
+
+      .name {
+        display: inline-block;
+        flex: none !important;
+      }
+
+      .last-scanned {
+        display: inline-block;
+        flex: none !important;
+        margin-left: 5px;
+        position: relative;
+        text-align: left !important;
+        top: 3px;
+      }
+    }
+
+    .product-detail {
+      padding-right: 0;
+    }
+
+    .view-details {
+      min-width: 100px;
+      top: -35px;
+      width: 100px;
+    }
+  }
+
+  * /deep/ .building-blocks-heading {
+    display: none;
+  }
+
+  hr.divider {
+    margin-bottom: 23px;
+    margin-right: 10px;
+  }
+}
+.product-list .product-card .portfolio-name {
+  width: 250px;
+
+  .fa-search { 
+    position: absolute;
+   font-size: 30px;
+  }
+
+ ::ng-deep .selected-list[_ngcontent-c4] .c-list[_ngcontent-c4] .c-token[_ngcontent-c4] {
+   background: transparent !important;
+   color: black;
+ }
+
+}
+
+.product-list .product-card .application-name {
+  width: 450px;
+
+  .fa-search { 
+    position: absolute;
+   font-size: 30px;
+  }
+
+ ::ng-deep .selected-list[_ngcontent-c4] .c-list[_ngcontent-c4] .c-token[_ngcontent-c4] {
+   background: transparent !important;
+   color: black;
+ }
+
+}
+.product-list .product-card .metrics-name {
+  width: 500px;
+
+  .fa-search { 
+    position: absolute;
+   font-size: 30px;
+  }
+
+ ::ng-deep .selected-list[_ngcontent-c4] .c-list[_ngcontent-c4] .c-token[_ngcontent-c4] {
+   background: transparent !important;
+   color: black;
+ }
+}
+.row {
+  margin-right: 1px;
+ margin-left: 1px; 
+}
+.warning{
+  font-size: 12px;
+}
+.highlights{
+  font-family: OpenSans_SemiBold, arial, sans-serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+.normal{
+  font-family: $OpenSans_Light,arial, sans-serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+}

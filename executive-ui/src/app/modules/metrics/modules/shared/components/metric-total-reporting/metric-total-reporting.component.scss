@@ -1,0 +1,64 @@
+@import '../../../../../../../assets/styles/colors';
+@import '../../../../../../../assets/styles/fonts';
+@import '../../../../../../../assets/styles/retina';
+
+.total-reporting {
+  background-color: rgba(2,24,41,0.5);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  height: 250px;
+  margin-bottom: 15px;
+  margin-right: 10px;
+  padding: 1.15em 1.65em 0;
+  min-width: 250px;
+
+  .chart {
+    display: block;
+    margin: 0 auto;
+    position: relative;
+
+    .percent-reporting {
+      font-family: $Montserrat_SemiBold;
+      font-size: 42px;
+      left: 0;
+      letter-spacing: .03em;
+      padding-left: 15px;
+      position: absolute;
+      right: 0;
+      text-align: center;
+      top: 79px;
+
+      &:after {
+        content: "%";
+        font-family: $OpenSans_Regular;
+        font-size: 20px;
+      }
+    }
+  }
+
+  hr {
+    border: 0.4px solid $card-border;
+    bottom: 24px;
+    height: 1px;
+    position: relative;
+
+  }
+
+  .title {
+    font-family: $OpenSans_SemiBold;
+    font-size: 14px;
+    letter-spacing: .07em;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+}
+
+* /deep/ svg {
+  margin: 0 auto;
+  display: block;
+
+  path.color1 {
+    fill: rgba(85,105,120,.3);
+  }
+}

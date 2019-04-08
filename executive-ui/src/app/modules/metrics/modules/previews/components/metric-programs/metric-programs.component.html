@@ -1,0 +1,191 @@
+<div [hidden]="!isdetailsenabled">
+	<div class="dashboard-view">
+		<div *ngIf="clarity; else header">
+			<h1>{{clarity.clarityProjectName}}</h1>
+		</div>
+
+		<ng-template #header>
+			<h1>Programs</h1>
+		</ng-template>
+
+		<!--  button *ngIf="!this.productId" type="button" class="btn btn-outlined ucase view-all-products" (click)="goToProductList()">
+      View Application Metrics
+    </button>
+     <button *ngIf="!this.productId" type="button" class="btn btn-outlined ucase view-portfolio-products" (click)="goToPortfolioList()">
+      View Portfolio Metrics
+    </button> -->
+
+		<hr class="divider" />
+		<div class="dashboard-content" fxLayout="row">
+			<div class="dashboard-previews" fxFlex>
+
+				<div class="metric-previews" fxLayout fxLayoutAlign="start" fxLayoutWrap *ngIf="clarity">
+					<div *ngFor="let item of clarity.applicationDetails">
+						<div class="metric-preview-card" [ngClass]="{'show-description': false}" fxLayout fxLayoutGap="10em">
+							<div class="content-side">
+								<div class="main-indicators">
+									<div class="score" [ngClass]="{'small': false}">
+										100 %
+									</div>
+									<app-metric-trend-indicator [trend]="this.getMetricPreviewTrend()"></app-metric-trend-indicator>
+									<div class="metric-update-status" fxLayout>
+									</div>
+									<div class="metric-unit-status" fxLayout>
+										<p class="name">Quality</p>
+									</div>
+									<hr [ngClass]="{'selected': true, 'deselected': false}">
+									<div class="metric-name" fxLayout fxLayoutAlign="start center">
+										<div class="score"> {{item.applicationName}}</div>
+									</div>
+									<hr [ngClass]="{'selected': true, 'deselected': false}">
+									<div class="key-indicators">
+										<div class="secondary-metric">
+											<p>LOC Added / Deleted</p>
+											<div>{{item.linesadded}}/{{item.linesDeleted}} </div>
+										</div>
+										<div class="secondary-metric">
+											<p>Defects Count</p>
+											<div *ngIf="item.irCount == undefined">0</div>
+											<div *ngIf="item.irCount != undefined">{{item.irCount}} </div>
+										</div>
+										<div class="secondary-metric">
+											<p>Total Developers</p>
+											<div *ngIf="item.developerCount == undefined">0</div>
+											<div *ngIf="item.developerCount != undefined">{{item.developerCount}} </div>
+										</div>
+										<hr [ngClass]="{'selected': true, 'deselected': false}">
+										<div>
+
+											<div *ngIf="(item.linesadded == '0' && item.linesDeleted == '0' && item.irCount == '0') ; else header">
+												<div class="toggle-container-NoDetails">
+													<label>No Details</label>
+												</div>
+											</div>
+
+											<ng-template #header>
+												<div class="toggle-container">
+													<label for="Details" (click)="viewDetails(item)">Details</label>
+												</div>
+											</ng-template>
+										</div>
+
+									</div>
+								</div>
+								<br>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="!isdetailsenabled">
+	<div class="dashboard-view">
+
+		<div *ngIf="clarity; else header">
+			<h1>{{clarity.clarityProjectName}}</h1>
+		</div>
+
+		<ng-template #header>
+			<h1>Programs</h1>
+		</ng-template>
+
+		<!--><a routerLink="./portfolio/{{clarity.clarityid}}"> BACK </a> </span> -->
+		<!-- <button *ngIf="!isdetailsenabled" type="button" class="btn btn-outlined ucase view-all-products" (click)="!isdetailsenabled">
+      {{this.selectedApp}} 
+    </button>  -->
+
+		<hr class="divider" />
+		<div class="dashboard-content" fxLayout="row">
+			<div class="dashboard-previews" fxFlex>
+				<div class="title">CHANGE DETAILS</div>
+				<div class="">
+					<div class="btn btn-outlined contentTitle">
+						<i class="fa fa-plus"></i>
+						<span>&nbsp;&nbsp;&nbsp;<font class="bold">Application Name:</font>&nbsp;{{this.selectedApp.applicationName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span>
+        					<font class="bold">Lines Added:</font>&nbsp;{{this.selectedApp.linesadded}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       						<font class="bold">Lines Deleted:</font>&nbsp;{{this.selectedApp.linesDeleted}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<font class="bold">Defects Count:</font>&nbsp;{{this.selectedApp.irCount}} &nbsp;&nbsp;
+      					</span>
+					</div>
+					<div>
+
+						<div class="metric-segmentation">
+							<div id="details" class="issues">
+								<div fxLayout="row" class="column-labels">
+								<!-- <p style="width: 35%;">Commit ID</p> 
+								<p style="width: 15%;">Repository</p>
+								<p style="width: 9%;">L. Deleted</p>
+								<p style="width: 9%;">L. Added</p>
+								<p style="width: 13%;">POC</p>
+								<p style="width: 19%;">Timestamp</p> -->
+									<p style="width: 40%;">Developer Name</p>
+									<p style="width: 15%;">L. Added</p>
+									<p style="width: 15%;">L. Deleted</p>
+									<p style="width: 15%;">Defects Count</p>
+									<p style="width: 15%;">Date</p>
+								</div>
+								<hr>
+								<div class="indicators">
+									<div fxLayout="row" *ngFor="let row of this.selectedApp.developerDetails" class="indicator" ng-app="">
+										<!-- <p style="width: 35%;">{{jiraItem.commitid}}</p>
+									   <p style="width: 15%;">{{jiraItem.repo}}</p> -->
+
+									       <p style="width: 40%;" *ngIf="(row.poc == 'undefined') ; else poc">0
+											</p>
+
+											<ng-template #poc>
+												
+												<p style="width: 40%;">{{row.poc}}</p>
+												
+											</ng-template>
+
+											 <p style="width: 15%;" *ngIf="(row.linesAdded == 'undefined') ; else linesAdded">
+												0												
+											</p>
+
+											<ng-template #linesAdded>
+												
+												<p style="width: 15%;">{{row.linesAdded}}</p>
+
+												
+											</ng-template>
+
+											 <p style="width: 15%;" *ngIf="(row.linesDeleted == 'undefined') ; else linesDeleted">
+												0
+												
+											</p>
+
+											<ng-template #linesDeleted>
+												<p style="width: 15%;">{{row.linesDeleted}}</p>
+											</ng-template>
+
+											 <p style="width: 15%;"  *ngIf="(row.irCount == 'undefined' || row.irCount == 'null') ; else irCount">
+												0
+												
+											</p>
+
+											<ng-template #irCount>
+												<p style="width: 15%;">{{row.irCount}}</p>
+											</ng-template>
+
+											<p *ngIf="(row.timeStamp == 'undefined' || row.timeStamp == 'null') ; else timeStamp">
+											 0												
+											</p>
+
+											<ng-template #timeStamp>
+												<p style="width: 15%;">{{row.timeStamp | date}}</p>
+											</ng-template>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
