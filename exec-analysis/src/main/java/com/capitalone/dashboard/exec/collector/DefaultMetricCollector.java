@@ -2,6 +2,7 @@ package com.capitalone.dashboard.exec.collector;
 
 import com.capitalone.dashboard.exec.model.CollectorItemMetricDetail;
 import com.capitalone.dashboard.exec.model.CollectorType;
+import com.capitalone.dashboard.exec.model.CollectorMapType;
 import com.capitalone.dashboard.exec.model.ComponentMetricDetail;
 import com.capitalone.dashboard.exec.model.MetricCollectionStrategy;
 import com.capitalone.dashboard.exec.model.MetricCount;
@@ -61,11 +62,11 @@ public abstract class DefaultMetricCollector {
                     if (dashboardId == null) { return; }
                     List<String> dashboardIds = new ArrayList<>();
                     dashboardIds.add(dashboardId.toString());
-                    if (isCollectByCollectorItem()) {
+                    if(getCollectorMapType().equals(CollectorMapType.BUSINESS_APPLICATION)){
+                        dashboardIds.stream().map(dbdId -> getCollectorItemMetricDetail(rowsListMap.get(dbdId), getMetricType())).forEach(componentMetricDetail::addCollectorItemMetricDetail);
+                    } else {
                         List<String> collectorItems = dashboardCollectorItemsMap.get(dashboardId.toString()) != null ? dashboardCollectorItemsMap.get(dashboardId.toString()) : new ArrayList<>();
                         collectorItems.stream().map(collectorItem -> getCollectorItemMetricDetail(rowsListMap.get(collectorItem), getMetricType())).forEach(componentMetricDetail::addCollectorItemMetricDetail);
-                    }else{
-                        dashboardIds.stream().map(dbdId -> getCollectorItemMetricDetail(rowsListMap.get(dbdId), getMetricType())).forEach(componentMetricDetail::addCollectorItemMetricDetail);
                     }
                     productMetricDetail.addComponentMetricDetail(componentMetricDetail);
                 });
@@ -97,7 +98,7 @@ public abstract class DefaultMetricCollector {
 
     protected abstract MetricCount getMetricCount(String level, double value, String type);
 
-    protected abstract boolean isCollectByCollectorItem();
+    protected abstract CollectorMapType getCollectorMapType();
 
     private List<String> getCollectorItemListForPortfolios(List<Portfolio> portfolioList, SparkSession sparkSession, JavaSparkContext javaSparkContext) {
         dashboardCollectorItemsMap
@@ -120,13 +121,13 @@ public abstract class DefaultMetricCollector {
     private Map<String,List<Row>> getCollectedDataMap(SparkSession sparkSession, JavaSparkContext javaSparkContext, List<Portfolio> portfolioList) {
         Map<String, List<Row>> rowsListMap;
         DefaultDataCollector dataCollector;
-        if (isCollectByCollectorItem()) {
+        if (getCollectorMapType().equals(CollectorMapType.BUSINESS_APPLICATION)){
+            dataCollector = new DefaultDataCollector(getCollection(), getQuery(), null, sparkSession, javaSparkContext);
+            rowsListMap = dataCollector.collectAllByDashboard();
+        } else {
             List<String> collectorItemList = getCollectorItemListForPortfolios(portfolioList, sparkSession, javaSparkContext);
             dataCollector = new DefaultDataCollector(getCollection(), getQuery(), collectorItemList, sparkSession, javaSparkContext);
             rowsListMap = dataCollector.collectAll();
-        }else {
-            dataCollector = new DefaultDataCollector(getCollection(), getQuery(), null, sparkSession, javaSparkContext);
-            rowsListMap = dataCollector.collectAllByDashboard();
         }
         return rowsListMap;
     }

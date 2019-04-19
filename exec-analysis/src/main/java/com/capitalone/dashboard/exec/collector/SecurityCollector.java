@@ -2,6 +2,7 @@ package com.capitalone.dashboard.exec.collector;
 
 import com.capitalone.dashboard.exec.model.CollectorItemMetricDetail;
 import com.capitalone.dashboard.exec.model.CollectorType;
+import com.capitalone.dashboard.exec.model.CollectorMapType;
 import com.capitalone.dashboard.exec.model.HygieiaSparkQuery;
 import com.capitalone.dashboard.exec.model.MetricCollectionStrategy;
 import com.capitalone.dashboard.exec.model.MetricCount;
@@ -115,11 +116,6 @@ public class SecurityCollector extends DefaultMetricCollector {
         return null;
     }
 
-    @Override
-    protected boolean isCollectByCollectorItem() {
-        return true;
-    }
-
     private String getMetricLabel(String inputMetricLabel) {
         switch (inputMetricLabel){
             case "High":
@@ -131,5 +127,10 @@ public class SecurityCollector extends DefaultMetricCollector {
             default:
                 return null;
         }
+    }
+
+    @Override
+    protected CollectorMapType getCollectorMapType() {
+        return CollectorMapType.COLLECTOR_ITEM;
     }
 }

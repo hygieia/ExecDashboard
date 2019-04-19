@@ -110,11 +110,6 @@ public class StaticCodeAnalysisCollector extends DefaultMetricCollector {
         return null;
     }
 
-    @Override
-    protected boolean isCollectByCollectorItem() {
-        return true;
-    }
-
     private String getMetricLabel(String inputMetricLabel) {
         if(inputMetricLabel.equals("blocker_violations")) {
             return "blocker";
@@ -126,5 +121,10 @@ public class StaticCodeAnalysisCollector extends DefaultMetricCollector {
             return "technical-debt";
         }
         return null;
+    }
+
+    @Override
+    protected CollectorMapType getCollectorMapType() {
+        return CollectorMapType.COLLECTOR_ITEM;
     }
 }

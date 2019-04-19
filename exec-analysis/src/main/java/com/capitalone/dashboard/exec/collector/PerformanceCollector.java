@@ -2,6 +2,7 @@ package com.capitalone.dashboard.exec.collector;
 
 import com.capitalone.dashboard.exec.model.MetricType;
 import com.capitalone.dashboard.exec.model.MetricCount;
+import com.capitalone.dashboard.exec.model.CollectorMapType;
 import com.capitalone.dashboard.exec.model.HygieiaSparkQuery;
 import com.capitalone.dashboard.exec.model.CollectorItemMetricDetail;
 import com.capitalone.dashboard.exec.model.MetricCollectionStrategy;
@@ -117,11 +118,6 @@ public class PerformanceCollector extends DefaultMetricCollector {
         return metricCount;
     }
 
-    @Override
-    protected boolean isCollectByCollectorItem() {
-        return true;
-    }
-
     private String getMetricLabel(String inputMetricLabel) {
         if(inputMetricLabel.equals(STR_AVG_RESPONSE_TIME)) {
             return STR_AVGRESPONSE;
@@ -133,5 +129,9 @@ public class PerformanceCollector extends DefaultMetricCollector {
         return "";
     }
 
+    @Override
+    protected CollectorMapType getCollectorMapType() {
+        return CollectorMapType.COLLECTOR_ITEM;
+    }
 
 }

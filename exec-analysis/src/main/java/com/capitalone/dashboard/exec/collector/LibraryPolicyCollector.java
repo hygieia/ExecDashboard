@@ -2,6 +2,7 @@ package com.capitalone.dashboard.exec.collector;
 
 import com.capitalone.dashboard.exec.model.CollectorItemMetricDetail;
 import com.capitalone.dashboard.exec.model.CollectorType;
+import com.capitalone.dashboard.exec.model.CollectorMapType;
 import com.capitalone.dashboard.exec.model.HygieiaSparkQuery;
 import com.capitalone.dashboard.exec.model.MetricCollectionStrategy;
 import com.capitalone.dashboard.exec.model.MetricCount;
@@ -106,7 +107,7 @@ public class LibraryPolicyCollector extends DefaultMetricCollector{
     }
 
     @Override
-    protected boolean isCollectByCollectorItem() {
-        return true;
+    protected CollectorMapType getCollectorMapType() {
+        return CollectorMapType.COLLECTOR_ITEM;
     }
 }
