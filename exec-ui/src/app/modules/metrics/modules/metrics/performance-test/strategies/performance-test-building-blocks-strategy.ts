@@ -65,10 +65,10 @@ export class PerformanceTestBuildingBlocksStrategy extends BuildingBlocksStrateg
             mapTPSMetric(this.auxiliaryTPSFigureStrategy.parse(metric),this.trendStrategy)
         ];
 
-        function mapErrorRateMetric(value,trendStr) {
+        function mapErrorRateMetric(value,trendStrategy) {
             return {
                 value: mapErrorRate(value),
-                trend: trendStr.parse(metric),
+                trend: trendStrategy.parse(metric),
                 isRatio: true
             };
         }
@@ -82,10 +82,10 @@ export class PerformanceTestBuildingBlocksStrategy extends BuildingBlocksStrateg
             };
         }
 
-        function mapResponseTimeMetric(value,trendstr) {
+        function mapResponseTimeMetric(value,trendStrategy) {
             return {
                 value: mapResponseTime(value),
-                trend: trendstr.parse(metric),
+                trend: trendStrategy.parse(metric),
                 isRatio: false
             };
         }
@@ -99,10 +99,10 @@ export class PerformanceTestBuildingBlocksStrategy extends BuildingBlocksStrateg
             };
         }
 
-        function mapTPSMetric(value,trendstr) {
+        function mapTPSMetric(value,trendStrategy) {
             return {
                 value: mapTPS(value),
-                trend: trendstr.parse(metric),
+                trend: trendStrategy.parse(metric),
                 isRatio: false
             };
         }
