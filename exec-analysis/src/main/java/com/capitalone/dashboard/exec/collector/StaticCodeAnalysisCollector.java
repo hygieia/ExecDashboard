@@ -122,9 +122,4 @@ public class StaticCodeAnalysisCollector extends DefaultMetricCollector {
         }
         return null;
     }
-
-    @Override
-    protected CollectorMapType getCollectorMapType() {
-        return CollectorMapType.COLLECTOR_ITEM;
-    }
 }

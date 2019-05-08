@@ -59,32 +59,4 @@ public class DefaultDataCollector {
             });
         return rowMap;
     }
-
-    /**
-     * collect by dashboard id map data
-     * @return
-     */
-    public Map<String, List<Row>> collectAllByDashboard() {
-        Map<String, List<Row>> rowMap = new HashMap<>();
-        DataFrameLoader.loadDataFrame(collectionName, javaSparkContext);
-        Dataset<Row> dataRows = sparkSession.sql(query);
-        List<Row> rowList = dataRows.collectAsList();
-        rowList.forEach(row -> {
-            Date timeWindowDt = row.getAs("timeWindow");
-            long daysAgo = HygieiaExecutiveUtil.getDaysAgo(timeWindowDt);
-            if ((daysAgo < 90)) {
-                String dashboardId = (String) ((GenericRowWithSchema) row.getAs("dashboardId")).get(0);
-                List<Row> existingRowList = rowMap.get(dashboardId);
-                if (existingRowList == null) {
-                    List<Row> newRow = new ArrayList<>();
-                    newRow.add(row);
-                    rowMap.put(dashboardId, newRow);
-                } else {
-                    existingRowList.add(row);
-                    rowMap.put(dashboardId, existingRowList);
-                }
-            }
-        });
-        return rowMap;
-    }
 }

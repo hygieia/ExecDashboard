@@ -2,7 +2,6 @@ package com.capitalone.dashboard.exec.collector;
 
 import com.capitalone.dashboard.exec.model.MetricType;
 import com.capitalone.dashboard.exec.model.MetricCount;
-import com.capitalone.dashboard.exec.model.CollectorMapType;
 import com.capitalone.dashboard.exec.model.HygieiaSparkQuery;
 import com.capitalone.dashboard.exec.model.CollectorItemMetricDetail;
 import com.capitalone.dashboard.exec.model.MetricCollectionStrategy;
@@ -128,10 +127,4 @@ public class PerformanceCollector extends DefaultMetricCollector {
         }
         return "";
     }
-
-    @Override
-    protected CollectorMapType getCollectorMapType() {
-        return CollectorMapType.COLLECTOR_ITEM;
-    }
-
 }

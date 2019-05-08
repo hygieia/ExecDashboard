@@ -1,7 +1,6 @@
 package com.capitalone.dashboard.exec.collector;
 
 import com.capitalone.dashboard.exec.model.MetricType;
-import com.capitalone.dashboard.exec.model.CollectorMapType;
 import com.capitalone.dashboard.exec.model.HygieiaSparkQuery;
 import com.capitalone.dashboard.exec.model.MetricCollectionStrategy;
 import com.capitalone.dashboard.exec.model.CollectorItemMetricDetail;
@@ -110,10 +109,4 @@ public class TraceabilityCollector extends DefaultMetricCollector {
         }
         return null;
     }
-
-    @Override
-    protected CollectorMapType getCollectorMapType() {
-        return CollectorMapType.BUSINESS_APPLICATION;
-    }
-
 }
