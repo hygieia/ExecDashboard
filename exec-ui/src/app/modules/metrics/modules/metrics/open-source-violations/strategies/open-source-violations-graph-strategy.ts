@@ -26,7 +26,7 @@ export class OpenSourceViolationsGraphStrategy extends GraphStrategyBase {
   }
 
   protected count(seriesElement: MetricTimeSeriesElement): number {
-    const validSet = new Set(['High', 'Medium', 'Low']);
+    const validSet = new Set(['Critical', 'High', 'Medium', 'Low']);
     return seriesElement.counts
       .reduce((sum, item) => validSet.has(item.label['severity']) ? sum + item.value : sum, 0);
   }
