@@ -57,14 +57,14 @@ export class TraceabilityBuildingBlocksStrategy extends BuildingBlocksStrategyBa
       }
 
       return [
-          mapAutomatedMetric(this.auxiliaryAutomatedFigureStrategy.parse(metric)),
-          mapManualMetric(this.auxiliaryManualFigureStrategy.parse(metric))
+          mapAutomatedMetric(this.auxiliaryAutomatedFigureStrategy.parse(metric), this.trendStrategy),
+          mapManualMetric(this.auxiliaryManualFigureStrategy.parse(metric), this.trendStrategy)
       ];
 
-      function mapAutomatedMetric(value) {
+      function mapAutomatedMetric(value, trendStrategy) {
           return {
                   value: mapAutomated(value),
-                  trend: null,
+                  trend: trendStrategy.parse(metric),
                   isRatio: true
               };
       }
@@ -78,10 +78,10 @@ export class TraceabilityBuildingBlocksStrategy extends BuildingBlocksStrategyBa
           };
       }
 
-      function mapManualMetric(value) {
+      function mapManualMetric(value, trendStrategy) {
           return {
               value: mapManual(value),
-              trend: null,
+              trend: trendStrategy.parse(metric),
               isRatio: true
           };
 

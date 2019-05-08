@@ -46,14 +46,8 @@ export class TraceabilityPreviewStrategy extends PreviewStrategyBase {
             }, new Map());
 
         let result = [];
-
-        if (sums.get('Automated')) {
-            result.push({name: 'automated', value: Math.round(sums.get('Automated').toLocaleString()), unit:'%'});
-        }
-
-        if (sums.get('Manual')) {
-            result.push({name: 'manual', value: Math.round(sums.get('Manual').toLocaleString()), unit:'%'});
-        }
+        result.push({name: 'automated', value: Math.round(sums.get('Automated').toLocaleString()), unit:'%'});
+        result.push({name: 'manual', value: Math.round(sums.get('Manual').toLocaleString()), unit:'%'});
         return result;
     }
 }
