@@ -92,7 +92,7 @@ public class TraceabilityCollector extends DefaultMetricCollector {
 
     @Override
     protected CollectorType getCollectorType() {
-        return CollectorType.Test;
+        return CollectorType.Audit;
     }
 
     @Override
