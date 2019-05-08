@@ -21,7 +21,7 @@ import java.util.Date;
 
 @Component
 public class PerformanceCollector extends DefaultMetricCollector {
-    
+
     private static final String STR_TIMEWINDOW = "timeWindow";
     private static final String STR_AVG_RESPONSE_TIME = "averageResponseTime";
     private static final String STR_CALLSPER_MINUTE = "callsperMinute";
@@ -108,7 +108,7 @@ public class PerformanceCollector extends DefaultMetricCollector {
             label.put("type", metricName);
             metricCount.setLabel(label);
             if(STR_TPS.equalsIgnoreCase(metricName)){
-            metricCount.setValue(value/60);
+                metricCount.setValue(value/60);
             }else {
                 metricCount.setValue(value);
             }
@@ -127,4 +127,6 @@ public class PerformanceCollector extends DefaultMetricCollector {
         }
         return "";
     }
+
+
 }

@@ -45,7 +45,7 @@ public class HygieiaSparkQuery {
                     "ORDER BY timeWindow ASC";
 
     public static final String TRACEABILITY_QUERY =
-            "SELECT dashboardId, options.traceability as traceability, cast(from_unixtime(cast(timestamp/1000 as bigint)) as timestamp) as timeWindow " +
+            "SELECT collectorItemId, options.traceability as traceability, cast(from_unixtime(cast(timestamp/1000 as bigint)) as timestamp) as timeWindow " +
                     "FROM audit_results " +
                     "WHERE (options.traceability IS NOT NULL)  and (auditType = 'TEST_RESULT') "+
                     "ORDER BY timeWindow ASC";

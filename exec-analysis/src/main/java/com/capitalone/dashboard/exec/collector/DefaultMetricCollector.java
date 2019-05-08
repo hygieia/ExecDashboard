@@ -46,6 +46,7 @@ public abstract class DefaultMetricCollector {
                 = new DefaultDataCollector(getCollection(), getQuery(), collectorItemList, sparkSession, javaSparkContext);
         Map<String, List<Row>> rowsListMap = dataCollector.collectAll();
         boolean deleteFlag = true;
+
         for (Portfolio portfolio: portfolioList) {
             PortfolioMetricDetail portfolioMetricDetail = new PortfolioMetricDetail();
             List<Product> products = portfolio.getProducts();
@@ -63,8 +64,8 @@ public abstract class DefaultMetricCollector {
                     componentMetricDetail.setLob(productComponent.getLob());
                     ObjectId dashboardId = productComponent.getProductComponentDashboardId();
                     if (dashboardId == null) { return; }
-                        List<String> collectorItems = dashboardCollectorItemsMap.get(dashboardId.toString()) != null ? dashboardCollectorItemsMap.get(dashboardId.toString()) : new ArrayList<>();
-                        collectorItems.stream().map(collectorItem -> getCollectorItemMetricDetail(rowsListMap.get(collectorItem), getMetricType())).forEach(componentMetricDetail::addCollectorItemMetricDetail);
+                    List<String> collectorItems = dashboardCollectorItemsMap.get(dashboardId.toString()) != null ? dashboardCollectorItemsMap.get(dashboardId.toString()) : new ArrayList<>();
+                    collectorItems.stream().map(collectorItem -> getCollectorItemMetricDetail(rowsListMap.get(collectorItem), getMetricType())).forEach(componentMetricDetail::addCollectorItemMetricDetail);
                     productMetricDetail.addComponentMetricDetail(componentMetricDetail);
                 });
                 productMetricDetail.setTotalComponents(productComponents.size());
