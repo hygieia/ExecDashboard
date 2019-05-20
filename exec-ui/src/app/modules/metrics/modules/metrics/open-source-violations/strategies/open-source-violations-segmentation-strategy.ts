@@ -12,9 +12,10 @@ export class OpenSourceViolationsSegmentationStrategy implements Strategy<Metric
     ];
 
     const rows = [
-      {name: 'High', order: 1},
-      {name: 'Medium', order: 2},
-      {name: 'Low', order: 3}
+        {name: 'Critical', order: 1},
+        {name: 'High', order: 2},
+        {name: 'Medium', order: 3},
+        {name: 'Low', order: 4}
     ];
 
     return {

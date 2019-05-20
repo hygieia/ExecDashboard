@@ -41,7 +41,11 @@ export class OpenSourceViolationsPreviewStrategy extends PreviewStrategyBase {
       return runningSums.set(count.label['severity'], newCount);
     }, new Map());
 
-    if (sums.get('High')) {
+    if (sums.get('Critical')) {
+          return [{name: 'Critical', value: sums.get('Critical').toLocaleString()}];
+      }
+
+      if (sums.get('High')) {
       return [{name: 'High', value: sums.get('High').toLocaleString()}];
     }
 

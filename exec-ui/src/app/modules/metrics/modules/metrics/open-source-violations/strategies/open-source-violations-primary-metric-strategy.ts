@@ -7,7 +7,7 @@ import {OpenSourceViolationsConfiguration} from '../open-source-violations.confi
 @Injectable()
 export class OpenSourceViolationsPrimaryMetricStrategy extends PrimaryMetricStrategyBase {
   parse(counts: Count[]): MetricValueModel {
-    const validSet = new Set(['High', 'Medium', 'Low']);
+    const validSet = new Set(['Critical', 'High', 'Medium', 'Low']);
 
     return {
       name: OpenSourceViolationsConfiguration.buildingBlockLabel,
