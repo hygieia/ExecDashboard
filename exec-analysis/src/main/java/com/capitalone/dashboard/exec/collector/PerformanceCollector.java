@@ -108,7 +108,7 @@ public class PerformanceCollector extends DefaultMetricCollector {
             label.put("type", metricName);
             metricCount.setLabel(label);
             if(STR_TPS.equalsIgnoreCase(metricName)){
-                metricCount.setValue(value/60);
+            metricCount.setValue(value/60);
             }else {
                 metricCount.setValue(value);
             }
