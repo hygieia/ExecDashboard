@@ -7,6 +7,12 @@ import com.capitalone.dashboard.exec.model.MetricType;
 import java.util.List;
 
 public interface MetricsService {
+   MetricDetails getLobMetricDetail(MetricType metricType, String name, String lob);
+
+   MetricDetails getLobMetricSummary(MetricType metricType, String name, String lob);
+
+   List<BuildingBlockMetricSummary> getLobMetricProducts(MetricType metricType, String name, String lob);
+
    MetricDetails getPortfolioMetricDetail(MetricType metricType, String name, String lob);
 
    MetricDetails getPortfolioMetricSummary(MetricType metricType, String name, String lob);

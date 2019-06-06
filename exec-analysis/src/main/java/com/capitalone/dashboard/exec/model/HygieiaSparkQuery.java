@@ -5,6 +5,10 @@ public class HygieiaSparkQuery {
             "SELECT _id as productId, configurationItem as productName, commonName, environments, components, businessOwner, ownerDept, appServiceOwner, supportOwner, developmentOwner " +
                     "FROM cmdb where (validConfigItem = 1) and (businessOwner is not null) and (businessOwner != '') and (itemType = 'app')";
 
+    public static final String CMDB_LOB_QUERY =
+            "SELECT distinct ownerDept" +
+                    "FROM cmdb where (validConfigItem = 1) and (businessOwner is not null) and (businessOwner != '') and (itemType = 'app')";
+
     public static final String CMDB_COMPONENT_QUERY =
             "SELECT _id as componentId, configurationItem, commonName as componentName, businessOwner, ownerDept " +
                     "FROM cmdb where (validConfigItem = 1) and (itemType = 'component')";
@@ -48,6 +52,12 @@ public class HygieiaSparkQuery {
             "SELECT collectorItemId, metrics, cast(from_unixtime(cast(timestamp/1000 as bigint)) as timestamp) as timeWindow " +
                     "FROM performance " +
                     "WHERE (metrics IS NOT NULL) " +
+                    "ORDER BY timeWindow ASC";
+
+    public static final String ENGG_MATURITY_QUERY_ALL_COLLECTOR_ITEMS =
+            "SELECT collectorItemId, lineOfBusiness, configItemBusServName, configItemBusAppName, auditType, auditTypeStatus, auditStatus, " +
+                    "cast(from_unixtime(cast(timestamp/1000 as bigint)) as timestamp) as timeWindow " +
+                    "FROM audit_results " +
                     "ORDER BY timeWindow ASC";
 
     public static final String TRACEABILITY_QUERY_ALL_COLLECTOR_ITEMS =

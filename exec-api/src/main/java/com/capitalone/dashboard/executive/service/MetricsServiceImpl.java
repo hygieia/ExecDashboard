@@ -52,6 +52,21 @@ public class MetricsServiceImpl implements MetricsService {
         return metricDetails;
     }
 
+    @Override
+    public MetricDetails getLobMetricDetail(MetricType metricType, String name, String lob) {
+        return null;
+    }
+
+    @Override
+    public MetricDetails getLobMetricSummary(MetricType metricType, String name, String lob) {
+        return null;
+    }
+
+    @Override
+    public List<BuildingBlockMetricSummary> getLobMetricProducts(MetricType metricType, String name, String lob) {
+        return null;
+    }
+
     /**
      * Gets metric details for a given metric type, portfolio name and line of business
      * End point: "/{metric}/portfolio/{name}/{lob}/detail"

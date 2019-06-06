@@ -7,9 +7,11 @@ import com.capitalone.dashboard.exec.model.MetricLevel;
 import com.capitalone.dashboard.exec.model.Owner;
 import com.capitalone.dashboard.exec.model.PeopleRoleRelation;
 import com.capitalone.dashboard.exec.model.Portfolio;
+import com.capitalone.dashboard.exec.model.Lob;
 import com.capitalone.dashboard.exec.model.Product;
 import com.capitalone.dashboard.exec.model.ProductComponent;
 import com.capitalone.dashboard.exec.model.RoleRelationShipType;
+import com.capitalone.dashboard.exec.repository.LobRepository;
 import com.capitalone.dashboard.exec.repository.PortfolioRepository;
 import com.tupilabs.human_name_parser.HumanNameParserParser;
 import com.tupilabs.human_name_parser.Name;
@@ -17,6 +19,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.RelationalGroupedDataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.catalyst.expressions.GenericRowWithSchema;
@@ -47,9 +50,13 @@ public class PortfolioCollector implements Runnable {
 
     private final PortfolioRepository portfolioRepository;
 
+    private final LobRepository lobRepository;
+
     private final PortfolioCollectorSetting setting;
 
     private List<Row> productRowsList;
+
+    private List<Row> lobRowsList;
 
     private List<Row> environmentRowsList;
 
@@ -73,9 +80,12 @@ public class PortfolioCollector implements Runnable {
 
     private final PerformanceCollector performanceCollector;
 
+    private final EngineeringMaturityCollector engineeringMaturityCollector;
+
     @Autowired
     @SuppressWarnings("PMD.ExcessiveParameterList")
     public PortfolioCollector(TaskScheduler taskScheduler, PortfolioRepository portfolioRepository,
+                              LobRepository lobRepository,
                               PortfolioCollectorSetting setting,
                               SCMCollector scmCollector,
                               LibraryPolicyCollector libraryPolicyCollector,
@@ -84,10 +94,12 @@ public class PortfolioCollector implements Runnable {
                               UnitTestCoverageCollector unitTestCoverageCollector,
                               AuditResultCollector auditResultCollector,
                               SecurityCollector securityCollector,
-                              PerformanceCollector performanceCollector) {
+                              PerformanceCollector performanceCollector,
+                              EngineeringMaturityCollector engineeringMaturityCollector) {
 
         this.taskScheduler = taskScheduler;
         this.portfolioRepository = portfolioRepository;
+        this.lobRepository = lobRepository;
         this.setting = setting;
         this.scmCollector = scmCollector;
         this.libraryPolicyCollector = libraryPolicyCollector;
@@ -97,6 +109,7 @@ public class PortfolioCollector implements Runnable {
         this.unitTestCoverageCollector = unitTestCoverageCollector;
         this.securityCollector = securityCollector;
         this.performanceCollector = performanceCollector;
+        this.engineeringMaturityCollector = engineeringMaturityCollector;
     }
 
     /**
@@ -110,13 +123,14 @@ public class PortfolioCollector implements Runnable {
         JavaSparkContext javaSparkContext = new JavaSparkContext(sparkSession.sparkContext());
 
         //Build portfolio structure: Portfolio -> Product (ASV) -> Environment -> Component (BAP)
-        List<Portfolio> portfolioList = collectCMDB(sparkSession, javaSparkContext);
+        collectCMDB(sparkSession, javaSparkContext);
+        List<Portfolio> portfolioList = createPortfolios();
+        ArrayList<Lob> lobList = (ArrayList<Lob>) createLobs();
 
         if (CollectionUtils.isEmpty(portfolioList)) {
             LOGGER.info("##### Portfolio List is empty, cannot procedd further, returning ... #####");
             return;
         }
-
 
         if(setting.isScmCollectorFlag()) {
             LOGGER.info("##### Starting SCM Collector #####");
@@ -150,23 +164,30 @@ public class PortfolioCollector implements Runnable {
             LOGGER.info("##### Starting Performance Collector #####");
             performanceCollector.collect(sparkSession, javaSparkContext, portfolioList);
         }
+        if(setting.isEngineeringMaturityFlag()) {
+            LOGGER.info("##### Starting Engineering Maturity Collector #####");
+            engineeringMaturityCollector.collect(sparkSession, javaSparkContext, lobList);
+        }
+
         sparkSession.close();
         javaSparkContext.close();
     }
 
-    public List<Portfolio> collectCMDB(SparkSession sparkSession, JavaSparkContext javaSparkContext) {
+    public void collectCMDB(SparkSession sparkSession, JavaSparkContext javaSparkContext) {
         LOGGER.info("##### Begin: collectCMDB #####");
         if ((sparkSession == null) || (javaSparkContext == null)) {
-            return null;
+            return;
         }
 
-        List<Portfolio> portfolioList = null;
         DataFrameLoader.loadDataFrame("cmdb", javaSparkContext);
         DataFrameLoader.loadDataFrame("dashboards", javaSparkContext);
 
         // Unique list of products per businessOwner
         Dataset<Row> productRows = sparkSession.sql(HygieiaSparkQuery.CMDB_PRODUCT_QUERY);
         productRows.groupBy("businessOwner", "productName");
+
+        Dataset<Row> lobRows = sparkSession.sql(HygieiaSparkQuery.CMDB_PRODUCT_QUERY);
+        lobRows.groupBy( "ownerDept");
 
         // Unique list of Environments
         Dataset<Row> environmentRows = sparkSession.sql(HygieiaSparkQuery.CMDB_ENVIRONMENT_QUERY);
@@ -180,17 +201,12 @@ public class PortfolioCollector implements Runnable {
         Dataset<Row> dashboardRows = sparkSession.sql(HygieiaSparkQuery.DASHBOARD_QUERY_EXPLODE);
 
         productRowsList = productRows.collectAsList();
+        lobRowsList = lobRows.collectAsList();
         environmentRowsList = environmentRows.collectAsList();
         componentRowsList = componentRows.collectAsList();
         dashboardRowsList = dashboardRows.collectAsList();
 
-        portfolioList = createPortfolios();
-        portfolioRepository.deleteAll();
-        portfolioRepository.save(portfolioList);
-
         LOGGER.info("##### End: collectCMDB #####");
-
-        return portfolioList;
     }
 
     private List<Portfolio> createPortfolios() {
@@ -222,7 +238,37 @@ public class PortfolioCollector implements Runnable {
             portfolio.addOwner(new PeopleRoleRelation(getPeople(pName, "businessOwner"), RoleRelationShipType.BusinessOwner));
         }
 
+        portfolioRepository.deleteAll();
+        portfolioRepository.save(portfolioList);
+
         return portfolioList;
+    }
+
+    private Iterable<Lob> createLobs() {
+        List<Lob> lobList = new ArrayList<>();
+
+        if (CollectionUtils.isEmpty(lobRowsList)){
+            return lobList;
+        }
+        for (Row productRow : lobRowsList) {
+            String lobName = productRow.getAs("ownerDept");
+            String pName = productRow.getAs("businessOwner");
+
+            Lob lob =
+                    lobList.stream()
+                            .filter(l -> l.getName().equalsIgnoreCase(lobName))
+                            .findFirst().orElse(null);
+            if (lob == null) {
+                lob = new Lob();
+                lob.setName(lobName);
+                lobList.add(lob);
+            }
+            LOGGER.debug("Lob Name = " + lobName);
+            addProductToLob(lob, productRow);
+            lob.addOwner(new PeopleRoleRelation(getPeople(pName, "businessOwner"), RoleRelationShipType.BusinessOwner));
+        }
+        lobRepository.deleteAll();
+        return lobRepository.save(lobList);
     }
 
     private void addProductToPortfolio(Portfolio portfolio, Row productRow) {
@@ -262,6 +308,45 @@ public class PortfolioCollector implements Runnable {
         product.addOwner(new PeopleRoleRelation(getPeople(productRow.getAs("developmentOwner"), "developmentOwner"), RoleRelationShipType.DevelopmentOwner));
 
         portfolio.addProduct(product);
+    }
+
+    private void addProductToLob(Lob lob, Row productRow) {
+        String productName = productRow.getAs("productName");
+        String productDept = productRow.getAs("ownerDept");
+        String commonName = productRow.getAs("commonName");
+        String productId = (String) ((GenericRowWithSchema) productRow.getAs("productId")).values()[0];
+
+        LOGGER.debug("    Product Name = " + productName + " ; Owner Dept = " + productDept);
+
+        // For a given portfolio, check if the current product already exists in the product list for the portfolio
+        // If not, add it to the product list
+        Product product =
+                Optional.ofNullable(lob.getProducts())
+                        .orElseGet(Collections::emptyList).stream()
+                        .filter(p -> p.getName().equalsIgnoreCase(productName)
+                                && p.getLob().equalsIgnoreCase(productDept))
+                        .findFirst().orElse(null);
+        if (product == null) {
+            product = new Product();
+            product.setId(new ObjectId(productId));
+            product.setLob(productDept);
+            product.setName(productName);
+            product.setCommonName(commonName);
+            product.setMetricLevel(MetricLevel.PRODUCT);
+        }
+        if (productRow.getAs("environments") != null) {
+            Collection<Object> environmentNames = JavaConversions.asJavaCollection(((WrappedArray) productRow.getAs("environments")).toStream().toList());
+            addEnvironmentsToProduct(product, environmentNames);
+        }
+        if (productRow.getAs("components") != null) {
+            Collection<Object> componentNames = JavaConversions.asJavaCollection(((WrappedArray) productRow.getAs("components")).toStream().toList());
+            addComponentsToProduct(product, componentNames);
+        }
+        product.addOwner(new PeopleRoleRelation(getPeople(productRow.getAs("appServiceOwner"), "appServiceOwner"), RoleRelationShipType.AppServiceOwner));
+        product.addOwner(new PeopleRoleRelation(getPeople(productRow.getAs("supportOwner"), "supportOwner"), RoleRelationShipType.SupportOwner));
+        product.addOwner(new PeopleRoleRelation(getPeople(productRow.getAs("developmentOwner"), "developmentOwner"), RoleRelationShipType.DevelopmentOwner));
+
+        lob.addProduct(product);
     }
 
     private void addEnvironmentsToProduct(Product product, Collection<Object> environmentNames) {

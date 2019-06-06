@@ -42,6 +42,8 @@ public class PortfolioCollectorSetting {
     private boolean securityCollectorFlag;
     @Value("${feature.performanceCollectorFlag:true}")
     private  boolean performanceCollectorFlag;
+    @Value("${feature.engineeringMaturityFlag:true}")
+    private  boolean engineeringMaturityFlag;
 
     private Map<MetricType, List<Filter>> filters;
 
@@ -135,6 +137,14 @@ public class PortfolioCollectorSetting {
 
     public void setPerformanceCollectorFlag(boolean performanceCollectorFlag) {
         this.performanceCollectorFlag = performanceCollectorFlag;
+    }
+
+    public boolean isEngineeringMaturityFlag() {
+        return engineeringMaturityFlag;
+    }
+
+    public void setEngineeringMaturityFlag(boolean engineeringMaturityFlag) {
+        this.engineeringMaturityFlag = engineeringMaturityFlag;
     }
 
     @PostConstruct

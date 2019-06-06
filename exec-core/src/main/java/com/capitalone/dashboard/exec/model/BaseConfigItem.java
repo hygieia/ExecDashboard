@@ -57,6 +57,10 @@ public class BaseConfigItem {
         this.lob = lob;
     }
 
+    public BaseConfigItem(String name) {
+        this.name = name;
+    }
+
     public BaseConfigItem(String name, String lob, List<PeopleRoleRelation> owners) {
         this.name = name;
         this.lob = lob;
