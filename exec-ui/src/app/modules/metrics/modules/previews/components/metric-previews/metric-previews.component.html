@@ -1,4 +1,4 @@
-<div class="metric-previews" (click)="reset()" [ngClass]="{'metric-selected': selectedMetric }" fxLayout="row" fxLayoutWrap>
+<div class="metric-previews" [ngClass]="{'metric-selected': selectedMetric }" fxLayout="row" fxLayoutWrap>
   <app-scm-commits-preview class="metric" [attr.data-sort]="sortMap.get('scm-commits').currentSort"
                            [ngClass]="{'disabled': isDisabled('scm-commits')}"
                            [portfolioName]="portfolioName" [portfolioLob]="portfolioLob" [productId]="this.productId"
