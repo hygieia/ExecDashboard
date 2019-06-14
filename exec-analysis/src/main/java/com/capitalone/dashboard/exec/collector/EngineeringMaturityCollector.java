@@ -64,7 +64,7 @@ public class EngineeringMaturityCollector extends DefaultMetricCollector {
         auditMap.put("auditTypeStatus", auditTypeStatus);
 
         double value = 0.0;
-        if (auditStatus.equalsIgnoreCase("OK")){
+        if ("OK".equalsIgnoreCase(auditStatus)){
             value = 1.0;
         }
         MetricCount mc = getMetricCount("", value, auditType);

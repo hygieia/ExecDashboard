@@ -15,6 +15,7 @@ import com.capitalone.dashboard.exec.model.ProductComponent;
 import com.capitalone.dashboard.exec.model.ProductMetricDetail;
 import com.capitalone.dashboard.exec.repository.PortfolioMetricRepository;
 import com.capitalone.dashboard.exec.repository.LobMetricRepository;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
@@ -46,7 +47,20 @@ public abstract class DefaultMetricCollector {
         this.lobMetricRepository = lobMetricRepository;
     }
 
-    public void collect(SparkSession sparkSession, JavaSparkContext javaSparkContext, List<Portfolio> portfolioList) {
+    public void collect(SparkSession sparkSession, JavaSparkContext javaSparkContext, List<?> objectList) {
+        if ((sparkSession == null) || (javaSparkContext == null) || CollectionUtils.isEmpty(objectList)) { return; }
+
+        if (objectList.get(0) instanceof Portfolio){
+            collectPortFolioMetrics(sparkSession, javaSparkContext, (List<Portfolio>) objectList);
+            return;
+        }
+        if (objectList.get(0) instanceof Lob){
+            collectLobMetrics(sparkSession, javaSparkContext, (List<Lob>) objectList);
+            return;
+        }
+    }
+
+    public void collectPortFolioMetrics(SparkSession sparkSession, JavaSparkContext javaSparkContext, List<Portfolio> portfolioList) {
         if ((sparkSession == null) || (javaSparkContext == null)) { return; }
 
         List<String> collectorItemList = getCollectorItemListForPortfolios(portfolioList, sparkSession, javaSparkContext);
@@ -92,7 +106,7 @@ public abstract class DefaultMetricCollector {
     }
 
 
-    public void collect(SparkSession sparkSession, JavaSparkContext javaSparkContext, ArrayList<Lob> lobList) {
+    public void collectLobMetrics(SparkSession sparkSession, JavaSparkContext javaSparkContext, List<Lob> lobList) {
         if ((sparkSession == null) || (javaSparkContext == null)) { return; }
 
         List<String> collectorItemList = getCollectorItemListForLobs(lobList, sparkSession, javaSparkContext);
@@ -120,10 +134,7 @@ public abstract class DefaultMetricCollector {
                     ObjectId dashboardId = productComponent.getProductComponentDashboardId();
                     if (dashboardId == null) { return; }
                     List<String> collectorItems = dashboardCollectorItemsMap.get(dashboardId.toString()) != null ? dashboardCollectorItemsMap.get(dashboardId.toString()) : new ArrayList<>();
-
                     collectorItems.stream().map(collectorItem -> getCollectorItemMetricDetail(rowsListMap.get(collectorItem), getMetricType())).forEach(componentMetricDetail::addCollectorItemMetricDetail);
-
-
                     productMetricDetail.addComponentMetricDetail(componentMetricDetail);
                 });
                 lobMetricDetail.setTotalComponents(productComponents.size());
@@ -160,15 +171,15 @@ public abstract class DefaultMetricCollector {
 
         List<String> collectorItemList = new ArrayList<>();
         Optional.ofNullable(portfolioList).orElseGet(Collections::emptyList).stream()
-        .map(Portfolio::getProducts)
+                .map(Portfolio::getProducts)
                 .forEach(products -> products.stream()
                         .map(Product::getProductComponentList)
                         .forEach(productComponents -> productComponents
-                                                        .stream()
-                                                        .map(ProductComponent::getProductComponentDashboardId)
-                                                        .filter(Objects::nonNull)
-                                                        .<List<String>>map(dashboardId -> dashboardCollectorItemsMap.get(dashboardId.toString()) != null ? dashboardCollectorItemsMap.get(dashboardId.toString()) : new ArrayList<>())
-                                                        .forEach(collectorItemList::addAll)));
+                                .stream()
+                                .map(ProductComponent::getProductComponentDashboardId)
+                                .filter(Objects::nonNull)
+                                .<List<String>>map(dashboardId -> dashboardCollectorItemsMap.get(dashboardId.toString()) != null ? dashboardCollectorItemsMap.get(dashboardId.toString()) : new ArrayList<>())
+                                .forEach(collectorItemList::addAll)));
         return collectorItemList;
     }
 
