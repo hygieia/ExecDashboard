@@ -1,0 +1,42 @@
+export class Vonkinator {
+
+    appId: string;
+    appName: string;
+    portfolio: string;
+    appStatus: string;
+    period: string;
+    meanTimeToResolveOutages: number;
+    meanTimeToResolveEvents: number;
+    outages: number;
+    changeFailureRate: number;
+    changeActivities: number;
+    velocity: number;
+    deploymentCadence: number;
+    fortifyVulnerabilities: number;
+    portScanVulnerabilities: number;
+    webScanVulnerabilities: number;
+    stories: number;
+    storyPoints: number;
+    timeTaken: number;
+    jiraBugs: number;
+    cycleTime: number;
+    cmisTickets: number;
+    snTickets: number;
+    events: number;
+    twoEid: string;
+    twoExecutive: string;
+    threeEid: string;
+    threeExecutive: string;
+    fourEid: string;
+    fourExecutive: string;
+    fiveEid: string;
+    fiveExecutive: string;
+    order: number;
+    isDojo: boolean;
+    developers: number;
+    hours: number;
+    weeks: number;
+    dojoStartDate: string;
+    dojoStartQtr: string;
+    isIT: boolean;
+}

@@ -1,0 +1,21 @@
+<div class="metric-graph-container">
+	<div class="title"></div>
+    <div *ngIf="model" class="graph-contents">
+        <app-metric-trend-indicator [trend]="model.trend"></app-metric-trend-indicator>
+        <div class="active-count">
+                <span class="prefix">{{this.model.score.prefix}}</span><span>{{this.model.score.value | number}}<span class="unit" *ngIf="model.score.unit">{{model.score.unit}}</span><span *ngIf="model.isRatio" class="percent">%</span></span>
+                <span class="graph-title">{{model.valueLabel}}</span>
+                <span class="last-scanned">{{this.model.lastScanned}}</span>
+
+                <div *ngIf="model.valueLabel == this.cloudLabel" class="xylabel">
+                    x-axis: MONTHS<br/><br/>y-axis: COST
+                  </div> 
+            
+                  <div *ngIf="model.valueLabel == 'STORIES COMPLETED'" class="xylabel">
+                    x-axis: TIME RANGE<br/><br/>y-axis: STORIES
+                  </div>
+        </div>
+        <div id="metric-graph" class="metric-graph"></div>
+    </div>
+    
+</div>

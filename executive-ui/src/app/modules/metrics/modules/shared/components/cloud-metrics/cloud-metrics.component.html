@@ -1,0 +1,59 @@
+<div *ngIf="model">
+	<div class="metric-segmentation">
+		<div class="title">Cloud Breakdown</div>
+		<div class="column1">
+			<div fxLayout="row" *ngFor="let row of this.breakdownValues()">
+				<ul class="abc">
+					<li>
+						<h1>{{row.heading}}
+							<strong> {{row.headingvalue}}</strong>
+						</h1>
+					</li>
+					<li class="greenborder">{{row.row1value}} {{row.row1}}</li>
+					<li class="redborder">
+						<strong>{{row.row2value}} {{row.row2}} </strong>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="column2">
+			<div class="metric-segmentation-prod">
+				<div class="issues">
+					<div class="indicators">
+						<div fxLayout="row" *ngFor="let row of this.prodValues()" class="indicator">
+							<p>{{row.label}}</p>
+							<div>
+								<strong>{{row.value}}</strong>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="metric-segmentation-sec">
+				<div class="issues">
+					<div class="indicators">
+						<div fxLayout="row" *ngFor="let row of this.rowValues()" class="indicator">
+							<p>{{row.label}}</p>
+							<div>
+								<strong>{{row.value | number}}</strong>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="metric-segmentation-sec">
+				<div class="issues">
+					<div class="indicators">
+						<div fxLayout="row" *ngFor="let row of this.costSavings()" class="indicator">
+							<p>{{row.label}}</p>
+							<div>
+								<strong>{{row.value | number}}</strong>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>

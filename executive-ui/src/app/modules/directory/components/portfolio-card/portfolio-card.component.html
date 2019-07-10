@@ -1,0 +1,10 @@
+<div class="portfolio-card" (click)="goToPortfolio(id)" fxLayout fxLayoutGap="1em">
+  <div class="portfolio-avatar-circle">
+    <span class="initials">{{initials}}</span>
+  </div>
+  <div class="portfolio-card-info" fxLayout="column" fxLayoutAlign="center">
+    <p *ngIf="name" class="portfolio-card-name opensans-rg fs1">{{name}}</p>
+    <p *ngIf="role" class="portfolio-card-role opensans-lt fs2">{{role}}</p>
+    <p *ngIf="lob" class="portfolio-card-lob opensans-ltit fs2">{{lob}}</p>
+  </div>
+</div>

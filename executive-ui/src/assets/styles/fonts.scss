@@ -1,0 +1,229 @@
+/* Font Directory Variable Declarations */
+
+$OpenSansFontDirectory: '/assets/fonts/Open_Sans';
+$MontserratFontDirectory: '/assets/fonts/Montserrat';
+
+
+/* Font Face Definitions */
+
+@font-face {
+  font-family: 'Montserrat_SemiBold';
+  font-style: normal;
+  font-weight: normal;
+  src: url('#{$MontserratFontDirectory}/eot/Montserrat-SemiBold.eot');
+  src: url('#{$MontserratFontDirectory}/eot/Montserrat-SemiBold.eot?#iefix') format('embedded-opentype'),
+  url('#{$MontserratFontDirectory}/woff2/Montserrat-SemiBold.woff2') format('woff2'),
+  url('#{$MontserratFontDirectory}/woff/Montserrat-SemiBold.woff') format('woff'),
+  url('#{$MontserratFontDirectory}/ttf/Montserrat-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'OpenSans_Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: url('#{$OpenSansFontDirectory}/eot/OpenSans-Bold.eot');
+    src: url('#{$OpenSansFontDirectory}/eot/OpenSans-Bold.eot?#iefix') format('embedded-opentype'),
+    url('#{$OpenSansFontDirectory}/woff2/OpenSans-Bold.woff2') format('woff2'),
+    url('#{$OpenSansFontDirectory}/woff/OpenSans-Bold.woff') format('woff'),
+    url('#{$OpenSansFontDirectory}/ttf/OpenSans-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSans_BoldItalic';
+  font-style: normal;
+  font-weight: normal;
+  src: url('#{$OpenSansFontDirectory}/eot/OpenSans-BoldItalic.eot');
+  src: url('#{$OpenSansFontDirectory}/eot/OpenSans-BoldItalic.eot?#iefix') format('embedded-opentype'),
+  url('#{$OpenSansFontDirectory}/woff2/OpenSans-BoldItalic.woff2') format('woff2'),
+  url('#{$OpenSansFontDirectory}/woff/OpenSans-BoldItalic.woff') format('woff'),
+  url('#{$OpenSansFontDirectory}/ttf/OpenSans-BoldItalic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSans_ExtraBold';
+  font-style: normal;
+  font-weight: normal;
+  src: url('#{$OpenSansFontDirectory}/eot/OpenSans-ExtraBold.eot');
+  src: url('#{$OpenSansFontDirectory}/eot/OpenSans-ExtraBold.eot?#iefix') format('embedded-opentype'),
+  url('#{$OpenSansFontDirectory}/woff2/OpenSans-ExtraBold.woff2') format('woff2'),
+  url('#{$OpenSansFontDirectory}/woff/OpenSans-ExtraBold.woff') format('woff'),
+  url('#{$OpenSansFontDirectory}/ttf/OpenSans-ExtraBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSans_ExtraBoldItalic';
+  font-style: normal;
+  font-weight: normal;
+  src: url('#{$OpenSansFontDirectory}/eot/OpenSans-ExtraBoldItalic.eot');
+  src: url('#{$OpenSansFontDirectory}/eot/OpenSans-ExtraBoldItalic.eot?#iefix') format('embedded-opentype'),
+  url('#{$OpenSansFontDirectory}/woff2/OpenSans-ExtraBoldItalic.woff2') format('woff2'),
+  url('#{$OpenSansFontDirectory}/woff/OpenSans-ExtraBoldItalic.woff') format('woff'),
+  url('#{$OpenSansFontDirectory}/ttf/OpenSans-ExtraBoldItalic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'OpenSans_Light';
+    font-style: normal;
+    font-weight: normal;
+    src: url('#{$OpenSansFontDirectory}/eot/OpenSans-Light.eot');
+    src: url('#{$OpenSansFontDirectory}/eot/OpenSans-Light.eot?#iefix') format('embedded-opentype'),
+    url('#{$OpenSansFontDirectory}/woff2/OpenSans-Light.woff2') format('woff2'),
+    url('#{$OpenSansFontDirectory}/woff/OpenSans-Light.woff') format('woff'),
+    url('#{$OpenSansFontDirectory}/ttf/OpenSans-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSans_Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: url('#{$OpenSansFontDirectory}/eot/OpenSans-Italic.eot');
+  src: url('#{$OpenSansFontDirectory}/eot/OpenSans-Italic.eot?#iefix') format('embedded-opentype'),
+  url('#{$OpenSansFontDirectory}/woff2/OpenSans-Italic.woff2') format('woff2'),
+  url('#{$OpenSansFontDirectory}/woff/OpenSans-Italic.woff') format('woff'),
+  url('#{$OpenSansFontDirectory}/ttf/OpenSans-Italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSans_Light';
+  font-style: normal;
+  font-weight: normal;
+  src: url('#{$OpenSansFontDirectory}/eot/OpenSans-Light.eot');
+  src: url('#{$OpenSansFontDirectory}/eot/OpenSans-Light.eot?#iefix') format('embedded-opentype'),
+  url('#{$OpenSansFontDirectory}/woff2/OpenSans-Light.woff2') format('woff2'),
+  url('#{$OpenSansFontDirectory}/woff/OpenSans-Light.woff') format('woff'),
+  url('#{$OpenSansFontDirectory}/ttf/OpenSans-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSans_LightItalic';
+  font-style: normal;
+  font-weight: normal;
+  src: url('#{$OpenSansFontDirectory}/eot/OpenSans-LightItalic.eot');
+  src: url('#{$OpenSansFontDirectory}/eot/OpenSans-LightItalic.eot?#iefix') format('embedded-opentype'),
+  url('#{$OpenSansFontDirectory}/woff2/OpenSans-LightItalic.woff2') format('woff2'),
+  url('#{$OpenSansFontDirectory}/woff/OpenSans-LightItalic.woff') format('woff'),
+  url('#{$OpenSansFontDirectory}/ttf/OpenSans-LightItalic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSans_Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: url('#{$OpenSansFontDirectory}/eot/OpenSans-Regular.eot');
+  src: url('#{$OpenSansFontDirectory}/eot/OpenSans-Regular.eot?#iefix') format('embedded-opentype'),
+  url('#{$OpenSansFontDirectory}/woff2/OpenSans-Regular.woff2') format('woff2'),
+  url('#{$OpenSansFontDirectory}/woff/OpenSans-Regular.woff') format('woff'),
+  url('#{$OpenSansFontDirectory}/ttf/OpenSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSans_SemiBold';
+  font-style: normal;
+  font-weight: normal;
+  src: url('#{$OpenSansFontDirectory}/eot/OpenSans-SemiBold.eot');
+  src: url('#{$OpenSansFontDirectory}/eot/OpenSans-SemiBold.eot?#iefix') format('embedded-opentype'),
+  url('#{$OpenSansFontDirectory}/woff2/OpenSans-SemiBold.woff2') format('woff2'),
+  url('#{$OpenSansFontDirectory}/woff/OpenSans-SemiBold.woff') format('woff'),
+  url('#{$OpenSansFontDirectory}/ttf/OpenSans-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSans_SemiBoldItalic';
+  font-style: normal;
+  font-weight: normal;
+  src: url('#{$OpenSansFontDirectory}/eot/OpenSans-SemiBoldItalic.eot');
+  src: url('#{$OpenSansFontDirectory}/eot/OpenSans-SemiBoldItalic.eot?#iefix') format('embedded-opentype'),
+  url('#{$OpenSansFontDirectory}/woff2/OpenSans-SemiBoldItalic.woff2') format('woff2'),
+  url('#{$OpenSansFontDirectory}/woff/OpenSans-SemiBoldItalic.woff') format('woff'),
+  url('#{$OpenSansFontDirectory}/ttf/OpenSans-SemiBoldItalic.ttf') format('truetype');
+}
+
+/* Font Style Variable Definitions */
+
+$Montserrat_SemiBold: Montserrat_SemiBold, arial, sans-serif;
+$OpenSans_Bold: OpenSans_Bold, arial, sans-serif;
+$OpenSans_BoldItalic: OpenSans_BoldItalic, arial, sans-serif;
+$OpenSans_ExtraBold: OpenSans_ExtraBold, arial, sans-serif;
+$OpenSans_ExtraBoldItalic: OpenSans_ExtraBoldItalic, arial, sans-serif;
+$OpenSans_Italic: OpenSans_Italic, arial, sans-serif;
+$OpenSans_Light: OpenSans_Light, arial, sans-serif;
+$OpenSans_LightItalic: OpenSans_LightItalic, arial, sans-serif;
+$OpenSans_Regular: OpenSans_Regular, arial, sans-serif;
+$OpenSans_SemiBold: OpenSans_SemiBold, arial, sans-serif;
+$OpenSans_SemiBoldItalic: OpenSans_SemiBoldItalic, arial, sans-serif;
+
+/* Style Definitions for Font Display */
+
+.opensans-bd {
+  font-family: $OpenSans_Bold;
+}
+
+.opensans-bdit {
+  font-family: $OpenSans_BoldItalic;
+}
+
+.opensans-xbd {
+  font-family: $OpenSans_ExtraBold;
+}
+
+.opensans-xbdit {
+  font-family: $OpenSans_ExtraBoldItalic;
+}
+
+.opensans-it {
+  font-family: $OpenSans_Italic;
+}
+
+.opensans-lt {
+  font-family: $OpenSans_Light;
+}
+
+.opensans-ltit {
+  font-family: $OpenSans_LightItalic;
+}
+
+.opensans-rg {
+  font-family: $OpenSans_Regular;
+}
+
+.opensans-sbd {
+  font-family: $OpenSans_SemiBold;
+}
+
+.opensans-sbdit {
+  font-family: $OpenSans_SemiBoldItalic;
+}
+
+.platinum {
+  letter-spacing: 5px;
+  opacity: 0.8;
+  text-transform: uppercase;
+}
+
+.fs1 {
+  font-size: 1em;
+}
+
+.fs2 {
+  font-size: 0.75em;
+}
+
+.lt {
+  font-weight: 300;
+}
+
+.rg {
+  font-weight: 400;
+}
+
+.sbd {
+  font-weight: 500;
+}
+
+.bd {
+  font-weight: 600;
+}
+
+.opq {
+  opacity: 0.65;
+}

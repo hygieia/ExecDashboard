@@ -1,0 +1,154 @@
+@import '../../../../../assets/styles/colors';
+@import '../../../../../assets/styles/fonts';
+@import '../../../../../assets/styles/retina';
+
+.portfolio-card {
+  background-color: $card-bg;
+	border: 1px solid $card-border;
+  border-radius: 10px;
+  cursor: pointer;
+  height: 94px;
+  letter-spacing: .03em;
+  margin-bottom: 15px;
+  padding: 1em;
+  width: 325px;
+
+  &:hover, &:active {
+    background-color: $card-hover;
+  }
+  .portfolio-card-info {
+    height: 60px;
+    min-width: 0;
+
+    .fullname {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width:500px;
+
+      span {
+
+        &.opensans-rg {
+          height: 22px;
+          line-height: 22px;
+        }
+
+        &.opensans-lt {
+          height: 17px;
+          line-height: 17px;
+        }
+
+        &.opensans-ltit {
+          height: 17px;
+          line-height: 17px;
+        }
+
+        &.portfolio-card-firstname {
+          text-overflow: ellipsis;
+        }
+
+        &.portfolio-card-lastname {
+          max-width: 50%;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+
+    p {
+
+      &.opensans-rg {
+        height: 22px;
+        line-height: 22px;
+      }
+
+      &.opensans-lt {
+        height: 17px;
+        line-height: 17px;
+      }
+
+      &.opensans-ltit {
+        height: 17px;
+        line-height: 17px;
+      }
+
+      &.portfolio-card-name,
+      &.portfolio-card-role,
+      &.portfolio-card-lob {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .portfolio-avatar-circle {
+    background-color: $avatar-404;
+    height: 60px;
+    border: 1px solid $avatar-accent;
+    border-radius: 50%;
+    box-sizing: border-box;
+    text-align: center;
+    width: 60px;
+
+    .initials {
+      color: $dark;
+      display: block;
+      font-family: $OpenSans_Bold;
+      font-size: 18px;
+      height: 60px;
+      line-height: 60px;
+      position: relative;
+      top: -2px;
+      width: 60px;
+
+    }
+  }
+
+
+}
+
+// break to 5 cards
+@media screen and (max-width: 1920px) and (min-width: 1780px) {
+  .portfolio-card {
+    min-width: auto;
+    max-width: auto;
+    width: 100%;
+  }
+}
+
+// break to 4 cards
+@media screen and (max-width: 1779px) and (min-width: 1440px) {
+  .portfolio-card {
+    min-width: auto;
+    max-width: auto;
+    width: 100%;
+  }
+}
+
+// break to 3 cards
+@media screen and (max-width: 1439px) and (min-width: 960px) {
+  .portfolio-card {
+    min-width: auto;
+    max-width: auto;
+    width: 100%;
+  }
+}
+
+// break to 2 cards
+@media screen and (max-width: 959px) and (min-width: 768px) {
+  .portfolio-card {
+    min-width: auto;
+    max-width: auto;
+    width: 100%;
+  }
+}
+
+// break to 1 card
+@media screen and (max-width: 767px) {
+  .portfolio-card {
+    width: 100%;
+  }
+}
+
+

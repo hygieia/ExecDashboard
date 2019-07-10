@@ -56,14 +56,14 @@ public class PortfolioMetricDetail extends RollupMetricDetail {
             summary = new MetricSummary();
         }
         summary.setLastUpdated(new Date());
-        productMetricDetailList.forEach(metricDetails -> updateSummary(metricDetails,productMetricDetailList.size() ));
+        productMetricDetailList.forEach(this::updateSummary);
     }
 
     protected void updateTimeSeries() {
         if (timeSeries == null) {
             timeSeries = getEmptyTimeSeries();
         }
-        productMetricDetailList.forEach(itemMetricDetails -> updateTimeSeries(itemMetricDetails, productMetricDetailList.size()));
+        productMetricDetailList.forEach(this::updateTimeSeries);
     }
 
     public static PortfolioMetricDetail getInstance(String name, String lob, MetricType metricType) {

@@ -1,0 +1,7 @@
+<div class="cards" fxLayout fxLayoutAlign="start" fxLayoutWrap>
+    <app-spinner  [threshold]="2800" ></app-spinner>
+    <app-portfolio-card *ngFor="let portfolio of portfolios | paginate: { itemsPerPage: 24, currentPage: pageNumber }" [portfolio]="portfolio" ></app-portfolio-card>
+</div>
+<br>
+<br>
+<div style="text-align: center" class="pagination-block" ><pagination-controls (pageChange)="pageNumber = $event"></pagination-controls><div class="pagination-block">

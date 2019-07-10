@@ -1,0 +1,10 @@
+<div class="application-card" (click)="goToApplication(id)" fxLayout fxLayoutGap="1em">
+  <div class="application-avatar-circle">
+    <span class="initials">{{id}}</span>
+  </div>
+  <div class="application-card-info" fxLayout="column" fxLayoutAlign="center">
+    <p *ngIf="name" class="application-card-name opensans-rg fs1">{{name}}</p>
+    <p *ngIf="role" class="application-card-role opensans-lt fs2">{{lob}}</p>
+    <p *ngIf="lob" class="application-card-lob opensans-ltit fs2">{{role}}</p>
+  </div>
+</div>

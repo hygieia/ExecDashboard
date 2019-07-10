@@ -1,0 +1,39 @@
+.title {
+    font-family:'Times New Roman', Times, serif;
+    font-size: 17px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    text-align: left; 
+    font-weight: bold;
+  }
+
+.smallInfo{
+  font-size:13px;
+}
+.progress-bar {
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    -ms-flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -ms-flex-pack: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    color: black;
+    text-align: center;
+    white-space: nowrap;
+    background-color: yellowgreen;
+    transition: width .6s ease;
+    font-size: 14px;
+    font-weight: bold;
+    text-indent: 5em;
+}
+.labelInfo{
+  letter-spacing: 0.01em;
+  line-height: 24px;
+  vertical-align: top;
+  font-size: 15px;
+  float: left;
+}

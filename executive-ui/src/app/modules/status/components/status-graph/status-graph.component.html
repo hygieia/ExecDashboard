@@ -1,0 +1,16 @@
+<div class="metric-graph-container">
+	<div class="title">{{graphModel.valueLabel}}</div>
+  <!--<p> Metric Graph </p>-->
+  <div *ngIf="graphModel" class="graph-contents">
+    <div class="active-count">
+      <span class="prefix"></span><span><span class="unit"></span><span class="percent"></span></span>
+      <span class="graph-title"></span>
+      <span class="last-scanned">{{this.graphModel.lastScanned}}</span>
+     <div class="xylabel">
+        x-axis: Time Range<br/><br/>y-axis: Unique Users
+      </div>
+    </div>
+    <div id="metric-graph" class="metric-graph up" [ngClass]="{'danger': false}"></div>
+  </div>
+  <br>
+</div>

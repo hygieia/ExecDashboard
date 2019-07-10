@@ -1,0 +1,18 @@
+.metric-previews {
+
+  overflow: visible !important;
+
+  &.metric-selected {
+    cursor: pointer;
+  }
+
+  > * {
+    margin-right: 10px;
+  }
+
+  .placeholder {
+    height: 1px;
+    min-width: 260px;
+    opacity: 0;
+  }
+}

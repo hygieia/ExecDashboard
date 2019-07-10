@@ -23,7 +23,7 @@ public class ComponentMetricDetail extends RollupMetricDetail {
             summary = new MetricSummary();
         }
         summary.setLastUpdated(new Date());
-        collectorItemMetricDetailList.forEach(metricDetails -> updateSummary(metricDetails, collectorItemMetricDetailList.size()));
+        collectorItemMetricDetailList.forEach(this::updateSummary);
     }
 
 
@@ -31,7 +31,7 @@ public class ComponentMetricDetail extends RollupMetricDetail {
         if (timeSeries == null) {
             timeSeries = getEmptyTimeSeries();
         }
-        collectorItemMetricDetailList.forEach(itemMetricDetails -> updateTimeSeries(itemMetricDetails, collectorItemMetricDetailList.size()));
+        collectorItemMetricDetailList.forEach(this::updateTimeSeries);
     }
 
     public List<CollectorItemMetricDetail> getCollectorItemMetricDetailList() {

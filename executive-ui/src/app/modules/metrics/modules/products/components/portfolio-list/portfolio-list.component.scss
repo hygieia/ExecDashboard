@@ -1,0 +1,375 @@
+@import '../../../../../../../assets/styles/colors';
+@import '../../../../../../../assets/styles/fonts';
+@import '../../../../../../../assets/styles/retina';
+
+
+.tooltip-custom {
+    position: relative;
+    display: inline-block;
+    border: 2px B #546979;
+}
+
+.tooltip-custom .tooltiptext {
+    visibility: hidden;
+    width: 130px;
+    background-color: #546979;
+    color: #fff;
+    text-align: center;
+    font-size: 13px;
+    border-radius: 6px;
+    padding: 5px 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 110%;
+    left: 100%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip-custom .tooltiptext-custom::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip-custom:hover .tooltiptext-custom {
+    visibility: visible;
+    opacity: 1;
+}
+
+.portfolio-list {
+  padding: 60px 20px 0 20px;
+  position: relative;
+
+  .view-opts-bar {
+    display: inline-block;
+    margin-bottom: 10px;
+    position: relative;
+    width: 100%;
+
+   .portfolio-name {
+      left: 25px;
+      width: 230px;
+    }
+  .portfolio-card .favo{
+      float: right;
+      position: relative;
+      top: 30px;
+      right: 75px;
+  }
+
+  .portfolio-card .favo .tooltip {
+    position: relative;
+    display: inline-block;
+    border: 2px B #546979;
+}
+
+ .portfolio-card .favo .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 130px;
+    background-color: #546979;
+    color: #fff;
+    text-align: center;
+    font-size: 13px;
+    border-radius: 6px;
+    padding: 5px 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 110%;
+    left: 100%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+ .portfolio-card .favo .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 65%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #546979 transparent transparent transparent;
+}
+
+ .portfolio-card .favo .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+    
+  .portfolio-card .executive-name {
+      width: 450px;
+
+      .fa-search { 
+        position: absolute;
+       font-size: 30px;
+      }
+
+     ::ng-deep .selected-list[_ngcontent-c4] .c-list[_ngcontent-c4] .c-token[_ngcontent-c4] {
+       background: transparent !important;
+       color: black;
+     }
+
+    }
+
+    .portfolio-card .metrics-name {
+      width: 250px;
+
+      .fa-search { 
+        position: absolute;
+       font-size: 30px;
+      }
+
+     ::ng-deep .selected-list[_ngcontent-c4] .c-list[_ngcontent-c4] .c-token[_ngcontent-c4] {
+       background: transparent !important;
+       color: black;
+     }
+
+    }
+
+    .view-all-metrics {
+      bottom: 5px;
+      padding: 0 15px;
+      position: absolute;
+      right: 10px;
+      width: 210px;
+    }
+  }
+
+  * /deep/ .metric-building-blocks {
+    min-width: 260px;
+  }
+
+  * /deep/ .metric-detail {
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 10px !important;
+    min-width: 110px !important;
+    padding: 12px 0 20px;
+    text-align: center;
+
+    &.last-metric {
+      border-right-color: transparent;
+    }
+
+    .empty-metric {
+
+      .name {
+        top: 17px !important;
+      }
+    }
+
+    div {
+      display: block !important;
+      width: 100%;
+
+      .metric-trend-indicator {
+        display: inline !important;
+        position: relative;
+        bottom: 6px;
+      }
+
+      .name {
+        margin: 0 auto;
+      }
+    }
+
+  }
+
+  * /deep/ .portfolio {
+
+    .portfolio-heading {
+      margin-bottom: 15px;
+      padding-right: 130px;
+
+      .name {
+        display: inline-block;
+        flex: none !important;
+      }
+
+      .last-scanned {
+        display: inline-block;
+        flex: none !important;
+        margin-left: 5px;
+        position: relative;
+        text-align: left !important;
+        top: 3px;
+      }
+    }
+
+    .portfolio-detail {
+      padding-right: 0;
+    }
+
+    .view-details {
+      min-width: 100px;
+      top: -35px;
+      width: 100px;
+    }
+  }
+
+  * /deep/ .building-blocks-heading {
+    display: none;
+  }
+
+  hr.divider {
+    margin-bottom: 23px;
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-width: 875px) {
+  .view-opts-bar {
+
+    * /deep/ .change-executive {
+      display: block !important;
+      margin-top: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 564px) {
+  .view-opts-bar {
+
+    * /deep/ .change-executive {
+      display: block !important;
+      margin-top: 20px;
+    }
+  }
+
+  .portfolio-list {
+
+    .portfolios {
+      min-width: 260px !important;
+
+      * /deep/ .metric-portfolios {
+        max-width: none !important;
+        min-width: 260px !important;
+
+        * /deep/ .metric-portfolios {
+          min-width: 260px;
+        }
+      }
+
+      * /deep/ .portfolio {
+
+        .portfolio-detail {
+          padding-top: 45px;
+        }
+
+        .view-details {
+          display: block;
+          float: none;
+          position: absolute;
+          right: unset;
+          top: 0;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .portfolio-list {
+
+    .view-opts-bar {
+
+      * /deep/ .heading {
+        margin-right: 0;
+        min-width: 0;
+
+        .primary {
+          min-width: 0;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .portfolio-list {
+
+    .view-opts-bar {
+      padding-right: 10px;
+
+      * /deep/ .change-executive {
+        width: 210px;
+      }
+
+      .view-all-metrics {
+        bottom: 4px;
+        margin-top: 15px;
+        position: relative;
+        right: unset;
+        width: 210px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .portfolio-list {
+
+    * /deep/ .metric-detail {
+      border-right-color: transparent;
+    }
+
+    * /deep/ .portfolio {
+
+      .portfolio-heading {
+        margin-bottom: 0;
+      }
+
+      .portfolio-detail {
+        display: flex !important;
+        margin-top: 5px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .portfolio-list {
+
+    .view-opts-bar {
+      min-width: 260px;
+
+      * /deep/ .change-executive {
+        min-width: 260px;
+        width: 100%;
+      }
+
+      .view-all-metrics {
+        min-width: 260px;
+        width: 100%;
+      }
+    }
+
+    * /deep/ .metric-detail {
+      min-width: 108px !important;
+    }
+  }
+}
+
+.input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #CCC;
+  color: white;
+  font-family: 'Arvo';
+  font-size: 18px;
+  
+  &:focus {
+    outline: none;    
+  }
+}
+
+input::-webkit-input-placeholder {
+  color: grey;
+}

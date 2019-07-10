@@ -1,0 +1,359 @@
+@import '../../../assets/styles/colors';
+@import '../../../assets/styles/fonts';
+@import '../../../assets/styles/retina';
+
+.portfolio-card {
+  background-color: $card-bg;
+	border: 1px solid $card-border;
+  border-radius: 10px;
+  cursor: pointer;
+  height: 94px;
+  letter-spacing: .03em;
+  margin-bottom: 15px;
+  padding: 1em;
+  width: 325px;
+
+  &:hover, &:active {
+    background-color: $card-hover;
+  }
+  .portfolio-card-info {
+    height: 60px;
+    min-width: 0;
+
+    .fullname {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width:500px;
+
+      span {
+
+        &.opensans-rg {
+          height: 22px;
+          margin:0.5em;
+          display: inline-block ;
+          line-height: 22px;
+        }
+
+        &.opensans-lt {
+          height: 17px;
+          margin:0.5em;
+          display: inline-block ;
+          line-height: 17px;
+        }
+
+        &.opensans-ltit {
+          height: 17px;
+          margin:0.5em;
+          display: inline-block ;
+          line-height: 17px;
+        }
+
+        &.portfolio-card-firstname {
+          text-overflow: ellipsis;
+        }
+
+        &.portfolio-card-lastname {
+          max-width: 50%;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+
+    p {
+
+      &.opensans-rg {
+        height: 22px;
+        line-height: 28px;
+      }
+
+      &.opensans-lt {
+        height: 17px;
+        line-height: 24px;
+      }
+
+      &.opensans-ltit {
+        height: 17px;
+        line-height: 17px;
+      }
+
+      &.portfolio-card-name,
+      &.portfolio-card-role,
+      &.portfolio-card-lob {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .portfolio-avatar-circle {
+    background-color: $avatar-404;
+    height: 60px;
+    border: 1px solid $avatar-accent;
+    border-radius: 50%;
+    box-sizing: border-box;
+    text-align: center;
+    width: 60px;
+
+    .initials {
+      color: $dark;
+      display: block;
+      font-family: $OpenSans_Bold;
+      font-size: 18px;
+      height: 60px;
+      line-height: 60px;
+      position: relative;
+      top: -2px;
+      width: 60px;
+
+    }
+  }
+
+
+}
+
+.image-backdrop{
+    height: 0px;
+}
+.content {
+        padding: 30px 50px;
+
+        ul {
+            list-style-type: none;
+            margin:0;padding:0;
+        
+            li {
+                background: #fff;
+                border-radius: 8px;
+                padding: 20px;
+                margin-bottom: 8px;
+        
+                a {
+                    font-size: 1.5em;
+                    text-decoration: none;
+                    font-weight: bold;
+                    color:#00A8FF;
+                }
+        
+                ul {
+                    margin-top: 20px;
+                    
+                    li {
+                        padding:0;
+        
+                        a {
+                            font-size: 1em;
+                            font-weight: 300;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    ////////test
+
+.dataInfo{
+  float: right;
+  position:relative;
+  top:20px;
+}
+
+
+.dashboard-view {
+  max-width: 1440px;
+  padding: 60px 20px 0 20px;
+  position: relative;
+
+  .dashboard-content {
+    margin-right: -10px;
+  }
+
+  .view-opts-bar {
+    display: inline-block;
+    margin-bottom: 10px;
+    position: relative;
+    width: 100%;
+  }
+
+  hr.divider {
+    margin-bottom: 23px;
+  }
+
+  .dashboard-previews {
+  }
+
+  .dashboard-products {
+    min-width: 400px;
+    position: relative;
+    opacity: 0;
+    transition: left .5s ease-out, opacity .65s ease-in;
+
+    &.visible {
+      left: 0;
+      opacity: 1;
+    }
+
+    &.hidden {
+      left: 1000px;
+    }
+  }
+
+  .change-executive {
+    letter-spacing: .03em;
+  }
+
+  .view-all-products {
+    bottom: 5px;
+    padding: 0 15px;
+    position: absolute;
+    right: 0;
+    width: 210px;
+  }
+  
+  .view-portfolio-products {
+    bottom: 5px;
+    padding: 0 15px;
+    position: absolute;
+    right: 1;
+    width: 210px;
+   }
+  
+}
+
+
+@media screen and (max-width: 875px) {
+  .dashboard-content {
+    flex-flow: wrap;
+
+    .dashboard-previews {
+      min-width: 400px;
+
+      * /deep/ .metric-previews.metric-selected {
+
+        .metric {
+          padding-right: 9px;
+        }
+        .metric.disabled, .placeholder {
+          display: none;
+        }
+      }
+    }
+
+    .dashboard-products {
+      max-width: none !important;
+      min-width: 400px !important;
+
+      * /deep/ .metric-products {
+        min-width: 400px;
+      }
+    }
+  }
+
+  .view-opts-bar {
+
+    * /deep/ .change-executive {
+      display: block !important;
+      margin-top: 20px;
+    }
+
+    .view-all-products {
+    }
+    
+    .view-portfolio-products {
+    }
+    
+  }
+}
+
+@media screen and (max-width: 564px) {
+  .dashboard-content {
+
+    .dashboard-previews {
+      min-width: 260px;
+    }
+
+    .dashboard-products {
+      min-width: 260px !important;
+
+      * /deep/ .metric-products {
+        max-width: none !important;
+        min-width: 260px !important;
+
+        * /deep/ .metric-products {
+          min-width: 260px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .view-opts-bar {
+
+    * /deep/ .heading {
+      margin-right: 0;
+      min-width: 0;
+
+      .primary {
+        min-width: 0;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .view-opts-bar {
+
+    * /deep/ .change-executive {
+      width: 210px;
+    }
+
+    .view-all-products {
+      bottom: 4px;
+      margin-top: 15px;
+      position: relative;
+      right: unset;
+      width: 210px;
+    }
+    
+    .view-portfolio-products {
+     bottom: 5px;
+    padding: 0 15px;
+    position: absolute;
+    right: 30;
+    width: 210px;
+    }
+    
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .view-opts-bar {
+
+    * /deep/ .change-executive {
+      width: 100%;
+    }
+
+    .view-all-products {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .view-opts-bar {
+
+    * /deep/ .change-executive {
+      min-width: 260px;
+    }
+
+    .view-all-products {
+      min-width: 260px;
+    }
+  }
+}

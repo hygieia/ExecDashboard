@@ -1,0 +1,127 @@
+<app-spinner></app-spinner>
+<div class="status-view" fxLayout="column">
+	<mat-tab-group  dynamicHeight="true">
+		<mat-tab label="OneHygieia Collector">
+			<br><br>
+			<div id="details" class="metric-segmentation">
+				<div class="issues">
+					<div fxLayout="row" class="column-labels">
+						<p style="width: 15%;">Collector Type</p>
+						<p style="width: 25%;">Collector Last Ran Time</p>
+						<p style="width: 20%;">Collection Name</p>
+						<p style="width: 25%;">Collection Updated Time</p>
+						<p style="width: 15%;">App Count</p>
+					</div>
+					<hr>
+					<div class="indicators">
+						<div fxLayout="row" *ngFor="let external of this.collectorUpdatedStatusList" class="indicator">
+							<p style="width: 15%;">{{external.type}}</p>
+							<div *ngIf="external.collectorUpdateTime > 0; then ifblock; else elseBlock"></div>
+							<ng-template #ifblock>
+								<p style="width: 25%;">{{external.collectorUpdateTime | date:'short'}}</p>
+							</ng-template>
+							<ng-template #elseBlock>
+								<p style="width: 25%;">NA</p>
+							</ng-template>
+							<p style="width: 20%">{{external.collectionName}}</p>
+							<div *ngIf="external.collectionUpdatedTime > 0; then ifCblock; else elseCBlock"></div>
+							<ng-template #ifCblock>
+								<p style="width: 25%;">{{external.collectionUpdatedTime | date:'short'}}</p>
+							</ng-template>
+							<ng-template #elseCBlock>
+								<p style="width: 25%;">NA</p>
+							</ng-template>
+							<p style="width: 15%">{{external.appCount}}</p>
+							<br>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="note"> <b>Note:</b> All the above mentioned Date & Time Metrics belongs to Local Time-zone</div>
+
+		</mat-tab>
+		<mat-tab label="Metric Processor">
+			<br><br>
+			<div id="details" class="metric-segmentation">
+				<div class="issues">
+					<div fxLayout="row" class="column-labels">
+						<p style="width: 20%;">Card Name</p>
+						<p style="width: 15%;"> Is Running</p>
+						<p style="width: 20%;">Process Start Time</p>
+						<p style="width: 20%;">Process Last Completed Time</p>
+						<p style="width: 15%;">Execution Time</p>
+						<p style="width: 10%;">No. Of App Refreshed</p>
+					</div>
+					<hr>
+					<div class="indicators">
+						<div fxLayout="row" *ngFor="let external of this.metricUpdatedStatusList" [hidden]="external.collectionName == ''"
+						 class="indicator">
+							<p style="width: 20%">{{external.collectionName}}</p>
+							
+							<div *ngIf="external.isRunning == true; then ifRunningblock; else elseRunningBlock"></div>
+							<ng-template #ifRunningblock>
+								<p style="width: 15%;"><i class="fa fa-circle fa-x" data-toggle="tooltip" data-placement="top" title= "{{ external.lastStartTime | date:'short' }}" style="color:lawngreen" ></i></p>
+							</ng-template>
+							<ng-template #elseRunningBlock>
+								<p style="width: 15%;"><i class="fa fa-circle fa-x" style="color:red" ></i></p>
+							</ng-template>
+
+							<div *ngIf="external.collectorStartTime > 0; then ifblock; else elseBlock"></div>
+							<ng-template #ifblock>
+								<p style="width: 20%;">{{external.collectorStartTime | date:'short'}}</p>
+							</ng-template>
+							<ng-template #elseBlock>
+								<p style="width: 20%;">NA</p>
+							</ng-template>
+
+							<div *ngIf="external.collectorUpdateTime > 0; then ifUpdateblock; else elseUpdateBlock"></div>
+							<ng-template #ifUpdateblock>
+								<p style="width: 20%;">{{external.collectorUpdateTime | date:'short'}}</p>
+							</ng-template>
+							<ng-template #elseUpdateBlock>
+								<p style="width: 20%;">NA</p>
+							</ng-template>
+							<div *ngIf="external.duration != undefined; then ifblockDuration; else elseBlockDuration"></div>
+							<ng-template #ifblockDuration>
+								<p style="width: 15%;" *ngIf="external.duration > 0 && external.duration/60 < 1">{{external.duration}}
+									Mins</p>
+								<p style="width: 15%;" *ngIf="external.duration > 0 && external.duration/60 >= 1">{{external.duration/60 |
+									number:'1.0-0'}} Hrs {{external.duration%60}} Mins</p>
+								<p style="width: 15%;" *ngIf="external.duration == 0">0</p>
+							</ng-template>
+							<ng-template #elseBlockDuration>
+								<p style="width: 20%;">NA</p>
+							</ng-template>
+
+							<div *ngIf="external.appCount != undefined; then ifappCountblock; else elseappCountBlock"></div>
+							<ng-template #ifappCountblock>
+								<p style="width: 10%;">{{external.appCount}}&nbsp; apps </p>
+							</ng-template>
+							<ng-template #elseappCountBlock>
+								<p style="width: 10%;">NA</p>
+							</ng-template>
+
+							<br>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="note"> <b>Note:</b> All the above mentioned Date & Time Metrics belongs to Local Time-zone</div>
+			
+		</mat-tab>
+		<mat-tab label="Software Version Details" style="height:100%;width:100%">
+			<app-instance></app-instance>
+		</mat-tab>
+		<mat-tab label="Vonkinator Reports" style="height:100%;width:100%">
+			<app-vonkinator></app-vonkinator>
+		</mat-tab>
+		<mat-tab *ngIf="this.isAdmin" label="Admin Access - Default board" style="height:100%;width:100%">
+			<app-admin-access></app-admin-access>
+		</mat-tab>
+		
+	</mat-tab-group>
+
+	
+
+</div>

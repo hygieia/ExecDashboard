@@ -7,7 +7,7 @@ import java.util.List;
 import static com.capitalone.dashboard.exec.util.HygieiaExecutiveUtil.getEmptyTimeSeries;
 
 public class ProductMetricDetail extends RollupMetricDetail {
-    public List<ComponentMetricDetail> componentMetricDetailList;
+    private List<ComponentMetricDetail> componentMetricDetailList;
 
 
     public ProductMetricDetail() {
@@ -46,13 +46,13 @@ public class ProductMetricDetail extends RollupMetricDetail {
             summary = new MetricSummary();
         }
         summary.setLastUpdated(new Date());
-        componentMetricDetailList.forEach(metricDetails -> updateSummary(metricDetails,componentMetricDetailList.size()));
+        componentMetricDetailList.forEach(this::updateSummary);
     }
 
     protected void updateTimeSeries() {
         if (timeSeries == null) {
             timeSeries = getEmptyTimeSeries();
         }
-        componentMetricDetailList.forEach(itemMetricDetails -> updateTimeSeries(itemMetricDetails, componentMetricDetailList.size()));
+        componentMetricDetailList.forEach(this::updateTimeSeries);
     }
 }

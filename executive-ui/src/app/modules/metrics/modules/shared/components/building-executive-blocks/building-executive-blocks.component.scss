@@ -1,0 +1,228 @@
+@import '../../../../../../../assets/styles/fonts';
+@import '../../../../../../../assets/styles/retina';
+@import '../../../../../../../assets/styles/colors';
+
+.view-all {
+    float: right;
+    min-width: 140px;
+    position: absolute;
+    right: 220px;
+    bottom: 5px;
+    width: 130px;
+
+    img {
+      position: absolute;
+      right: 20px;
+      top: 7px;
+    }
+  }
+
+.metric-building-blocks {
+  min-width: 290px;
+  padding-right: 10px;
+}
+
+.pagination-block {
+  padding-right: 20px;
+  font-family: $OpenSans_Light;
+  font-size: 15px;
+  letter-spacing: 2px;
+  line-height: 18px;
+}
+
+.pagination-block ::ng-deep .ngx-pagination a {
+    color: white;
+    background-color: transparent;
+  }
+
+a {
+  cursor: pointer;
+}
+.sort{
+    position: relative;
+    height: 30px;
+    float: right;
+}
+
+.sorta{
+    position: relative;
+    height: 30px;
+    float: right;
+    bottom: 10px;
+}
+
+.filterIcon{
+    position: relative;
+    height: 30px;
+    float: right;
+    bottom: 1px;
+}
+
+.building-blocks-heading {
+  background-color: $blue-main;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  max-width: 100%;
+  padding: 12px 0 12px 0;
+  position: relative;
+
+  img.icon {
+    position: absolute;
+    height: 24px;
+    top: 9px;
+    left: 15px;
+  }
+
+  span {
+    font-family: $OpenSans_Light;
+    text-transform: uppercase;
+
+    &.label {
+      font-size: 14px;
+      letter-spacing: 2px;
+      line-height: 18px;
+      margin: 14px 0 14px 19px;
+      width: 212px;
+    }
+
+    &.reporting {
+      right: 20px;
+      float: right;
+      font-size: 14px;
+      letter-spacing: .2em;
+      line-height: 12px;
+      position: relative;
+      text-align: right;
+      width: auto;
+
+    }
+
+    &.filter {
+      right: 40px;
+      float: right;
+      font-size: 14px;
+      letter-spacing: .2em;
+      line-height: 12px;
+      position: relative;
+      text-align: right;
+      width: auto;
+
+    }
+
+     &.count {
+      float: left;
+      font-size: 10px;
+      letter-spacing: .2em;
+      line-height: 12px;
+      margin-left: 50px;
+      margin-bottom: 2px;
+      position: relative;
+      text-align: right;
+      width: auto;
+    }
+
+    
+  }
+
+
+
+  &.box {
+
+    span.label {
+      margin: 14px 0 14px 50px;
+
+    }
+  }
+
+  &.components {
+
+    span.label {
+      margin: 14px 0 14px 45px;
+    }
+  }
+}
+
+.dropbtn {
+    padding: 0px;
+    font-size: 16px;
+    border: none;
+}
+
+.dropdown {
+    position: relative;
+    height: 30px;
+    display: inline;
+    float: right;
+    bottom: 10px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0px;
+    top:30px;
+    background-color: $blue-main;
+    opacity: 1;
+    min-width: 220px;
+    //box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content-sort {
+    display: none;
+    position: absolute;
+    right: 0px;
+    top:30px;
+    background-color: $blue-main;
+    opacity: 1;
+    min-width: 260px;
+    //box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: rgb(255, 254, 254);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content-sort a {
+    color: rgb(255, 254, 254);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #546979}
+
+.dropdown-content-sort a:hover {background-color: #546979}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropdown-content-sort {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    //background-color: #000000;
+    opacity: 0.5
+}
+
+@media screen and (max-width: 400px) {
+  .metric-building-blocks {
+
+    .building-blocks-heading {
+
+      .reporting {
+        bottom: 0;
+        display: block;
+        float: none;
+        margin: 12px 16px 0 19px;
+        text-align: left;
+      }
+    }
+  }
+}

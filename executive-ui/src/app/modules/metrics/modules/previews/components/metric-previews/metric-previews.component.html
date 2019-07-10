@@ -1,0 +1,146 @@
+<div class="metric-previews" (click)="reset()"
+	[ngClass]="{'metric-selected': selectedMetric }" fxLayout="row"
+	fxLayoutWrap>
+	<app-open-source-violations-card class="metric"
+		[attr.data-sort]="sortMap.get('open-source-violations').currentSort"
+		[ngClass]="{'disabled': isDisabled('open-source-violations')}"
+		fxFlex [portfolioId]="portfolioId" [productId]="this.productId"
+		(hideBuildingBlocksEvent)="reset()"
+		(showBuildingBlocksEvent)="showBuildingBlocks($event)"
+		(metricPreviewInitialized)="addMetric()"
+		[selectedMetric]="selectedMetric"
+		(isSelectedEvent)="selectMetric($event)" [hidden]="!showVelocity"  (showSpinner)="showSpinnerFromChild($event)"></app-open-source-violations-card>
+	<app-pipeline-lead-time-card class="metric" 
+		[attr.data-sort]="sortMap.get('pipeline-lead-time').currentSort"
+		fxFlex
+                            [ngClass]="{'disabled': isDisabled('pipeline-lead-time')}"
+		[portfolioId]="portfolioId" [productId]="this.productId"
+		(hideBuildingBlocksEvent)="reset()"
+		(showBuildingBlocksEvent)="showBuildingBlocks($event)"
+		(metricPreviewInitialized)="addMetric()"
+		[selectedMetric]="selectedMetric"
+		(isSelectedEvent)="selectMetric($event)" [hidden]="!showCycleTime"  (showSpinner)="showSpinnerFromChild($event)"></app-pipeline-lead-time-card>
+	<app-security-violations-preview class="metric"
+		[attr.data-sort]="sortMap.get('security-violations').currentSort"
+		fxFlex
+                                   [ngClass]="{'disabled': isDisabled('security-violations')}"
+		[portfolioId]="portfolioId" [productId]="this.productId"
+		(hideBuildingBlocksEvent)="reset()"
+		(showBuildingBlocksEvent)="showBuildingBlocks($event)"
+		(metricPreviewInitialized)="addMetric()"
+		[selectedMetric]="selectedMetric"
+		(isSelectedEvent)="selectMetric($event)" [hidden]="!showSecurity"  (showSpinner)="showSpinnerFromChild($event)"></app-security-violations-preview>
+	<app-production-incidents-preview class="metric"
+		[attr.data-sort]="sortMap.get('production-incidents').currentSort"
+		[ngClass]="{'disabled': isDisabled('production-incidents')}"
+		fxFlex [portfolioId]="portfolioId" [productId]="this.productId"
+		(hideBuildingBlocksEvent)="reset()"
+		(showBuildingBlocksEvent)="showBuildingBlocks($event)"
+		(metricPreviewInitialized)="addMetric()"
+		[selectedMetric]="selectedMetric"
+		(isSelectedEvent)="selectMetric($event)" [hidden]="!showEvents"  (showSpinner)="showSpinnerFromChild($event)"></app-production-incidents-preview>
+	<app-quality-preview class="metric" 
+		[attr.data-sort]="sortMap.get('quality').currentSort"
+		fxFlex
+                                   [ngClass]="{'disabled': isDisabled('quality')}"
+		[portfolioId]="portfolioId" [productId]="this.productId"
+		(hideBuildingBlocksEvent)="reset()"
+		(showBuildingBlocksEvent)="showBuildingBlocks($event)"
+		(metricPreviewInitialized)="addMetric()"
+		[selectedMetric]="selectedMetric"
+		(isSelectedEvent)="selectMetric($event)" [hidden]="!showQuality"  (showSpinner)="showSpinnerFromChild($event)"></app-quality-preview>
+	<app-work-in-progress-preview class="metric"
+		[attr.data-sort]="sortMap.get('work-in-progress').currentSort"
+		fxFlex
+                                   [ngClass]="{'disabled': isDisabled('work-in-progress')}"
+		[portfolioId]="portfolioId" [productId]="this.productId"
+		(hideBuildingBlocksEvent)="reset()"
+		(showBuildingBlocksEvent)="showBuildingBlocks($event)"
+		(metricPreviewInitialized)="addMetric()"
+		[selectedMetric]="selectedMetric"
+		(isSelectedEvent)="selectMetric($event)" [hidden]="!showWip"  (showSpinner)="showSpinnerFromChild($event)"></app-work-in-progress-preview>
+	<app-throughput-preview class="metric"
+		[attr.data-sort]="sortMap.get('total-value').currentSort"
+		fxFlex
+                                   [ngClass]="{'disabled': isDisabled('total-value')}"
+		[portfolioId]="portfolioId" [productId]="this.productId"
+		(hideBuildingBlocksEvent)="reset()"
+		(showBuildingBlocksEvent)="showBuildingBlocks($event)"
+		(metricPreviewInitialized)="addMetric()"
+		[selectedMetric]="selectedMetric"
+		(isSelectedEvent)="selectMetric($event)" [hidden]="!showStories"  (showSpinner)="showSpinnerFromChild($event)"></app-throughput-preview>
+	<app-build-preview class="metric"
+		[attr.data-sort]="sortMap.get('build').currentSort"
+		[ngClass]="{'disabled': isDisabled('build')}"
+		fxFlex [portfolioId]="portfolioId" [productId]="this.productId"
+		(hideBuildingBlocksEvent)="reset()"
+		(showBuildingBlocksEvent)="showBuildingBlocks($event)"
+		(metricPreviewInitialized)="addMetric()"
+		[selectedMetric]="selectedMetric"
+		(isSelectedEvent)="selectMetric($event)" [hidden]="!showBuild"  (showSpinner)="showSpinnerFromChild($event)"></app-build-preview>
+
+		
+	<app-deploy-preview class="metric" 
+		[attr.data-sort]="sortMap.get('deploy').currentSort"
+		[ngClass]="{'disabled': isDisabled('deploy')}"
+		fxFlex [portfolioId]="portfolioId" [productId]="this.productId"
+		(hideBuildingBlocksEvent)="reset()"
+		(showBuildingBlocksEvent)="showBuildingBlocks($event)"
+		(metricPreviewInitialized)="addMetric()"
+		[selectedMetric]="selectedMetric"
+		(isSelectedEvent)="selectMetric($event)" [hidden]="!showDeploy"  (showSpinner)="showSpinnerFromChild($event)"></app-deploy-preview>
+
+	<app-cloud-preview class="metric"
+		[attr.data-sort]="sortMap.get('cloud').currentSort"
+		[ngClass]="{'disabled': isDisabled('cloud')}"
+		fxFlex [portfolioId]="portfolioId" [productId]="this.productId"
+		(hideBuildingBlocksEvent)="reset()"
+		(showBuildingBlocksEvent)="showBuildingBlocks($event)"
+		(metricPreviewInitialized)="addMetric()"
+		[selectedMetric]="selectedMetric"
+		(isSelectedEvent)="selectMetric($event)" [hidden]="!showCloud"  (showSpinner)="showSpinnerFromChild($event)"></app-cloud-preview>
+	<app-code-repo-preview class="metric" 
+		[attr.data-sort]="sortMap.get('stash').currentSort"
+		fxFlex [ngClass]="{'disabled': isDisabled('stash')}"
+		[portfolioId]="portfolioId" [productId]="this.productId"
+		(hideBuildingBlocksEvent)="reset()"
+		(showBuildingBlocksEvent)="showBuildingBlocks($event)"
+		(metricPreviewInitialized)="addMetric()"
+		[selectedMetric]="selectedMetric"
+		(isSelectedEvent)="selectMetric($event)" [hidden]="!showCodeRepo"  (showSpinner)="showSpinnerFromChild($event)"></app-code-repo-preview>
+	<app-saydoratio-preview class="metric"
+		[attr.data-sort]="sortMap.get('saydoratio').currentSort"
+		[ngClass]="{'disabled': isDisabled('saydoratio')}"
+		fxFlex [portfolioId]="portfolioId" [productId]="this.productId"
+		(hideBuildingBlocksEvent)="reset()"
+		(showBuildingBlocksEvent)="showBuildingBlocks($event)"
+		(metricPreviewInitialized)="addMetric()"
+		[selectedMetric]="selectedMetric"
+		(isSelectedEvent)="selectMetric($event)" [hidden]="!showSayDoRatio"  (showSpinner)="showSpinnerFromChild($event)"></app-saydoratio-preview>
+
+	<app-test-preview class="metric"
+		[attr.data-sort]="sortMap.get('test').currentSort"
+		[ngClass]="{'disabled': isDisabled('test')}"
+		fxFlex [portfolioId]="portfolioId" [productId]="this.productId"
+		(hideBuildingBlocksEvent)="reset()"
+		(showBuildingBlocksEvent)="showBuildingBlocks($event)"
+		(metricPreviewInitialized)="addMetric()"
+		[selectedMetric]="selectedMetric"
+		(isSelectedEvent)="selectMetric($event)" [hidden]="!showTest"  (showSpinner)="showSpinnerFromChild($event)"></app-test-preview>
+		
+		
+		<app-devopscup-preview class="metric"
+		[attr.data-sort]="sortMap.get('devopscup').currentSort"
+		[ngClass]="{'disabled': isDisabled('devopscup')}"
+		fxFlex [portfolioId]="portfolioId" [productId]="this.productId"
+		(hideBuildingBlocksEvent)="reset()"
+		(showBuildingBlocksEvent)="showBuildingBlocks($event)"
+		(metricPreviewInitialized)="addMetric()"
+		[selectedMetric]="selectedMetric"
+		(isSelectedEvent)="selectMetric($event)" [hidden]="!showDevopsCup"  (showSpinner)="showSpinnerFromChild($event)"></app-devopscup-preview>
+	<div class="placeholder" fxFlex></div>
+	<div class="placeholder" fxFlex></div>
+	<div class="placeholder" fxFlex></div>
+	<div class="placeholder" fxFlex></div>
+	<div class="placeholder" fxFlex></div>
+</div>
