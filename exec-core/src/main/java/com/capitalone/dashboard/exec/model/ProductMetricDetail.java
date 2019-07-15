@@ -46,13 +46,13 @@ public class ProductMetricDetail extends RollupMetricDetail {
             summary = new MetricSummary();
         }
         summary.setLastUpdated(new Date());
-        componentMetricDetailList.forEach(this::updateSummary);
+        componentMetricDetailList.forEach(metricDetails -> updateSummary(metricDetails,componentMetricDetailList.size()));
     }
 
     protected void updateTimeSeries() {
         if (timeSeries == null) {
             timeSeries = getEmptyTimeSeries();
         }
-        componentMetricDetailList.forEach(this::updateTimeSeries);
+        componentMetricDetailList.forEach(itemMetricDetails -> updateTimeSeries(itemMetricDetails, componentMetricDetailList.size()));
     }
 }

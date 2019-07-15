@@ -4,9 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import com.capitalone.dashboard.exec.model.vz.MTTR;
-import com.capitalone.dashboard.exec.model.vz.OperationalMetrics;
-
 public class MetricCount {
     private Map<String, String> label;
     private double value;
@@ -43,10 +40,12 @@ public class MetricCount {
         value += val;
     }
 
-    public void addAverageValue(double val) {
+    public void addAverageValue(double val,int reportingComponents) {
+        value = ((val*(reportingComponents-1)) + value)/reportingComponents;
+    }
+    public void addMetricSummaryAverageValue(double val) {
         value = (value + val)/2.0;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
