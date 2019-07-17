@@ -13,9 +13,9 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
 import com.capitalone.dashboard.collector.MetricsProcessorConfig;
-import com.capitalone.dashboard.exec.model.vz.BitbucketPullRequest;
-import com.capitalone.dashboard.exec.model.vz.Commit;
-import com.capitalone.dashboard.exec.model.vz.StashDetailsInfo;
+import com.capitalone.dashboard.exec.model.BitbucketPullRequest;
+import com.capitalone.dashboard.exec.model.Commit;
+import com.capitalone.dashboard.exec.model.StashDetailsInfo;
 import com.mongodb.MongoClient;
 
 /**

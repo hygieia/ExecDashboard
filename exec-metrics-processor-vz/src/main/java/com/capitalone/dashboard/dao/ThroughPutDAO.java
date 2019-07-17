@@ -16,8 +16,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.capitalone.dashboard.collector.MetricsProcessorConfig;
-import com.capitalone.dashboard.exec.model.vz.Dashboard;
-import com.capitalone.dashboard.exec.model.vz.ProductPipelineData;
+import com.capitalone.dashboard.exec.model.Dashboard;
+import com.capitalone.dashboard.exec.model.ProductPipelineData;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;

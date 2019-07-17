@@ -16,8 +16,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import com.capitalone.dashboard.collector.MetricsProcessorConfig;
-import com.capitalone.dashboard.exec.model.vz.ServiceNowIssues;
-import com.capitalone.dashboard.exec.model.vz.ServiceNowTicket;
+import com.capitalone.dashboard.exec.model.ServiceNowIssues;
+import com.capitalone.dashboard.exec.model.ServiceNowTicket;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 

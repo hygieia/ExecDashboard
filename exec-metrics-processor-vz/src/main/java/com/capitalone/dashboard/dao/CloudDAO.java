@@ -12,14 +12,14 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
 import com.capitalone.dashboard.collector.MetricsProcessorConfig;
-import com.capitalone.dashboard.exec.model.vz.CloudCustodianAMI;
-import com.capitalone.dashboard.exec.model.vz.CloudCustodianEBS;
-import com.capitalone.dashboard.exec.model.vz.CloudCustodianEbsUnused;
-import com.capitalone.dashboard.exec.model.vz.CloudCustodianElbUnused;
-import com.capitalone.dashboard.exec.model.vz.CloudCustodianEniUnused;
-import com.capitalone.dashboard.exec.model.vz.CloudCustodianRdsAll;
-import com.capitalone.dashboard.exec.model.vz.CloudCustodianS3;
-import com.capitalone.dashboard.exec.model.vz.ELB;
+import com.capitalone.dashboard.exec.model.CloudCustodianAMI;
+import com.capitalone.dashboard.exec.model.CloudCustodianEBS;
+import com.capitalone.dashboard.exec.model.CloudCustodianEbsUnused;
+import com.capitalone.dashboard.exec.model.CloudCustodianElbUnused;
+import com.capitalone.dashboard.exec.model.CloudCustodianEniUnused;
+import com.capitalone.dashboard.exec.model.CloudCustodianRdsAll;
+import com.capitalone.dashboard.exec.model.CloudCustodianS3;
+import com.capitalone.dashboard.exec.model.ELB;
 import com.mongodb.MongoClient;
 
 /**

@@ -17,8 +17,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
 import com.capitalone.dashboard.collector.MetricsProcessorConfig;
-import com.capitalone.dashboard.exec.model.vz.FeatureUserStory;
-import com.capitalone.dashboard.exec.model.vz.JiraDetailsFinal;
+import com.capitalone.dashboard.exec.model.FeatureUserStory;
+import com.capitalone.dashboard.exec.model.JiraDetailsFinal;
 import com.mongodb.MongoClient;
 
 /**

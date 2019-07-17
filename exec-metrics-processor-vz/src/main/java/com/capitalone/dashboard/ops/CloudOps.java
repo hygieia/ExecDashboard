@@ -14,11 +14,11 @@ import org.springframework.stereotype.Component;
 import com.capitalone.dashboard.dao.CloudDAO;
 import com.capitalone.dashboard.exec.model.MetricCount;
 import com.capitalone.dashboard.exec.model.MetricTimeSeriesElement;
-import com.capitalone.dashboard.exec.model.vz.CloudCost;
-import com.capitalone.dashboard.exec.model.vz.ExecutiveMetricsSeries;
-import com.capitalone.dashboard.exec.model.vz.ExecutiveModuleMetrics;
-import com.capitalone.dashboard.exec.model.vz.SeriesCount;
-import com.capitalone.dashboard.exec.repository.vz.CloudCostRepository;
+import com.capitalone.dashboard.exec.model.CloudCost;
+import com.capitalone.dashboard.exec.model.ExecutiveMetricsSeries;
+import com.capitalone.dashboard.exec.model.ExecutiveModuleMetrics;
+import com.capitalone.dashboard.exec.model.SeriesCount;
+import com.capitalone.dashboard.exec.repository.CloudCostRepository;
 import com.capitalone.dashboard.utils.GenericMethods;
 import com.mongodb.MongoClient;
 

@@ -16,10 +16,10 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
 import com.capitalone.dashboard.collector.MetricsProcessorConfig;
-import com.capitalone.dashboard.exec.model.vz.ExecutiveMetricsSeries;
-import com.capitalone.dashboard.exec.model.vz.ExecutiveModuleMetrics;
-import com.capitalone.dashboard.exec.model.vz.SeriesCount;
-import com.capitalone.dashboard.exec.model.vz.TestMetrics;
+import com.capitalone.dashboard.exec.model.ExecutiveMetricsSeries;
+import com.capitalone.dashboard.exec.model.ExecutiveModuleMetrics;
+import com.capitalone.dashboard.exec.model.SeriesCount;
+import com.capitalone.dashboard.exec.model.TestMetrics;
 import com.mongodb.MongoClient;
 
 /**

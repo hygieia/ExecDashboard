@@ -26,7 +26,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
 import com.capitalone.dashboard.collector.MetricsProcessorConfig;
-import com.capitalone.dashboard.exec.model.vz.Vast;
+import com.capitalone.dashboard.exec.model.Vast;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 

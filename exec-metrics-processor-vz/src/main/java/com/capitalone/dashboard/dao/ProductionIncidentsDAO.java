@@ -20,8 +20,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
 import com.capitalone.dashboard.collector.MetricsProcessorConfig;
-import com.capitalone.dashboard.exec.model.vz.MTTR;
-import com.capitalone.dashboard.exec.model.vz.OperationalMetrics;
+import com.capitalone.dashboard.exec.model.MTTR;
+import com.capitalone.dashboard.exec.model.OperationalMetrics;
 import com.mongodb.MongoClient;
 
 /**

@@ -18,12 +18,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Component;
 
-import com.capitalone.dashboard.exec.model.vz.ApplicationDetails;
-import com.capitalone.dashboard.exec.model.vz.ExecutiveMetricsSeries;
-import com.capitalone.dashboard.exec.model.vz.ExecutiveModuleMetrics;
-import com.capitalone.dashboard.exec.model.vz.SeriesCount;
-import com.capitalone.dashboard.exec.repository.vz.ApplicationDetailsRepository;
-import com.capitalone.dashboard.exec.repository.vz.CloudCostRepository;
+import com.capitalone.dashboard.exec.model.ApplicationDetails;
+import com.capitalone.dashboard.exec.model.ExecutiveMetricsSeries;
+import com.capitalone.dashboard.exec.model.ExecutiveModuleMetrics;
+import com.capitalone.dashboard.exec.model.SeriesCount;
+import com.capitalone.dashboard.exec.repository.ApplicationDetailsRepository;
+import com.capitalone.dashboard.exec.repository.CloudCostRepository;
 
 /**
  * @author raish4s

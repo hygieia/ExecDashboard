@@ -12,9 +12,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.capitalone.dashboard.exec.model.vz.Collector;
-import com.capitalone.dashboard.exec.model.vz.CollectorType;
-import com.capitalone.dashboard.exec.repository.vz.BaseCollectorRepository;
+import com.capitalone.dashboard.exec.model.Collector;
+import com.capitalone.dashboard.exec.model.CollectorType;
+import com.capitalone.dashboard.exec.repository.BaseCollectorRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MetricsProcessorCollectorTaskTest {

@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Component;
 
-import com.capitalone.dashboard.exec.collector.vz.CollectorTask;
-import com.capitalone.dashboard.exec.model.vz.Collector;
-import com.capitalone.dashboard.exec.model.vz.CollectorType;
-import com.capitalone.dashboard.exec.repository.vz.BaseCollectorRepository;
+import com.capitalone.dashboard.exec.collector.CollectorTask;
+import com.capitalone.dashboard.exec.model.Collector;
+import com.capitalone.dashboard.exec.model.CollectorType;
+import com.capitalone.dashboard.exec.repository.BaseCollectorRepository;
 
 /**
  * MetricsProcessorCollectorTask extends CollectorTask<Collector>

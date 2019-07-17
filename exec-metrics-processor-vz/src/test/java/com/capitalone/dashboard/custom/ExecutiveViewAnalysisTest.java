@@ -18,14 +18,14 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.capitalone.dashboard.exec.model.MetricCount;
 import com.capitalone.dashboard.exec.model.MetricLevel;
 import com.capitalone.dashboard.exec.model.MetricSummary;
-import com.capitalone.dashboard.exec.model.vz.BuildingBlocks;
-import com.capitalone.dashboard.exec.model.vz.ExecutiveSummaryList;
-import com.capitalone.dashboard.exec.model.vz.MetricsDetail;
-import com.capitalone.dashboard.exec.model.vz.PortfolioResponse;
-import com.capitalone.dashboard.exec.repository.vz.BuildingBlocksRepository;
-import com.capitalone.dashboard.exec.repository.vz.ExecutiveSummaryListRepository;
-import com.capitalone.dashboard.exec.repository.vz.MetricsDetailRepository;
-import com.capitalone.dashboard.exec.repository.vz.PortfolioResponseRepository;
+import com.capitalone.dashboard.exec.model.BuildingBlocks;
+import com.capitalone.dashboard.exec.model.ExecutiveSummaryList;
+import com.capitalone.dashboard.exec.model.MetricsDetail;
+import com.capitalone.dashboard.exec.model.PortfolioResponse;
+import com.capitalone.dashboard.exec.repository.BuildingBlocksRepository;
+import com.capitalone.dashboard.exec.repository.ExecutiveSummaryListRepository;
+import com.capitalone.dashboard.exec.repository.MetricsDetailRepository;
+import com.capitalone.dashboard.exec.repository.PortfolioResponseRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ExecutiveViewAnalysisTest {

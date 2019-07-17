@@ -13,10 +13,10 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.capitalone.dashboard.dao.CloudDAO;
-import com.capitalone.dashboard.exec.model.vz.CloudCost;
-import com.capitalone.dashboard.exec.model.vz.ExecutiveMetricsSeries;
-import com.capitalone.dashboard.exec.model.vz.ExecutiveModuleMetrics;
-import com.capitalone.dashboard.exec.repository.vz.CloudCostRepository;
+import com.capitalone.dashboard.exec.model.CloudCost;
+import com.capitalone.dashboard.exec.model.ExecutiveMetricsSeries;
+import com.capitalone.dashboard.exec.model.ExecutiveModuleMetrics;
+import com.capitalone.dashboard.exec.repository.CloudCostRepository;
 import com.capitalone.dashboard.utils.GenericMethods;
 import com.mongodb.MongoClient;
 

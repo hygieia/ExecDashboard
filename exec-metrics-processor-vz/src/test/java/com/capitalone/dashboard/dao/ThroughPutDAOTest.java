@@ -14,9 +14,9 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import com.capitalone.dashboard.collector.MetricsProcessorConfig;
-import com.capitalone.dashboard.exec.model.vz.BunitCredentials;
-import com.capitalone.dashboard.exec.model.vz.Dashboard;
-import com.capitalone.dashboard.exec.model.vz.ProductPipelineData;
+import com.capitalone.dashboard.exec.model.BunitCredentials;
+import com.capitalone.dashboard.exec.model.Dashboard;
+import com.capitalone.dashboard.exec.model.ProductPipelineData;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 

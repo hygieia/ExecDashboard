@@ -8,7 +8,7 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 
 import com.capitalone.dashboard.exec.model.MetricCount;
-import com.capitalone.dashboard.exec.model.vz.SeriesCount;
+import com.capitalone.dashboard.exec.model.SeriesCount;
 
 /**
  * @author raish4s

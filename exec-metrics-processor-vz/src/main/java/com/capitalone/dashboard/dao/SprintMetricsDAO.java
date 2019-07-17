@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
 import com.capitalone.dashboard.collector.MetricsProcessorConfig;
-import com.capitalone.dashboard.exec.model.vz.SprintMetrics;
+import com.capitalone.dashboard.exec.model.SprintMetrics;
 import com.mongodb.MongoClient;
 
 /**

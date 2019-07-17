@@ -11,7 +11,7 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.capitalone.dashboard.dao.ServiceNowDAO;
-import com.capitalone.dashboard.exec.model.vz.ServiceNowTicket;
+import com.capitalone.dashboard.exec.model.ServiceNowTicket;
 import com.mongodb.MongoClient;
 
 @RunWith(MockitoJUnitRunner.class)

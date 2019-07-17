@@ -17,11 +17,11 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
 import com.capitalone.dashboard.collector.MetricsProcessorConfig;
-import com.capitalone.dashboard.exec.model.vz.DateWiseMetricsSeries;
-import com.capitalone.dashboard.exec.model.vz.ExecutiveMetricsSeries;
-import com.capitalone.dashboard.exec.model.vz.ExecutiveSecurityData;
-import com.capitalone.dashboard.exec.model.vz.SeriesCount;
-import com.capitalone.dashboard.exec.model.vz.Vast;
+import com.capitalone.dashboard.exec.model.DateWiseMetricsSeries;
+import com.capitalone.dashboard.exec.model.ExecutiveMetricsSeries;
+import com.capitalone.dashboard.exec.model.ExecutiveSecurityData;
+import com.capitalone.dashboard.exec.model.SeriesCount;
+import com.capitalone.dashboard.exec.model.Vast;
 import com.capitalone.dashboard.utils.LinearRegression;
 import com.mongodb.MongoClient;
 

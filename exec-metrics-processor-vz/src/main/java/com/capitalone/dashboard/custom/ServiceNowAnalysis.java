@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.capitalone.dashboard.dao.ServiceNowDAO;
-import com.capitalone.dashboard.exec.model.vz.ServiceNowTicket;
+import com.capitalone.dashboard.exec.model.ServiceNowTicket;
 import com.mongodb.MongoClient;
 
 /**
