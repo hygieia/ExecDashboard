@@ -16,7 +16,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 	private AuthenticationRepository authenticationRepository;
 	private UserTrackRepository userTrackRepository;
-	// private PortfolioResponseRepository portfolioResponseRepository;
 
 	/**
 	 * 
@@ -27,11 +26,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	@Autowired
 	public AuthenticationServiceImpl(AuthenticationRepository authenticationRepository,
 			UserTrackRepository userTrackRepository) {
-		// UserTrackRepository userTrackRepository, PortfolioResponseRepository
-		// portfolioResponseRepository) {
 		this.authenticationRepository = authenticationRepository;
 		this.userTrackRepository = userTrackRepository;
-		// this.portfolioResponseRepository = portfolioResponseRepository;
 	}
 
 	/**
@@ -42,7 +38,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	public String register(AuthenticationRequest request) {
 
 		Authentication currentUser = authenticationRepository.findByEid(request.getEid());
-		long loggededTime = System.currentTimeMillis();
+		long loggedTime = System.currentTimeMillis();
 		if (currentUser == null) {
 			Authentication newUser = new Authentication();
 
@@ -51,17 +47,17 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 			newUser.setFirstname(request.getFirstname());
 			newUser.setLastname(request.getLastname());
 			newUser.setUsername(request.getUsername());
-			newUser.setLastLoggedin(loggededTime);
+			newUser.setLastLoggedin(loggedTime);
 			newUser.setIsAdmin(false);
 
 			authenticationRepository.save(newUser);
-			logUser(request.getEid(), loggededTime);
+			logUser(request.getEid(), loggedTime);
 			return "New User Created";
 
 		} else {
 
-			logUser(request.getEid(), loggededTime);
-			currentUser.setLastLoggedin(loggededTime);
+			logUser(request.getEid(), loggedTime);
+			currentUser.setLastLoggedin(loggedTime);
 			authenticationRepository.save(currentUser);
 			
 			if(currentUser.getIsAdmin() == null ){
