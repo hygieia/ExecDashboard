@@ -9,10 +9,6 @@ import java.util.Set;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-/**
- * @author V636975
- *
- */
 @Document(collection = "externalmonitor")
 public class ExternalSystemMonitor extends BaseModel {
 

@@ -11,8 +11,7 @@ import com.capitalone.dashboard.exec.model.StashDetailsExcel;
 
 /**
  * Data Model for Stash Details obtained from excel sheet
- * 
- * @author prakpr5
+ *
  */
 
 @Repository

@@ -12,7 +12,7 @@ import com.capitalone.dashboard.exec.model.CardsList;
  * Interface CardsListRepository extends PagingAndSortingRepository<CardsList,
  * ObjectId>
  * 
- * @author v143611
+ *
  */
 public interface CardsListRepository extends PagingAndSortingRepository<CardsList, ObjectId> {
 

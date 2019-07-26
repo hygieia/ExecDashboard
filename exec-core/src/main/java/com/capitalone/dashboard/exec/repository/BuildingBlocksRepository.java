@@ -14,7 +14,7 @@ import com.capitalone.dashboard.exec.model.BuildingBlocks;
  * Interface BuildingBlocks extends PagingAndSortingRepository<BuildingBlocks,
  * ObjectId>
  * 
- * @author raish4s
+ *
  */
 public interface BuildingBlocksRepository extends PagingAndSortingRepository<BuildingBlocks, ObjectId> {
 

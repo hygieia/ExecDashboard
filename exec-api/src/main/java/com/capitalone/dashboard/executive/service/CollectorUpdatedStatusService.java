@@ -6,8 +6,7 @@ import java.util.List;
 
 /**
  * interface CollectorUpdatedStatusService
- * 
- * @author rhe94mg
+ *
  *
  */
 @FunctionalInterface

@@ -9,7 +9,7 @@ import com.capitalone.dashboard.exec.model.DevopscupRoundDetails;
  * Interface DevopscupRoundDetailsRepository
  * gingAndSortingRepository<DevopscupRoundDetails, ObjectId>
  * 
- * @author rhe94mg
+ *
  */
 public interface DevopscupRoundDetailsRepository extends PagingAndSortingRepository<DevopscupRoundDetails, ObjectId> {
 	/**

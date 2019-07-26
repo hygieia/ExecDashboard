@@ -8,7 +8,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import com.capitalone.dashboard.exec.model.VonkinatorPeriod;
 
 /**
- * @author RAISH4S
+ *
  *
  */
 public interface VonkinatorPeriodRepository extends PagingAndSortingRepository<VonkinatorPeriod, ObjectId> {

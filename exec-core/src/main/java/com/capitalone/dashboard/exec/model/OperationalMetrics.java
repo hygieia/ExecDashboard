@@ -3,7 +3,7 @@ package com.capitalone.dashboard.exec.model;
 import java.util.List;
 
 /**
- * @author V143611
+ *
  *
  */
 public class OperationalMetrics {

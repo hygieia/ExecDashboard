@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * @author V143611
+ *
  *
  */
 @Document(collection = "vonkinator_data_set")

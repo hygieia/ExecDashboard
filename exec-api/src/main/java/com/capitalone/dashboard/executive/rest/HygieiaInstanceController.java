@@ -15,8 +15,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 /**
  * class HygieiaInstanceController
- * 
- * @author RHE94MG
+ *
  *
  */
 @RestController

@@ -3,7 +3,7 @@ package com.capitalone.dashboard.exec.model;
 /**
  * CloudExcellence added for DevopsCup Scores
  * 
- * @author RHE94MG
+ *
  *
  */
 public class CloudExcellence {

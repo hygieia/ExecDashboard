@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 /**
  * Instance class extends BaseModel
  * 
- * @author RHE94MG
+ *
  *
  */
 @Document(collection = "instances")

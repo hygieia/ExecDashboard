@@ -11,8 +11,7 @@ import com.capitalone.dashboard.exec.model.CloudCost;
 /**
  * Interface CloudCostRepository extends PagingAndSortingRepository<CloudCost,
  * ObjectId>
- * 
- * @author raish4s
+ *
  */
 public interface CloudCostRepository extends PagingAndSortingRepository<CloudCost, ObjectId> {
 

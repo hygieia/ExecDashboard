@@ -2,11 +2,7 @@ package com.capitalone.dashboard.exec.model;
 
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-/**
- * 
- * @author ASTHAAA
- *
- */
+
 @Document(collection = "sprint_metrics")
 public class SprintMetrics extends BaseModel {
 	

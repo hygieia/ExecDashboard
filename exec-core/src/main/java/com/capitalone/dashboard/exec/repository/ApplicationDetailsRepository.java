@@ -11,8 +11,7 @@ import com.capitalone.dashboard.exec.model.ApplicationDetails;
 /**
  * Interface ApplicationDetailsRepository extends
  * PagingAndSortingRepository<ApplicationDetails, ObjectId>
- * 
- * @author raish4s
+ *
  */
 public interface ApplicationDetailsRepository extends PagingAndSortingRepository<ApplicationDetails, ObjectId> {
 

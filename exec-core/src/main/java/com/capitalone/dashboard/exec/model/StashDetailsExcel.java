@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 /**
  * Data Model for Stash Details obtained from excel sheet
  * 
- * @author prakpr5
+ *
  */
 
 @Document(collection = "stash_details_excel")

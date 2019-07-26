@@ -10,8 +10,7 @@ import com.capitalone.dashboard.exec.model.MetricPortfolioDetailResponse;
 /**
  * Interface ChangeFailureRepository extends
  * CrudRepository<MetricPortfolioDetailResponse, ObjectId>
- * 
- * @author v925481
+ *
  */
 
 public interface ChangeFailureRepository extends CrudRepository<MetricPortfolioDetailResponse, ObjectId> {

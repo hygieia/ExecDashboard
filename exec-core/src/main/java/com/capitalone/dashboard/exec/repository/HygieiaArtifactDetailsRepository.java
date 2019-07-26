@@ -7,8 +7,7 @@ import com.capitalone.dashboard.exec.model.HygieiaArtifactDetails;
 
 /**
  * HygieiaArtifactDetailsRepository interface extends PagingAndSortingRepository
- * 
- * @author RHE94MG
+ *
  *
  */
 public interface HygieiaArtifactDetailsRepository extends PagingAndSortingRepository<HygieiaArtifactDetails, ObjectId> {

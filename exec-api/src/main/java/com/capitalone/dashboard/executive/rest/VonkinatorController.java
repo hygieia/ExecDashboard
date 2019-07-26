@@ -15,7 +15,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 /**
  * class VonkinatorController
  * 
- * @author v143611
+ *
  *
  */
 @RestController

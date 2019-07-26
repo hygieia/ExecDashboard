@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * 
- * @author RHE94MG
+ *
  *
  */
 @Document(collection = "hygieia_artifactories")

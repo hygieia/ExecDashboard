@@ -12,7 +12,7 @@ import com.capitalone.dashboard.exec.model.BuildingBlockMetricSummaryResponse;
  * Interface BuildingBlockMetricSummaryRepository extends
  * PagingAndSortingRepository<BuildingBlockMetricSummaryResponse, ObjectId>
  * 
- * @author v143611
+ *
  */
 public interface BuildingBlockMetricSummaryRepository
 		extends PagingAndSortingRepository<BuildingBlockMetricSummaryResponse, ObjectId> {

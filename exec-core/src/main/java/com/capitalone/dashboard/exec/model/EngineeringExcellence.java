@@ -3,7 +3,7 @@ package com.capitalone.dashboard.exec.model;
 /**
  * EngineeringExcellence for DevopsCup Scores
  * 
- * @author RHE94MG
+ *
  *
  */
 public class EngineeringExcellence {

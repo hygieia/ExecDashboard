@@ -3,11 +3,6 @@ package com.capitalone.dashboard.exec.model;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
-/**
- * 
- * @author asthaaa
- *
- */
 @Component
 @Document(collection = "testmetrics")
 public class TestMetrics extends BaseModel {

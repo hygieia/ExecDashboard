@@ -3,7 +3,7 @@ package com.capitalone.dashboard.exec.model;
 /**
  * AwsNonProdScoreRequest for Cloud Excellence
  * 
- * @author RHE94MG
+ *
  *
  */
 public class AwsNonProdScoreRequest {

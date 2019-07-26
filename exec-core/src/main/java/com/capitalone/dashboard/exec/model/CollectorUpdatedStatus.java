@@ -3,7 +3,7 @@ package com.capitalone.dashboard.exec.model;
 
 /**
  * 
- * @author rhe94mg
+ *
  * 
  */
 public class CollectorUpdatedStatus {

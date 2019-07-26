@@ -1,14 +1,6 @@
 package com.capitalone.dashboard.exec.model;
 
-/**
- * @author raish4s
- *
- */
 
-/**
- * @author V636975
- *
- */
 public enum ExternalSystemType {
 	API, DB;
 

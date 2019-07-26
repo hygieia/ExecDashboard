@@ -9,10 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.capitalone.dashboard.exec.model.ExternalSystemMonitor;
 
-/**
- * @author V636975
- *
- */
 @Repository
 public interface ExternalSystemMonitorRepository extends MongoRepository<ExternalSystemMonitor, ObjectId> {
 

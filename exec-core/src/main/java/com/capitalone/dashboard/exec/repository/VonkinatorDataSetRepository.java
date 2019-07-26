@@ -9,7 +9,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import com.capitalone.dashboard.exec.model.VonkinatorDataSet;
 
 /**
- * @author raish4s
+ *
  *
  */
 public interface VonkinatorDataSetRepository extends PagingAndSortingRepository<VonkinatorDataSet, ObjectId> {

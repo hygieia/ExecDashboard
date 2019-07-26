@@ -12,7 +12,7 @@ import com.capitalone.dashboard.exec.model.CollectorUpdatedDetails;
 /**
  * interface CollectorUpdatedDetailsRepository
  * 
- * @author rhe94mg
+ *
  *
  */
 public interface CollectorUpdatedDetailsRepository

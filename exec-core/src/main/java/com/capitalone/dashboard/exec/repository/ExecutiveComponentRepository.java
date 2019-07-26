@@ -12,7 +12,7 @@ import com.capitalone.dashboard.exec.model.ExecutiveComponents;
  * Interface ExecutiveComponentRepository extends
  * PagingAndSortingRepository<ExecutiveComponents, ObjectId>
  * 
- * @author v143611
+ *
  */
 public interface ExecutiveComponentRepository extends PagingAndSortingRepository<ExecutiveComponents, ObjectId> {
 

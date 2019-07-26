@@ -1,10 +1,5 @@
 package com.capitalone.dashboard.exec.model;
 
-/**
- * @author v636975
- *
- */
-
 public class ExternalMetric {
 
 	private String queryOrApi;

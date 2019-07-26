@@ -1,7 +1,7 @@
 package com.capitalone.dashboard.exec.model;
 
 /**
- * @author V143611
+ *
  *
  */
 public class ExecutiveStatus {

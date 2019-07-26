@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * @author V143611
+ *
  *
  */
 @Document(collection = "mttr")

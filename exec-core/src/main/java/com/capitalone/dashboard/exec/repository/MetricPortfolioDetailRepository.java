@@ -12,7 +12,7 @@ import com.capitalone.dashboard.exec.model.MetricPortfolioDetailResponse;
  * Interface ApplicationDetailsRepository extends
  * PagingAndSortingRepository<ApplicationDetails, ObjectId>
  * 
- * @author v143611
+ *
  */
 public interface MetricPortfolioDetailRepository
 		extends PagingAndSortingRepository<MetricPortfolioDetailResponse, ObjectId> {

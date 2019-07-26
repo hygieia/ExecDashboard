@@ -6,7 +6,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import com.capitalone.dashboard.exec.model.JenkinsPipelineMetrics;
 
 /**
- * @author v143611
+ *
  *
  */
 public interface JenkinsPipelineMetricsRepository extends PagingAndSortingRepository<JenkinsPipelineMetrics, ObjectId> {

@@ -3,7 +3,7 @@ package com.capitalone.dashboard.exec.model;
 /**
  * Data model for RepoDetails object
  * 
- * @author PRAKPR5
+ *
  *
  */
 public class RepoDetails {

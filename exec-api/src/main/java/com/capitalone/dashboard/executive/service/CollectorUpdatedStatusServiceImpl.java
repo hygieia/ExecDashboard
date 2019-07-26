@@ -14,8 +14,7 @@ import java.util.List;
 @Service
 /**
  * Collector Updated Status Service Impl
- * 
- * @author rhe94mg
+ *
  *
  */
 public class CollectorUpdatedStatusServiceImpl implements CollectorUpdatedStatusService {

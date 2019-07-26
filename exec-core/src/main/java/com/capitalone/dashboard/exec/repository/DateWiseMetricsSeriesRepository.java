@@ -10,7 +10,7 @@ import org.springframework.data.repository.CrudRepository;
 import com.capitalone.dashboard.exec.model.DateWiseMetricsSeries;
 
 /**
- * @author V143611
+ *
  *
  */
 public interface DateWiseMetricsSeriesRepository extends CrudRepository<DateWiseMetricsSeries, ObjectId> {
