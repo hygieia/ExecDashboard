@@ -7,7 +7,7 @@ import java.util.List;
 import static com.capitalone.dashboard.exec.util.HygieiaExecutiveUtil.getEmptyTimeSeries;
 
 public class ProductMetricDetail extends RollupMetricDetail {
-    public List<ComponentMetricDetail> componentMetricDetailList;
+    private List<ComponentMetricDetail> componentMetricDetailList;
 
 
     public ProductMetricDetail() {
