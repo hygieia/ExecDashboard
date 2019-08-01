@@ -37,6 +37,7 @@ public abstract class DefaultMetricCollector {
         this.portfolioMetricRepository = portfolioMetricRepository;
     }
 
+    @SuppressWarnings("PMD.AvoidDeeplyNestedIfStmts")
     public void collect(SparkSession sparkSession, JavaSparkContext javaSparkContext, List<Portfolio> portfolioList) {
         if ((sparkSession == null) || (javaSparkContext == null)) { return; }
 

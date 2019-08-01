@@ -3,11 +3,11 @@ package com.capitalone.dashboard.exec.model;
 public class HygieiaSparkQuery {
     public static final String CMDB_PRODUCT_QUERY =
             "SELECT _id as productId, configurationItem as productName, commonName, environments, components, businessOwner, ownerDept, appServiceOwner, supportOwner, developmentOwner " +
-                    "FROM cmdb where (validConfigItem = 1) and (businessOwner is not null) and (businessOwner != '') and (itemType = 'app')";
+                    "FROM cmdb where (validConfigItem = true) and (businessOwner is not null) and (businessOwner != '') and (itemType = 'app')";
 
     public static final String CMDB_COMPONENT_QUERY =
             "SELECT _id as componentId, configurationItem, commonName as componentName, businessOwner, ownerDept " +
-                    "FROM cmdb where (validConfigItem = 1) and (itemType = 'component')";
+                    "FROM cmdb where (validConfigItem = true) and (itemType = 'component')";
 
     public static final String CMDB_ENVIRONMENT_QUERY =
             "SELECT _id as componentId, configurationItem, components, commonName as componentName, businessOwner, ownerDept " +
@@ -30,8 +30,22 @@ public class HygieiaSparkQuery {
             "SELECT _id as dashboardId, title, explode(widgets) as widgets, widgets.componentId as componentId, configurationItemBusServName as productName, configurationItemBusAppName as componentName " +
                     "FROM dashboards WHERE (configurationItemBusServName IS NOT null) and (configurationItemBusAppName IS NOT null) and (type = 'Team')";
 
+    public static final String DASHBOARD_QUERY_EXPLODE_PRODUCT =
+            "SELECT _id as dashboardId, title, widget.componentId as componentId, team.dashBoardId as dashboardIds, configurationItemBusServName as productName, configurationItemBusAppName as componentName from dashboards " +
+                    "lateral view explode(widgets) exploded_widgets as widget " +
+                    "lateral view explode(widgets.options.teams) exploded_teams as team " +
+                    "WHERE (configurationItemBusServName IS NOT null) and (configurationItemBusAppName IS NOT null) and (type = 'Product')";
+
+    public static final String DASHBOARD_QUERY_EXPLODE_PROD =
+            "SELECT _id as dashboardId, title, explode(widgets) as widgets, widgets.componentId as componentId, configurationItemBusServName as productName, configurationItemBusAppName as componentName " +
+                    "FROM dashboards WHERE dashboardId = %1$s";
+
     public static final String COMPONENT_QUERY_BY_COLLECTOR_TYPE =
             "SELECT _id, collectorItems.%1$s._id as collectorItems FROM components where collectorItems.%1$s IS NOT NULL";
+
+    public static final String COMPONENT_QUERY_BY_COLLECTOR_TYPE_PRODUCT =
+            "SELECT _id, collectorItems.%1$s._id as collectorItems, collectorItems.%1$s.options.dashboardId as productComponentDashboardId FROM components where collectorItems.%1$s IS NOT NULL";
+
 
     public static final String STATIC_CODE_ANALYSIS_QUERY_ALL_COLLECTOR_ITEMS =
             "SELECT collectorItemId, metrics, cast(from_unixtime(cast(timestamp/1000 as bigint)) as timestamp) as timeWindow " +
@@ -66,4 +80,10 @@ public class HygieiaSparkQuery {
                     "GROUP BY collectorItemId, severity, status, cast(from_unixtime(cast(openTime/1000 as bigint)) as timestamp), " +
                     "cast(from_unixtime(cast(closedTime/1000 as bigint)) as timestamp), closedTime " +
                     "ORDER BY collectorItemId, timeWindow, closeDate";
+
+    public static final String PIPELINE_QUERY_BY_COLLECTOR_ITEMS_ID =
+            "select collectorItemId, cast(from_unixtime(cast((stages.%1$s.lastArtifact.timestamp)/1000 as bigint)) as timestamp) as timeWindow, " +
+                    "stages.%1$s.commits AS prodStageList  from pipelines " +
+                    "where (collectorItemId IS NOT NULL) AND (stages.%1$s.commits IS NOT NULL)";
+
 }
