@@ -1,9 +1,15 @@
 package com.capitalone.dashboard.executive.rest;
 
 import com.capitalone.dashboard.exec.model.BuildingBlockMetricSummary;
+import com.capitalone.dashboard.exec.model.BuildingBlocks;
 import com.capitalone.dashboard.exec.model.MetricDetails;
+import com.capitalone.dashboard.exec.model.MetricLevel;
+import com.capitalone.dashboard.exec.model.MetricSummary;
 import com.capitalone.dashboard.exec.model.MetricType;
+import com.capitalone.dashboard.exec.model.MetricsDetail;
+import com.capitalone.dashboard.executive.service.MetricsDetailService;
 import com.capitalone.dashboard.executive.service.MetricsService;
+import com.capitalone.dashboard.executive.service.BuildingBlocksService;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +25,18 @@ import java.util.List;
 @RequestMapping("/metrics")
 @CrossOrigin
 public class MetricsController {
+    //TODO: Need to merge both vz and default Hygieia project
     private final MetricsService metricsService;
+    private final MetricsDetailService metricsDetailService;
+    private final BuildingBlocksService buildingBlocksService;
 
-    public MetricsController(MetricsService metricsService) {
+    public MetricsController(MetricsService metricsService,
+                             BuildingBlocksService buildingBlocksService,
+                             MetricsDetailService metricsDetailService) {
+
         this.metricsService = metricsService;
+        this.buildingBlocksService = buildingBlocksService;
+        this.metricsDetailService = metricsDetailService;
     }
 
     @GetMapping("/{metric}/portfolio/{name}/{lob}/summary")
@@ -81,7 +95,41 @@ public class MetricsController {
 
         return metricsService.getProductMetricComponents(metricType, name, lob, productName);
     }
+    @GetMapping("/{metric}/portfolio/{id}/summary")
+    public MetricSummary getPortfolioMetricSummary(@PathVariable("metric") MetricType metricType,
+                                                   @PathVariable("id") String portfolioId) {
+        return metricsDetailService.getMetricSummary(MetricLevel.PORTFOLIO, metricType, portfolioId);
+    }
 
+    @GetMapping("/{metric}/portfolio/{id}/detail")
+    public MetricsDetail getPortfolioMetricDetail(@PathVariable("metric") MetricType metricType,
+                                                  @PathVariable("id") String portfolioId) {
+        return metricsDetailService.getMetricsDetail(MetricLevel.PORTFOLIO, metricType, portfolioId);
+    }
+
+    @GetMapping("/{metric}/portfolio/{id}/product")
+    public List<BuildingBlocks> getPortfolioMetricProducts(@PathVariable("metric") MetricType metricType,
+                                                           @PathVariable("id") String portfolioId) {
+        return buildingBlocksService.getBuildingBlocks(MetricLevel.PRODUCT, metricType, portfolioId);
+    }
+
+    @GetMapping("/{metric}/product/{id}/summary")
+    public MetricSummary getProductMetricSummary(@PathVariable("metric") MetricType metricType,
+                                                 @PathVariable("id") String productId) {
+        return metricsDetailService.getMetricSummaryForProducts(MetricLevel.PRODUCT, metricType, productId);
+    }
+
+    @GetMapping("/{metric}/product/{id}/detail")
+    public MetricsDetail getProductMetricDetail(@PathVariable("metric") MetricType metricType,
+                                                @PathVariable("id") String productId) {
+        return metricsDetailService.getMetricsDetailForProducts(MetricLevel.PRODUCT, metricType, productId);
+    }
+
+    @GetMapping("/{metric}/product/{id}/component")
+    public List<BuildingBlocks> getProductMetricComponents(@PathVariable("metric") MetricType metricType,
+                                                           @PathVariable("id") String productId) {
+        return buildingBlocksService.getBuildingBlocksComponentsForMetric(productId, metricType);
+    }
     @InitBinder
     public void initBinder(final WebDataBinder webdataBinder) {
         webdataBinder.registerCustomEditor(MetricType.class, new MetricTypeConverter());

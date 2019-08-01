@@ -26,7 +26,7 @@ public class RollupMetricDetail extends MetricDetails {
                 rollupSummaryCounts.add(copyCount);
             } else {
                 rollupSummaryCounts.remove(existing);
-                MetricCount updatedMetricCount = getUpdatedMetricCount(copyCount, metricDetails.getType().getDataType(), existing.getValue(),size);
+                MetricCount updatedMetricCount = getUpdatedMetricCount(copyCount, metricDetails.getType().getDataType(), existing.getValue(), size);
                 rollupSummaryCounts.add(updatedMetricCount);
             }
         }
@@ -37,7 +37,7 @@ public class RollupMetricDetail extends MetricDetails {
         if(metricDataType.equals(MetricType.DataType.SUM)) {
             metricCount.addValue(existingValue);
         } else {
-            metricCount.addAverageValue(existingValue,reporting);
+            metricCount.addAverageValue(existingValue, reporting);
         }
         return metricCount;
     }
@@ -51,7 +51,7 @@ public class RollupMetricDetail extends MetricDetails {
                 if(itemMetricDetails.getType().getDataType().equals(MetricType.DataType.SUM)) {
                     timeSeries.get(itemDetailsTimeSeriesElement.getDaysAgo()).addCount(itemCount);
                 } else {
-                    timeSeries.get(itemDetailsTimeSeriesElement.getDaysAgo()).averageCount(itemCount,size);
+                    timeSeries.get(itemDetailsTimeSeriesElement.getDaysAgo()).averageCount(itemCount, size);
                 }
 
             }
