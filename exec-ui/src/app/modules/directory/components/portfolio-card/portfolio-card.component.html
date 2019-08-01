@@ -1,6 +1,13 @@
 <div class="portfolio-card" (click)="goToPortfolio(name,lob)" fxLayout fxLayoutGap="1em">
   <div class="portfolio-avatar-circle">
-    <span class="initials">{{initials}}</span>
+      
+<div *ngIf="(initialsImg !='') && (initialsImg!= null)" >
+      <img class="portfolio-avatar-circle" src="data:image/png;base64,{{initialsImg}}"
+             alt="{{initials}}" width="60px" height="60px">
+    </div>
+
+   <span class="initials"  *ngIf="initialsImg =='' || initialsImg == null">
+         {{initials}}</span>
   </div>
   <div class="portfolio-card-info" fxLayout="column" fxLayoutAlign="center">
     <p *ngIf="name" class="portfolio-card-name opensans-rg fs1">{{name}}</p>

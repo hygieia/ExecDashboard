@@ -15,6 +15,7 @@ export class PortfolioCardComponent implements OnInit {
   public role: string;
   public lob: string;
   public initials: string;
+  public initialsImg: string;
 
   constructor(private router: Router) {
   }
@@ -28,6 +29,7 @@ export class PortfolioCardComponent implements OnInit {
     this.initials = !this.portfolio.name
       ? this.portfolio.executive.firstName.charAt(0).concat(this.portfolio.executive.lastName.charAt(0))
       : this.portfolio.name.charAt(0);
+    this.initialsImg = this.portfolio.thumbnail;
   }
 
   formatCardNameWithFirstInitial(first: string, last: string) {
