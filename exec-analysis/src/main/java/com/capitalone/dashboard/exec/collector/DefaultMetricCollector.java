@@ -37,6 +37,7 @@ public abstract class DefaultMetricCollector {
         this.portfolioMetricRepository = portfolioMetricRepository;
     }
 
+    @SuppressWarnings("PMD.AvoidDeeplyNestedIfStmts")
     public void collect(SparkSession sparkSession, JavaSparkContext javaSparkContext, List<Portfolio> portfolioList) {
         if ((sparkSession == null) || (javaSparkContext == null)) { return; }
 
@@ -102,15 +103,15 @@ public abstract class DefaultMetricCollector {
 
         List<String> collectorItemList = new ArrayList<>();
         Optional.ofNullable(portfolioList).orElseGet(Collections::emptyList).stream()
-        .map(Portfolio::getProducts)
+                .map(Portfolio::getProducts)
                 .forEach(products -> products.stream()
                         .map(Product::getProductComponentList)
                         .forEach(productComponents -> productComponents
-                                                        .stream()
-                                                        .map(ProductComponent::getProductComponentDashboardId)
-                                                        .filter(Objects::nonNull)
-                                                        .<List<String>>map(dashboardId -> dashboardCollectorItemsMap.get(dashboardId.toString()) != null ? dashboardCollectorItemsMap.get(dashboardId.toString()) : new ArrayList<>())
-                                                        .forEach(collectorItemList::addAll)));
+                                .stream()
+                                .map(ProductComponent::getProductComponentDashboardId)
+                                .filter(Objects::nonNull)
+                                .<List<String>>map(dashboardId -> dashboardCollectorItemsMap.get(dashboardId.toString()) != null ? dashboardCollectorItemsMap.get(dashboardId.toString()) : new ArrayList<>())
+                                .forEach(collectorItemList::addAll)));
         return collectorItemList;
     }
 }

@@ -49,6 +49,9 @@ public class CollectorItemMetricDetail extends MetricDetails {
             case CUMULATIVE:
                 updateTimeSeries(metricCount, scanDate);
                 break;
+            case AVERAGE:
+                updateTimeSeries(metricCount,scanDate);
+                break;
             default:
                 throw new UnsupportedOperationException("Not supported yet");
         }
@@ -61,7 +64,7 @@ public class CollectorItemMetricDetail extends MetricDetails {
         label.put("type", "mttr");
         mc.setLabel(label);
         mc.setValue(meanTimeToResolve);
-        summary.addCollectorItemCount(mc, strategy, null);
+        summary.addCollectorItemCount(mc, MetricCollectionStrategy.AVERAGE, null);
     }
 
     private void updateTimeSeries(MetricCount metricCount, Date scanTime) {
@@ -96,12 +99,26 @@ public class CollectorItemMetricDetail extends MetricDetails {
                     timeSeries.add(existing.getDaysAgo(), existing);
                     break;
                 case AVERAGE:
-                    throw new UnsupportedOperationException("Not supported yet");
+                    if (this.timeSeries != null && this.timeSeries.get(existing.getDaysAgo()).getCounts().size() > 0) {
+                        (this.timeSeries.get(existing.getDaysAgo()).getCounts().get(0)).setValue(((this.timeSeries.get(existing.getDaysAgo()).getCounts().get(0)).getValue() + metricCount.getValue())/2);
+                    }else {
+                        existing.getCounts().add(metricCount);
+                    }
+                    break;
+                    //throw new UnsupportedOperationException("Not supported yet");
                 default:
                     break;
             }
         } else {
-            timeSeries.add(element);
+            // looks like a bug, it should not add value simply for more than 90 days, doing a fix for pipeline lead time
+            // Need to check for other widgets.. commit, sonar.. etc...
+            if ((metricCount.getLabel().get("type")).equals(MetricType.PIPELINE_LEAD_TIME.getName())) {
+                if (element != null && element.getDaysAgo() < 90) {
+                    timeSeries.add(element);
+                }
+            } else {
+                timeSeries.add(element);
+            }
         }
     }
 

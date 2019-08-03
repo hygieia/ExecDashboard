@@ -9,9 +9,11 @@ import com.capitalone.dashboard.exec.model.PortfolioMetricDetail;
 import com.capitalone.dashboard.exec.model.Product;
 import com.capitalone.dashboard.exec.model.ProductComponent;
 import com.capitalone.dashboard.exec.model.ProductMetricDetail;
+import com.capitalone.dashboard.exec.model.*;
 
 import com.capitalone.dashboard.exec.repository.PortfolioMetricRepository;
 import com.capitalone.dashboard.exec.repository.PortfolioRepository;
+import com.capitalone.dashboard.exec.repository.PortfolioRepositoryThumbnail;
 import com.capitalone.dashboard.executive.model.PortfolioResponse;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -27,12 +29,16 @@ import java.util.Optional;
 public class PortfolioServiceImpl implements PortfolioService {
     private final PortfolioRepository portfolioRepository;
     private final PortfolioMetricRepository portfolioMetricRepository;
+    private final PortfolioRepositoryThumbnail portfolioRepositoryThumbnail;
+
 
     @Autowired
     public PortfolioServiceImpl(PortfolioRepository portfolioRepository,
+                                PortfolioRepositoryThumbnail portfolioRepositoryThumbnail,
                                 PortfolioMetricRepository portfolioMetricRepository) {
         this.portfolioRepository = portfolioRepository;
         this.portfolioMetricRepository = portfolioMetricRepository;
+        this.portfolioRepositoryThumbnail = portfolioRepositoryThumbnail;
     }
 
 
@@ -129,8 +135,18 @@ public class PortfolioServiceImpl implements PortfolioService {
      */
     public List<PortfolioResponse> getPortfolios() {
         List<PortfolioResponse> portfolioResponses = new ArrayList<>();
-        List<Portfolio> portfolioList;
-        portfolioList =  portfolioRepository.findAllByOwnersNotNull();
+        List<Portfolio> newportfolioList = new ArrayList<>();
+        List<Portfolio> portfolioList = portfolioRepository.findAllByOwnersNotNull();
+        List<PortfolioThumbnail> portfolioListThumbnail = portfolioRepositoryThumbnail.findAll();
+        for (Portfolio pList:portfolioList) {
+            for (PortfolioThumbnail p1:portfolioListThumbnail) {
+                if (pList.getName().equalsIgnoreCase(p1.getName())) {
+                    pList.setThumbnail(p1.getThumbnail());
+                    newportfolioList.add(pList);
+                    break;
+                }
+            }
+        }
         Optional.ofNullable(portfolioList).orElseGet(Collections::emptyList)
                 .forEach(p -> portfolioResponses.add(PortfolioResponse.getPortfolio(p)));
         return portfolioResponses;
@@ -221,4 +237,5 @@ public class PortfolioServiceImpl implements PortfolioService {
 
         return buildingBlockMetricSummaryList;
     }
+
 }
