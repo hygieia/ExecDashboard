@@ -10,10 +10,6 @@ import org.springframework.ldap.filter.EqualsFilter;
 import org.springframework.ldap.filter.Filter;
 import org.springframework.stereotype.Component;
 
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.cloud.context.config.annotation.RefreshScope;
-
-//@RefreshScope
 @Component
 @Scope(value = "singleton")
 public class LdapHandler {
@@ -56,7 +52,7 @@ public class LdapHandler {
                 ldapTemplate.authenticate("OU=Technology,OU=User Accounts", filter.encode(), password);
                 LOGGER.info("LDAP template initialization successful ! ");
             } catch (org.springframework.ldap.CommunicationException e) {
-                LOGGER.info("LDAP template initialization failed - ");
+                LOGGER.info("LDAP template initialization failed ! ");
             } catch (Exception e) {
                 LOGGER.error(ExceptionUtils.getStackTrace(e));
             }

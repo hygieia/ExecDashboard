@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-//import java.util.Arrays;
-
 @Entry(objectClasses = { "person", "top" })
 public final class Person {
 
@@ -153,42 +151,12 @@ public final class Person {
     }
 
     /**
-     * get user level of ldap person
-     *
-     * @param description description coming from ldap server
-     * @return Level of user(VP/DIRECTOR/USER/TERMINATED)
-     */
-    /*public PersonLevel getLevel() {
-
-        if (null == description)
-            return PersonLevel.UNKNOWN;
-        else if (description.startsWith("TERM"))
-            return PersonLevel.TERMINATED;
-        else if (Arrays.asList(description.split(",")).stream()
-                .anyMatch(e -> Arrays.asList(e.split("/")).stream().anyMatch(s -> s.trim().equals("Sr Director"))))
-            return PersonLevel.SENIORDIRECTOR;
-        else if (Arrays.asList(description.split(",")).stream()
-                .anyMatch(e -> Arrays.asList(e.split("/")).stream().anyMatch(s -> s.trim().equals("Director"))))
-            return PersonLevel.DIRECTOR;
-        else if (Arrays.asList(description.split(",")).stream()
-                .anyMatch(e -> Arrays.asList(e.split("/")).stream().anyMatch(s -> s.trim().equals("SVP"))))
-            return PersonLevel.SVP;
-        else if (Arrays.asList(description.split(",")).stream()
-                .anyMatch(e -> Arrays.asList(e.split("/")).stream().anyMatch(s -> s.trim().equals("VP"))))
-            return PersonLevel.VP;
-        else
-            return PersonLevel.USER;
-
-    }
-*/
-    /**
      * Method to get manager's NTID
      *
      * @return manager NTID
      */
     public String getManagerNTID() {
         return ((!getManager().isEmpty()) ? getManager().split(",")[0].split("=")[1] : "");
-
     }
 
     /**
@@ -200,7 +168,6 @@ public final class Person {
         return (directReports != null)
                 ? directReports.stream().map(entry -> entry.split(",")[0].split("=")[1]).collect(Collectors.toList())
                 : new ArrayList<String>();
-
     }
 
     @Override

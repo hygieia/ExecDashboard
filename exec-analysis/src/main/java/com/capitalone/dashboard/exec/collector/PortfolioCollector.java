@@ -401,7 +401,7 @@ public class PortfolioCollector implements Runnable {
         taskScheduler.schedule(this, new CronTrigger(setting.getCron()));
     }
 
-    public String getPortfolioWithThumbnails(List<Portfolio> portfolioList) {
+    public void getPortfolioWithThumbnails(List<Portfolio> portfolioList) {
         ldapHandler.initLdaptemplate();
         setLdapTemplate(LdapHandler.getLdaptemplate());
         PortfolioThumbnail portfolioThumbnail = null;
@@ -410,35 +410,42 @@ public class PortfolioCollector implements Runnable {
             portfolioThumbnail = new PortfolioThumbnail();
             String pName = p.getName();
             String lob = p.getLob();
-            String photoString = null;
             String lastName = pName.substring(pName.indexOf(" ") + 1);
             String firstName = pName.substring(0, pName.indexOf(" "));
             String fullName = lastName + ", " + firstName;
+            String thumbNail = null;
             if (!fullName.isEmpty()) {
                 List<Person> execInfo = findByName(fullName);
-                if (execInfo != null && !execInfo.isEmpty()) {
-                    byte[] photo = (byte[]) execInfo.get(0).getThumbnailPhoto();
-                    if (photo == null) {
-                        photoString = "";
-                    } else {
-                        photoString = Base64.getEncoder().encodeToString(photo);
-                    }
-                }
-                LOGGER.info("Byte code convert to string :" + photoString);
+                thumbNail = getExecInfo(execInfo);
             } else {
                 LOGGER.info("List size is empty");
             }
             portfolioThumbnail.setName(pName);
             portfolioThumbnail.setLob(lob);
-            portfolioThumbnail.setThumbnail(photoString);
+            portfolioThumbnail.setThumbnail(thumbNail);
             portfolioListThumbnail.add(portfolioThumbnail);
         }
         portfolioRepositoryThumbnail.save(portfolioListThumbnail);
-        return null;
     }
 
     public List<Person> findByName(String name) {
         ldapTemplate.setIgnorePartialResultException(true);
         return ldapTemplate.find(query().where("displayName").is(name), Person.class);
+    }
+
+    public String getExecInfo(List<Person> execInfo){
+        String photoString = null;
+        if (execInfo != null && !execInfo.isEmpty()) {
+            byte[] photo = (byte[]) execInfo.get(0).getThumbnailPhoto();
+            if (photo == null) {
+                photoString = "";
+                LOGGER.debug("Executive doesn't have thumbnail");
+            } else {
+                photoString = Base64.getEncoder().encodeToString(photo);
+                LOGGER.info("Byte code convert to string :" + photoString);
+            }
+            LOGGER.debug("Byte code convert to string :" + photoString);
+        }
+        return photoString;
     }
 }

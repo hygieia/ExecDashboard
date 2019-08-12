@@ -42,7 +42,7 @@ public class DefaultDataCollector {
         Dataset<Row> dataRows = null;
         String tempQuery = query;
         if (collectionName.contains("pipelines")) {
-            String[] str = {"Production", "prod"};
+            String[] str = {"prod"};
             try {
                 for (int i = 0; i < str.length; i++) {
                     Dataset<Row> partialDataRows = null;

@@ -6,10 +6,10 @@ import com.capitalone.dashboard.exec.model.ComponentMetricDetail;
 import com.capitalone.dashboard.exec.model.MetricType;
 import com.capitalone.dashboard.exec.model.Portfolio;
 import com.capitalone.dashboard.exec.model.PortfolioMetricDetail;
+import com.capitalone.dashboard.exec.model.PortfolioThumbnail;
 import com.capitalone.dashboard.exec.model.Product;
 import com.capitalone.dashboard.exec.model.ProductComponent;
 import com.capitalone.dashboard.exec.model.ProductMetricDetail;
-import com.capitalone.dashboard.exec.model.*;
 
 import com.capitalone.dashboard.exec.repository.PortfolioMetricRepository;
 import com.capitalone.dashboard.exec.repository.PortfolioRepository;

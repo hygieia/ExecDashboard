@@ -158,17 +158,11 @@ public class DashBoardCollectorItemMapBuilder {
                         componentRows.col("_id").equalTo(dashboardRows.col("widgets.componentId")));
                 dbCollectorItemDataset = dbcompRows.map(GET_DASHBOARD_COLLECTOR_ITEMS, Encoders.bean(DashboardCollectorItem.class));
                 dashboardCollectorItemList = dbCollectorItemDataset.collectAsList();
-
-
             }
-            if (collectorType.toString().equalsIgnoreCase("StaticSecurityScan")) {
-                return null;
-            }else {
-                    dashboardCollectorItemList.forEach(dList -> {
-                        String collectorItemId = dList.getDashboardId().toString();
-                        dashboardCollectorItemsMap.put(collectorItemId, dList.getItems());
+            dashboardCollectorItemList.forEach(dList -> {
+            	String collectorItemId = dList.getDashboardId().toString();
+                dashboardCollectorItemsMap.put(collectorItemId, dList.getItems());
                     });
-                }
         } catch (Exception e) {
             LOGGER.error("Exception while building dashboard collectorItems map for collectorType=" + collectorType, e);
         }
