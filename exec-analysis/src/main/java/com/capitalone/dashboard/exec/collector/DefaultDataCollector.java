@@ -40,25 +40,10 @@ public class DefaultDataCollector {
         Map<String, List<Row>> rowMap = new HashMap<>();
         DataFrameLoader.loadDataFrame(collectionName, javaSparkContext);
         Dataset<Row> dataRows = null;
-        String tempQuery = query;
         if (collectionName.contains("pipelines")) {
-            String[] str = {"prod"};
-            try {
-                for (int i = 0; i < str.length; i++) {
-                    Dataset<Row> partialDataRows = null;
-                    query = String.format(tempQuery, str[i]);
-                    if (dataRows == null) {
-                        dataRows = sparkSession.sql(query);
-                    } else {
-                        partialDataRows = sparkSession.sql(query);
-                        dataRows = dataRows.union(partialDataRows);
-                    }
-                    LOGGER.info("Final DataRows for Pipeline:" + dataRows.toString());
-                }
-            }catch(Exception analysisException){
-                LOGGER.info("Analysis Exception thrown for struct field:" + str);
-            }
-        }else {
+            dataRows = getDataRowsForPipelines();
+        }
+        else {
             dataRows = sparkSession.sql(query);
         }
         List<Row> rowList = dataRows.collectAsList();
@@ -83,5 +68,27 @@ public class DefaultDataCollector {
                 }
             });
         return rowMap;
+    }
+
+    protected Dataset<Row> getDataRowsForPipelines() {
+        Dataset<Row> dataRows = null;
+        String tempQuery = query;
+        String[] envName = {"prod"}; //If we have more envName, update in a string with comma separated (Ex:{"prod","Production"})
+        try {
+            for (String eachEnvName : envName) {
+                Dataset<Row> partialDataRows = null;
+                query = String.format(tempQuery, eachEnvName);
+                if (dataRows == null) {
+                    dataRows = sparkSession.sql(query);
+                } else {
+                    partialDataRows = sparkSession.sql(query);
+                    dataRows = dataRows.union(partialDataRows);
+                }
+                LOGGER.info("Final DataRows for Pipeline:" + dataRows.toString());
+            }
+        }catch(Exception analysisException){
+            LOGGER.info("Analysis Exception thrown for struct field:" + envName);
+        }
+        return dataRows;
     }
 }

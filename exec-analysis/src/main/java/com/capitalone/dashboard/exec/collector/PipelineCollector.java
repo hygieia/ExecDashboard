@@ -112,9 +112,8 @@ public class PipelineCollector extends DefaultMetricCollector {
             label.put("type", metricLabel);
             mc.setLabel(label);
             mc.setValue(value);
-            return mc;
         }
-        return null;
+        return mc;
     }
 
     private String getMetricLabel(String inputMetricLabel) {
