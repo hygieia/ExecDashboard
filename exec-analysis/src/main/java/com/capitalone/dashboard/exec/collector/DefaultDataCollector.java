@@ -27,13 +27,15 @@ public class DefaultDataCollector {
     private String collectionName;
     private String query;
     private JavaSparkContext javaSparkContext;
+    private PortfolioCollectorSetting portfolioCollectorSetting;
 
-    DefaultDataCollector(String collectionName, String query, List<String> collectorItemIds, SparkSession sparkSession, JavaSparkContext javaSparkContext) {
+    DefaultDataCollector(String collectionName, String query, List<String> collectorItemIds, SparkSession sparkSession, JavaSparkContext javaSparkContext, PortfolioCollectorSetting portfolioCollectorSetting) {
         this.collectionName = collectionName;
         this.query = query;
         this.collectorItemIds = collectorItemIds;
         this.sparkSession = sparkSession;
         this.javaSparkContext = javaSparkContext;
+        this.portfolioCollectorSetting = portfolioCollectorSetting;
     }
 
     public Map<String, List<Row>> collectAll() {
@@ -73,7 +75,7 @@ public class DefaultDataCollector {
     protected Dataset<Row> getDataRowsForPipelines() {
         Dataset<Row> dataRows = null;
         String tempQuery = query;
-        String[] envName = {"prod"}; //If we have more envName, update in a string with comma separated (Ex:{"prod","Production"})
+        List<String> envName = portfolioCollectorSetting.getPipelineEnvName();
         try {
             for (String eachEnvName : envName) {
                 Dataset<Row> partialDataRows = null;

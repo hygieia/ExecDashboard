@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.catalyst.expressions.GenericRowWithSchema;
 import org.slf4j.Logger;
@@ -32,8 +33,8 @@ public class PipelineCollector extends DefaultMetricCollector {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PipelineCollector.class);
 
-    public PipelineCollector(PortfolioMetricRepository portfolioMetricRepository) {
-        super(portfolioMetricRepository);
+    public PipelineCollector(PortfolioMetricRepository portfolioMetricRepository, PortfolioCollectorSetting portfolioCollectorSetting) {
+        super(portfolioMetricRepository, portfolioCollectorSetting);
     }
 
     @Override
@@ -117,7 +118,7 @@ public class PipelineCollector extends DefaultMetricCollector {
     }
 
     private String getMetricLabel(String inputMetricLabel) {
-        if(inputMetricLabel.equals("pipeline-lead-time")) {
+        if(StringUtils.equals(inputMetricLabel,"pipeline-lead-time")){
             return "pipeline-lead-time";
         } else {
             return inputMetricLabel;

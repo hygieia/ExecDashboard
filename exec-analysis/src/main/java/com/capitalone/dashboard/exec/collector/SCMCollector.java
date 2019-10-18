@@ -21,8 +21,8 @@ import java.util.Map;
 @Component
 public class SCMCollector extends DefaultMetricCollector {
 
-    public SCMCollector(PortfolioMetricRepository portfolioMetricRepository) {
-        super(portfolioMetricRepository);
+    public SCMCollector(PortfolioMetricRepository portfolioMetricRepository, PortfolioCollectorSetting portfolioCollectorSetting) {
+        super(portfolioMetricRepository, portfolioCollectorSetting);
     }
 
     @Override

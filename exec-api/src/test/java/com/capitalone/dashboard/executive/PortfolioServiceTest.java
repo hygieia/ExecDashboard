@@ -2,7 +2,6 @@ package com.capitalone.dashboard.executive;
 
 import com.capitalone.dashboard.exec.model.BuildingBlockMetricSummary;
 import com.capitalone.dashboard.exec.model.MetricLevel;
-import com.capitalone.dashboard.exec.model.PortfolioThumbnail;
 import com.capitalone.dashboard.exec.model.RoleRelationShipType;
 import com.capitalone.dashboard.exec.repository.PortfolioMetricRepository;
 import com.capitalone.dashboard.exec.repository.PortfolioRepository;

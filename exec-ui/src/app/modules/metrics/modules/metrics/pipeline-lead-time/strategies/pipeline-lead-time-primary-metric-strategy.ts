@@ -8,7 +8,7 @@ import {PipelineLeadTimeConfiguration} from '../pipeline-lead-time.configuration
 export class PipelineLeadTimePrimaryMetricStrategy extends PrimaryMetricStrategyBase {
   parse(counts: Count[]): MetricValueModel {
     if (!counts || !counts.length) {
-      return {name: PipelineLeadTimeConfiguration.buildingBlockLabel, value: 0, unit: 'hours'};
+      return {name: PipelineLeadTimeConfiguration.buildingBlockLabel, value: 0, unit: 'minutes'};
     }
 
     const minutes = counts[0].value / 60;

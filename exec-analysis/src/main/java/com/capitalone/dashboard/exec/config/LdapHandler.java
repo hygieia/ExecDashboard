@@ -3,7 +3,6 @@ package com.capitalone.dashboard.exec.config;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Scope;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.core.support.LdapContextSource;
 import org.springframework.ldap.filter.EqualsFilter;
@@ -11,7 +10,6 @@ import org.springframework.ldap.filter.Filter;
 import org.springframework.stereotype.Component;
 
 @Component
-@Scope(value = "singleton")
 public class LdapHandler {
 
     private static final Logger LOGGER = Logger.getLogger(LdapHandler.class);

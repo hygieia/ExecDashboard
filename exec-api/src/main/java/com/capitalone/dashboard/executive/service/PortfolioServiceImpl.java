@@ -137,10 +137,10 @@ public class PortfolioServiceImpl implements PortfolioService {
         List<PortfolioResponse> portfolioResponses = new ArrayList<>();
         List<Portfolio> newportfolioList = new ArrayList<>();
         List<Portfolio> portfolioList = portfolioRepository.findAllByOwnersNotNull();
-        List<PortfolioThumbnail> portfolioListThumbnail = portfolioRepositoryThumbnail.findAll();
+        List<PortfolioThumbnail> portfolioListThumbnail = portfolioRepositoryThumbnail.findAllByNameAndThumbnail();
         for (Portfolio pList:portfolioList) {
             for (PortfolioThumbnail p1:portfolioListThumbnail) {
-                if (pList.getName().equalsIgnoreCase(p1.getName())) {
+                if(StringUtils.equals(pList.getName(),p1.getName())){
                     pList.setThumbnail(p1.getThumbnail());
                     newportfolioList.add(pList);
                     break;

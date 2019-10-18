@@ -1,5 +1,6 @@
 package com.capitalone.dashboard.exec.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.ldap.odm.annotations.Attribute;
 import org.springframework.ldap.odm.annotations.Entry;
 import org.springframework.ldap.odm.annotations.Id;
@@ -172,7 +173,10 @@ public final class Person {
 
     @Override
     public String toString() {
-        return "Person{" + "dn=" + dn + ", " + ", NTID='" + ntid + '\'' + ", lastName='" + lastName + '\'' + "," + '}';
+        return new ToStringBuilder(this)
+                .append("dn=", dn)
+                .append("NTID=", ntid)
+                .append("lastname=", lastName).toString();
     }
 
 }

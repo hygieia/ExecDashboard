@@ -27,8 +27,8 @@ public class StaticCodeAnalysisCollector extends DefaultMetricCollector {
     private static final Logger LOGGER = LoggerFactory.getLogger(StaticCodeAnalysisCollector.class);
 
     @Autowired
-    public StaticCodeAnalysisCollector(PortfolioMetricRepository portfolioMetricRepository) {
-        super(portfolioMetricRepository);
+    public StaticCodeAnalysisCollector(PortfolioMetricRepository portfolioMetricRepository, PortfolioCollectorSetting portfolioCollectorSetting) {
+        super(portfolioMetricRepository, portfolioCollectorSetting);
     }
 
     @Override

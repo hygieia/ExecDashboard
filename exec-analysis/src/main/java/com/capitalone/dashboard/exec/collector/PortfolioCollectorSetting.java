@@ -25,6 +25,7 @@ public class PortfolioCollectorSetting {
     public String writeUri;
     public String readDatabase;
     public String writeDatabase;
+    public List<String> pipelineEnvName;
 
     @Value("${feature.incidentsCollectorFlag:true}")
     private boolean incidentsCollectorFlag;
@@ -147,6 +148,14 @@ public class PortfolioCollectorSetting {
 
     public void setPipelineCollectorFlag(boolean pipelineCollectorFlag) {
         this.pipelineCollectorFlag = pipelineCollectorFlag;
+    }
+
+    public List<String> getPipelineEnvName() {
+        return pipelineEnvName;
+    }
+
+    public void setPipelineEnvName(List<String> pipelineEnvName) {
+        this.pipelineEnvName = pipelineEnvName;
     }
 
     @PostConstruct
