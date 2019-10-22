@@ -16,3 +16,4 @@ public enum CollectorType {
 		throw new IllegalArgumentException(value + " is not a CollectorType");
 	}
 }
+

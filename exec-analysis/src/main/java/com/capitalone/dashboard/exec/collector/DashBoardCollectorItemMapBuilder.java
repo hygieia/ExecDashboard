@@ -30,6 +30,16 @@ public class DashBoardCollectorItemMapBuilder {
         public String dashboardId;
         protected List<String> items;
 
+        public String getProductDashboardIds() {
+            return productDashboardIds;
+        }
+
+        public void setProductDashboardIds(String productDashboardIds) {
+            this.productDashboardIds = productDashboardIds;
+        }
+
+        public String productDashboardIds;
+
         public String getName() {
             return name;
         }
@@ -77,6 +87,41 @@ public class DashBoardCollectorItemMapBuilder {
                 return dashboardCollectorItem;
             };
 
+    public static final List<DashboardCollectorItem> getPipelineDashboardCollectorItems(Dataset<Row> ds) {
+        List<DashboardCollectorItem> arr = new ArrayList<>();
+        List<Row> dd = ds.collectAsList();
+        dd.forEach(row -> {
+            WrappedArray dashboardIds = row.getAs("dashboardIds");
+            Iterator iterdashboardIds = dashboardIds.iterator();
+            WrappedArray itemArray = row.getAs("collectorItems");
+            Iterator iter = itemArray.iterator();
+
+            for (int i = 0; i < dashboardIds.length(); i++) {
+                String productName = row.getAs("productName");
+                String componentName = row.getAs("componentName");
+                String dashboardId = (String) ((GenericRowWithSchema) row.getAs("dashboardId")).values()[0];
+
+                List<String> itemIds = new ArrayList<>();
+                DashboardCollectorItem dashboardCollectorItem = null;
+
+                dashboardCollectorItem = new DashboardCollectorItem();
+                String grs = (String) iterdashboardIds.next();
+                dashboardCollectorItem.setDashboardId(grs);
+                GenericRowWithSchema collId = (GenericRowWithSchema) iter.next();
+                itemIds.add((String) collId.get(0));
+                dashboardCollectorItem.setItems(itemIds);
+                String dashboardTitle = row.getAs("title");
+                String key = productName + DELIMITER + componentName + DELIMITER + dashboardTitle;
+
+                dashboardCollectorItem.setName(key);
+
+                dashboardCollectorItem.setProductDashboardIds(dashboardId);
+                arr.add(dashboardCollectorItem);
+            }
+
+        });
+        return arr;
+    }
 
     /**
      * @return Map of (Dashboard Name, CollectorItemId list))
@@ -92,19 +137,32 @@ public class DashBoardCollectorItemMapBuilder {
         try {
             DataFrameLoader.loadDataFrame("dashboards", javaSparkContext);
             DataFrameLoader.loadDataFrame("components", javaSparkContext);
-            Dataset<Row> dashboardRows = sparkSession.sql(HygieiaSparkQuery.DASHBOARD_QUERY_EXPLODE);
-            String query = String.format(HygieiaSparkQuery.COMPONENT_QUERY_BY_COLLECTOR_TYPE, collectorType.toString());
-            Dataset<Row> componentRows = sparkSession.sql(query);
-            Dataset<Row> dbcompRows = dashboardRows.join(componentRows,
-                    componentRows.col("_id").equalTo(dashboardRows.col("widgets.componentId")));
-            Dataset<DashboardCollectorItem> dbCollectorItemDataset
-                    = dbcompRows.map(GET_DASHBOARD_COLLECTOR_ITEMS, Encoders.bean(DashboardCollectorItem.class));
-            List<DashboardCollectorItem> dashboardCollectorItemList = dbCollectorItemDataset.collectAsList();
+            Dataset<Row> dashboardRows = null;
+            String query = null;
+            Dataset<Row> componentRows = null;
+            Dataset<Row> dbcompRows = null;
+            List<DashboardCollectorItem> dashboardCollectorItemList = null;
+            Dataset<DashboardCollectorItem> dbCollectorItemDataset = null;
+            if (collectorType.toString().equalsIgnoreCase("Product")){
+                dashboardRows = sparkSession.sql(HygieiaSparkQuery.DASHBOARD_QUERY_EXPLODE_PRODUCT);
+                query = String.format(HygieiaSparkQuery.COMPONENT_QUERY_BY_COLLECTOR_TYPE_PRODUCT, collectorType.toString());
+                componentRows = sparkSession.sql(query);
+                dbcompRows = dashboardRows.join(componentRows, componentRows.col("productComponentDashboardId").equalTo(dashboardRows.col("dashboardIds")));
+                LOGGER.info("dbcompRows values =" + dbcompRows);
+                dashboardCollectorItemList = getPipelineDashboardCollectorItems(dbcompRows);
+            }else {
+                dashboardRows = sparkSession.sql(HygieiaSparkQuery.DASHBOARD_QUERY_EXPLODE);
+                query = String.format(HygieiaSparkQuery.COMPONENT_QUERY_BY_COLLECTOR_TYPE, collectorType.toString());
+                componentRows = sparkSession.sql(query);
+                dbcompRows = dashboardRows.join(componentRows,
+                        componentRows.col("_id").equalTo(dashboardRows.col("widgets.componentId")));
+                dbCollectorItemDataset = dbcompRows.map(GET_DASHBOARD_COLLECTOR_ITEMS, Encoders.bean(DashboardCollectorItem.class));
+                dashboardCollectorItemList = dbCollectorItemDataset.collectAsList();
+            }
             dashboardCollectorItemList.forEach(dList -> {
-                String collectorItemId = dList.getDashboardId().toString();
+            	String collectorItemId = dList.getDashboardId().toString();
                 dashboardCollectorItemsMap.put(collectorItemId, dList.getItems());
-            });
-
+                    });
         } catch (Exception e) {
             LOGGER.error("Exception while building dashboard collectorItems map for collectorType=" + collectorType, e);
         }

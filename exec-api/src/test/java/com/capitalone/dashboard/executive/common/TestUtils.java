@@ -43,6 +43,7 @@ public class TestUtils {
         portfolio.setName("portfolio1");
         portfolio.setCommonName("PF");
         portfolio.setLob("LOB");
+        portfolio.setThumbnail("thumbnailPhoto");
         portfolio.setDashboardDisplayName("PF dashboard");
         portfolio.setMetricLevel(metricLevel);
         portfolio.setMetricsId(ObjectId.get());

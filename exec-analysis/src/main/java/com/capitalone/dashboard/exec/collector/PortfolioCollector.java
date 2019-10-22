@@ -1,16 +1,20 @@
 package com.capitalone.dashboard.exec.collector;
 
 import com.capitalone.dashboard.exec.config.DataFrameLoader;
+import com.capitalone.dashboard.exec.config.LdapHandler;
 import com.capitalone.dashboard.exec.model.Environment;
 import com.capitalone.dashboard.exec.model.HygieiaSparkQuery;
 import com.capitalone.dashboard.exec.model.MetricLevel;
 import com.capitalone.dashboard.exec.model.Owner;
 import com.capitalone.dashboard.exec.model.PeopleRoleRelation;
+import com.capitalone.dashboard.exec.model.Person;
 import com.capitalone.dashboard.exec.model.Portfolio;
+import com.capitalone.dashboard.exec.model.PortfolioThumbnail;
 import com.capitalone.dashboard.exec.model.Product;
 import com.capitalone.dashboard.exec.model.ProductComponent;
 import com.capitalone.dashboard.exec.model.RoleRelationShipType;
 import com.capitalone.dashboard.exec.repository.PortfolioRepository;
+import com.capitalone.dashboard.exec.repository.PortfolioRepositoryThumbnail;
 import com.tupilabs.human_name_parser.HumanNameParserParser;
 import com.tupilabs.human_name_parser.Name;
 import org.apache.commons.collections.CollectionUtils;
@@ -24,6 +28,7 @@ import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
@@ -32,11 +37,14 @@ import scala.collection.mutable.WrappedArray;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
+import static org.springframework.ldap.query.LdapQueryBuilder.query;
 
 @Component
 public class PortfolioCollector implements Runnable {
@@ -46,6 +54,8 @@ public class PortfolioCollector implements Runnable {
     private final TaskScheduler taskScheduler;
 
     private final PortfolioRepository portfolioRepository;
+
+    private final PortfolioRepositoryThumbnail portfolioRepositoryThumbnail;
 
     private final PortfolioCollectorSetting setting;
 
@@ -61,17 +71,28 @@ public class PortfolioCollector implements Runnable {
 
     private final LibraryPolicyCollector libraryPolicyCollector;
 
-    private StaticCodeAnalysisCollector staticCodeAnalysisCollector;
+    private final StaticCodeAnalysisCollector staticCodeAnalysisCollector;
 
     private final IncidentCollector incidentCollector;
 
     private final AuditResultCollector auditResultCollector;
 
-    private UnitTestCoverageCollector unitTestCoverageCollector;
+    private final UnitTestCoverageCollector unitTestCoverageCollector;
 
-    private SecurityCollector securityCollector;
+    private final SecurityCollector securityCollector;
 
     private final PerformanceCollector performanceCollector;
+	
+	private final PipelineCollector pipelineCollector;
+
+    @Autowired
+    private LdapHandler ldapHandler;
+
+    private LdapTemplate ldapTemplate;
+
+    public void setLdapTemplate(LdapTemplate ldapTemplate) {
+        this.ldapTemplate = ldapTemplate;
+    }
 
     @Autowired
     @SuppressWarnings("PMD.ExcessiveParameterList")
@@ -84,6 +105,8 @@ public class PortfolioCollector implements Runnable {
                               UnitTestCoverageCollector unitTestCoverageCollector,
                               AuditResultCollector auditResultCollector,
                               SecurityCollector securityCollector,
+							  PipelineCollector pipelineCollector,
+							  PortfolioRepositoryThumbnail portfolioRepositoryThumbnail,
                               PerformanceCollector performanceCollector) {
 
         this.taskScheduler = taskScheduler;
@@ -97,6 +120,8 @@ public class PortfolioCollector implements Runnable {
         this.unitTestCoverageCollector = unitTestCoverageCollector;
         this.securityCollector = securityCollector;
         this.performanceCollector = performanceCollector;
+		this.portfolioRepositoryThumbnail = portfolioRepositoryThumbnail;
+		this.pipelineCollector = pipelineCollector;
     }
 
     /**
@@ -121,34 +146,48 @@ public class PortfolioCollector implements Runnable {
         if(setting.isScmCollectorFlag()) {
             LOGGER.info("##### Starting SCM Collector #####");
             scmCollector.collect(sparkSession, javaSparkContext, portfolioList);
+			LOGGER.info("##### Completed SCM Collector #####");
         }
         if(setting.isLibraryPolicyCollectorFlag()) {
             LOGGER.info("##### Starting Library Policy Collector #####");
             libraryPolicyCollector.collect(sparkSession, javaSparkContext, portfolioList);
+			LOGGER.info("##### Completed Library Policy Collector #####");
         }
         if(setting.isIncidentsCollectorFlag()){
             LOGGER.info("##### Starting Incident Collector #####");
             incidentCollector.collect(sparkSession, javaSparkContext, portfolioList);
+			LOGGER.info("##### Completed Incident Collector #####");
         }
         if(setting.isStaticCodeAnalysisCollectorFlag()){
             LOGGER.info("##### Starting Static Code Collector #####");
             staticCodeAnalysisCollector.collect(sparkSession, javaSparkContext, portfolioList);
+			LOGGER.info("##### Completed Static Code Analysis Collector #####");
         }
         if(setting.isUnitTestCoverageCollectorFlag()){
             LOGGER.info("##### Starting Unit Test Collector #####");
             unitTestCoverageCollector.collect(sparkSession, javaSparkContext, portfolioList);
+			LOGGER.info("##### Completed Unit Test Collector #####");
         }
+		if(setting.isPipelineCollectorFlag()){
+            LOGGER.info("##### Starting Pipeline Collector #####");
+            pipelineCollector.collect(sparkSession, javaSparkContext, portfolioList);
+            LOGGER.info("##### Completed Pipeline Collector #####");
+        }
+		
         if(setting.isAuditResultCollectorFlag()){
             LOGGER.info("##### Starting Audit Results Collector #####");
             auditResultCollector.collect(sparkSession, javaSparkContext, portfolioList);
+			LOGGER.info("##### Completed Audit Result Collector #####");
         }
         if(setting.isSecurityCollectorFlag()) {
             LOGGER.info("##### Starting Security Collector #####");
             securityCollector.collect(sparkSession, javaSparkContext, portfolioList);
+			LOGGER.info("##### Completed Security Collector #####");
         }
         if(setting.isPerformanceCollectorFlag()) {
             LOGGER.info("##### Starting Performance Collector #####");
             performanceCollector.collect(sparkSession, javaSparkContext, portfolioList);
+			LOGGER.info("##### Completed Performance Collector #####");
         }
         sparkSession.close();
         javaSparkContext.close();
@@ -185,6 +224,8 @@ public class PortfolioCollector implements Runnable {
         dashboardRowsList = dashboardRows.collectAsList();
 
         portfolioList = createPortfolios();
+        portfolioRepositoryThumbnail.deleteAll();
+        getPortfolioWithThumbnails(portfolioList);
         portfolioRepository.deleteAll();
         portfolioRepository.save(portfolioList);
 
@@ -284,7 +325,7 @@ public class PortfolioCollector implements Runnable {
                 String componentId = (String) ((GenericRowWithSchema) optErow.getAs("componentId")).values()[0];
                 environment.setId(new ObjectId(componentId));
 
-                LOGGER.debug("        Environment Name = " + obj);
+                LOGGER.debug("Environment Name = " + obj);
 
                 product.addEnvironment(environment);
             }
@@ -330,7 +371,7 @@ public class PortfolioCollector implements Runnable {
                 product.addProductComponent(productComponent);
 
                 //Debug Statement
-                LOGGER.debug("            Component Name = " + productComponent.getName());
+                LOGGER.debug("Component Name = " + productComponent.getName());
             }
         });
     }
@@ -358,5 +399,53 @@ public class PortfolioCollector implements Runnable {
     @PostConstruct
     public void onStartup() {
         taskScheduler.schedule(this, new CronTrigger(setting.getCron()));
+    }
+
+    public void getPortfolioWithThumbnails(List<Portfolio> portfolioList) {
+        ldapHandler.initLdaptemplate();
+        setLdapTemplate(LdapHandler.getLdaptemplate());
+        PortfolioThumbnail portfolioThumbnail = null;
+        List<PortfolioThumbnail> portfolioListThumbnail = new ArrayList<>();
+        for(Portfolio p :  portfolioList) {
+            portfolioThumbnail = new PortfolioThumbnail();
+            String pName = p.getName();
+            String lob = p.getLob();
+            String lastName = pName.substring(pName.indexOf(" ") + 1);
+            String firstName = pName.substring(0, pName.indexOf(" "));
+            String fullName = lastName + ", " + firstName;
+            String thumbNail = null;
+            if (!fullName.isEmpty()) {
+                List<Person> execInfo = findByName(fullName);
+                thumbNail = getExecInfo(execInfo);
+            } else {
+                LOGGER.info("List size is empty");
+            }
+            portfolioThumbnail.setName(pName);
+            portfolioThumbnail.setLob(lob);
+            portfolioThumbnail.setThumbnail(thumbNail);
+            portfolioListThumbnail.add(portfolioThumbnail);
+        }
+        portfolioRepositoryThumbnail.save(portfolioListThumbnail);
+    }
+
+    public List<Person> findByName(String name) {
+        ldapTemplate.setIgnorePartialResultException(true);
+        return ldapTemplate.find(query().where("displayName").is(name), Person.class);
+    }
+
+    public String getExecInfo(List<Person> execInfo){
+        String photoString = null;
+        if (execInfo != null && !execInfo.isEmpty()) {
+            byte[] photo = (byte[]) execInfo.get(0).getThumbnailPhoto();
+            if (photo == null) {
+                photoString = "";
+                LOGGER.debug("Executive doesn't have thumbnail");
+            } else {
+                photoString = Base64.getEncoder().encodeToString(photo);
+                LOGGER.info("Byte code convert to string :" + photoString);
+            }
+            LOGGER.debug("Byte code convert to string :" + photoString);
+        }
+        return photoString;
     }
 }

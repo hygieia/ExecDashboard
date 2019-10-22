@@ -31,8 +31,8 @@ public class AuditResultCollector extends DefaultMetricCollector {
     private static final String STR_PERCENT_TRACEABILITY = "percentTraceability";
     private static final Logger LOGGER = LoggerFactory.getLogger(AuditResultCollector.class);
 
-    public AuditResultCollector(PortfolioMetricRepository portfolioMetricRepository) {
-        super(portfolioMetricRepository);
+    public AuditResultCollector(PortfolioMetricRepository portfolioMetricRepository, PortfolioCollectorSetting portfolioCollectorSetting) {
+        super(portfolioMetricRepository, portfolioCollectorSetting);
     }
 
     @Override

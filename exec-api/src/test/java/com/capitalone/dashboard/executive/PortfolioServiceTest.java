@@ -5,6 +5,7 @@ import com.capitalone.dashboard.exec.model.MetricLevel;
 import com.capitalone.dashboard.exec.model.RoleRelationShipType;
 import com.capitalone.dashboard.exec.repository.PortfolioMetricRepository;
 import com.capitalone.dashboard.exec.repository.PortfolioRepository;
+import com.capitalone.dashboard.exec.repository.PortfolioRepositoryThumbnail;
 import com.capitalone.dashboard.executive.common.TestUtils;
 import com.capitalone.dashboard.executive.model.PortfolioResponse;
 import com.capitalone.dashboard.executive.service.PortfolioServiceImpl;
@@ -30,6 +31,8 @@ public class PortfolioServiceTest {
     private PortfolioMetricRepository portfolioMetricRepository;
     @InjectMocks
     private PortfolioServiceImpl portfolioService;
+    @Mock
+    private PortfolioRepositoryThumbnail portfolioRepositoryThumbnail;
 
     @Test
     public void testGetPortfolioForBusinessOwner(){
@@ -76,6 +79,7 @@ public class PortfolioServiceTest {
         Assert.assertEquals(portfolioResponse.getName(),"portfolio1");
         Assert.assertEquals(portfolioResponse.getLob(),"LOB");
         Assert.assertEquals(portfolioResponse.getProductList().get(0).getName(),"Product1");
+		Assert.assertEquals(portfolioResponse.getThumbnail(),"thumbnailPhoto");
         Assert.assertNotNull(portfolioResponse.getProductList().get(0).getEnvironments());
         Assert.assertEquals(portfolioResponse.getExecutive().getFirstName(),"firstName");
     }

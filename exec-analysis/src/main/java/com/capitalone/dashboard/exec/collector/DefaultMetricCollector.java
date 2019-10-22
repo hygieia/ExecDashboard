@@ -31,19 +31,22 @@ import java.util.Collections;
 public abstract class DefaultMetricCollector {
     private Map<String, List<String>> dashboardCollectorItemsMap = new HashMap<>();
     private final PortfolioMetricRepository portfolioMetricRepository;
+    private final PortfolioCollectorSetting portfolioCollectorSetting;
 
     @Autowired
-    public DefaultMetricCollector(PortfolioMetricRepository portfolioMetricRepository) {
+    public DefaultMetricCollector(PortfolioMetricRepository portfolioMetricRepository, PortfolioCollectorSetting portfolioCollectorSetting) {
         this.portfolioMetricRepository = portfolioMetricRepository;
+        this.portfolioCollectorSetting = portfolioCollectorSetting;
     }
 
+    @SuppressWarnings("PMD.AvoidDeeplyNestedIfStmts")
     public void collect(SparkSession sparkSession, JavaSparkContext javaSparkContext, List<Portfolio> portfolioList) {
         if ((sparkSession == null) || (javaSparkContext == null)) { return; }
 
         List<String> collectorItemList = getCollectorItemListForPortfolios(portfolioList, sparkSession, javaSparkContext);
 
         DefaultDataCollector dataCollector
-                = new DefaultDataCollector(getCollection(), getQuery(), collectorItemList, sparkSession, javaSparkContext);
+                = new DefaultDataCollector(getCollection(), getQuery(), collectorItemList, sparkSession, javaSparkContext, portfolioCollectorSetting);
         Map<String, List<Row>> rowsListMap = dataCollector.collectAll();
         boolean deleteFlag = true;
 
