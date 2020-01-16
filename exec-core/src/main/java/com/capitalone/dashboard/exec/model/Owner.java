@@ -6,6 +6,7 @@ import java.util.Objects;
 
 @Document(collection="people")
 public class Owner {
+    private String username;
     private String firstName;
     private String lastName;
     private String userId;
@@ -19,6 +20,14 @@ public class Owner {
         this.userId = userId;
         this.jobTitle = jobTitle;
         this.role = role;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getFirstName() {
@@ -70,12 +79,13 @@ public class Owner {
                 Objects.equals(lastName, owner.lastName) &&
                 Objects.equals(userId, owner.userId) &&
                 Objects.equals(jobTitle, owner.jobTitle) &&
-                Objects.equals(role, owner.role);
+                Objects.equals(role, owner.role) &&
+                Objects.equals(username, owner.username);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(firstName, lastName, userId, jobTitle, role);
+        return Objects.hash(firstName, lastName, userId, jobTitle, role, username);
     }
 }

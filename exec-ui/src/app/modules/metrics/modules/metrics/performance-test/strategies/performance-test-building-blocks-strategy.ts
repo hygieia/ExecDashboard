@@ -60,15 +60,15 @@ export class PerformanceTestBuildingBlocksStrategy extends BuildingBlocksStrateg
         }
 
         return [
-            mapErrorRateMetric(this.auxiliaryErrorRateFigureStrategy.parse(metric)),
-            mapResponseTimeMetric(this.auxiliaryResponseTimeFigureStrategy.parse(metric)),
-            mapTPSMetric(this.auxiliaryTPSFigureStrategy.parse(metric))
+            mapErrorRateMetric(this.auxiliaryErrorRateFigureStrategy.parse(metric),this.trendStrategy),
+            mapResponseTimeMetric(this.auxiliaryResponseTimeFigureStrategy.parse(metric),this.trendStrategy),
+            mapTPSMetric(this.auxiliaryTPSFigureStrategy.parse(metric),this.trendStrategy)
         ];
 
-        function mapErrorRateMetric(value) {
+        function mapErrorRateMetric(value,trendStrategy) {
             return {
                 value: mapErrorRate(value),
-                trend: null,
+                trend: trendStrategy.parse(metric),
                 isRatio: true
             };
         }
@@ -82,10 +82,10 @@ export class PerformanceTestBuildingBlocksStrategy extends BuildingBlocksStrateg
             };
         }
 
-        function mapResponseTimeMetric(value) {
+        function mapResponseTimeMetric(value,trendStrategy) {
             return {
                 value: mapResponseTime(value),
-                trend: null,
+                trend: trendStrategy.parse(metric),
                 isRatio: false
             };
         }
@@ -99,10 +99,10 @@ export class PerformanceTestBuildingBlocksStrategy extends BuildingBlocksStrateg
             };
         }
 
-        function mapTPSMetric(value) {
+        function mapTPSMetric(value,trendStrategy) {
             return {
                 value: mapTPS(value),
-                trend: null,
+                trend: trendStrategy.parse(metric),
                 isRatio: false
             };
         }

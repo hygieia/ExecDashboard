@@ -27,8 +27,8 @@ public class TraceabilityCollector extends DefaultMetricCollector {
     private static final String STR_TIME_WINDOW = "timeWindow";
     private static final String STR_TRACEABILITY = "traceability";
 
-    public TraceabilityCollector(PortfolioMetricRepository portfolioMetricRepository) {
-        super(portfolioMetricRepository);
+    public TraceabilityCollector(PortfolioMetricRepository portfolioMetricRepository, PortfolioCollectorSetting portfolioCollectorSetting) {
+        super(portfolioMetricRepository, portfolioCollectorSetting);
     }
 
     @Override

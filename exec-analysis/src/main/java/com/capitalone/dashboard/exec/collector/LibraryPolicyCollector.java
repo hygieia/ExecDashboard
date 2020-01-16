@@ -29,8 +29,8 @@ import java.util.Optional;
 public class LibraryPolicyCollector extends DefaultMetricCollector{
 
     @Autowired
-    public LibraryPolicyCollector(PortfolioMetricRepository portfolioMetricRepository) {
-        super(portfolioMetricRepository);
+    public LibraryPolicyCollector(PortfolioMetricRepository portfolioMetricRepository, PortfolioCollectorSetting portfolioCollectorSetting) {
+        super(portfolioMetricRepository, portfolioCollectorSetting);
     }
 
     @Override

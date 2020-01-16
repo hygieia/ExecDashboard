@@ -1,4 +1,4 @@
-<div class="metric-previews" (click)="reset()" [ngClass]="{'metric-selected': selectedMetric }" fxLayout="row" fxLayoutWrap>
+<div class="metric-previews" [ngClass]="{'metric-selected': selectedMetric }" fxLayout="row" fxLayoutWrap>
   <app-scm-commits-preview class="metric" [attr.data-sort]="sortMap.get('scm-commits').currentSort"
                            [ngClass]="{'disabled': isDisabled('scm-commits')}"
                            [portfolioName]="portfolioName" [portfolioLob]="portfolioLob" [productId]="this.productId"
@@ -80,14 +80,14 @@
                                    (metricPreviewInitialized)="addMetric()"
                                    [selectedMetric]="selectedMetric" (isSelectedEvent)="selectMetric($event)"
                                    fxFlex></app-production-releases-preview -->
-  <!-- app-pipeline-lead-time-card class="metric" [attr.data-sort]="sortMap.get('pipeline-lead-time').currentSort" fxFlex
+  <app-pipeline-lead-time-card class="metric" [attr.data-sort]="sortMap.get('pipeline-lead-time').currentSort" fxFlex
                             [ngClass]="{'disabled': isDisabled('pipeline-lead-time')}"
                                [portfolioName]="portfolioName" [portfolioLob]="portfolioLob" [productId]="this.productId"
                             (hideBuildingBlocksEvent)="reset()"
                             (showBuildingBlocksEvent)="showBuildingBlocks($event)"
                                (metricPreviewInitialized)="addMetric()"
                             [selectedMetric]="selectedMetric"
-                            (isSelectedEvent)="selectMetric($event)"></app-pipeline-lead-time-card -->
+                            (isSelectedEvent)="selectMetric($event)"></app-pipeline-lead-time-card>
 
   <div class="placeholder" fxFlex></div>
   <div class="placeholder" fxFlex></div>

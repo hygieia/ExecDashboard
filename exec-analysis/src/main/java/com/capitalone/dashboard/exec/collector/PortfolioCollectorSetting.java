@@ -25,6 +25,7 @@ public class PortfolioCollectorSetting {
     public String writeUri;
     public String readDatabase;
     public String writeDatabase;
+    public List<String> pipelineEnvName;
 
     @Value("${feature.incidentsCollectorFlag:true}")
     private boolean incidentsCollectorFlag;
@@ -42,6 +43,10 @@ public class PortfolioCollectorSetting {
     private boolean securityCollectorFlag;
     @Value("${feature.performanceCollectorFlag:true}")
     private  boolean performanceCollectorFlag;
+    @Value("${feature.engineeringMaturityFlag:true}")
+    private  boolean engineeringMaturityFlag;
+    @Value("${feature.pipelineCollectorFlag:true}")
+    private boolean pipelineCollectorFlag;
 
     private Map<MetricType, List<Filter>> filters;
 
@@ -71,7 +76,9 @@ public class PortfolioCollectorSetting {
         this.scmCollectorFlag = scmCollectorFlag;
     }
 
-    public boolean isIncidentsCollectorFlag() { return incidentsCollectorFlag; }
+    public boolean isIncidentsCollectorFlag() { 
+        return incidentsCollectorFlag; 
+    }
 
     public void setIncidentsCollectorFlag(boolean incidentsCollectorFlag) {
         this.incidentsCollectorFlag = incidentsCollectorFlag;
@@ -134,6 +141,30 @@ public class PortfolioCollectorSetting {
 
     public void setPerformanceCollectorFlag(boolean performanceCollectorFlag) {
         this.performanceCollectorFlag = performanceCollectorFlag;
+    }
+
+    public boolean isEngineeringMaturityFlag() {
+        return engineeringMaturityFlag;
+    }
+
+    public void setEngineeringMaturityFlag(boolean engineeringMaturityFlag) {
+        this.engineeringMaturityFlag = engineeringMaturityFlag;
+    }
+
+    public boolean isPipelineCollectorFlag() {
+        return pipelineCollectorFlag;
+    }
+
+    public void setPipelineCollectorFlag(boolean pipelineCollectorFlag) {
+        this.pipelineCollectorFlag = pipelineCollectorFlag;
+    }
+
+    public List<String> getPipelineEnvName() {
+        return pipelineEnvName;
+    }
+
+    public void setPipelineEnvName(List<String> pipelineEnvName) {
+        this.pipelineEnvName = pipelineEnvName;
     }
 
     @PostConstruct

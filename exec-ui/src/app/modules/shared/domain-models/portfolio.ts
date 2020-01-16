@@ -5,6 +5,7 @@ export class Portfolio {
   lob: string;
   name: string;
   executive: Executive;
+  thumbnail: string;
 }
 
 

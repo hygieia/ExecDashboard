@@ -46,7 +46,7 @@ export class PerformanceTestPreviewStrategy extends PreviewStrategyBase {
         let result = [];
 
         if (sums.get('Error Rate')) {
-            result.push({name: 'Error Rate', value: sums.get('Error Rate').toLocaleString(),unit:'%'});
+            result.push({name: 'Error Rate', value: Math.round(sums.get('Error Rate').toLocaleString()),unit:'%'});
         }
         return result;
     }

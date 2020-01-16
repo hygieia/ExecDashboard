@@ -32,8 +32,8 @@ public class PerformanceCollector extends DefaultMetricCollector {
 
 
 
-    public PerformanceCollector(PortfolioMetricRepository portfolioMetricRepository) {
-        super(portfolioMetricRepository);
+    public PerformanceCollector(PortfolioMetricRepository portfolioMetricRepository, PortfolioCollectorSetting portfolioCollectorSetting) {
+        super(portfolioMetricRepository, portfolioCollectorSetting);
     }
 
     @Override

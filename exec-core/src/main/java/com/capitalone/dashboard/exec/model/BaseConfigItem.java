@@ -16,6 +16,15 @@ public class BaseConfigItem {
     private String dashboardDisplayName;
     private List<PeopleRoleRelation> owners;
     private MetricLevel metricLevel;
+	private String thumbnail;
+	
+	public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
 
     public ObjectId getId() {
         return id;
@@ -55,6 +64,10 @@ public class BaseConfigItem {
     public BaseConfigItem(String name, String lob) {
         this.name = name;
         this.lob = lob;
+    }
+
+    public BaseConfigItem(String name) {
+        this.name = name;
     }
 
     public BaseConfigItem(String name, String lob, List<PeopleRoleRelation> owners) {

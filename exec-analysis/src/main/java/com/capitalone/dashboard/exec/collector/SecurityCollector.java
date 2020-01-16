@@ -32,8 +32,8 @@ public class SecurityCollector extends DefaultMetricCollector {
     private static final Logger LOGGER = LoggerFactory.getLogger(SecurityCollector.class);
 
     @Autowired
-    public SecurityCollector(PortfolioMetricRepository portfolioMetricRepository) {
-        super(portfolioMetricRepository);
+    public SecurityCollector(PortfolioMetricRepository portfolioMetricRepository, PortfolioCollectorSetting portfolioCollectorSetting) {
+        super(portfolioMetricRepository, portfolioCollectorSetting);
     }
 
     @Override

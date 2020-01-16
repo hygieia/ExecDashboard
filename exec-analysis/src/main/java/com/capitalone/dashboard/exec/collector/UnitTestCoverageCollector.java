@@ -32,8 +32,8 @@ public class UnitTestCoverageCollector extends DefaultMetricCollector {
     private static final Logger LOGGER = LoggerFactory.getLogger(UnitTestCoverageCollector.class);
 
     @Autowired
-    public UnitTestCoverageCollector(PortfolioMetricRepository portfolioMetricRepository) {
-        super(portfolioMetricRepository);
+    public UnitTestCoverageCollector(PortfolioMetricRepository portfolioMetricRepository, PortfolioCollectorSetting portfolioCollectorSetting) {
+        super(portfolioMetricRepository, portfolioCollectorSetting);
     }
 
     @Override

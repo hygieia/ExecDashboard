@@ -9,7 +9,7 @@ import static com.capitalone.dashboard.exec.model.MetricType.SummaryRange.DAY;
 import static com.capitalone.dashboard.exec.model.MetricType.SummaryRange.MULTI_DAY;
 
 public enum MetricType {
-    OPEN_SOURCE_VIOLATIONS("open-source-violations", DataType.SUM, DAY, null),
+    OPEN_SOURCE_VIOLATIONS("open-source", DataType.SUM, DAY, null),
     SECURITY_VIOLATIONS("security-violations", DataType.SUM, DAY, null),
     TEST_AUTOMATION("test-automation", DataType.RATIO, DAY, null),
     STATIC_CODE_ANALYSIS("static-code-analysis", DataType.SUM, DAY, null),
@@ -18,8 +18,20 @@ public enum MetricType {
     PRODUCTION_RELEASES("production-releases", DataType.SUM, MULTI_DAY, null),
     PIPELINE_LEAD_TIME("pipeline-lead-time", DataType.AVERAGE, DAY, null),
     SCM_COMMITS("scm-commits", DataType.SUM, MULTI_DAY, null),
+	QUALITY("quality", DataType.SUM, MULTI_DAY, null),
+    VELOCITY("open-source-violations", DataType.AVERAGE, MULTI_DAY, null),
+	WORK_IN_PROGRESS("work-in-progress", DataType.SUM, MULTI_DAY, null),
+	STASH("stash", DataType.SUM, MULTI_DAY, null),
+	TOTAL_VALUE("total-value", DataType.SUM, MULTI_DAY, null),
+	DEVOPSCUP("devopscup", DataType.SUM, MULTI_DAY, null),
+	SAY_DO_RATIO("saydoratio", DataType.RATIO, MULTI_DAY, null),
+	TEST("test", DataType.SUM, MULTI_DAY, null),
+	CLOUD("cloud", DataType.SUM, MULTI_DAY, null),
+	DEPLOY("deploy", DataType.SUM, MULTI_DAY, null),
+	BUILD("build", DataType.SUM, MULTI_DAY, null),
     TRACEABILITY("traceability", DataType.RATIO, DAY, null),
-    PERFORMANCE_TEST("performance-test",DataType.RATIO,DAY,null);
+    PERFORMANCE_TEST("performance-test",DataType.RATIO,DAY,null),
+    ENGINEERING_MATURITY("engineering-maturity",DataType.RATIO,DAY,null);
 
     public enum DataType { SUM, RATIO, AVERAGE }
     public enum SummaryRange { DAY, MULTI_DAY }

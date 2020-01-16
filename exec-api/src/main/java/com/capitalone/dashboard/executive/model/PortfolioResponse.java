@@ -11,6 +11,7 @@ public final class PortfolioResponse {
     private String name;
     private ExecutiveResponse executive;
     List<Product> productList;
+	private String thumbnail;
 
     public List<Product> getProductList() {
         return productList;
@@ -19,7 +20,15 @@ public final class PortfolioResponse {
     public void setProductList(List<Product> productList) {
         this.productList = productList;
     }
+	
+	public String getThumbnail() {
+        return thumbnail;
+    }
 
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+	
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
@@ -42,6 +51,7 @@ public final class PortfolioResponse {
         portfolioResponse.setProductList(productList);
         ExecutiveResponse executiveResponse = ExecutiveResponse.getExecutive(portfolio);
         portfolioResponse.setExecutive(executiveResponse);
+		portfolioResponse.setThumbnail(portfolio.getThumbnail());
         return portfolioResponse;
     }
 
