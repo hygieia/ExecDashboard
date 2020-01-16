@@ -7,6 +7,7 @@ import {GraphStrategyBase} from '../../../shared/strategies/graph-strategy-base'
 import {UnitTestCoveragePrimaryMetricStrategy} from './unit-test-coverage-primary-metric-strategy';
 import {Injectable} from '@angular/core';
 import {UnitTestCoverageConfiguration} from '../unit-test-coverage.configuration';
+import decimalToPercent = PresentationFunctions.decimalToPercent;
 
 @Injectable()
 export class UnitTestCoverageGraphStrategy extends GraphStrategyBase {
@@ -29,7 +30,11 @@ export class UnitTestCoverageGraphStrategy extends GraphStrategyBase {
   }
 
   protected count(seriesElement: MetricTimeSeriesElement): number {
-    return seriesElement.counts
-      .reduce((sum, item) => sum + item.value, 0);
+	  if(seriesElement.counts[0] != null)
+		  return decimalToPercent(seriesElement.counts[0].value);
+	  else
+		  return 0;
+    //return seriesElement.counts
+      //.reduce((sum, item) => sum + item.value, 0);
   }
 }

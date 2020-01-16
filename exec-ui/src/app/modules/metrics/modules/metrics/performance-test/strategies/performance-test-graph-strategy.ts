@@ -24,7 +24,7 @@ export class PerformanceTestGraphStrategy extends GraphStrategyBase {
     metricGraph.values = model.timeSeries.sort((a, b) => a.daysAgo - b.daysAgo).map(this.count);
     metricGraph.isRatio = true;
     metricGraph.valueLabel = PerformanceTestConfiguration.graphHeading.toUpperCase();
-    metricGraph.toolTipLabel = (x) => `${x}% passing`;
+    metricGraph.toolTipLabel = (x) => `${x}% Error Rate`;
 
     return metricGraph;
   }

@@ -11,9 +11,9 @@ export class PipelineLeadTimePrimaryMetricStrategy extends PrimaryMetricStrategy
       return {name: PipelineLeadTimeConfiguration.buildingBlockLabel, value: 0, unit: 'minutes'};
     }
 
-    const minutes = counts[0].value / 1000 / 60;
-    const hours = counts[0].value / 1000 / 60 / 60;
-    const days = counts[0].value / 1000 / 60 / 60 / 24;
+    const minutes = counts[0].value / 60;
+    const hours = counts[0].value / 60 / 60;
+    const days = counts[0].value / 60 / 60 / 24;
 
     if (days >= 1) { return { prefix: '~', name: PipelineLeadTimeConfiguration.buildingBlockLabel, value: Math.round(days), unit: 'days' }; }
     if (hours >= 1) { return { prefix: '~', name: PipelineLeadTimeConfiguration.buildingBlockLabel, value: Math.round(hours), unit: 'hours' }; }

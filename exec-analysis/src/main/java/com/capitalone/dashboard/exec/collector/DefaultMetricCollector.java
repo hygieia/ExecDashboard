@@ -36,10 +36,12 @@ public abstract class DefaultMetricCollector {
     private Map<String, List<String>> dashboardCollectorItemsMap = new HashMap<>();
     private PortfolioMetricRepository portfolioMetricRepository;
     private LobMetricRepository lobMetricRepository;
+    private PortfolioCollectorSetting portfolioCollectorSetting;
 
     @Autowired
-    public DefaultMetricCollector(PortfolioMetricRepository portfolioMetricRepository) {
+    public DefaultMetricCollector(PortfolioMetricRepository portfolioMetricRepository, PortfolioCollectorSetting portfolioCollectorSetting) {
         this.portfolioMetricRepository = portfolioMetricRepository;
+        this.portfolioCollectorSetting = portfolioCollectorSetting;
     }
 
     @Autowired
@@ -60,13 +62,14 @@ public abstract class DefaultMetricCollector {
         }
     }
 
+    @SuppressWarnings("PMD.AvoidDeeplyNestedIfStmts")
     public void collectPortFolioMetrics(SparkSession sparkSession, JavaSparkContext javaSparkContext, List<Portfolio> portfolioList) {
         if ((sparkSession == null) || (javaSparkContext == null)) { return; }
 
         List<String> collectorItemList = getCollectorItemListForPortfolios(portfolioList, sparkSession, javaSparkContext);
 
         DefaultDataCollector dataCollector
-                = new DefaultDataCollector(getCollection(), getQuery(), collectorItemList, sparkSession, javaSparkContext);
+                = new DefaultDataCollector(getCollection(), getQuery(), collectorItemList, sparkSession, javaSparkContext, portfolioCollectorSetting);
         Map<String, List<Row>> rowsListMap = dataCollector.collectAll();
         boolean deleteFlag = true;
 

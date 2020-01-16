@@ -2,6 +2,7 @@ import {Count} from '../../../shared/domain-models/count';
 import {PresentationFunctions} from '../../../shared/utils/presentation-functions';
 import {PrimaryMetricStrategyBase} from '../../../shared/strategies/primary-metric-strategy-base';
 import {Injectable} from '@angular/core';
+import decimalToPercent = PresentationFunctions.decimalToPercent;
 import {MetricValueModel} from '../../../shared/component-models/metric-value-model';
 import {UnitTestCoverageConfiguration} from '../unit-test-coverage.configuration';
 
@@ -16,6 +17,7 @@ export class UnitTestCoveragePrimaryMetricStrategy extends PrimaryMetricStrategy
     }
     return {
       name: UnitTestCoverageConfiguration.buildingBlockLabel,
+	  //value: decimalToPercent(counts[0].value)
       value: Math.round(counts[0].value)
     };
   }

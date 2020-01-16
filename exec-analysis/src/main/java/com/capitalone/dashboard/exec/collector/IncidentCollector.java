@@ -19,8 +19,8 @@ import java.util.Map;
 @Component
 public class IncidentCollector extends DefaultMetricCollector {
 
-    public IncidentCollector(PortfolioMetricRepository portfolioMetricRepository) {
-        super(portfolioMetricRepository);
+    public IncidentCollector(PortfolioMetricRepository portfolioMetricRepository, PortfolioCollectorSetting portfolioCollectorSetting) {
+        super(portfolioMetricRepository, portfolioCollectorSetting);
     }
 
     @Override

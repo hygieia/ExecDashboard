@@ -9,7 +9,7 @@ import java.util.Optional;
 public class RollupMetricDetail extends MetricDetails {
     protected static final String MTTR = "mttr";
     protected static final String TYPE = "type";
-
+    @SuppressWarnings("PMD.NPathComplexity")
     protected void updateSummary(MetricDetails metricDetails, int size) {
         if (metricDetails.isProcessed()) {return;}
         MetricSummary itemMetricSummary = metricDetails.getSummary();
@@ -29,7 +29,11 @@ public class RollupMetricDetail extends MetricDetails {
                 rollupSummaryCounts.add(copyCount);
             } else {
                 rollupSummaryCounts.remove(existing);
-                MetricCount updatedMetricCount = getUpdatedMetricCount(copyCount, metricDetails.getType().getDataType(), existing.getValue(),size);
+                MetricType.DataType  dataType= metricDetails.getType().getDataType();
+                if(existing.getLabel().get("type").equalsIgnoreCase("mttr")){
+                    dataType = MetricType.DataType.AVERAGE;
+                }
+                MetricCount updatedMetricCount = getUpdatedMetricCount(copyCount, dataType, existing.getValue(),size);
                 rollupSummaryCounts.add(updatedMetricCount);
             }
         }
@@ -48,8 +52,13 @@ public class RollupMetricDetail extends MetricDetails {
     protected void updateTimeSeries(MetricDetails itemMetricDetails, int size) {
         if (itemMetricDetails.isProcessed()) {return;}
         List<MetricTimeSeriesElement> itemMetricDetailTimeSeries = itemMetricDetails.getTimeSeries();
+        // Temp fix - the timeseries count should not be more than 90
+        if (itemMetricDetailTimeSeries!=null && itemMetricDetailTimeSeries.size() > 90)
+        	itemMetricDetailTimeSeries.subList(90, itemMetricDetailTimeSeries.size()).clear();
         for (MetricTimeSeriesElement itemDetailsTimeSeriesElement : itemMetricDetailTimeSeries) {
             List<MetricCount> itemTimeSeriesElementCounts = itemDetailsTimeSeriesElement.getCounts();
+            // Temp fix - the timeseries count should not be more than 90
+            //itemTimeSeriesElementCounts.subList(91, itemTimeSeriesElementCounts.size()).clear();
             for (MetricCount itemCount : itemTimeSeriesElementCounts) {
                 if(itemMetricDetails.getType().getDataType().equals(MetricType.DataType.SUM)) {
                     timeSeries.get(itemDetailsTimeSeriesElement.getDaysAgo()).addCount(itemCount);
