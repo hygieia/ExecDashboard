@@ -6,7 +6,7 @@ public class HygieiaSparkQuery {
                     "FROM cmdb where (validConfigItem = true) and (businessOwner is not null) and (businessOwner != '') and (itemType = 'app')";
 
     public static final String CMDB_LOB_QUERY =
-            "SELECT distinct ownerDept" +
+            "SELECT distinct ownerDept " +
                     "FROM cmdb where (validConfigItem = 1) and (businessOwner is not null) and (businessOwner != '') and (itemType = 'app')";
 
     public static final String CMDB_COMPONENT_QUERY =
