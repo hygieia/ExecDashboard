@@ -66,7 +66,7 @@ public class PortfolioServiceTest {
         BuildingBlockMetricSummary actual = a.get(0);
         Assert.assertEquals(actual.getMetrics().size(),1);
         Assert.assertEquals(actual.getName(),"product1");
-        Assert.assertEquals(actual.getTotalExpectedMetrics(),22);
+        Assert.assertEquals(actual.getTotalExpectedMetrics(),23);
         Assert.assertEquals(actual.getTotalComponents(),1);
         Assert.assertEquals(actual.getReportingComponents(),0);
     }
@@ -91,7 +91,7 @@ public class PortfolioServiceTest {
         BuildingBlockMetricSummary actual = portfolioService.getPortfolioProduct("test","LOB","Product1");
         Assert.assertEquals(actual.getMetrics().size(),1);
         Assert.assertEquals(actual.getName(),"Product1");
-        Assert.assertEquals(actual.getTotalExpectedMetrics(),22);
+        Assert.assertEquals(actual.getTotalExpectedMetrics(),23);
         Assert.assertEquals(actual.getTotalComponents(),1);
         Assert.assertEquals(actual.getReportingComponents(),0);
     }
@@ -104,7 +104,7 @@ public class PortfolioServiceTest {
         BuildingBlockMetricSummary actual = a.get(0);
         Assert.assertEquals(actual.getMetrics().size(),1);
         Assert.assertEquals(actual.getName(),"Product1");
-        Assert.assertEquals(actual.getTotalExpectedMetrics(),22);
+        Assert.assertEquals(actual.getTotalExpectedMetrics(),23);
         Assert.assertEquals(actual.getTotalComponents(),1);
         Assert.assertEquals(actual.getReportingComponents(),0);
     }

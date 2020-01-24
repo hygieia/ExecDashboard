@@ -39,6 +39,33 @@ public class MetricsController {
         this.metricsDetailService = metricsDetailService;
     }
 
+    @GetMapping("/{metric}/lob/{name}/{lob}/summary")
+    public MetricDetails getLobMetricSummary(
+            @PathVariable("metric") MetricType metricType,
+            @PathVariable("name") String name,
+            @PathVariable("lob") String lob) {
+
+        return metricsService.getLobMetricSummary(metricType, name, lob);
+    }
+
+    @GetMapping("/{metric}/lob/{name}/{lob}/detail")
+    public MetricDetails getLobMetricDetail(
+            @PathVariable("metric") MetricType metricType,
+            @PathVariable("name") String name,
+            @PathVariable("lob") String lob) {
+
+        return metricsService.getLobMetricDetail(metricType, name, lob);
+    }
+
+    @GetMapping("/{metric}/lob/{name}/{lob}/product")
+    public List<BuildingBlockMetricSummary> getLobMetricProducts(
+            @PathVariable("metric") MetricType metricType,
+            @PathVariable("name") String name,
+            @PathVariable("lob") String lob) {
+
+        return metricsService.getLobMetricProducts(metricType, name, lob);
+    }
+
     @GetMapping("/{metric}/portfolio/{name}/{lob}/summary")
     public MetricDetails getPortfolioMetricSummary(
             @PathVariable("metric") MetricType metricType,

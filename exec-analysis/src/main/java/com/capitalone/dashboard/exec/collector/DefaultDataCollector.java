@@ -29,6 +29,14 @@ public class DefaultDataCollector {
     private JavaSparkContext javaSparkContext;
     private PortfolioCollectorSetting portfolioCollectorSetting;
 
+    DefaultDataCollector(String collectionName, String query, List<String> collectorItemIds, SparkSession sparkSession, JavaSparkContext javaSparkContext) {
+        this.collectionName = collectionName;
+        this.query = query;
+        this.collectorItemIds = collectorItemIds;
+        this.sparkSession = sparkSession;
+        this.javaSparkContext = javaSparkContext;
+    }
+
     DefaultDataCollector(String collectionName, String query, List<String> collectorItemIds, SparkSession sparkSession, JavaSparkContext javaSparkContext, PortfolioCollectorSetting portfolioCollectorSetting) {
         this.collectionName = collectionName;
         this.query = query;
