@@ -102,6 +102,8 @@ public class PortfolioCollector implements Runnable {
         this.ldapTemplate = ldapTemplate;
     }
 
+    private final EngineeringMaturityCollector engineeringMaturityCollector;
+
     @Autowired
     @SuppressWarnings("PMD.ExcessiveParameterList")
     public PortfolioCollector(TaskScheduler taskScheduler, PortfolioRepository portfolioRepository,
