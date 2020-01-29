@@ -37,8 +37,8 @@ public class PortfolioCollectorSetting {
     private boolean staticCodeAnalysisCollectorFlag;
     @Value("${feature.unitTestCoverageCollectorFlag:true}")
     private boolean unitTestCoverageCollectorFlag;
-    @Value("${feature.auditResultCollectorFlag:true}")
-    private boolean auditResultCollectorFlag;
+    @Value("${feature.traceabilityCollectorFlag:true}")
+    private boolean traceabilityCollectorFlag;
     @Value("${feature.securityCollectorFlag:true}")
     private boolean securityCollectorFlag;
     @Value("${feature.performanceCollectorFlag:true}")
@@ -120,14 +120,6 @@ public class PortfolioCollectorSetting {
         this.unitTestCoverageCollectorFlag = unitTestCoverageCollectorFlag;
     }
 
-    public boolean isAuditResultCollectorFlag() {
-        return auditResultCollectorFlag;
-    }
-
-    public void setAuditResultCollectorFlag(boolean auditResultCollectorFlag) {
-        this.auditResultCollectorFlag = auditResultCollectorFlag;
-    }
-
     public boolean isSecurityCollectorFlag() {
         return securityCollectorFlag;
     }
@@ -136,6 +128,13 @@ public class PortfolioCollectorSetting {
         this.securityCollectorFlag = securityCollectorFlag;
     }
 
+    public boolean isTraceabilityCollectorFlag() {
+        return traceabilityCollectorFlag;
+    }
+
+    public void setTraceabilityCollectorFlag(boolean traceabilityCollectorFlag) {
+        this.traceabilityCollectorFlag = traceabilityCollectorFlag;
+    }
     public boolean isPerformanceCollectorFlag() {
         return performanceCollectorFlag;
     }

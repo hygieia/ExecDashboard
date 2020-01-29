@@ -81,7 +81,7 @@ public class PortfolioCollector implements Runnable {
 
     private final IncidentCollector incidentCollector;
 
-    private final AuditResultCollector auditResultCollector;
+    private final TraceabilityCollector traceabilityCollector;
 
     private final UnitTestCoverageCollector unitTestCoverageCollector;
 
@@ -91,6 +91,8 @@ public class PortfolioCollector implements Runnable {
 	
 	private final PipelineCollector pipelineCollector;
 
+    private final EngineeringMaturityCollector engineeringMaturityCollector;
+
     @Autowired
     private LdapHandler ldapHandler;
 
@@ -99,8 +101,6 @@ public class PortfolioCollector implements Runnable {
     public void setLdapTemplate(LdapTemplate ldapTemplate) {
         this.ldapTemplate = ldapTemplate;
     }
-
-    private final EngineeringMaturityCollector engineeringMaturityCollector;
 
     @Autowired
     @SuppressWarnings("PMD.ExcessiveParameterList")
@@ -112,7 +112,7 @@ public class PortfolioCollector implements Runnable {
                               StaticCodeAnalysisCollector staticCodeAnalysisCollector,
                               IncidentCollector incidentCollector,
                               UnitTestCoverageCollector unitTestCoverageCollector,
-                              AuditResultCollector auditResultCollector,
+                              TraceabilityCollector traceabilityCollector,
                               SecurityCollector securityCollector,
                               PerformanceCollector performanceCollector,
                               EngineeringMaturityCollector engineeringMaturityCollector,
@@ -126,7 +126,7 @@ public class PortfolioCollector implements Runnable {
         this.libraryPolicyCollector = libraryPolicyCollector;
         this.staticCodeAnalysisCollector = staticCodeAnalysisCollector;
         this.incidentCollector = incidentCollector;
-        this.auditResultCollector = auditResultCollector;
+        this.traceabilityCollector = traceabilityCollector;
         this.unitTestCoverageCollector = unitTestCoverageCollector;
         this.securityCollector = securityCollector;
         this.performanceCollector = performanceCollector;
@@ -185,11 +185,10 @@ public class PortfolioCollector implements Runnable {
             pipelineCollector.collect(sparkSession, javaSparkContext, portfolioList);
             LOGGER.info("##### Completed Pipeline Collector #####");
         }
-		
-        if(setting.isAuditResultCollectorFlag()){
-            LOGGER.info("##### Starting Audit Results Collector #####");
-            auditResultCollector.collect(sparkSession, javaSparkContext, portfolioList);
-			LOGGER.info("##### Completed Audit Result Collector #####");
+        if(setting.isTraceabilityCollectorFlag()){
+            LOGGER.info("##### Starting Traceability Collector #####");
+            traceabilityCollector.collect(sparkSession, javaSparkContext, portfolioList);
+            LOGGER.info("##### Completed Traceability Collector #####");
         }
         if(setting.isSecurityCollectorFlag()) {
             LOGGER.info("##### Starting Security Collector #####");

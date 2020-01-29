@@ -21,7 +21,7 @@ import java.util.Date;
 
 @Component
 public class PerformanceCollector extends DefaultMetricCollector {
-    
+
     private static final String STR_TIMEWINDOW = "timeWindow";
     private static final String STR_AVG_RESPONSE_TIME = "averageResponseTime";
     private static final String STR_CALLSPER_MINUTE = "callsperMinute";

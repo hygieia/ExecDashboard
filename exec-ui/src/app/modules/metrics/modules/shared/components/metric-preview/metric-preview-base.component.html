@@ -55,7 +55,7 @@
       <div class="key-indicators" *ngIf="this.hasReports()">
         <div class="secondary-metric" *ngFor="let metric of this.metricPreview.secondaryMetrics">
           <p>{{metric.name}}</p>
-          <div>{{metric.value}} {{metric.unit}}</div>
+          <div>{{metric.value}}{{metric.unit}}</div>
         </div>
         <div class="total-reporting">
           <p>Components Reporting</p>

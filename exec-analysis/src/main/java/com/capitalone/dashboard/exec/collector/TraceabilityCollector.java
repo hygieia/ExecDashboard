@@ -10,8 +10,6 @@ import com.capitalone.dashboard.exec.repository.PortfolioMetricRepository;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.catalyst.expressions.GenericRowWithSchema;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 
@@ -22,16 +20,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class AuditResultCollector extends DefaultMetricCollector {
+public class TraceabilityCollector extends DefaultMetricCollector {
     private static final String STR_AUDIT_RESULTS = "audit_results";
     private static final String STR_AUTOMATED = "Automated";
     private static final String STR_MANUAL = "Manual";
     private static final String STR_TIME_WINDOW = "timeWindow";
     private static final String STR_TRACEABILITY = "traceability";
-    private static final String STR_PERCENT_TRACEABILITY = "percentTraceability";
-    private static final Logger LOGGER = LoggerFactory.getLogger(AuditResultCollector.class);
 
-    public AuditResultCollector(PortfolioMetricRepository portfolioMetricRepository, PortfolioCollectorSetting portfolioCollectorSetting) {
+    public TraceabilityCollector(PortfolioMetricRepository portfolioMetricRepository, PortfolioCollectorSetting portfolioCollectorSetting) {
         super(portfolioMetricRepository, portfolioCollectorSetting);
     }
 
@@ -42,7 +38,7 @@ public class AuditResultCollector extends DefaultMetricCollector {
 
     @Override
     protected String getQuery() {
-        return HygieiaSparkQuery.TRACEABILITY_QUERY_ALL_COLLECTOR_ITEMS;
+        return HygieiaSparkQuery.TRACEABILITY_QUERY;
     }
 
     @Override
@@ -77,34 +73,26 @@ public class AuditResultCollector extends DefaultMetricCollector {
      * Update collectorItemMetric details with latest timeSeries data and summary.
      *
      */
-    private void updateCollectorItemMetricDetail(CollectorItemMetricDetail collectorItemMetricDetail,Row itemRow){
+    private void updateCollectorItemMetricDetail(CollectorItemMetricDetail collectorItemMetricDetail,Row itemRow) {
 
         Date timeWindowDt = itemRow.getAs(STR_TIME_WINDOW);
-        List<String> traceability = Arrays.asList(STR_AUTOMATED,STR_MANUAL);
-        GenericRowWithSchema javaCollection = (((GenericRowWithSchema) itemRow.getAs(STR_TRACEABILITY)));
-        for (String traceable : traceability
-             ) {
-            GenericRowWithSchema genericRowWithSchema = (((GenericRowWithSchema) javaCollection.getAs(traceable)));
-            String valueStr = genericRowWithSchema.getAs(STR_PERCENT_TRACEABILITY);
-            try {
-                double value = Double.parseDouble(valueStr);
-                MetricCount mc = getMetricCount("", value, traceable);
-                if (mc != null) {
-                    collectorItemMetricDetail.setStrategy(getCollectionStrategy());
-                    collectorItemMetricDetail.addCollectorItemMetricCount(timeWindowDt, mc);
-                    collectorItemMetricDetail.setLastScanDate(timeWindowDt);
-                }
-            } catch (NumberFormatException e) {
-                LOGGER.info("Exception: Not a number, 'value' = "+valueStr,e);
+        List<String> testTypes = Arrays.asList(STR_AUTOMATED, STR_MANUAL);
+        GenericRowWithSchema javaCollection = itemRow.getAs(STR_TRACEABILITY);
+        testTypes.forEach(testType -> {
+            double value = javaCollection.getAs(testType);
+            MetricCount mc = getMetricCount("", value, testType);
+            if (mc != null) {
+                collectorItemMetricDetail.setStrategy(getCollectionStrategy());
+                collectorItemMetricDetail.addCollectorItemMetricCount(timeWindowDt, mc);
+                collectorItemMetricDetail.setLastScanDate(timeWindowDt);
             }
-
-        }
+        });
     }
 
 
     @Override
     protected CollectorType getCollectorType() {
-        return CollectorType.Test;
+        return CollectorType.Audit;
     }
 
     @Override
@@ -121,5 +109,4 @@ public class AuditResultCollector extends DefaultMetricCollector {
         }
         return null;
     }
-
 }
