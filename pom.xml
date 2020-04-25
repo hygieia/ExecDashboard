@@ -59,7 +59,7 @@
     <scm>
         <connection>scm:git:https://github.com/Hygieia/ExecDashboard.git/</connection>
         <developerConnection>scm:git:https://github.com/Hygieia/ExecDashboard.git/</developerConnection>
-        <url>https://github.com/capitalone/ExecDashboard.git</url>
+        <url>https://github.com/Hygieia/ExecDashboard.git</url>
         <tag>HEAD</tag>
     </scm>
 
