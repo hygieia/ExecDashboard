@@ -30,14 +30,9 @@ notifications:
   email:
     recipients:
     - tapabrata.pal@capitalone.com
-    - brock.beatty@capitalone.com
-    - nireesh.thiruveedula@capitalone.com
-    - Stephen.Hughes@capitalone.com
-    - Prashant.Parekh@capitalone.com
-    - Matthew.Beasley@capitalone.com
-    - Subodh.Battina@capitalone.com
     - Ragha.Vema@capitalone.com
-    on_success: always
+    - hygieia2@capitalone.com
+    on_success: change
     on_failure: always
 
 after_failure:
