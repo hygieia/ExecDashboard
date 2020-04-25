@@ -18,7 +18,9 @@
     <properties>
         <jackson.version>2.10.3</jackson.version>
         <guava.version>19.0</guava.version>
+        <spark.version>2.3.3</spark.version>
         <application.version.number>${project.version}</application.version.number>
+        <spark.version>2.3.3</spark.version>
     </properties>
 
 
@@ -220,17 +222,22 @@
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-core_2.11</artifactId>
-            <version>2.2.0</version>
+            <version>${spark.version}</version>
         </dependency>
         <dependency>
             <groupId>org.mongodb.spark</groupId>
             <artifactId>mongo-spark-connector_2.11</artifactId>
-            <version>2.2.0</version>
+            <version>${spark.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-sql_2.11</artifactId>
-            <version>2.2.0</version>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-mllib_2.11</artifactId>
+            <version>${spark.version}</version>
         </dependency>
 
         <dependency>
@@ -255,11 +262,7 @@
             <artifactId>sparkts</artifactId>
             <version>LATEST</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-mllib_2.11</artifactId>
-            <version>2.3.0</version>
-        </dependency>
+        
 
         <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-streaming-java -->
         <dependency>
