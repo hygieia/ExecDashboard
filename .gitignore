@@ -45,3 +45,4 @@ logs
 application.properties
 
 spark-warehouse/
+.vscode/
