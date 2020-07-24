@@ -178,7 +178,7 @@
         <dependency>
             <groupId>com.mysema.querydsl</groupId>
             <artifactId>querydsl-apt</artifactId>
-            <version>3.6.0</version>
+            <version>3.7.4</version>
         </dependency>
         <dependency>
             <groupId>com.mysema.querydsl</groupId>
