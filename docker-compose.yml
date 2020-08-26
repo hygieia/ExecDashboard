@@ -6,11 +6,17 @@ services:
       - "27000:27017"
     volumes:
       - "execdb-data:/data/db"
+    networks:
+      - hygieia_default
 
   exec-db-setup:
     build: exec-db
     depends_on:
       - exec-db
+    networks:
+      - hygieia_default
+    links:
+      - "exec-db:db"
 
   exec-ui:
     build: exec-ui
@@ -20,9 +26,11 @@ services:
       - exec-db-setup
     environment:
       - API_URL=http://exec-api:8080
+    networks:
+      - hygieia_default
 
   exec-api:
-    build: 
+    build:
       context: exec-api
       args:
         JAR_FILE: "./target/exec-api*.jar"
@@ -30,6 +38,8 @@ services:
       - "./config/api:/var/app/config"
     depends_on:
       - exec-db-setup
+    networks:
+      - hygieia_default
 
   exec-analysis:
     build:
@@ -38,11 +48,12 @@ services:
         JAR_FILE: "./target/exec-analysis*.jar"
     volumes:
       - "./config/analysis:/var/app/config"
+    networks:
+      - hygieia_default
 
-volumes: 
+volumes:
   execdb-data:
 
 networks:
-  default:
-    external:
-      name: hygieia_default
+  hygieia_default:
+    driver: bridge
